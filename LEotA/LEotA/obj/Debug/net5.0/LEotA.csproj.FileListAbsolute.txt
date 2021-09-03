@@ -80,3 +80,7 @@ C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\obj\Debug\net5.0\LEotA.dll
 C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\obj\Debug\net5.0\ref\LEotA.dll
 C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\obj\Debug\net5.0\LEotA.pdb
 C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\obj\Debug\net5.0\LEotA.genruntimeconfig.cache
+C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\user\Desktop\repos\LEotA\LEotA\LEotA\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll

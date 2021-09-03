@@ -12,6 +12,7 @@ using LEotA.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace LEotA
 {
@@ -35,11 +36,21 @@ namespace LEotA
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1.0.0", new OpenApiInfo
+                {
+                    Title = "LEotA",
+                    Version = "v1.0.0"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1.0.0/swagger.json", "API v1.0.0"); });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
