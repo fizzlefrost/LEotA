@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pizi\\RiderProjects\\LEotA\\LEotA\\LEotA\\LEotA.csproj": {}
+    "C:\\Users\\user\\Desktop\\repos\\LEotA\\LEotA\\LEotA\\LEotA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pizi\\RiderProjects\\LEotA\\LEotA\\LEotA\\LEotA.csproj": {
+    "C:\\Users\\user\\Desktop\\repos\\LEotA\\LEotA\\LEotA\\LEotA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pizi\\RiderProjects\\LEotA\\LEotA\\LEotA\\LEotA.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\repos\\LEotA\\LEotA\\LEotA\\LEotA.csproj",
         "projectName": "LEotA",
-        "projectPath": "C:\\Users\\pizi\\RiderProjects\\LEotA\\LEotA\\LEotA\\LEotA.csproj",
-        "packagesPath": "C:\\Users\\pizi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pizi\\RiderProjects\\LEotA\\LEotA\\LEotA\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\repos\\LEotA\\LEotA\\LEotA\\LEotA.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\repos\\LEotA\\LEotA\\LEotA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pizi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
