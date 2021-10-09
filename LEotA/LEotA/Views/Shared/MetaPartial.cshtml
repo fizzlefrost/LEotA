@@ -1,0 +1,19 @@
+﻿<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>@ViewData["Title"] - LEotA</title>
+@if (ViewBag.Title != null)
+{
+    <title>@ViewBag.Title</title>
+}
+else
+{
+    <title>LULE</title>
+}
+@if (ViewBag.Description != null)
+{
+    <meta name="description" content="@ViewBag.Description">
+}
+@if (ViewBag.Title != null)
+{
+    <meta name="keywords" content="@ViewBag.Keywords">
+}
