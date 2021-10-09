@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "LEotA.Engine.Entities/1.0.0": {
+        "dependencies": {
+          "Calabonga.EntityFrameworkCore.Entities.Base": "3.0.1"
+        },
+        "runtime": {
+          "LEotA.Engine.Entities.dll": {}
+        }
+      },
+      "Calabonga.EntityFrameworkCore.Entities.Base/3.0.1": {
+        "runtime": {
+          "lib/net5.0/Calabonga.EntityFrameworkCore.Entities.Base.dll": {
+            "assemblyVersion": "3.0.1.0",
+            "fileVersion": "3.0.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LEotA.Engine.Entities/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Calabonga.EntityFrameworkCore.Entities.Base/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lzGGtvQmvt3AaiRTisNkLRoQT8bdtyJ25NFU+PmGDSSVDM1i5WDhd0L4NNuGlp4dLw+KGI4cM5MbkjARhSwNFA==",
+      "path": "calabonga.entityframeworkcore.entities.base/3.0.1",
+      "hashPath": "calabonga.entityframeworkcore.entities.base.3.0.1.nupkg.sha512"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\bin\Debug\net5.0\LEotA.Engine.Entities.deps.json
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\bin\Debug\net5.0\LEotA.Engine.Entities.dll
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\bin\Debug\net5.0\ref\LEotA.Engine.Entities.dll
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\bin\Debug\net5.0\LEotA.Engine.Entities.pdb
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\LEotA.Engine.Entities.csprojAssemblyReference.cache
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\LEotA.Engine.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\LEotA.Engine.Entities.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\LEotA.Engine.Entities.AssemblyInfo.cs
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\LEotA.Engine.Entities.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\LEotA.Engine.Entities.dll
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\ref\LEotA.Engine.Entities.dll
+C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Entities\obj\Debug\net5.0\LEotA.Engine.Entities.pdb

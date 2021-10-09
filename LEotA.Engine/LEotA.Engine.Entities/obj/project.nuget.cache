@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "AcwXfxlKrqA2J4/hwEXOZ2lYT6USPUlcZJIKMZ+b9BgmUN2obtf2yTd0v7tgmtXY7HGKCHcqdMskaZSHtEKzNA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\user\\Desktop\\repos\\he\\LEotA\\LEotA.Engine\\LEotA.Engine.Entities\\LEotA.Engine.Entities.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\calabonga.entityframeworkcore.entities.base\\3.0.1\\calabonga.entityframeworkcore.entities.base.3.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
