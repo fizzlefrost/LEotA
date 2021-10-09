@@ -36,13 +36,13 @@ namespace LEotA.Engine.Data.DatabaseInitialization
 
             var developer1 = new ApplicationUser
             {
-                Email = "microservice@yopmail.com",
-                NormalizedEmail = "MICROSERVICE@YOPMAIL.COM",
-                UserName = "microservice@yopmail.com",
-                FirstName = "Microservice",
-                LastName = "Administrator",
-                NormalizedUserName = "MICROSERVICE@YOPMAIL.COM",
-                PhoneNumber = "+79000000000",
+                Email = "leonidimeev@yandex.ru",
+                NormalizedEmail = "LEONIDIMEEV@YANDEX.RU",
+                UserName = "leonidimeev@yandex.ru",
+                FirstName = "Leonid",
+                LastName = "Imeev",
+                NormalizedUserName = "LEONIDIMEEV@YANDEX.RU",
+                PhoneNumber = "+79142650809",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
@@ -66,7 +66,7 @@ namespace LEotA.Engine.Data.DatabaseInitialization
             if (!context.Users.Any(u => u.UserName == developer1.UserName))
             {
                 var password = new PasswordHasher<ApplicationUser>();
-                var hashed = password.HashPassword(developer1, "123qwe!@#");
+                var hashed = password.HashPassword(developer1, "&U&U5t3e");
                 developer1.PasswordHash = hashed;
                 var userStore = scope.ServiceProvider.GetService<ApplicationUserStore>();
                 var result = await userStore.CreateAsync(developer1);
