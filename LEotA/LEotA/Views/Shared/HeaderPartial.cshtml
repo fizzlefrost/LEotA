@@ -1,4 +1,7 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" id="nav-bg">
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" id="nav-bg">
     <div class="container">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png"></a>
     </div>
@@ -14,27 +17,27 @@
             </ul>
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">About Us</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Events</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Events">Events</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Gallery</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Gallery">Gallery</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Projects</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Projects">Projects</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-1">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Publications</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Publications">Publications</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-1">
@@ -42,11 +45,13 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Staff">Staff</a>
                 </li>
             </ul>
-            <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Materials" asp-action="Index">Materials</a>
-                </li>
-            </ul>
+            @if (SignInManager.IsSignedIn(User)){
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Materials" asp-action="Index">Materials</a>
+                    </li>
+                </ul>
+            }
         </div>
     </div>
 </nav>
