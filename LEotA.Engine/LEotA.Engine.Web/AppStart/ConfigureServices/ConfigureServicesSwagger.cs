@@ -31,7 +31,7 @@ namespace LEotA.Engine.Web.AppStart.ConfigureServices
             {
                 Title = AppTitle,
                 Version = AppVersion,
-                Description = "Microservice module API with IdentityServer4. This template based on .NET 5.0"
+                Description = "LEotA module API with IdentityServer4. Template based on .NET 5.0"
             });
             options.ResolveConflictingActions(x => x.First());
 

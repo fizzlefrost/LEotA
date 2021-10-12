@@ -1031,6 +1031,16 @@
             LastName
             </summary>
         </member>
+        <member name="P:LEotA.Engine.Web.ViewModels.AccountViewModels.RegisterViewModel.PatronimicName">
+            <summary>
+            PatronimicName
+            </summary>
+        </member>
+        <member name="P:LEotA.Engine.Web.ViewModels.AccountViewModels.RegisterViewModel.EmbedLink">
+            <summary>
+            EmbedLink
+            </summary>
+        </member>
         <member name="P:LEotA.Engine.Web.ViewModels.AccountViewModels.RegisterViewModel.Email">
             <summary>
             Email
@@ -1069,6 +1079,16 @@
         <member name="P:LEotA.Engine.Web.ViewModels.AccountViewModels.UserProfileViewModel.LastName">
             <summary>
             LastName
+            </summary>
+        </member>
+        <member name="P:LEotA.Engine.Web.ViewModels.AccountViewModels.UserProfileViewModel.PatronomicName">
+            <summary>
+            PatronomicName
+            </summary>
+        </member>
+        <member name="P:LEotA.Engine.Web.ViewModels.AccountViewModels.UserProfileViewModel.EmbedLink">
+            <summary>
+            EmbedLink
             </summary>
         </member>
         <member name="P:LEotA.Engine.Web.ViewModels.AccountViewModels.UserProfileViewModel.Email">
@@ -1185,16 +1205,16 @@
             <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: e9eed0b</summary>
+            <summary>Commit: 39074ac</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: e9eed0b8b5d8d5854eb61cf7c3c3dc3aafebdac1</summary>
+            <summary>Sha: 39074ac1b99e42c8203367311e18407067925702</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2021-10-09T18:12:07+09:00</summary>
+            <summary>Commit date: 2021-10-09T18:48:45+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 8</summary>
+            <summary>Commits on top of base version: 12</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1224,7 +1244,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 8</summary>
+            <summary>Patch: 12</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>

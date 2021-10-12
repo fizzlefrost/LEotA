@@ -22,6 +22,16 @@ namespace LEotA.Engine.Web.ViewModels.AccountViewModels
         /// LastName
         /// </summary>
         public string LastName { get; set; }
+        
+        /// <summary>
+        /// PatronomicName
+        /// </summary>
+        public string PatronomicName { get; set; }
+        
+        /// <summary>
+        /// EmbedLink
+        /// </summary>
+        public string EmbedLink { get; set; }
 
         /// <summary>
         /// Email

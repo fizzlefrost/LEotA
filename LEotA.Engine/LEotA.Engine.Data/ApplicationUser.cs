@@ -18,6 +18,16 @@ namespace LEotA.Engine.Data
         /// LastName
         /// </summary>
         public string LastName { get; set; }
+        
+        /// <summary>
+        /// LastName
+        /// </summary>
+        public string? PatronomicName { get; set; }
+        
+        /// <summary>
+        /// LastName
+        /// </summary>
+        public string EmbedLink { get; set; }
 
         /// <summary>
         /// Profile identity

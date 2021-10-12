@@ -13,6 +13,7 @@ namespace LEotA.Engine.Web.ViewModels.AccountViewModels
             RuleFor(x => x.Model.Email).NotNull().EmailAddress();
             RuleFor(x => x.Model.FirstName).NotEmpty().NotNull().MaximumLength(50);
             RuleFor(x => x.Model.LastName).NotEmpty().NotNull().MaximumLength(50);
+            RuleFor(x => x.Model.EmbedLink).NotEmpty().NotNull().MaximumLength(50);
             RuleFor(x => x.Model.Password).NotNull().NotEmpty().MaximumLength(50);
             RuleFor(x => x.Model.ConfirmPassword).NotNull().MaximumLength(50).Equal(x => x.Model.Password).When(x => !string.IsNullOrEmpty(x.Model.Password));
         });

@@ -41,6 +41,8 @@ namespace LEotA.Engine.Data.DatabaseInitialization
                 UserName = "leonidimeev@yandex.ru",
                 FirstName = "Leonid",
                 LastName = "Imeev",
+                PatronomicName = "Vladimirovitch",
+                EmbedLink = "https://www.google.ru",
                 NormalizedUserName = "LEONIDIMEEV@YANDEX.RU",
                 PhoneNumber = "+79142650809",
                 EmailConfirmed = true,
@@ -66,7 +68,7 @@ namespace LEotA.Engine.Data.DatabaseInitialization
             if (!context.Users.Any(u => u.UserName == developer1.UserName))
             {
                 var password = new PasswordHasher<ApplicationUser>();
-                var hashed = password.HashPassword(developer1, "&U&U5t3e");
+                var hashed = password.HashPassword(developer1, "Qwerty123!");
                 developer1.PasswordHash = hashed;
                 var userStore = scope.ServiceProvider.GetService<ApplicationUserStore>();
                 var result = await userStore.CreateAsync(developer1);

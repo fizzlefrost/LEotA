@@ -22,6 +22,8 @@ namespace LEotA.Engine.Web.Infrastructure.Mappers
                 .ForMember(x => x.EmailConfirmed, o => o.MapFrom(src => true))
                 .ForMember(x => x.FirstName, o => o.MapFrom(p => p.FirstName))
                 .ForMember(x => x.LastName, o => o.MapFrom(p => p.LastName))
+                .ForMember(x => x.PatronomicName, o => o.MapFrom(p => p.PatronimicName))
+                .ForMember(x => x.EmbedLink, o => o.MapFrom(p => p.EmbedLink))
                 .ForMember(x => x.PhoneNumberConfirmed, o => o.MapFrom(src => true))
                 .ForAllOtherMembers(x => x.Ignore());
 

@@ -22,6 +22,22 @@ namespace LEotA.Engine.Web.ViewModels.AccountViewModels
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        
+        /// <summary>
+        /// PatronimicName
+        /// </summary>
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Patronimic Name")]
+        public string? PatronimicName { get; set; }
+        
+        /// <summary>
+        /// EmbedLink
+        /// </summary>
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Embed Link")]
+        public string EmbedLink { get; set; }
 
         /// <summary>
         /// Email
