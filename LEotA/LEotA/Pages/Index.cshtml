@@ -1,7 +1,6 @@
 ﻿@page
-@using LEotA.Pages
-@using LEotA.Clients
-@model TestModel
+@using Microsoft.EntityFrameworkCore
+@model LEotA.Pages.TestModel
 @* @code{ *@
 @*     string message = new string("message"); *@
 @*     string name = new string("name"); *@
@@ -9,16 +8,14 @@
 
 <div class="text-center">
     <h1 class="display-4">Looking kinda sus</h1>
-    
-    @* <input type="text" id="message" name="message" required *@
-    @*        minlength="4" maxlength="8" size="10"> *@
-    @* <input type="text" id="name" name="name" required *@
-    @*            minlength="4" maxlength="8" size="10"> *@
-        <input id="Button1" type="button" value="@TestModel.OnPostAboutUs(new List<string>(){"message","name"})" asp-page-handler="AboutUs"/>
-
-    @* <input id="Button1" type="button" value="@TestModel.OnPostAboutUs(new List<string>(){"message","name"})"/> *@
-    @* <input id=Button1" type=button" value="@TestModel.OnPostAboutUs(new List<string>(){"message","name"})" onclick="document.getElementById('Text1').value = this.value" /> *@
-
+    @foreach (var product in Model._aboutUsList)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Text</td>
+            <td>@product.Image</td>
+        </tr>
+    }
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 @* @functions *@

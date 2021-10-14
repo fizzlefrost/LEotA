@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using LEotA.Clients.EngineClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -29,8 +31,20 @@ namespace LEotA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // var sectionApplicationSettings = Configuration.GetSection("App");
+            // services.Configure<ApplicationSettings>(sectionApplicationSettings);
+            // var applicationSettings = sectionApplicationSettings.Get<ApplicationSettings>();
+            
             services.AddRazorPages();
             services.AddHttpClient();
+            
+            services.AddSingleton<EngineClientManager>();
+            
+            services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
