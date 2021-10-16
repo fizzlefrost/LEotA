@@ -20,6 +20,10 @@ ul {
     list-style: none;
 }
 
+.floatingimg{
+    float: right;
+}
+
 body {
     -webkit-text-size-adjust: none;
 }

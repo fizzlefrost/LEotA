@@ -8,8 +8,4 @@ services:
     environment:
       SA_PASSWORD: "Qwerty123!"
       ACCEPT_EULA: "Y"
-  postgres:
-      ports:
-      - '0.0.0.0:5432:5432'
-      environment:
-          POSTGRES_PASSWORD: Qwerty123!
+  
