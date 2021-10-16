@@ -8,7 +8,7 @@ namespace LEotA.Models
         [JsonPropertyName("text")]
         public string Text { get; set; }
         [JsonPropertyName("image")]
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         [JsonPropertyName("id")]
         public string Id { get; set; }
     }

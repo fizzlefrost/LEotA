@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
 using LEotA.Models;
 
-namespace LEotA.Clients.EngineClient
+namespace LEotA.Clients.EngineClient.Patrons
 {
     public interface IAboutUsPatron
     {
-        public Task<CalabongaViewModelForCreation> AboutUsGetViewModelForCreationAsync();
-        public Task<string> AboutUsPostAsync(string text, string imageRaw);
-        public Task<CalabongaViewModelForEditing<AboutUs>> AboutUsGetViewModelForEditingAsync(string id);
-        public Task<string> AboutUsPutAsync(AboutUsUpdateModel aboutUsUpdateModel);
+        public Task<CalabongaViewModel<AboutUs>> AboutUsGetViewModelForCreationAsync();
+        public Task<CalabongaViewModel<AboutUs>> AboutUsPostAsync(AboutUsCreateModel aboutUsCreateModel);
+        public Task<CalabongaViewModel<AboutUs>> AboutUsGetViewModelForEditingAsync(string id);
+        public Task<CalabongaViewModel<AboutUs>> AboutUsPutAsync(AboutUsUpdateModel aboutUsUpdateModel);
+        public Task<CalabongaViewModel<AboutUs>> AboutUsDeleteAsync(string id);
         public Task<CalabongaViewModel<AboutUs>> AboutUsGetByIdAsync(string id);
         public Task<CalabongaGetPagedModel<AboutUs>> AboutUsGetPagedAsync(CalabongaGetPagedRequestModel parameters);
     }

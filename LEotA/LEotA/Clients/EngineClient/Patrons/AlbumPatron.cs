@@ -10,40 +10,39 @@ using LEotA.Models;
 
 namespace LEotA.Clients.EngineClient.Patrons
 {
-    public class AboutUsPatron : IAboutUsPatron
+    public class AlbumPatron : IAlbumPatron
     {
         private HttpClient _httpClient;
 
-        public AboutUsPatron(HttpClient httpClient)
+        public AlbumPatron(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
         
-        public async Task<CalabongaViewModel<AboutUs>> AboutUsGetViewModelForCreationAsync()
+        public async Task<CalabongaViewModel<Album>> AlbumGetViewModelForCreationAsync()
         {
             var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-creation");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            return JsonSerializer.Deserialize<CalabongaViewModel<Album>>(result, options);
         }
 
-        public async Task<CalabongaViewModel<AboutUs>> AboutUsPostAsync(AboutUsCreateModel aboutUsCreateModel)
+        public async Task<CalabongaViewModel<Album>> AlbumPostAsync(AlbumCreateModel AlbumCreateModel)
         {
-            var request = new AboutUsCreateModel()
+            var request = new AlbumCreateModel()
             {
-                Text = aboutUsCreateModel.Text, 
-                Image = aboutUsCreateModel.Image
+                Name = AlbumCreateModel.Name
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
             using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<AboutUs>();
+            var report = new CalabongaViewModel<Album>();
             try
             {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+                report = JsonSerializer.Deserialize<CalabongaViewModel<Album>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
             }
             catch (Exception exception)
             {
@@ -52,24 +51,24 @@ namespace LEotA.Clients.EngineClient.Patrons
             return report;
         }
 
-        public async Task<CalabongaViewModel<AboutUs>> AboutUsGetViewModelForEditingAsync(string id)
+        public async Task<CalabongaViewModel<Album>> AlbumGetViewModelForEditingAsync(string id)
         {
             var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-editing/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            return JsonSerializer.Deserialize<CalabongaViewModel<Album>>(result, options);
         }
         
-        public async Task<CalabongaViewModel<AboutUs>> AboutUsPutAsync(AboutUsUpdateModel aboutUsUpdateModel)
+        public async Task<CalabongaViewModel<Album>> AlbumPutAsync(AlbumUpdateModel AlbumUpdateModel)
         {
-            using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", aboutUsUpdateModel);
+            using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", AlbumUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<AboutUs>();
+            var report = new CalabongaViewModel<Album>();
             try
             {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+                report = JsonSerializer.Deserialize<CalabongaViewModel<Album>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
             }
             catch (Exception exception)
             {
@@ -78,25 +77,25 @@ namespace LEotA.Clients.EngineClient.Patrons
             return report;
         }
         
-        public async Task<CalabongaViewModel<AboutUs>> AboutUsDeleteAsync(string id)
+        public async Task<CalabongaViewModel<Album>> AlbumDeleteAsync(string id)
         {
             var httpResponse = await _httpClient.DeleteAsync($"api/about-us/delete-item/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            return JsonSerializer.Deserialize<CalabongaViewModel<Album>>(result, options);
         }
 
-        public async Task<CalabongaViewModel<AboutUs>> AboutUsGetByIdAsync(string id)
+        public async Task<CalabongaViewModel<Album>> AlbumGetByIdAsync(string id)
         {
             var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-by-id/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            return JsonSerializer.Deserialize<CalabongaViewModel<Album>>(result, options);
         }
         
-        public async Task<CalabongaGetPagedModel<AboutUs>> AboutUsGetPagedAsync(CalabongaGetPagedRequestModel parameters)
+        public async Task<CalabongaGetPagedModel<Album>> AlbumGetPagedAsync(CalabongaGetPagedRequestModel parameters)
         {
             var builder = new UriBuilder($"{_httpClient.BaseAddress}api/about-us/get-paged");
             var query = HttpUtility.ParseQueryString(builder.Query);
@@ -111,7 +110,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaGetPagedModel<AboutUs>>(result, options);
+            return JsonSerializer.Deserialize<CalabongaGetPagedModel<Album>>(result, options);
         }
     }
 }

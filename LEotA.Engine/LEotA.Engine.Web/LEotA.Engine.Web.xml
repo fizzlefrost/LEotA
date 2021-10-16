@@ -1193,28 +1193,28 @@
             <summary>Provides access to the git information for the current assembly.</summary>
         </member>
         <member name="F:ThisAssembly.Git.IsDirty">
-            <summary>IsDirty: true</summary>
+            <summary>IsDirty: false</summary>
         </member>
         <member name="F:ThisAssembly.Git.IsDirtyString">
-            <summary>IsDirtyString: true</summary>
+            <summary>IsDirtyString: false</summary>
         </member>
         <member name="F:ThisAssembly.Git.RepositoryUrl">
             <summary>Repository URL: https://github.com/fizzlefrost/LEotA.git</summary>
         </member>
         <member name="F:ThisAssembly.Git.Branch">
-            <summary>Branch: feature/engine-client</summary>
+            <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: 6f5f3a7</summary>
+            <summary>Commit: 850bf52</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: 6f5f3a7981be6cf20e48b2fe9f2e508e1283ec46</summary>
+            <summary>Sha: 850bf523c43a150327a38b5b4311caddf21fdfd6</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2021-10-13T23:38:56+09:00</summary>
+            <summary>Commit date: 2021-10-15T00:15:05+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 20</summary>
+            <summary>Commits on top of base version: 21</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1244,7 +1244,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 20</summary>
+            <summary>Patch: 21</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>
