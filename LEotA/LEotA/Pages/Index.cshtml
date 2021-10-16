@@ -1,42 +1,16 @@
 ﻿@page
 @using Microsoft.EntityFrameworkCore
 @model LEotA.Pages.TestModel
-@* @code{ *@
-@*     string message = new string("message"); *@
-@*     string name = new string("name"); *@
-@* } *@
 
 <div class="text-center">
     <h1 class="display-4">Looking kinda sus</h1>
-    @foreach (var product in Model._aboutUsList)
-    {
-        <tr>
-            <td>@product.Id</td>
-            <td>@product.Text</td>
-            <td>@product.Image</td>
-        </tr>
-    }
+    @* @foreach (var product in Model._aboutUsList) *@
+    @* { *@
+    @*     <tr> *@
+    @*         <td>@product.Id</td> *@
+    @*         <td>@product.Text</td> *@
+    @*         <td>@product.Image</td> *@
+    @*     </tr> *@
+    @* } *@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-@* @functions *@
-@* { *@
-@*     public static string PostAboutUs(string message, string name) *@
-@*     { *@
-@*         return (EngineClient.PostAboutUs(message, name).Result); *@
-@*     } *@
-@* *@
-@*     private object PostAboutUs() *@
-@*     { *@
-@*         throw new NotImplementedException(); *@
-@*     } *@
-@* } *@
-@* @section Scripts *@
-@* { *@
-@*     <script> *@
-@*     // let name = "name"; *@
-@*     // let message = "message"; *@
-@*     function PostAboutUsButton(){ *@
-@*         $("button").html('@PostAboutUs() *@
-@*         } *@
-@*     </script> *@
-@* } *@

@@ -1,57 +1,46 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" id="nav-bg">
+﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-1" id="nav-bg">
     <div class="container">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png"></a>
+        <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png"></a>
     </div>
-    <partial name="_LoginPartial"/>
 </nav>
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-        <div id="page-wrapper" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
+        <div id="page-wrapper" class="navbar-collapse collapse d-sm-inline-flex justify-content-around">
+            <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                 </li>
             </ul>
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/AboutUs">About Us</a>
                 </li>
             </ul>
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Events">Events</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Events">Events</a>
                 </li>
             </ul>
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Gallery">Gallery</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Gallery">Gallery</a>
                 </li>
             </ul>
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Projects">Projects</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Projects">Projects</a>
                 </li>
             </ul>
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Publications">Publications</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Publications">Publications</a>
                 </li>
             </ul>
-            <ul class="navbar-nav flex-grow-1">
+            <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Staff">Staff</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Staff">Staff</a>
                 </li>
             </ul>
-            @if (SignInManager.IsSignedIn(User)){
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Materials" asp-action="Index">Materials</a>
-                    </li>
-                </ul>
-            }
         </div>
     </div>
 </nav>

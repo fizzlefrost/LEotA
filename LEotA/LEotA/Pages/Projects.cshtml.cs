@@ -8,23 +8,24 @@ using Microsoft.Extensions.Logging;
 
 namespace LEotA.Pages
 {
-    public class TestModel : PageModel
+    public class  ProjectsModel : PageModel
     {
-        private readonly ILogger<TestModel> _logger;
+        private readonly ILogger<ProjectsModel> _logger;
         private readonly EngineClientManager _engineClientManager;
 
-        public TestModel(ILogger<TestModel> logger, EngineClientManager engineClientManager)
-        //public TestModel( EngineClientManager engineClientManager)
-        //public TestModel( EngineClientManager engineClientManager)
+        public ProjectsModel(ILogger<ProjectsModel> logger, EngineClientManager engineClientManager)
+            //public TestModel( EngineClientManager engineClientManager)
+            //public TestModel( EngineClientManager engineClientManager)
         {
             _logger = logger;
             _engineClientManager = engineClientManager;
         }
 
-        public List<AboutUs>? _aboutUsList { get; set; }
+        //public List<AboutUs>? _aboutUsList { get; set; }
 
         public void OnGet()
         {
+            
             //_aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
         }
     }
