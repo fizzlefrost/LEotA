@@ -1,5 +1,4 @@
 ﻿@page
-@using Microsoft.EntityFrameworkCore
 @model LEotA.Pages.TestModel
 
 <div class="text-center">
@@ -12,5 +11,29 @@
     @*         <td>@product.Image</td> *@
     @*     </tr> *@
     @* } *@
+    @* <li><a href="/AdminPanel">Contact</a></li> *@
+    <a asp-page="/AdminPanel">Admin</a>
+    <br>
+    <a asp-page="/Login">Admin Login</a>
+    
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+     
+     
+    @if(User.Identity.IsAuthenticated)
+    {
+        <p>@User.Identity.Name</p>
+     
+        <form method="post" asp-controller="Account" asp-action="Logout">
+            <input type="submit" value="Выход" />
+        </form>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login">Вход</a>
+        <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    }
+
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

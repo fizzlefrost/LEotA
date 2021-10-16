@@ -46,6 +46,13 @@ namespace LEotA
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
 
+            services.AddAuthentication("Cookie")
+                .AddCookie("Cookie", config =>
+                {
+                    config.LoginPath = "/AdminPanel";
+                });
+            services.AddAuthorization();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,7 +74,8 @@ namespace LEotA
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
