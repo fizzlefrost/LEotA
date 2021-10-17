@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEotA.Engine.Web", "LEotA.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEotA", "LEotA.Ng\LEotA.csproj", "{8CEE4053-4C88-424B-8EF4-6CFD65ECF0FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEotA.IdentityServer", "LEotA.IdentityServer\LEotA.IdentityServer.csproj", "{03D0A62C-F38B-4C25-A357-83D37B2F9DA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{8CEE4053-4C88-424B-8EF4-6CFD65ECF0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CEE4053-4C88-424B-8EF4-6CFD65ECF0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CEE4053-4C88-424B-8EF4-6CFD65ECF0FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D0A62C-F38B-4C25-A357-83D37B2F9DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D0A62C-F38B-4C25-A357-83D37B2F9DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D0A62C-F38B-4C25-A357-83D37B2F9DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D0A62C-F38B-4C25-A357-83D37B2F9DA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
