@@ -3,7 +3,7 @@
     "LEotA.IdentityServer": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "site/index",
       "applicationUrl": "https://localhost:9001;http://localhost:9000",
       "environmentVariables": {

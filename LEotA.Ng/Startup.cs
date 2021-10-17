@@ -44,12 +44,8 @@ namespace LEotA
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
-            
-            services.AddSingleton<EngineAuthenticationManager>();
-            services.AddHttpClient<EngineAuthenticationManager>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:10001");
-            });
+
+            services.AddHttpClient();
 
             services.AddAuthentication("Cookie")
                 .AddCookie("Cookie", config =>

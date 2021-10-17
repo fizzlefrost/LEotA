@@ -2,6 +2,7 @@
 using LEotA.Engine.Data;
 using LEotA.Engine.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,12 @@ namespace LEotA.Engine.Web.AppStart.ConfigureServices
         {
             var url = configuration.GetSection("IdentityServer").GetValue<string>("Url");
             services.AddAuthentication()
+            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                // .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, config =>
+                // {
+                //     config.Authority = "https://localhost:9001";
+                //     config.Audience = "OrdersAPI";
+                // })
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(
                     options =>

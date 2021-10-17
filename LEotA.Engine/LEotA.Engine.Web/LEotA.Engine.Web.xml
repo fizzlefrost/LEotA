@@ -163,39 +163,16 @@
         <member name="M:LEotA.Engine.Web.AppStart.SwaggerFilters.ApplySummariesOperationFilter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
             <inheritdoc />
         </member>
-        <member name="T:LEotA.Engine.Web.Controllers.Account2Controller">
-            <summary>
-            Account Controller
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Controllers.Account2Controller.#ctor(LEotA.Engine.Web.Infrastructure.Services.IAccountService)">
-            <summary>
-            Register controller
-            </summary>
-            <param name="accountService"></param>
-        </member>
-        <member name="M:LEotA.Engine.Web.Controllers.Account2Controller.Register(LEotA.Engine.Web.ViewModels.AccountViewModels.RegisterViewModel)">
-            <summary>
-            Register new user. Success registration returns UserProfile for new user.
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:LEotA.Engine.Web.Controllers.Account2Controller.Profile">
-            <summary>
-            Returns profile information for authenticated user
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:LEotA.Engine.Web.Controllers.AccountController">
             <summary>
             Account Controller
             </summary>
         </member>
-        <member name="M:LEotA.Engine.Web.Controllers.AccountController.#ctor(MediatR.IMediator)">
+        <member name="M:LEotA.Engine.Web.Controllers.AccountController.#ctor(LEotA.Engine.Web.Infrastructure.Services.IAccountService)">
             <summary>
             Register controller
             </summary>
+            <param name="accountService"></param>
         </member>
         <member name="M:LEotA.Engine.Web.Controllers.AccountController.Register(LEotA.Engine.Web.ViewModels.AccountViewModels.RegisterViewModel)">
             <summary>
@@ -1205,16 +1182,16 @@
             <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: 399a290</summary>
+            <summary>Commit: c6393c7</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: 399a2901ba248c36caf61c940b95658ef35b6c91</summary>
+            <summary>Sha: c6393c78e72a6deae12414d0772087d61fd82959</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2021-10-16T22:47:44+09:00</summary>
+            <summary>Commit date: 2021-10-17T14:04:00+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 27</summary>
+            <summary>Commits on top of base version: 31</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1244,7 +1221,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 27</summary>
+            <summary>Patch: 31</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>
