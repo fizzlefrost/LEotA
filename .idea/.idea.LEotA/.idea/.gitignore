@@ -2,12 +2,12 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
-/contentModel.xml
-/.idea.LEotA.iml
 /projectSettingsUpdater.xml
 /modules.xml
+/.idea.LEotA.iml
+/contentModel.xml
 # Datasource local storage ignored files
-/../../../../../../../../../../:\Users\user\Desktop\repos\LEotA\LEotA\.idea\.idea.LEotA\.idea/dataSources/
+/../../../../../../../../../../:\Users\user\Desktop\repos\he\LEotA\.idea\.idea.LEotA\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/

@@ -21,6 +21,6 @@ namespace LEotA.Models
         public object Exception { get; set; }
 
         [JsonPropertyName("logs")]
-        public List<object> Logs { get; set; }
+        public List<string> Logs { get; set; }
     }
 }

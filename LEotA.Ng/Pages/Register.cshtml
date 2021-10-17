@@ -1,0 +1,42 @@
+﻿@page "/Register"
+@model LEotA.Pages.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2 class="text-info pt-2 pb-3">Create a new account</h2>
+
+<form method="post">
+    <div>
+        @Html.LabelFor(m => m.Input.FirstName)
+        <input type="text" name="firstName">
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Input.LastName)
+        <input type="text" name="lastName">
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Input.PatronomicName)
+        <input type="text" name="patronomicName">
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Input.EmbedLink)
+        <input type="text" name="embedLink">
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Input.Email)
+        <input type="text" name="email">
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Input.Password)
+        <input type="text" name="password">
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Input.ConfirmPassword)
+        <input type="text" name="passwordConfirm">
+    </div>
+    <div>
+        <input type="submit" value="Регистрация"/>
+    </div>
+</form>

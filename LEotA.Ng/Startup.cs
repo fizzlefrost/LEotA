@@ -40,8 +40,13 @@ namespace LEotA
             services.AddHttpClient();
             
             services.AddSingleton<EngineClientManager>();
-            
             services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
+            
+            services.AddSingleton<EngineAuthenticationManager>();
+            services.AddHttpClient<EngineAuthenticationManager>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });

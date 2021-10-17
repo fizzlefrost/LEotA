@@ -12,6 +12,8 @@ namespace LEotA.Pages
         private readonly ILogger<AdminPanelModel> _logger;
         private readonly EngineClientManager _engineClientManager;
 
+        public RegisterViewModel model { get; set; }
+
         public LoginModel(ILogger<AdminPanelModel> logger, EngineClientManager engineClientManager)
         {
             _logger = logger;
@@ -20,16 +22,12 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            Console.WriteLine("asdasd");
+            
         }
         
-        // public void OnPost()
-        // {
-        //     Console.WriteLine("asdasd");
-        // }
-        // public void OnGetSubmit()
-        // {
-        //     Console.WriteLine("asdasd");
-        // }
+        public void OnPost(RegisterViewModel model)
+        {
+            
+        }
     }
 }
