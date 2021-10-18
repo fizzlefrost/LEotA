@@ -1,9 +1,21 @@
 ﻿@page "/AboutUs"
-@model LEotA.Models.AboutUs
+@model LEotA.Pages.AboutUsModel
+@{
+    
+}
 <div class="container border border-2">
     <h2>About Us</h2>
-    <img class="float-right" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.Image))>"/>
-    <p class="align-center">
-        @Model.Text
-    </p>
+    @foreach (var product in Model.imgSrcDict)
+    
+        {
+            <tr>
+                <img class="float-right" src="@product.Key" />
+                @* <td>@product.Id</td> *@
+                @* <td>@product.Text</td> *@
+                @* <td>@product.Image</td> *@
+            </tr>
+            <p class="align-center"> 
+                @product.Value.Text 
+            </p> 
+        }
 </div>

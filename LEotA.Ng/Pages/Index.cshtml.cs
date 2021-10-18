@@ -7,12 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace LEotA.Pages
 {
-    public class TestModel : PageModel
+    public class IndexModel : PageModel
     {
-        private readonly ILogger<TestModel> _logger;
+        private readonly ILogger<IndexModel> _logger;
         private readonly EngineClientManager _engineClientManager;
 
-        public TestModel(ILogger<TestModel> logger, EngineClientManager engineClientManager)
+        public IndexModel(ILogger<IndexModel> logger, EngineClientManager engineClientManager)
         //public TestModel( EngineClientManager engineClientManager)
         //public TestModel( EngineClientManager engineClientManager)
         {

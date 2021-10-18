@@ -5,7 +5,7 @@ namespace LEotA.Models
 {
     public class CultureSwitcherModel
     {
-        public CultureInfo CurrentUiCulture { get; set; }
+        public CultureInfo CurrentUICulture { get; set; }
         public List<CultureInfo> SupportedCultures { get; set; }
     }
 }

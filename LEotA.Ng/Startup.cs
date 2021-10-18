@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Globalization;
+using LEotA.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
@@ -42,6 +43,7 @@ namespace LEotA
             services.AddRazorPages();
             services.AddHttpClient();
             services.AddSingleton<EngineClientManager>();
+            services.AddSingleton<CommonLocalizationService>();
             services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
@@ -53,21 +55,24 @@ namespace LEotA
                 .AddCookie("Cookie", config =>
                 {
                     config.LoginPath = "/AdminPanel";
-                });
+                })
+                ;
             services.AddAuthorization();
-            services.AddLocalization();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
             services.Configure<RequestLocalizationOptions>(options =>
             {
-               var supportedCultures = new[]
+                var supportedCultures = new[]
                 {
-                    new CultureInfo("ru"),
                     new CultureInfo("en"),
+                    new CultureInfo("ru")
                 };
-                options.DefaultRequestCulture = new RequestCulture("ru");
+                options.DefaultRequestCulture = new RequestCulture("en-GB");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,10 +94,10 @@ namespace LEotA
             app.UseStaticFiles();
 
             app.UseRouting();
-            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
             app.UseRequestLocalization(localizationOptions);
 
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 

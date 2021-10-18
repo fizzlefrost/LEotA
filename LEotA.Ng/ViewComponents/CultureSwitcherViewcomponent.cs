@@ -9,17 +9,17 @@ namespace LEotA.ViewComponents
 {
     public class CultureSwitcherViewComponent : ViewComponent
     {
-        private readonly IOptions<RequestLocalizationOptions> _localizationOptions;
+        private readonly IOptions<RequestLocalizationOptions> localizationOptions;
         public CultureSwitcherViewComponent(IOptions<RequestLocalizationOptions> localizationOptions) =>
-            this._localizationOptions = localizationOptions;
+            this.localizationOptions = localizationOptions;
  
         public IViewComponentResult Invoke()
         {
             var cultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
             var model = new CultureSwitcherModel
             {
-                SupportedCultures = _localizationOptions.Value.SupportedUICultures.ToList(),
-                CurrentUiCulture = cultureFeature.RequestCulture.UICulture
+                SupportedCultures = localizationOptions.Value.SupportedUICultures.ToList(),
+                CurrentUICulture = cultureFeature.RequestCulture.UICulture
             };
             return View(model);
         }

@@ -1,4 +1,7 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-1" id="nav-bg">
+﻿@using LEotA.Services
+@inject CommonLocalizationService localizer
+<title>@ViewData["Title"] - @localizer.Get("Localisation")</title>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-1" id="nav-bg">
     <div class="container">
         <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png"></a>
         <vc:culture-switcher/>
@@ -9,37 +12,37 @@
         <div id="page-wrapper" class="navbar-collapse collapse d-sm-inline-flex justify-content-around">
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">@localizer.Get("Home")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/AboutUs">About Us</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/AboutUs">@localizer.Get("AboutUs")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Events">Events</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Events">@localizer.Get("Events")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Gallery">Gallery</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Gallery">@localizer.Get("Gallery")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Projects">Projects</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Projects">@localizer.Get("Projects")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Publications">Publications</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Publications">@localizer.Get("Publications")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Staff">Staff</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Staff">@localizer.Get("Staff")</a>
                 </li>
             </ul>
         </div>
