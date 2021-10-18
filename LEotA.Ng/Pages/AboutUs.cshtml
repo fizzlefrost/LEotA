@@ -1,3 +1,9 @@
 ﻿@page "/AboutUs"
-@model AboutUs
-<img src="data:image/jpg;base64,@(Convert.ToBase64String(Model.Image))>"/>
+@model LEotA.Models.AboutUs
+<div class="container border border-2">
+    <h2>About Us</h2>
+    <img class="float-right" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.Image))>"/>
+    <p class="align-center">
+        @Model.Text
+    </p>
+</div>

@@ -1,11 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
@@ -15,6 +11,7 @@ namespace LEotA.Pages
     {
         private readonly ILogger<AboutUsModel> _logger;
         private readonly EngineClientManager _engineClientManager;
+        public List<AboutUs>? _aboutUsList { get; set; }
         public AboutUsModel(ILogger<AboutUsModel> logger, EngineClientManager engineClientManager)
         {
             _logger = logger;
@@ -22,7 +19,7 @@ namespace LEotA.Pages
         }
         public void OnGet()
         {
-            //_aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
+            _aboutUsList = _engineClientManager.AboutUsGetPaged(null, 1, null, null, false);
         }
         
     }

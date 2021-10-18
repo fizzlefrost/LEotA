@@ -1,8 +1,12 @@
-﻿@{
-    ViewData["Title"] = "LEAKED LULW";
-}
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
 
-<div class="text-center">
-    <h1 class="display-4">BANNED LULW</h1>
-    <p>Sorry Forsen I had to report you FeelsBadMan .</p>
-</div>
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["About"];
+}
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>@Localizer["Use this area to provide additional information."]</p>

@@ -1,17 +1,19 @@
 ﻿@page
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal
+@inject IStringLocalizer<IndexModel> _localizer
+@inject IHtmlLocalizer<IndexModel> _htmlLocalizer
 @model LEotA.Pages.TestModel
+@{
+    ViewData["Title"] = "Home page";
+    var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
+    var requestCulture = requestCultureFeature.RequestCulture;
+}
 
 <div class="text-center">
-    <h1 class="display-4">Looking kinda sus</h1>
-    @* @foreach (var product in Model._aboutUsList) *@
-    @* { *@
-    @*     <tr> *@
-    @*         <td>@product.Id</td> *@
-    @*         <td>@product.Text</td> *@
-    @*         <td>@product.Image</td> *@
-    @*     </tr> *@
-    @* } *@
-    @* <li><a href="/AdminPanel">Contact</a></li> *@
+    <h1 class="display-4">@_localizer["Welcome"]</h1>
+    <p>@_htmlLocalizer["Learn"]</p>
     <a asp-page="/AdminPanel">Admin</a>
     <br>
     <a asp-page="/Login">Admin Login</a>
@@ -31,7 +33,7 @@
     }
     else
     {
-        <a asp-page="/Login">Вход</a>
+        <a asp-page="/Login">@requestCulture.UICulture.Name</a>
         <a asp-page="/Register">Регистрация</a>
         <a asp-page="/GetClientSecretTestPage">TEST</a>
     }

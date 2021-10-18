@@ -17,6 +17,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 namespace LEotA
 {
@@ -38,7 +41,6 @@ namespace LEotA
             
             services.AddRazorPages();
             services.AddHttpClient();
-            
             services.AddSingleton<EngineClientManager>();
             services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
             {
@@ -53,7 +55,19 @@ namespace LEotA
                     config.LoginPath = "/AdminPanel";
                 });
             services.AddAuthorization();
-
+            services.AddLocalization();
+            services.AddMvc().AddViewLocalization();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+               var supportedCultures = new[]
+                {
+                    new CultureInfo("ru"),
+                    new CultureInfo("en"),
+                };
+                options.DefaultRequestCulture = new RequestCulture("ru");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +89,9 @@ namespace LEotA
             app.UseStaticFiles();
 
             app.UseRouting();
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
+            app.UseRequestLocalization(localizationOptions);
+
             
             app.UseAuthentication();
             app.UseAuthorization();

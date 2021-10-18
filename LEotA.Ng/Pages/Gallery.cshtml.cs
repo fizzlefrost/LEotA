@@ -1,5 +1,7 @@
 ﻿#nullable enable
+using System.Collections.Generic;
 using LEotA.Clients.EngineClient;
+using LEotA.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
@@ -18,12 +20,13 @@ namespace LEotA.Pages
             _engineClientManager = engineClientManager;
         }
 
-        //public List<AboutUs>? _aboutUsList { get; set; }
+        public List<Album>? _albumList { get; set; }
+        public List<Image>? _imageList { get; set; }
 
         public void OnGet()
         {
-            
-            //_aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
+
+            _albumList = _engineClientManager.AlbumGetPaged(null, 10, null, null, false);
         }
     }
 }
