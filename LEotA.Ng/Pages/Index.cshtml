@@ -1,22 +1,18 @@
 ﻿@page
-@inject IStringLocalizer<IndexModel> localizer
-@inject IHtmlLocalizer<IndexModel> htmlLocalizer
-@using Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.AspNetCore.Localization
+@inject CommonLocalizationService localizer
+@using LEotA.Services
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
-    var requestCulture = requestCultureFeature.RequestCulture;
 }
 <div class="text-center">
-    <h1 class="display-4">@localizer["Welcome"]</h1>
-    <p>@htmlLocalizer["Learn"]</p>
+    <h1 class="display-4">@localizer.Get("Welcome")</h1>
+    <p>@localizer.Get("Learn")</p>
 </div>
 <div class="text-center">
     <a asp-page="/AdminPanel">Admin</a>
     <br>
-    <a asp-page="/Login">Admin Login</a>
+    <a asp-page="/Login">@localizer.Get("Login")</a>
      
      
     @if(User.Identity.IsAuthenticated)
@@ -29,8 +25,7 @@
     }
     else
     {
-        <a asp-page="/Login">@requestCulture.UICulture.Name</a>
-        <a asp-page="/Register">Регистрация</a>
+        <a asp-page="/Register">@localizer.Get("Register")</a>
         <a asp-page="/GetClientSecretTestPage">TEST</a>
     }
 

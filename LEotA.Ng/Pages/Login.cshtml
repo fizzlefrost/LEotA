@@ -1,6 +1,7 @@
 ﻿@page "/Login"
+@using LEotA.Services
 @model LEotA.Models.LoginViewModel
- 
+@inject CommonLocalizationService localizer
 <h2>Вход в приложение</h2>
 <form method="post">
     <div asp-validation-summary="ModelOnly"></div>

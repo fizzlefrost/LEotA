@@ -45,4 +45,25 @@
     <data name="Materials" xml:space="preserve">
         <value>Материалы</value>
     </data>
+    <data name="Register" xml:space="preserve">
+        <value>Регистрация</value>
+    </data>
+    <data name="Welcome" xml:space="preserve">
+        <value>Добро пожаловать</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>Введите электронную почту</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Введите пароль</value>
+    </data>
+    <data name="PasswordA" xml:space="preserve">
+        <value>Введите пароль заново</value>
+    </data>
+    <data name="Learn" xml:space="preserve">
+        <value>Учись</value>
+    </data>
+    <data name="Login" xml:space="preserve">
+        <value>Войти</value>
+    </data>
 </root>

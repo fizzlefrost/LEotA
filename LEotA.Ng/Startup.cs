@@ -67,7 +67,7 @@ namespace LEotA
                     new CultureInfo("en"),
                     new CultureInfo("ru")
                 };
-                options.DefaultRequestCulture = new RequestCulture("en-GB");
+                options.DefaultRequestCulture = new RequestCulture("en");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
