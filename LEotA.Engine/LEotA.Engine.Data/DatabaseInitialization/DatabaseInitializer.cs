@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace LEotA.Engine.Data.DatabaseInitialization
 {
@@ -19,7 +20,7 @@ namespace LEotA.Engine.Data.DatabaseInitialization
 
             // Should be uncomment when using UseSqlServer() settings or any other provider.
             // This is should not be used when UseInMemoryDatabase()
-            // context.Database.Migrate();
+            await context.Database.MigrateAsync();
 
             var roles = AppData.Roles.ToArray();
 

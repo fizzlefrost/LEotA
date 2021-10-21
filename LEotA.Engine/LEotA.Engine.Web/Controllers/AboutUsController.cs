@@ -4,6 +4,8 @@ using Calabonga.UnitOfWork;
 using Calabonga.UnitOfWork.Controllers.Controllers;
 using Calabonga.UnitOfWork.Controllers.Factories;
 using LEotA.Engine.Entities;
+using LEotA.Engine.Entities.Core;
+using LEotA.Engine.Web.Infrastructure.Auth;
 using LEotA.Engine.Web.ViewModels.AboutUsViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LEotA.Engine.Web.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = AuthData.AuthSchemes)]
     public class AboutUsController: WritableController<AboutUsViewModel, AboutUs, AboutUsCreateViewModel, AboutUsUpdateViewModel, PagedListQueryParams>
     {
         public AboutUsController(IEntityManagerFactory entityManagerFactory, IUnitOfWork unitOfWork, IMapper mapper) 
@@ -19,11 +22,11 @@ namespace LEotA.Engine.Web.Controllers
             
         }
 
-        [Authorize]
-        [Route("[action]")]
-        public string Secret()
-        {
-            return "Secret string from Orders APaI";
-        }
+        // [Authorize(Policy = "Logs:UserRoles:View", Roles = AppData.SystemAdministratorRoleName)]
+        // [Route("[action]")]
+        // public string Secret()
+        // {
+        //     return "Secret string from Orders APaI";
+        // }
     }
 }

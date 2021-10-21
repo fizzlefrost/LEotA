@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LEotA.Engine.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,15 +21,15 @@ namespace LEotA.Engine.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Albums",
+                name: "Album",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Albums", x => x.Id);
+                    table.PrimaryKey("PK_Album", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,7 +79,21 @@ namespace LEotA.Engine.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventParticipants",
+                name: "Event",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
+                    EmbedLink = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Event", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventParticipant",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -88,21 +102,7 @@ namespace LEotA.Engine.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventParticipants", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Events",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmbedLink = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Events", x => x.Id);
+                    table.PrimaryKey("PK_EventParticipant", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -413,7 +413,7 @@ namespace LEotA.Engine.Data.Migrations
                 name: "AboutUs");
 
             migrationBuilder.DropTable(
-                name: "Albums");
+                name: "Album");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -434,10 +434,10 @@ namespace LEotA.Engine.Data.Migrations
                 name: "AutoHistory");
 
             migrationBuilder.DropTable(
-                name: "EventParticipants");
+                name: "Event");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "EventParticipant");
 
             migrationBuilder.DropTable(
                 name: "Images");

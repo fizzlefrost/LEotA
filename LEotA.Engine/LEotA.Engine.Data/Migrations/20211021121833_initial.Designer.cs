@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LEotA.Engine.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211012150056_Initial")]
-    partial class Initial
+    [Migration("20211021121833_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,11 +233,12 @@ namespace LEotA.Engine.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Albums");
+                    b.ToTable("Album");
                 });
 
             modelBuilder.Entity("LEotA.Engine.Entities.Event", b =>
@@ -248,19 +249,22 @@ namespace LEotA.Engine.Data.Migrations
 
                     b.Property<string>("EmbedLink")
                         .IsRequired()
+                        .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Text")
                         .IsRequired()
+                        .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("Event");
                 });
 
             modelBuilder.Entity("LEotA.Engine.Entities.EventParticipant", b =>
@@ -277,7 +281,7 @@ namespace LEotA.Engine.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EventParticipants");
+                    b.ToTable("EventParticipant");
                 });
 
             modelBuilder.Entity("LEotA.Engine.Entities.Image", b =>

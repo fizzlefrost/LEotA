@@ -162,3 +162,6 @@ msbuild.wrn
 .vs/
 
 *.dll
+
+# amogus
+LEotA.Engine.Web.csproj

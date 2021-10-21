@@ -24,12 +24,6 @@ namespace LEotA.Engine.Web.AppStart.ConfigureServices
         {
             var url = configuration.GetSection("IdentityServer").GetValue<string>("Url");
             services.AddAuthentication()
-            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                // .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, config =>
-                // {
-                //     config.Authority = "https://localhost:9001";
-                //     config.Audience = "OrdersAPI";
-                // })
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(
                     options =>

@@ -21,19 +21,19 @@ namespace LEotA.Engine.Web.Controllers
         {
         }
         
-        [Authorize]
-        [Route("/get-image-by-masterId")]
-        public async Task<IActionResult> GetImageByMasterIdAsync(Guid id)
-        {
-            try
-            {
-                var images = Repository.GetAll(true).Where(i => i.MasterId == id);
-                return Ok(images);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
+        // [Authorize]
+        // [Route("[action]")]
+        // public async Task<IActionResult> GetImageByMasterIdAsync(Guid id)
+        // {
+        //     try
+        //     {
+        //         var images = Repository.GetAll(true).Where(i => i.MasterId == id);
+        //         return Ok(images);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         return StatusCode(500, "Internal Server Error");
+        //     }
+        // }
     }
 }

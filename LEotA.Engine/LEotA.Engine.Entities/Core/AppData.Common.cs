@@ -10,7 +10,7 @@ namespace LEotA.Engine.Entities.Core
         /// <summary>
         /// Current service name
         /// </summary>
-        public const string ServiceName = "IdentityModule";
+        public const string ServiceName = "LEotA.Engine";
 
         /// <summary>
         /// "SystemAdministrator"
