@@ -12,5 +12,6 @@ namespace LEotA.Clients.EngineClient.Patrons
         public Task<CalabongaViewModel<Image>> ImageDeleteAsync(string id);
         public Task<CalabongaViewModel<Image>> ImageGetByIdAsync(string id);
         public Task<CalabongaGetPagedModel<Image>> ImageGetPagedAsync(CalabongaGetPagedRequestModel parameters);
+        public Task<CalabongaGetPagedModel<Image>> ImageGetByMasterIdAsync(string id);
     }
 }

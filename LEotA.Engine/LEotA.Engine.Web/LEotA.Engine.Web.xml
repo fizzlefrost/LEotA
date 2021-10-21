@@ -1170,10 +1170,10 @@
             <summary>Provides access to the git information for the current assembly.</summary>
         </member>
         <member name="F:ThisAssembly.Git.IsDirty">
-            <summary>IsDirty: false</summary>
+            <summary>IsDirty: true</summary>
         </member>
         <member name="F:ThisAssembly.Git.IsDirtyString">
-            <summary>IsDirtyString: false</summary>
+            <summary>IsDirtyString: true</summary>
         </member>
         <member name="F:ThisAssembly.Git.RepositoryUrl">
             <summary>Repository URL: https://github.com/fizzlefrost/LEotA.git</summary>
@@ -1182,16 +1182,16 @@
             <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: ad48a9b</summary>
+            <summary>Commit: edf8d7d</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: ad48a9b054db006f0da31b99045ca29fe53c58ee</summary>
+            <summary>Sha: edf8d7dba22ad62235e9e778362a6895ea343fc1</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2021-10-18T23:06:47+09:00</summary>
+            <summary>Commit date: 2021-10-19T23:19:14+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 35</summary>
+            <summary>Commits on top of base version: 36</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1221,7 +1221,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 35</summary>
+            <summary>Patch: 36</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>

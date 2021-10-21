@@ -1,13 +1,24 @@
 ﻿@page "/Events"
-@model EventsModel
+@model LEotA.Pages.EventsModel
 @{
-    ViewData["Title"] = "Amogus!!!!!";
+	ViewBag.Title = "My Home Page";
+	;
 }
-@foreach (var donk in Model.events)
-{
-	<div class="container">
-		<h2>@donk.Name</h2>
-		<p> @donk.Text </p>
-		<a href="@donk.EmbedLink" class="btn btn-primary">REGISTER</a>
-	</div>
-}
+<div class="container border border-2">
+	<h2>About Us</h2>
+	@foreach (var e_vent in Model.eventViewModelList)
+    
+	{
+		<h2 class="align-center"> @e_vent.Event.Name </h2> 
+		<tr>
+			@foreach (var e_Image in e_vent.Image) 
+			{
+				<img class = "float-right" src="data:image/jpeg;base64,@Convert.ToBase64String(e_Image.ImageRaw)"/>
+			
+			}
+			<p class="align-center"> @e_vent.Event.Text </p> 
+		</tr>
+        
+		<p class="align-center"> @e_vent.Event.EmbedLink </p> 
+	}
+</div>

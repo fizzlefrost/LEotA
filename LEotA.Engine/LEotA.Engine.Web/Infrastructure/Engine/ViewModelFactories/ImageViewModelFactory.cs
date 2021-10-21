@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Calabonga.OperationResults;
@@ -24,6 +25,12 @@ namespace LEotA.Engine.Web.Infrastructure.Engine.ViewModelFactories
         {
             return Task.FromResult(new OperationResult<ImageCreateViewModel>());
         }
+        
+        // public Task<OperationResult<ImageCreateViewModel>> GetAllByMasterId(Guid id)
+        // {
+        //     var images = new List<Image>();
+        //     // images = resposito
+        // }
 
         public override async Task<OperationResult<ImageUpdateViewModel>> GenerateForUpdateAsync(Guid id)
         {

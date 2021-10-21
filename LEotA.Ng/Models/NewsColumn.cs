@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace LEotA.Models
 {
@@ -19,7 +20,11 @@ namespace LEotA.Models
         [JsonPropertyName("text")]
         public string Text { get; set; }
     }
-    
+    public class NewsViewModel
+    {
+        public Event Event { get; set; }
+        public List<Image>? Image { get; set; }
+    }
     public class NewsColumnUpdateModel
     {
         [JsonPropertyName("id")]

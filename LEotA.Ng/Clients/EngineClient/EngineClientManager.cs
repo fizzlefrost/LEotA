@@ -217,6 +217,8 @@ namespace LEotA.Clients.EngineClient
         public CalabongaViewModel<Image>? ImageGetById(Guid id) =>
             _imagePatron?.ImageGetByIdAsync(id.ToString()).Result;
 
+        public CalabongaGetPagedModel<Image>? ImageGetByMasterId(Guid id) =>
+            _imagePatron?.ImageGetByMasterIdAsync(id.ToString()).Result;
         public List<Image>? ImageGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes) => _imagePatron?.ImageGetPagedAsync(new CalabongaGetPagedRequestModel()
         {

@@ -1,11 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace LEotA.Models
 {
     public class Event    
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("text")]
@@ -22,6 +24,12 @@ namespace LEotA.Models
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+    }
+    
+    public class EventViewModel
+    {
+        public Event Event { get; set; }
+        public List<Image>? Image { get; set; }
     }
     
     public class EventUpdateModel

@@ -16,8 +16,9 @@ namespace LEotA.Engine.Web.Controllers
         public AboutUsController(IEntityManagerFactory entityManagerFactory, IUnitOfWork unitOfWork, IMapper mapper) 
             : base(entityManagerFactory, unitOfWork, mapper)
         {
+            
         }
-        
+
         [Authorize]
         [Route("[action]")]
         public string Secret()
