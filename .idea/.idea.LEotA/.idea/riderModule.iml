@@ -3,5 +3,6 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../.." />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="21030a443c" level="application" />
   </component>
 </module>

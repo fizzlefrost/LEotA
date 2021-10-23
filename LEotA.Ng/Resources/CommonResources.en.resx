@@ -69,4 +69,7 @@
     <data name="Logout" xml:space="preserve">
         <value>Logout</value>
     </data>
+    <data name="FooterSocial" xml:space="preserve">
+        <value>Our socials</value>
+    </data>
 </root>

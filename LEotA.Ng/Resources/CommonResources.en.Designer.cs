@@ -88,6 +88,15 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Our socials.
+        /// </summary>
+        internal static string FooterSocial {
+            get {
+                return ResourceManager.GetString("FooterSocial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gallery.
         /// </summary>
         internal static string Gallery {
