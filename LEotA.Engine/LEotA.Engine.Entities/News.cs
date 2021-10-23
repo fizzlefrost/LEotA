@@ -8,5 +8,6 @@ namespace LEotA.Engine.Entities
     {
         public string Description { get; set; }
         public Guid NewsColumnId { get; set; }
+        public string Culture { get; set; }
     }
 }

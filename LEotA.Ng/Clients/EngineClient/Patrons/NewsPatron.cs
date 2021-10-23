@@ -33,7 +33,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             var request = new NewsCreateModel()
             {
                 Description = NewsCreateModel.Description,
-                NewsColumnId = NewsCreateModel.NewsColumnId
+                NewsColumnId = NewsCreateModel.NewsColumnId,
+                Culture = NewsCreateModel.Culture
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);

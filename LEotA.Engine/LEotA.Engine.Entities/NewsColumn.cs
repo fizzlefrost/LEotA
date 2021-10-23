@@ -8,5 +8,6 @@ namespace LEotA.Engine.Entities
     {
         public string Name { get; set; }
         public string Text { get; set; }
+        public string Culture { get; set; }
     }
 }

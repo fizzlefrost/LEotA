@@ -133,6 +133,15 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выйти.
+        /// </summary>
+        internal static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Материалы.
         /// </summary>
         internal static string Materials {

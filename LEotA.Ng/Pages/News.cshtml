@@ -1,0 +1,11 @@
+﻿@page "/News/{id}"
+@inject CommonLocalizationService localizer
+@using LEotA.Services
+@model NewsModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@foreach (var news in Model.newsColumnModelList)
+{
+    
+}

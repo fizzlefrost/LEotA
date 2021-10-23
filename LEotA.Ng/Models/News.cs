@@ -11,6 +11,8 @@ namespace LEotA.Models
         public string Description { get; set; }
         [JsonPropertyName("newsColumnId")]
         public Guid NewsColumnId { get; set; }
+        [JsonPropertyName("culture")]
+        public string Culture { get; set; }
     }
     
     public class NewsCreateModel
@@ -19,6 +21,8 @@ namespace LEotA.Models
         public string Description { get; set; }
         [JsonPropertyName("newsColumnId")]
         public Guid NewsColumnId { get; set; }
+        [JsonPropertyName("culture")]
+        public string Culture { get; set; }
     }
     
     public class NewsUpdateModel
@@ -31,5 +35,7 @@ namespace LEotA.Models
         public Guid NewsColumnId { get; set; }
         [JsonPropertyName("newId")]
         public string NewId { get; set; }
+        [JsonPropertyName("culture")]
+        public string Culture { get; set; }
     }
 }

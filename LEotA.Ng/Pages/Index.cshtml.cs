@@ -1,9 +1,17 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace LEotA.Pages
 {
@@ -11,6 +19,7 @@ namespace LEotA.Pages
     {
         private readonly ILogger<EventsModel> _logger;
         private readonly EngineClientManager _engineClientManager;
+        
         public IList<News> _newsList { get; set; }
         public List<NewsColumn> _newsColumnList { get; set; }
         public List<EventViewModel> eventViewModelList { get; set; }
@@ -23,7 +32,6 @@ namespace LEotA.Pages
         public void OnGet()
         {
             _newsList = _engineClientManager.NewsGetPaged(null, 10, null, null, false);
-            _newsColumnList = _engineClientManager.NewsColumnGetPaged(null, 10, null, null, false);
             eventViewModelList = new List<EventViewModel>();
             //     foreach (var _event in _newsList)
             //     {
@@ -35,6 +43,11 @@ namespace LEotA.Pages
             //     }
             // }
 
+        }
+
+        public async Task OnPostAsync()
+        {
+            var _image = Path.Combine(_env)
         }
     }
 }

@@ -1,29 +1,32 @@
 ﻿@page "/AboutUs"
 @using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Localization
 @model LEotA.Pages.AboutUsModel
 @{
      ViewBag.Title = "My Home Page";
-    ;
+    var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
+    var requestCulture = requestCultureFeature.RequestCulture;
 }
 <div class="container border border-2">
     <h2>About Us</h2>
     @foreach (var product in Model.imgSrcDict)
-    
     {
-        <tr>
-            @* <img src="@(new FileContentResult(product.Key, "image/png"))" alt="Person Image"/> *@
-            @* <img src="@(product.Key)" alt="Person Image"/> *@
-                
-            <img class = "float-right" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Key)"/>
-            <p class="align-center"> @product.Value.Text </p> 
-            
-            @* <img alt="" src="@ViewData["img8642ECA1-1577-40C8-6FAA-08D98E3B2BA1"]" style="height:256px;width:256px;"/> *@
+        if (product.Value.Culture != requestCulture.Culture.Name)
+        {
+            <tr>
+                @* <img src="@(new FileContentResult(product.Key, "image/png"))" alt="Person Image"/> *@
+                @* <img src="@(product.Key)" alt="Person Image"/> *@
 
-            @* <td>@product.Id</td> *@
-            @* <td>@product.Text</td> *@
-            @* <td>@product.Image</td> *@
-        </tr>
-        
+                <img class="float-right" src="data:image/jpeg;base64,@Convert.ToBase64String(product.Key)"/>
+                <p class="align-center"> @product.Value.Text </p>
+
+                @* <img alt="" src="@ViewData["img8642ECA1-1577-40C8-6FAA-08D98E3B2BA1"]" style="height:256px;width:256px;"/> *@
+
+                @* <td>@product.Id</td> *@
+                @* <td>@product.Text</td> *@
+                @* <td>@product.Image</td> *@
+            </tr>
+        }
     }
 </div>
 @* <img alt="s" src="data:image/png;base64, @Convert.ToBase64String(Model.imgSrcDict.FirstOrDefault().Key)"/> *@

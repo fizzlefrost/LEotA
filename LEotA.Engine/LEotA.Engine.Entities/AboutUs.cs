@@ -6,5 +6,6 @@ namespace LEotA.Engine.Entities
     {
         public string Text { get; set; }
         public byte[] Image { get; set; }
+        public string Culture { get; set; }
     }
 }

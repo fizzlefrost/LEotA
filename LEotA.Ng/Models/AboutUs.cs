@@ -11,6 +11,9 @@ namespace LEotA.Models
         public byte[] Image { get; set; }
         [JsonPropertyName("id")]
         public string Id { get; set; }
+        
+        [JsonPropertyName("culture")]
+        public string Culture { get; set; }
     }
     
     public class AboutUsCreateModel
@@ -19,6 +22,8 @@ namespace LEotA.Models
         public string Text { get; set; }
         [JsonPropertyName("image")]
         public string Image { get; set; }
+        [JsonPropertyName("culture")]
+        public string Culture { get; set; }
     }
     
     public class AboutUsUpdateModel
@@ -31,5 +36,7 @@ namespace LEotA.Models
         public string Image { get; set; }
         [JsonPropertyName("Id")]
         public string NewId { get; set; }
+        [JsonPropertyName("culture")]
+        public string Culture { get; set; }
     }
 }

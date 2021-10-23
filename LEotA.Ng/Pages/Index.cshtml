@@ -1,9 +1,12 @@
 ﻿@page
 @inject CommonLocalizationService localizer
 @using LEotA.Services
+@using Microsoft.AspNetCore.Localization
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
+    var requestCulture = requestCultureFeature.RequestCulture;
 }
 <div class="text-center">
     <h1 class="display-4">@localizer.Get("Welcome")</h1>
@@ -20,7 +23,7 @@
         <p>@User.Identity.Name</p>
      
         <form method="post" asp-controller="Account" asp-action="Logout">
-            <input type="submit" value="Выход" />
+            <input type="submit" value="@localizer.Get("Logout")" />
         </form>
     }
     else
@@ -28,6 +31,38 @@
         <a asp-page="/Register">@localizer.Get("Register")</a>
         <a asp-page="/GetClientSecretTestPage">TEST</a>
     }
-
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="container mb-3 border-dark">
+        <article class="special">
+            <h2>Pepega</h2>
+        </article>
+    </div>
+    <div class="container mb-3 border-dark">
+        <article class="special">
+            <h2>Pepega</h2>
+        </article>
+    </div>
+    <div class="container mb-3 border ">
+        <article class="special align-left">
+            <h2>Pepega</h2>
+            <p> I am not a Pepega</p>
+        </article>
+    </div>
+    @* @foreach (var news in Model._newsList) *@
+    @* { *@
+    @*     if (news.Culture != requestCulture.Culture.Name) *@
+    @*     { *@
+    @*         continue; *@
+    @*     } *@
+    @*     else *@
+    @*     { *@
+    @*         <div class="container mb-3 border"> *@
+    @*             <a asp-page="/News" asp-route-id="@news.NewsColumnId"> *@
+    @*                 <article class="special align-left"> *@
+    @*                     <h2>@news.Description</h2> *@
+    @*                 </article> *@
+    @*             </a> *@
+    @*         </div> *@
+    @*     } *@
+    @* } *@
+    
 </div>

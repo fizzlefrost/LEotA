@@ -33,7 +33,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             var request = new AboutUsCreateModel()
             {
                 Text = aboutUsCreateModel.Text, 
-                Image = aboutUsCreateModel.Image
+                Image = aboutUsCreateModel.Image,
+                Culture = aboutUsCreateModel.Culture
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);

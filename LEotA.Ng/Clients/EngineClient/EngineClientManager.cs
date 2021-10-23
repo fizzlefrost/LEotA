@@ -38,23 +38,25 @@ namespace LEotA.Clients.EngineClient
         public CalabongaViewModel<AboutUs>? AboutUsGetViewModelForCreation() =>
             _aboutUsPatron?.AboutUsGetViewModelForCreationAsync().Result;
         
-        public CalabongaViewModel<AboutUs>? AboutUsPost(string text, string imageRaw) =>
+        public CalabongaViewModel<AboutUs>? AboutUsPost(string text, string imageRaw, string culture) =>
             _aboutUsPatron?.AboutUsPostAsync(new AboutUsCreateModel()
             {
                 Text = text,
-                Image = imageRaw
+                Image = imageRaw,
+                Culture = culture
             }).Result;
         
         public CalabongaViewModel<AboutUs>? AboutUsPostGetViewModelForEditing(string id) =>
             _aboutUsPatron?.AboutUsGetViewModelForEditingAsync(id).Result;
         
-        public CalabongaViewModel<AboutUs>? AboutUsPut(string id, string text, string image, string newId) => 
+        public CalabongaViewModel<AboutUs>? AboutUsPut(string id, string text, string image, string culture, string newId) => 
             _aboutUsPatron?.AboutUsPutAsync(new AboutUsUpdateModel()
         {
             Id = id,
             Text = text,
             Image = image,
             NewId = newId,
+            Culture = culture
         }).Result;
         
         public CalabongaViewModel<AboutUs>? AboutUsDelete(Guid id) =>
@@ -232,23 +234,25 @@ namespace LEotA.Clients.EngineClient
         public CalabongaViewModel<News>? NewsGetViewModelForCreation() =>
             _newsPatron?.NewsGetViewModelForCreationAsync().Result;
         
-        public CalabongaViewModel<News>? NewsPost(string description, string newsColumnId) =>
+        public CalabongaViewModel<News>? NewsPost(string description, string newsColumnId, string culture) =>
             _newsPatron?.NewsPostAsync(new NewsCreateModel()
             {
                 Description = description,
-                NewsColumnId = new Guid(newsColumnId)
+                NewsColumnId = new Guid(newsColumnId),
+                Culture = culture
             }).Result;
         
         public CalabongaViewModel<News>? NewsPostGetViewModelForEditing(string id) =>
             _newsPatron?.NewsGetViewModelForEditingAsync(id).Result;
         
-        public CalabongaViewModel<News>? NewsPut(string id, string description, string newsColumnId, string newId) => 
+        public CalabongaViewModel<News>? NewsPut(string id, string description, string newsColumnId, string newId, string culture) => 
             _newsPatron?.NewsPutAsync(new NewsUpdateModel()
             {
                 Id = id,
                 Description = description,
                 NewsColumnId = new Guid(newsColumnId),
                 NewId = newId,
+                Culture = culture
             }).Result;
         
         public CalabongaViewModel<News>? NewsDelete(Guid id) =>
