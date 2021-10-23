@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
@@ -17,16 +19,20 @@ namespace LEotA.Pages
 
         public RegisterViewModel model { get; set; }
 
-        public LoginModel(ILogger<AdminPanelModel> logger, EngineClientManager engineClientManager, IHttpClientFactory _httpClientFactory)
+        public LoginModel(ILogger<AdminPanelModel> logger, EngineClientManager engineClientManager, 
+            IHttpClientFactory _httpClientFactory)
         {
             _logger = logger;
             _engineClientManager = engineClientManager;
             this._httpClientFactory = _httpClientFactory;
         }
         
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            
+            string url = $"localhost:10001/.auth/login/aad?post_login_redirect_url=" 
+                                + Request.Query["redirect_url"];
+
+            return Redirect(url);
         }
         
         public async Task OnPost(string email, string password, string passwordConfirm, string _RequestVerificationToken)

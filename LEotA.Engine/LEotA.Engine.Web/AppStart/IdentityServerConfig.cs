@@ -1,6 +1,7 @@
 ﻿using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityModel;
 
 namespace LEotA.Engine.Web.AppStart
 {
@@ -37,7 +38,7 @@ namespace LEotA.Engine.Web.AppStart
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.Address,
-                    "api1"
+                    "leota_client"
                 }
             },
             new Client
@@ -56,6 +57,16 @@ namespace LEotA.Engine.Web.AppStart
                 },
                 RedirectUris = { "https://localhost:5001/authentication/login-callback" },
                 PostLogoutRedirectUris = { "https://localhost:5001" },
+            },
+            new Client
+            {
+                ClientId = "leota_client_id",
+                ClientSecrets = { new Secret("leota_client_secret".ToSha256()) },
+                AllowedGrantTypes = GrantTypes.Code,
+                AllowedScopes =
+                {
+                    "OrdersAPI"
+                }
             }
         };
 
