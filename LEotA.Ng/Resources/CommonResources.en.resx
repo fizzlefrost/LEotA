@@ -72,4 +72,8 @@
     <data name="FooterSocial" xml:space="preserve">
         <value>Our socials</value>
     </data>
+    <data name="Footer" xml:space="preserve">
+        <value>2021 © International Research Laboratory
+“Arctic Linguistic Ecology”</value>
+    </data>
 </root>

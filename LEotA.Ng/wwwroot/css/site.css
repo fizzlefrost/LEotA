@@ -11,13 +11,6 @@ html, body, div, a, img, ul, li, footer, header, nav {
 footer, header,  nav{
     display: block;
 }
-footer {
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:auto;
-    background-color: #1c2331;
-}
 
 
 body {

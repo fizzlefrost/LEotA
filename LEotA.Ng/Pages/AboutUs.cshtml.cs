@@ -53,6 +53,11 @@ namespace LEotA.Pages
             }
 
         }
+
+        public IActionResult OnPost()
+        {
+            return 
+        }
         public class AboutUsImageViewModel
         {
             public List<AboutUs>? _aboutUsList { get; set; }

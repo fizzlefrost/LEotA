@@ -88,6 +88,16 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2021 © International Research Laboratory
+        ///“Arctic Linguistic Ecology”.
+        /// </summary>
+        internal static string Footer {
+            get {
+                return ResourceManager.GetString("Footer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Our socials.
         /// </summary>
         internal static string FooterSocial {

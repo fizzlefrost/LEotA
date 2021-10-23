@@ -14,9 +14,8 @@
 			@foreach (var e_Image in e_vent.Image) 
 			{
 				<img class = "float-right" src="data:image/jpeg;base64,@Convert.ToBase64String(e_Image.ImageRaw)"/>
-			
+				<p class="align-center"> @e_vent.Event.Text </p>
 			}
-			<p class="align-center"> @e_vent.Event.Text </p> 
 		</tr>
         
 		<p class="align-center"> @e_vent.Event.EmbedLink </p> 
