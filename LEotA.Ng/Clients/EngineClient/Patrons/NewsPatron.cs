@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -18,15 +19,6 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             _httpClient = httpClient;
         }
-        
-        public async Task<CalabongaViewModel<News>> NewsGetViewModelForCreationAsync()
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-creation");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<News>>(result, options);
-        }
 
         public async Task<CalabongaViewModel<News>> NewsPostAsync(NewsCreateModel NewsCreateModel)
         {
@@ -41,42 +33,17 @@ namespace LEotA.Clients.EngineClient.Patrons
             using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<News>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<News>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<NewsGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return NewsGetModelToNews(report);
         }
 
-        public async Task<CalabongaViewModel<News>> NewsGetViewModelForEditingAsync(string id)
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-editing/{id}");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<News>>(result, options);
-        }
-        
         public async Task<CalabongaViewModel<News>> NewsPutAsync(NewsUpdateModel NewsUpdateModel)
         {
             using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", NewsUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<News>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<News>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<NewsGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return NewsGetModelToNews(report);
         }
         
         public async Task<CalabongaViewModel<News>> NewsDeleteAsync(string id)
@@ -85,7 +52,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<News>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<NewsGetModel>>(result, options);
+            return NewsGetModelToNews(report);
         }
 
         public async Task<CalabongaViewModel<News>> NewsGetByIdAsync(string id)
@@ -94,7 +62,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<News>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<NewsGetModel>>(result, options);
+            return NewsGetModelToNews(report);
         }
         
         public async Task<CalabongaGetPagedModel<News>> NewsGetPagedAsync(CalabongaGetPagedRequestModel parameters)
@@ -112,7 +81,76 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaGetPagedModel<News>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaGetPagedModel<NewsGetModel>>(result, options);
+            return NewsGetPagedModelToNews(report);
+        }
+        
+        private CalabongaViewModel<News> NewsGetModelToNews(CalabongaViewModel<NewsGetModel> pageModel)
+        {
+            var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
+            var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
+            var culturedDescription = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Description);
+            var returnModel = new CalabongaViewModel<News>()
+            {
+                ActivityId = pageModel.ActivityId,
+                Exception = pageModel.Exception,
+                Logs = pageModel.Logs,
+                Metadata = pageModel.Metadata,
+                Ok = pageModel.Ok,
+                Result = new News()
+                {
+                    Id = new Guid(pageModel.Result.Id),
+                    Name = culturedName,
+                    Text = culturedText,
+                    Description = culturedDescription
+                }
+            };
+            return returnModel;
+        }
+
+        private CalabongaGetPagedModel<News> NewsGetPagedModelToNews(CalabongaGetPagedModel<NewsGetModel> pageModel)
+        {
+            try
+            {
+                var returnModel = new CalabongaGetPagedModel<News>()
+                {
+                    ActivityId = pageModel.ActivityId,
+                    Exception = pageModel.Exception,
+                    Logs = pageModel.Logs,
+                    Metadata = pageModel.Metadata,
+                    Ok = pageModel.Ok,
+                    Result = new Page<News>()
+                    {
+                        HasNextPage = pageModel.Result.HasNextPage,
+                        HasPreviousPage = pageModel.Result.HasPreviousPage,
+                        IndexFrom = pageModel.Result.IndexFrom,
+                        Items = new List<News>(),
+                        PageIndex = pageModel.Result.PageIndex,
+                        PageSize = pageModel.Result.PageSize,
+                        TotalCount = pageModel.Result.TotalCount,
+                        TotalPages = pageModel.Result.TotalPages
+                    }
+                };
+                foreach (var News in pageModel.Result.Items)
+                {
+                    var culturedText = JsonSerializer.Deserialize<CultureBase>(News.Text);
+                    var culturedName = JsonSerializer.Deserialize<CultureBase>(News.Name);
+                    var culturedDescription = JsonSerializer.Deserialize<CultureBase>(News.Description);
+                    returnModel.Result.Items.Add(new News()
+                    {
+                        Id = new Guid(News.Id),
+                        Text = culturedText,
+                        Description = culturedDescription,
+                        Name = culturedName
+                    });
+                }
+
+                return returnModel;
+            }
+            catch (Exception e)
+            {
+                return new CalabongaGetPagedModel<News>();
+            }
         }
     }
 }

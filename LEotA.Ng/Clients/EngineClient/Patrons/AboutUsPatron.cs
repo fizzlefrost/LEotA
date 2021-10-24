@@ -26,7 +26,9 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<AboutUsGetModel>>(result, options);
+            return AboutUsGetModelToAboutUs(report);
+            
         }
 
         public async Task<CalabongaViewModel<AboutUs>> AboutUsPostAsync(AboutUsCreateModel aboutUsCreateModel)
@@ -41,16 +43,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<AboutUs>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<AboutUsGetModel>>(json, new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+            return AboutUsGetModelToAboutUs(report);
         }
 
         public async Task<CalabongaViewModel<AboutUs>> AboutUsGetViewModelForEditingAsync(string id)
@@ -59,22 +53,24 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            var pageModel = JsonSerializer.Deserialize<CalabongaViewModel<AboutUsGetModel>>(result, options);
+            return AboutUsGetModelToAboutUs(pageModel);
         }
         
         public async Task<CalabongaViewModel<AboutUs>> AboutUsPutAsync(AboutUsUpdateModel aboutUsUpdateModel)
         {
             using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", aboutUsUpdateModel);
-            var json = await response.Content.ReadAsStringAsync();
-            if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{result}");
             var report = new CalabongaViewModel<AboutUs>();
             try
             {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+                var pageModel = JsonSerializer.Deserialize<CalabongaViewModel<AboutUsGetModel>>(result, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+                return AboutUsGetModelToAboutUs(pageModel);
             }
             catch (Exception exception)
             {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
+                // throw new JsonException($"Ошибка десериализации {Environment.NewLine}{aboutUsUpdateModel.Id}", exception);
             }
             return report;
         }
@@ -85,7 +81,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            var pageModel = JsonSerializer.Deserialize<CalabongaViewModel<AboutUsGetModel>>(result, options);
+            return AboutUsGetModelToAboutUs(pageModel);
         }
 
         public async Task<CalabongaViewModel<AboutUs>> AboutUsGetByIdAsync(string id)
@@ -94,7 +91,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<AboutUs>>(result, options);
+            var pageModel = JsonSerializer.Deserialize<CalabongaViewModel<AboutUsGetModel>>(result, options);
+            return AboutUsGetModelToAboutUs(pageModel);
         }
         
         public async Task<CalabongaGetPagedModel<AboutUs>> AboutUsGetPagedAsync(CalabongaGetPagedRequestModel parameters)
@@ -113,37 +111,69 @@ namespace LEotA.Clients.EngineClient.Patrons
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
             var pageModel = JsonSerializer.Deserialize<CalabongaGetPagedModel<AboutUsGetModel>>(result, options);
-
-            var returnModel = new CalabongaGetPagedModel<AboutUs>()
+            return AboutUsGetPagedModelToAboutUs(pageModel);
+        }
+        
+        private CalabongaViewModel<AboutUs> AboutUsGetModelToAboutUs(CalabongaViewModel<AboutUsGetModel> pageModel)
+        {
+            var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
+            var returnModel = new CalabongaViewModel<AboutUs>()
             {
                 ActivityId = pageModel.ActivityId,
                 Exception = pageModel.Exception,
                 Logs = pageModel.Logs,
                 Metadata = pageModel.Metadata,
                 Ok = pageModel.Ok,
-                Result = new Page<AboutUs>()
+                Result = new AboutUs()
                 {
-                    HasNextPage = pageModel.Result.HasNextPage,
-                    HasPreviousPage = pageModel.Result.HasPreviousPage,
-                    IndexFrom = pageModel.Result.IndexFrom,
-                    Items = new List<AboutUs>(),
-                    PageIndex = pageModel.Result.PageIndex,
-                    PageSize = pageModel.Result.PageSize,
-                    TotalCount = pageModel.Result.TotalCount,
-                    TotalPages = pageModel.Result.TotalPages
+                    Id = new Guid(pageModel.Result.Id),
+                    Image = Convert.FromBase64String(pageModel.Result.Image),
+                    Text = culturedText
                 }
             };
-            foreach (var aboutUs in pageModel.Result.Items)
-            {
-                var culturedText = JsonSerializer.Deserialize<CultureBase>(aboutUs.Text);
-                returnModel.Result.Items.Add(new AboutUs()
-                {
-                    Id = new Guid(aboutUs.Id),
-                    Image = Convert.FromBase64String(aboutUs.Image),
-                    Text = culturedText
-                });
-            }
             return returnModel;
+        }
+
+        private CalabongaGetPagedModel<AboutUs> AboutUsGetPagedModelToAboutUs(CalabongaGetPagedModel<AboutUsGetModel> pageModel)
+        {
+            try
+            {
+                var returnModel = new CalabongaGetPagedModel<AboutUs>()
+                {
+                    ActivityId = pageModel.ActivityId,
+                    Exception = pageModel.Exception,
+                    Logs = pageModel.Logs,
+                    Metadata = pageModel.Metadata,
+                    Ok = pageModel.Ok,
+                    Result = new Page<AboutUs>()
+                    {
+                        HasNextPage = pageModel.Result.HasNextPage,
+                        HasPreviousPage = pageModel.Result.HasPreviousPage,
+                        IndexFrom = pageModel.Result.IndexFrom,
+                        Items = new List<AboutUs>(),
+                        PageIndex = pageModel.Result.PageIndex,
+                        PageSize = pageModel.Result.PageSize,
+                        TotalCount = pageModel.Result.TotalCount,
+                        TotalPages = pageModel.Result.TotalPages
+                    }
+                };
+                foreach (var aboutUs in pageModel.Result.Items)
+                {
+                    var culturedText = JsonSerializer.Deserialize<CultureBase>(aboutUs.Text);
+                    returnModel.Result.Items.Add(new AboutUs()
+                    {
+                        Id = new Guid(aboutUs.Id),
+                        Image = Convert.FromBase64String(aboutUs.Image),
+                        Text = culturedText
+                    });
+                }
+
+                return returnModel;
+            }
+            catch (Exception e)
+            {
+                return new CalabongaGetPagedModel<AboutUs>();
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace LEotA.Models
         public string ActivityId { get; set; }
 
         [JsonPropertyName("metadata")]
-        public object Metadata { get; set; }
+        public Metadata Metadata { get; set; }
 
         [JsonPropertyName("exception")]
         public object Exception { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -25,7 +26,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<EventParticipant>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(result, options);
+            return EventParticipantGetModelToAboutUs(report);
         }
 
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantPostAsync(EventParticipantCreateModel EventParticipantCreateModel)
@@ -40,16 +42,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<EventParticipant>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipant>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return EventParticipantGetModelToAboutUs(report);
         }
 
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantGetViewModelForEditingAsync(string id)
@@ -58,7 +52,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<EventParticipant>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(result, options);
+            return EventParticipantGetModelToAboutUs(report);
         }
         
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantPutAsync(EventParticipantUpdateModel EventParticipantUpdateModel)
@@ -66,16 +61,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", EventParticipantUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<EventParticipant>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipant>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return EventParticipantGetModelToAboutUs(report);
         }
         
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantDeleteAsync(string id)
@@ -84,7 +71,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<EventParticipant>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(result, options);
+            return EventParticipantGetModelToAboutUs(report);
         }
 
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantGetByIdAsync(string id)
@@ -93,7 +81,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<EventParticipant>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(result, options);
+            return EventParticipantGetModelToAboutUs(report);
         }
         
         public async Task<CalabongaGetPagedModel<EventParticipant>> EventParticipantGetPagedAsync(CalabongaGetPagedRequestModel parameters)
@@ -111,7 +100,68 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaGetPagedModel<EventParticipant>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaGetPagedModel<EventParticipantGetModel>>(result, options);
+            return EventParticipantGetPagedModelToAboutUs(report);
+        }
+        
+        private CalabongaViewModel<EventParticipant> EventParticipantGetModelToAboutUs(CalabongaViewModel<EventParticipantGetModel> pageModel)
+        {
+            var returnModel = new CalabongaViewModel<EventParticipant>()
+            {
+                ActivityId = pageModel.ActivityId,
+                Exception = pageModel.Exception,
+                Logs = pageModel.Logs,
+                Metadata = pageModel.Metadata,
+                Ok = pageModel.Ok,
+                Result = new EventParticipant()
+                {
+                    Id = new Guid(pageModel.Result.Id),
+                    EventId = new Guid(pageModel.Result.EventId),
+                    UserId = new Guid(pageModel.Result.UserId)
+                }
+            };
+            return returnModel;
+        }
+
+        private CalabongaGetPagedModel<EventParticipant> EventParticipantGetPagedModelToAboutUs(CalabongaGetPagedModel<EventParticipantGetModel> pageModel)
+        {
+            try
+            {
+                var returnModel = new CalabongaGetPagedModel<EventParticipant>()
+                {
+                    ActivityId = pageModel.ActivityId,
+                    Exception = pageModel.Exception,
+                    Logs = pageModel.Logs,
+                    Metadata = pageModel.Metadata,
+                    Ok = pageModel.Ok,
+                    Result = new Page<EventParticipant>()
+                    {
+                        HasNextPage = pageModel.Result.HasNextPage,
+                        HasPreviousPage = pageModel.Result.HasPreviousPage,
+                        IndexFrom = pageModel.Result.IndexFrom,
+                        Items = new List<EventParticipant>(),
+                        PageIndex = pageModel.Result.PageIndex,
+                        PageSize = pageModel.Result.PageSize,
+                        TotalCount = pageModel.Result.TotalCount,
+                        TotalPages = pageModel.Result.TotalPages
+                    }
+                };
+                foreach (var eventParticipant in pageModel.Result.Items)
+                {
+                    returnModel.Result.Items.Add(new EventParticipant()
+                    {
+                        Id = new Guid(eventParticipant.Id),
+                        EventId = new Guid(eventParticipant.EventId),
+                        UserId = new Guid(eventParticipant.UserId)
+                    });
+                }
+
+                return returnModel;
+            }
+            catch (Exception e)
+            {
+                return new CalabongaGetPagedModel<EventParticipant>();
+            }
         }
     }
 }

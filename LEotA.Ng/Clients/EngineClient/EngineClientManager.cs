@@ -147,6 +147,9 @@ namespace LEotA.Clients.EngineClient
         
         public CalabongaViewModel<EventParticipant>? EventParticipantDelete(Guid id) =>
             _eventParticipantPatron?.EventParticipantDeleteAsync(id.ToString()).Result;
+        
+        public CalabongaViewModel<EventParticipant>? EventParticipantGetByIdAsync(Guid id) =>
+            _eventParticipantPatron?.EventParticipantGetByIdAsync(id.ToString()).Result;
 
         public List<EventParticipant>? EventParticipantGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes) => _eventParticipantPatron?.EventParticipantGetPagedAsync(new CalabongaGetPagedRequestModel()
@@ -198,9 +201,6 @@ namespace LEotA.Clients.EngineClient
                 Name = JsonSerializer.Serialize(name),
                 Text = JsonSerializer.Serialize(text)
             }).Result;
-        
-        public CalabongaViewModel<News>? NewsPostGetViewModelForEditing(Guid id) =>
-            _newsPatron?.NewsGetViewModelForEditingAsync(id.ToString()).Result;
         
         public CalabongaViewModel<News>? NewsPut(Guid id, CultureBase description, CultureBase name, CultureBase text, Guid newId) => 
             _newsPatron?.NewsPutAsync(new NewsUpdateModel()

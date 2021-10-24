@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -18,15 +19,6 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             _httpClient = httpClient;
         }
-        
-        public async Task<CalabongaViewModel<Project>> ProjectGetViewModelForCreationAsync()
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-creation");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Project>>(result, options);
-        }
 
         public async Task<CalabongaViewModel<Project>> ProjectPostAsync(ProjectCreateModel ProjectCreateModel)
         {
@@ -40,42 +32,17 @@ namespace LEotA.Clients.EngineClient.Patrons
             using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<Project>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<Project>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<ProjectGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return ProjectGetModelToProject(report);
         }
 
-        public async Task<CalabongaViewModel<Project>> ProjectGetViewModelForEditingAsync(string id)
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-editing/{id}");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Project>>(result, options);
-        }
-        
         public async Task<CalabongaViewModel<Project>> ProjectPutAsync(ProjectUpdateModel ProjectUpdateModel)
         {
             using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", ProjectUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<Project>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<Project>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<ProjectGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return ProjectGetModelToProject(report);
         }
         
         public async Task<CalabongaViewModel<Project>> ProjectDeleteAsync(string id)
@@ -84,7 +51,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Project>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<ProjectGetModel>>(result, options);
+            return ProjectGetModelToProject(report);
         }
 
         public async Task<CalabongaViewModel<Project>> ProjectGetByIdAsync(string id)
@@ -93,7 +61,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Project>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<ProjectGetModel>>(result, options);
+            return ProjectGetModelToProject(report);
         }
         
         public async Task<CalabongaGetPagedModel<Project>> ProjectGetPagedAsync(CalabongaGetPagedRequestModel parameters)
@@ -111,7 +80,70 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaGetPagedModel<Project>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaGetPagedModel<ProjectGetModel>>(result, options);
+            return ProjectGetPagedModelToProject(report);
+        }
+        
+        private CalabongaViewModel<Project> ProjectGetModelToProject(CalabongaViewModel<ProjectGetModel> pageModel)
+        {
+            var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
+            var returnModel = new CalabongaViewModel<Project>()
+            {
+                ActivityId = pageModel.ActivityId,
+                Exception = pageModel.Exception,
+                Logs = pageModel.Logs,
+                Metadata = pageModel.Metadata,
+                Ok = pageModel.Ok,
+                Result = new Project()
+                {
+                    Id = new Guid(pageModel.Result.Id),
+                    Text = culturedText,
+                    EmbedLink = pageModel.Result.EmbedLink
+                }
+            };
+            return returnModel;
+        }
+
+        private CalabongaGetPagedModel<Project> ProjectGetPagedModelToProject(CalabongaGetPagedModel<ProjectGetModel> pageModel)
+        {
+            try
+            {
+                var returnModel = new CalabongaGetPagedModel<Project>()
+                {
+                    ActivityId = pageModel.ActivityId,
+                    Exception = pageModel.Exception,
+                    Logs = pageModel.Logs,
+                    Metadata = pageModel.Metadata,
+                    Ok = pageModel.Ok,
+                    Result = new Page<Project>()
+                    {
+                        HasNextPage = pageModel.Result.HasNextPage,
+                        HasPreviousPage = pageModel.Result.HasPreviousPage,
+                        IndexFrom = pageModel.Result.IndexFrom,
+                        Items = new List<Project>(),
+                        PageIndex = pageModel.Result.PageIndex,
+                        PageSize = pageModel.Result.PageSize,
+                        TotalCount = pageModel.Result.TotalCount,
+                        TotalPages = pageModel.Result.TotalPages
+                    }
+                };
+                foreach (var Project in pageModel.Result.Items)
+                {
+                    var culturedText = JsonSerializer.Deserialize<CultureBase>(Project.Text);
+                    returnModel.Result.Items.Add(new Project()
+                    {
+                        Id = new Guid(Project.Id),
+                        Text = culturedText,
+                        EmbedLink = Project.EmbedLink
+                    });
+                }
+
+                return returnModel;
+            }
+            catch (Exception e)
+            {
+                return new CalabongaGetPagedModel<Project>();
+            }
         }
     }
 }

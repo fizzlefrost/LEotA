@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -25,7 +26,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Publication>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(result, options);
+            return PublicationGetModelToPublication(report);
         }
 
         public async Task<CalabongaViewModel<Publication>> PublicationPostAsync(PublicationCreateModel PublicationCreateModel)
@@ -41,16 +43,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<Publication>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<Publication>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return PublicationGetModelToPublication(report);
         }
 
         public async Task<CalabongaViewModel<Publication>> PublicationGetViewModelForEditingAsync(string id)
@@ -59,7 +53,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Publication>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(result, options);
+            return PublicationGetModelToPublication(report);
         }
         
         public async Task<CalabongaViewModel<Publication>> PublicationPutAsync(PublicationUpdateModel PublicationUpdateModel)
@@ -67,16 +62,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", PublicationUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
-            var report = new CalabongaViewModel<Publication>();
-            try
-            {
-                report = JsonSerializer.Deserialize<CalabongaViewModel<Publication>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            }
-            catch (Exception exception)
-            {
-                throw new JsonException($"Ошибка десериализации {Environment.NewLine}{json}", exception);
-            }
-            return report;
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
+            return PublicationGetModelToPublication(report);
         }
         
         public async Task<CalabongaViewModel<Publication>> PublicationDeleteAsync(string id)
@@ -85,7 +72,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Publication>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(result, options);
+            return PublicationGetModelToPublication(report);
         }
 
         public async Task<CalabongaViewModel<Publication>> PublicationGetByIdAsync(string id)
@@ -94,7 +82,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaViewModel<Publication>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(result, options);
+            return PublicationGetModelToPublication(report);
         }
         
         public async Task<CalabongaGetPagedModel<Publication>> PublicationGetPagedAsync(CalabongaGetPagedRequestModel parameters)
@@ -112,7 +101,72 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaGetPagedModel<Publication>>(result, options);
+            var report = JsonSerializer.Deserialize<CalabongaGetPagedModel<PublicationGetModel>>(result, options);
+            return PublicationGetPagedModelToPublication(report);
+        }
+        
+        private CalabongaViewModel<Publication> PublicationGetModelToPublication(CalabongaViewModel<PublicationGetModel> pageModel)
+        {
+            var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
+            var returnModel = new CalabongaViewModel<Publication>()
+            {
+                ActivityId = pageModel.ActivityId,
+                Exception = pageModel.Exception,
+                Logs = pageModel.Logs,
+                Metadata = pageModel.Metadata,
+                Ok = pageModel.Ok,
+                Result = new Publication()
+                {
+                    Id = new Guid(pageModel.Result.Id),
+                    Text = culturedText,
+                    EmbedLink = pageModel.Result.EmbedLink,
+                    PDFRaw = Convert.FromBase64String(pageModel.Result.PDFRaw)
+                }
+            };
+            return returnModel;
+        }
+
+        private CalabongaGetPagedModel<Publication> PublicationGetPagedModelToPublication(CalabongaGetPagedModel<PublicationGetModel> pageModel)
+        {
+            try
+            {
+                var returnModel = new CalabongaGetPagedModel<Publication>()
+                {
+                    ActivityId = pageModel.ActivityId,
+                    Exception = pageModel.Exception,
+                    Logs = pageModel.Logs,
+                    Metadata = pageModel.Metadata,
+                    Ok = pageModel.Ok,
+                    Result = new Page<Publication>()
+                    {
+                        HasNextPage = pageModel.Result.HasNextPage,
+                        HasPreviousPage = pageModel.Result.HasPreviousPage,
+                        IndexFrom = pageModel.Result.IndexFrom,
+                        Items = new List<Publication>(),
+                        PageIndex = pageModel.Result.PageIndex,
+                        PageSize = pageModel.Result.PageSize,
+                        TotalCount = pageModel.Result.TotalCount,
+                        TotalPages = pageModel.Result.TotalPages
+                    }
+                };
+                foreach (var Publication in pageModel.Result.Items)
+                {
+                    var culturedText = JsonSerializer.Deserialize<CultureBase>(Publication.Text);
+                    returnModel.Result.Items.Add(new Publication()
+                    {
+                        Id = new Guid(Publication.Id),
+                        Text = culturedText,
+                        EmbedLink = Publication.EmbedLink,
+                        PDFRaw = Convert.FromBase64String(Publication.PDFRaw)
+                    });
+                }
+
+                return returnModel;
+            }
+            catch (Exception e)
+            {
+                return new CalabongaGetPagedModel<Publication>();
+            }
         }
     }
 }
