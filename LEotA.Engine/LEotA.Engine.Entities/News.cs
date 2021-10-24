@@ -7,7 +7,7 @@ namespace LEotA.Engine.Entities
     public class News: Identity
     {
         public string Description { get; set; }
-        public Guid NewsColumnId { get; set; }
-        public string Culture { get; set; }
+        public string Name { get; set; }
+        public string Text { get; set; }
     }
 }

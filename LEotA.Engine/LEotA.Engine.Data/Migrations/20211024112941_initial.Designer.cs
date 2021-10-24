@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LEotA.Engine.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211021121833_initial")]
+    [Migration("20211024112941_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,20 +355,6 @@ namespace LEotA.Engine.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("NewsColumnId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("News");
-                });
-
-            modelBuilder.Entity("LEotA.Engine.Entities.NewsColumn", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -379,7 +365,7 @@ namespace LEotA.Engine.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NewsColumns");
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("LEotA.Engine.Entities.Project", b =>

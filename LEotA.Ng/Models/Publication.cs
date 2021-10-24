@@ -1,15 +1,28 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace LEotA.Models
 {
     public class Publication
     {
         [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+        [JsonPropertyName("text")]
+        public CultureBase Text { get; set; }
+        [JsonPropertyName("pdfRaw")]
+        public byte[] PDFRaw { get; set; }
+        [JsonPropertyName("embedLink")]
+        public string EmbedLink { get; set; }
+    }
+    
+    public class PublicationGetModel
+    {
+        [JsonPropertyName("id")]
         public string Id { get; set; }
         [JsonPropertyName("text")]
         public string Text { get; set; }
         [JsonPropertyName("pdfRaw")]
-        public byte[] PDFRaw { get; set; }
+        public string PDFRaw { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
     }
@@ -19,7 +32,7 @@ namespace LEotA.Models
         [JsonPropertyName("text")]
         public string Text { get; set; }
         [JsonPropertyName("pdfRaw")]
-        public byte[] PDFRaw { get; set; }
+        public string PDFRaw { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
     }
@@ -31,7 +44,7 @@ namespace LEotA.Models
         [JsonPropertyName("text")]
         public string Text { get; set; }
         [JsonPropertyName("pdfRaw")]
-        public byte[] PDFRaw { get; set; }
+        public string PDFRaw { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
         [JsonPropertyName("newId")]

@@ -9,13 +9,23 @@ namespace LEotA.Models
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
         [JsonPropertyName("name")]
+        public CultureBase Name { get; set; }
+        [JsonPropertyName("text")]
+        public CultureBase Text { get; set; }
+        [JsonPropertyName("embedLink")]
+        public string EmbedLink { get; set; }
+    }
+    
+    public class EventGetModel  
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+        [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("text")]
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
-        [JsonPropertyName("culture")]
-        public string Culture { get; set; }
     }
     
     public class EventCreateModel
@@ -26,14 +36,6 @@ namespace LEotA.Models
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
-        [JsonPropertyName("culture")]
-        public string Culture { get; set; }
-    }
-    
-    public class EventViewModel
-    {
-        public Event Event { get; set; }
-        public List<Image>? Image { get; set; }
     }
     
     public class EventUpdateModel
@@ -46,8 +48,6 @@ namespace LEotA.Models
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
-        [JsonPropertyName("culture")]
-        public string Culture { get; set; }
         [JsonPropertyName("newId")]
         public string NewId { get; set; }
     }

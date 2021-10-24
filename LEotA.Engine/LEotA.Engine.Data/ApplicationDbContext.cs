@@ -22,7 +22,6 @@ namespace LEotA.Engine.Data
         public DbSet<MicroservicePermission> Permissions { get; set; }
 
         public DbSet<News> News { get; set; }
-        public DbSet<NewsColumn> NewsColumns { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<Album> Albums { get; set; }

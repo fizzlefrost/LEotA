@@ -13,23 +13,33 @@ namespace LEotA.Models
         public Guid EventId { get; set; }
     }
     
+    public class EventParticipantGetModel
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+        [JsonPropertyName("userId")]
+        public string UserId { get; set; }
+        [JsonPropertyName("eventId")]
+        public string EventId { get; set; }
+    }
+    
     public class EventParticipantCreateModel
     {
         [JsonPropertyName("userId")]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         [JsonPropertyName("eventId")]
-        public Guid EventId { get; set; }
+        public string EventId { get; set; }
     }
     
     public class EventParticipantUpdateModel
     {
         [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         [JsonPropertyName("userId")]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         [JsonPropertyName("eventId")]
-        public Guid EventId { get; set; }
+        public string EventId { get; set; }
         [JsonPropertyName("newId")]
-        public Guid NewId { get; set; }
+        public string NewId { get; set; }
     }
 }

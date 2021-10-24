@@ -8,6 +8,5 @@ namespace LEotA.Engine.Entities
         public string Text { get; set; }
         public byte[] PDFRaw { get; set; }
         public string EmbedLink { get; set; }
-        public string Culture { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace LEotA.Engine.Web.ViewModels.NewsViewModels
     public class NewsUpdateViewModel : ViewModelBase
     {
         public string Description { get; set; }
-        public Guid NewsColumnId { get; set; }
+        public string Name { get; set; }
+        public string Text { get; set; }
     }
 }

@@ -1,8 +1,17 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace LEotA.Models
 {
     public class Album
+    {
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+        [JsonPropertyName("name")]
+        public CultureBase Name { get; set; }
+    }
+    
+    public class AlbumGetModel
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

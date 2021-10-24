@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LEotA.Engine.Web.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(AuthenticationSchemes = AuthData.AuthSchemes)]
+    // [Authorize(AuthenticationSchemes = AuthData.AuthSchemes)]
     public class AboutUsController: WritableController<AboutUsViewModel, AboutUs, AboutUsCreateViewModel, AboutUsUpdateViewModel, PagedListQueryParams>
     {
         public AboutUsController(IEntityManagerFactory entityManagerFactory, IUnitOfWork unitOfWork, IMapper mapper) 
@@ -22,7 +22,7 @@ namespace LEotA.Engine.Web.Controllers
             
         }
 
-        [Authorize(Policy = "Logs:UserRoles:View", Roles = AppData.SystemAdministratorRoleName)]
+        // [Authorize(Policy = "Logs:UserRoles:View", Roles = AppData.SystemAdministratorRoleName)]
         [Route("[action]")]
         public string Secret()
         {

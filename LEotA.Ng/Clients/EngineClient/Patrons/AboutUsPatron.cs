@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -32,9 +33,8 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             var request = new AboutUsCreateModel()
             {
-                Text = aboutUsCreateModel.Text, 
-                Image = aboutUsCreateModel.Image,
-                Culture = aboutUsCreateModel.Culture
+                Text = JsonSerializer.Serialize(aboutUsCreateModel.Text), 
+                Image = aboutUsCreateModel.Image
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
@@ -112,7 +112,38 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            return JsonSerializer.Deserialize<CalabongaGetPagedModel<AboutUs>>(result, options);
+            var pageModel = JsonSerializer.Deserialize<CalabongaGetPagedModel<AboutUsGetModel>>(result, options);
+
+            var returnModel = new CalabongaGetPagedModel<AboutUs>()
+            {
+                ActivityId = pageModel.ActivityId,
+                Exception = pageModel.Exception,
+                Logs = pageModel.Logs,
+                Metadata = pageModel.Metadata,
+                Ok = pageModel.Ok,
+                Result = new Page<AboutUs>()
+                {
+                    HasNextPage = pageModel.Result.HasNextPage,
+                    HasPreviousPage = pageModel.Result.HasPreviousPage,
+                    IndexFrom = pageModel.Result.IndexFrom,
+                    Items = new List<AboutUs>(),
+                    PageIndex = pageModel.Result.PageIndex,
+                    PageSize = pageModel.Result.PageSize,
+                    TotalCount = pageModel.Result.TotalCount,
+                    TotalPages = pageModel.Result.TotalPages
+                }
+            };
+            foreach (var aboutUs in pageModel.Result.Items)
+            {
+                var culturedText = JsonSerializer.Deserialize<CultureBase>(aboutUs.Text);
+                returnModel.Result.Items.Add(new AboutUs()
+                {
+                    Id = new Guid(aboutUs.Id),
+                    Image = Convert.FromBase64String(aboutUs.Image),
+                    Text = culturedText
+                });
+            }
+            return returnModel;
         }
     }
 }

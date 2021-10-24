@@ -1,19 +1,41 @@
 ﻿@page
-@inject IStringLocalizer<IndexModel> localizer
-@inject IHtmlLocalizer<IndexModel> htmlLocalizer
-@using Microsoft.AspNetCore.Mvc.Localization
+@inject CommonLocalizationService localizer
+@using LEotA.Services
 @using Microsoft.AspNetCore.Localization
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
-    var requestCulture = requestCultureFeature.RequestCulture;
+    var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
 <div class="text-center">
-    <h1 class="display-4">@localizer["Welcome"]</h1>
-    <p>@htmlLocalizer["Learn"]</p>
+    <h1 class="display-4">@localizer.Get("Welcome")</h1>
+    <p>@localizer.Get("Learn")</p>
+    
 </div>
 <div class="text-center">
+    @{
+        try
+        {
+            foreach (var news in (List<News>)ViewData["newsList"])
+            {
+                <div class="container mb-3 border">
+                    <a asp-page="/News" asp-route-id="@news.Id">
+                        <article class="special align-left">
+                            <h2>@LocalizationHelper.GetTextByCulture(news.Name, culture)</h2>
+                        </article>
+                    </a>
+                </div>
+            }
+        }
+        catch (Exception e)
+        {
+            Console.Write(e);
+            <div class="container mb-3 border">
+                <p>NULL</p>
+            </div>
+        }
+    }
+
     
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

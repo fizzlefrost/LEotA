@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Security.Claims;
+using LEotA.Models.Claim;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 
-namespace LEotA.Models.Claim
+namespace LEotA.Clients.Claim
 {
     public class ClaimManager
     {
@@ -26,6 +25,7 @@ namespace LEotA.Models.Claim
         }
 
         public List<ClaimViewer> Items { get; set; }
+        public string? AccessToken { get; set; }
 
         private void AddTokenInfo(string nameToken, string idTokenJson)
         {

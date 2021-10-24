@@ -13,7 +13,7 @@ namespace LEotA.Pages
         private readonly ILogger<EventsModel> _logger;
         private readonly EngineClientManager _engineClientManager;
         public IList<Event>? _eventsList { get; set; }
-        public List<EventViewModel>eventViewModelList { get; set; }
+        public Dictionary<List<Image>, Event> _eventImages { get; set; }
         public EventsModel(EngineClientManager engineClientManager)
         {
             _engineClientManager = engineClientManager;
@@ -23,14 +23,9 @@ namespace LEotA.Pages
             try
             {
                 _eventsList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
-                eventViewModelList = new List<EventViewModel>();
                 foreach (var _event in _eventsList)
                 {
-                    eventViewModelList.Add(new EventViewModel()
-                    {
-                        Event = _event,
-                        Image = _engineClientManager.ImageGetByMasterId(_event.Id)?.Result.Items
-                    });
+                    _eventImages.Add(_engineClientManager.ImageGetByMasterId(_event.Id).Result.Items, _event);
                 }
             }
             catch (Exception e)
