@@ -3,27 +3,42 @@
 @using Microsoft.AspNetCore.Localization
 @using LEotA.Services
 @model LEotA.Pages.AboutUsModel
+@inject CommonLocalizationService localizer
 @{
     ViewBag.Title = "My Home Page";
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
 <div class="container border border-2">
-    <h2>About Us</h2>
     @{
         try
         {
             foreach (var aboutUs in ((List<AboutUs>) ViewData["aboutUs"]))
             {
-                <tr>
-                    @* <img class="float-right" src="data:image/jpeg;base64,@Convert.ToBase64String(aboutUs.Image)"/> *@
-                    <p class="align-center"> @LocalizationHelper.GetTextByCulture(aboutUs.Text, culture) </p>
+                
+                    
+                
 
-                    @* <img alt="" src="@ViewData["img8642ECA1-1577-40C8-6FAA-08D98E3B2BA1"]" style="height:256px;width:256px;"/> *@
+                @* <img alt="" src="@ViewData["img8642ECA1-1577-40C8-6FAA-08D98E3B2BA1"]" style="height:256px;width:256px;"/> *@
+                <div class="bcontainer">
+                    <header class="align-items-start flex-wrap bheader bpadding">
+                        <div class="bheader-intro">
+                            <div class="bheader-intro-text">
+                                <h3>@localizer.Get("LabName")</h3>
+                            </div>
+                        </div>
+                        <div class="bheader-intro-continue">
+                            <img class="floatingimg" src="IMG_5122.JPG"/>
+                            <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p> 
+                        </div>
+                        <figure class="bheader-image">
+                            <div class="bheader-image-wrapper ">
+                                @* <img src="data:image/jpeg;base64,@Convert.ToBase64String(aboutUs.Image)"/> *@
+                                
+                            </div>
+                        </figure>
 
-                    @* <td>@product.Id</td> *@
-                    @* <td>@product.Text</td> *@
-                    @* <td>@product.Image</td> *@
-                </tr>
+                    </header>
+                </div>
             }
         }
         catch (Exception e)
@@ -32,4 +47,6 @@
         }
     }
 </div>
+@* <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p> *@
+@* <img src="data:image/jpeg;base64,@Convert.ToBase64String(aboutUs.Image)"/> *@
 @* <img alt="s" src="data:image/png;base64, @Convert.ToBase64String(Model.imgSrcDict.FirstOrDefault().Key)"/> *@

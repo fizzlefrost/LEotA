@@ -17,4 +17,7 @@
     <data name="Footer" xml:space="preserve">
         <value />
     </data>
+    <data name="LabName" xml:space="preserve">
+        <value />
+    </data>
 </root>
