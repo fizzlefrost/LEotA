@@ -67,6 +67,8 @@ namespace LEotA
                     config.SaveTokens = true;
 
                     config.ResponseType = "code";
+
+                    config.GetClaimsFromUserInfoEndpoint = true;
                 });
             services.AddAuthorization();
             services.AddLocalization(options => options.ResourcesPath = "Resources");

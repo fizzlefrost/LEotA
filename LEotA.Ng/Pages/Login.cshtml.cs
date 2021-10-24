@@ -1,49 +1,41 @@
 ﻿#nullable enable
-using System;
-using System.Net.Http;
+using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
-using LEotA.Clients.EngineClient;
-using LEotA.Models;
+using LEotA.Models.Claim;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LEotA.Pages
 {
+    [Authorize]
     public class LoginModel : PageModel
     {
-        private readonly ILogger<AdminPanelModel> _logger;
-        private readonly EngineClientManager _engineClientManager;
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        public RegisterViewModel model { get; set; }
-
-        public LoginModel(ILogger<AdminPanelModel> logger, EngineClientManager engineClientManager, 
-            IHttpClientFactory _httpClientFactory)
+        public LoginModel()
         {
-            _logger = logger;
-            _engineClientManager = engineClientManager;
-            this._httpClientFactory = _httpClientFactory;
         }
         
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            string url = $"localhost:10001/.auth/login/aad?post_login_redirect_url=" 
-                                + Request.Query["redirect_url"];
-
-            return Redirect(url);
-        }
-        
-        public async Task OnPost(string email, string password, string passwordConfirm, string _RequestVerificationToken)
-        {
-            var ordersClient = _httpClientFactory.CreateClient();
+            var model = new ClaimManager(HttpContext, User);
             
-            var response = await ordersClient.GetAsync("localhost:10001");
-
-            var message = response.Content.ReadAsStreamAsync();
-
-            ViewData["Message"] = message;
+            ViewData.Add("tokens", model);
+                
+            // return Page();
+            return Redirect("Index");
         }
+        
+        // public async Task OnPost(string email, string password, string passwordConfirm, string _RequestVerificationToken)
+        // {
+        //     // var ordersClient = _httpClientFactory.CreateClient();
+        //     //
+        //     // var response = await ordersClient.GetAsync("localhost:10001");
+        //     //
+        //     // var message = response.Content.ReadAsStreamAsync();
+        //     //
+        //     // ViewData["Message"] = message;
+        // }
     }
 }

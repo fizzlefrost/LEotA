@@ -6,6 +6,20 @@
         <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png"></a>
         <vc:culture-switcher/>
     </div>
+    @if(User.Identity.IsAuthenticated)
+        {
+            <p>@User.Identity.Name</p>
+         
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input type="submit" value="Выход" />
+            </form>
+        }
+        else
+        {
+            <a asp-page="/Login">@localizer.Get("Login")</a>
+            <a asp-page="/Register">Регистрация</a>
+            <a asp-page="/GetClientSecretTestPage">GETCLIENTTESTTAPGE</a>
+        }
 </nav>
 <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">

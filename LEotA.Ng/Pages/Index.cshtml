@@ -14,25 +14,6 @@
     <p>@htmlLocalizer["Learn"]</p>
 </div>
 <div class="text-center">
-    <a asp-page="/AdminPanel">Admin</a>
-    <br>
-    <a asp-page="/Login">Admin Login</a>
-     
-     
-    @if(User.Identity.IsAuthenticated)
-    {
-        <p>@User.Identity.Name</p>
-     
-        <form method="post" asp-controller="Account" asp-action="Logout">
-            <input type="submit" value="Выход" />
-        </form>
-    }
-    else
-    {
-        <a asp-page="/Login">@requestCulture.UICulture.Name</a>
-        <a asp-page="/Register">Регистрация</a>
-        <a asp-page="/GetClientSecretTestPage">GETCLIENTTESTTAPGE</a>
-    }
-
+    
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

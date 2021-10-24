@@ -43,31 +43,48 @@ namespace LEotA.Engine.Web.AppStart
             },
             new Client
             {
-                ClientId = "blazor_web_assembly",
+                ClientId = "leota_client_id",
+                ClientSecrets = { new Secret("leota_client_secret".ToSha256()) },
+                AllowAccessTokensViaBrowser = true,
+                IdentityTokenLifetime = 21600,
+                AuthorizationCodeLifetime = 21600,
+                AccessTokenLifetime = 21600,
+                AllowOfflineAccess =  true,
+                RefreshTokenUsage = TokenUsage.ReUse,
+                RefreshTokenExpiration = TokenExpiration.Sliding,
+                SlidingRefreshTokenLifetime = 1296000, //in seconds = 15 days
                 AllowedGrantTypes = GrantTypes.Code,
-                RequireClientSecret = false,
-                RequireConsent = false,
-                RequirePkce = true,
-                AllowedScopes = {
+                AllowedScopes =
+                {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
                     IdentityServerConstants.StandardScopes.Address,
-                    "api1"
+                    "leota_client"
                 },
-                RedirectUris = { "https://localhost:5001/authentication/login-callback" },
-                PostLogoutRedirectUris = { "https://localhost:5001" },
-            },
-            new Client
-            {
-                ClientId = "leota_client_id",
-                ClientSecrets = { new Secret("leota_client_secret".ToSha256()) },
-                AllowedGrantTypes = GrantTypes.Code,
-                AllowedScopes =
+                RedirectUris =
                 {
-                    "OrdersAPI"
-                }
+                    "https://localhost:5003/signin-oidc"
+                },
+                AlwaysIncludeUserClaimsInIdToken = true
             }
+            // new Client
+            // {
+            //     ClientId = "blazor_web_assembly",
+            //     AllowedGrantTypes = GrantTypes.Code,
+            //     RequireClientSecret = false,
+            //     RequireConsent = false,
+            //     RequirePkce = true,
+            //     AllowedScopes = {
+            //         IdentityServerConstants.StandardScopes.OpenId,
+            //         IdentityServerConstants.StandardScopes.Profile,
+            //         IdentityServerConstants.StandardScopes.Email,
+            //         IdentityServerConstants.StandardScopes.Address,
+            //         "api1"
+            //     },
+            //     RedirectUris = { "https://localhost:5001/authentication/login-callback" },
+            //     PostLogoutRedirectUris = { "https://localhost:5001" },
+            // }
         };
 
         /// <summary>
