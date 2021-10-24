@@ -72,4 +72,7 @@
     <data name="FooterSocial" xml:space="preserve">
         <value>Наши страницы в соцсетях</value>
     </data>
+    <data name="Footer" xml:space="preserve">
+        <value>2021 © Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики».</value>
+    </data>
 </root>
