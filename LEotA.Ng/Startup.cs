@@ -19,6 +19,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Globalization;
 using LEotA.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
@@ -51,12 +53,23 @@ namespace LEotA
 
             services.AddHttpClient();
 
-            services.AddAuthentication("Cookie")
-                .AddCookie("Cookie", config =>
+            services.AddAuthentication(config =>
                 {
-                    config.LoginPath = "/AdminPanel";
+                    config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    config.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
                 })
-                ;
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, config =>
+                {
+                    config.Authority = "https://localhost:10001";
+                    config.ClientId = "leota_client_id";
+                    config.ClientSecret = "leota_client_secret";
+                    config.SaveTokens = true;
+
+                    config.ResponseType = "code";
+
+                    config.GetClaimsFromUserInfoEndpoint = true;
+                });
             services.AddAuthorization();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();

@@ -1,20 +1,44 @@
-﻿@page "/Login"
-@using LEotA.Services
-@model LEotA.Models.LoginViewModel
-@inject CommonLocalizationService localizer
-<h2>Вход в приложение</h2>
-<form method="post">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <input type="text" name="email" placeholder="Your email"/>
-    </div>
-    <div>
-        <input type="password" name="password" placeholder="Your password"/>
-    </div>
-    <div>
-        <input type="text" name="Email" placeholder="Your password again"/>
-    </div>
-    <div>
-        <input type="submit" value="Войти" />
-    </div>
-</form>
+@* @page "/Login" *@
+@* @model LEotA.Models.LoginViewModel *@
+@*   *@
+@* <h2>Вход в приложение</h2> *@
+@* <form method="post"> *@
+@*     <div asp-validation-summary="ModelOnly"></div> *@
+@*     <div> *@
+@*         <input type="text" name="email" placeholder="Your email"/> *@
+@*     </div> *@
+@*     <div> *@
+@*         <input type="password" name="password" placeholder="Your password"/> *@
+@*     </div> *@
+@*     <div> *@
+@*         <input type="text" name="Email" placeholder="Your password again"/> *@
+@*     </div> *@
+@*     <div> *@
+@*         <input type="submit" value="Войти" /> *@
+@*     </div> *@
+@* </form> *@
+
+@page
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model LEotA.Pages.LoginModel
+
+@{
+    // Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    @{
+        <p>
+            @ViewData["tokens"]
+        </p>
+    }
+</div>
+</body>
+</html>
