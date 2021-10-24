@@ -109,7 +109,9 @@ a:hover {
 
 }
 /* Header */
-
+#lower-nav{
+    clear:both;
+}
 /* Footer */
 
 footer{
