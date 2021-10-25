@@ -124,6 +124,15 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики»..
+        /// </summary>
+        internal static string LabName {
+            get {
+                return ResourceManager.GetString("LabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Учись.
         /// </summary>
         internal static string Learn {
