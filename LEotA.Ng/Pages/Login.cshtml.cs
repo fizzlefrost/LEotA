@@ -26,7 +26,6 @@ namespace LEotA.Pages
         
         public async Task<IActionResult> OnGet()
         {
-            // return Page();
             return Redirect("Index");
         }
         

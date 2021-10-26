@@ -12,15 +12,11 @@
                 {
                     <p>@User.Identity.Name</p>
                  
-                    <form method="post" asp-controller="Account" asp-action="Logout">
-                        <input type="submit" value="Выход" />
-                    </form>
+                    <a asp-page="/Logout">@localizer.Get("Logout")</a>
                 }
                 else
                 {
                     <a asp-page="/Login">@localizer.Get("Login")</a>
-                    <a asp-page="/Register">@localizer.Get("Register")</a>
-                    <a asp-page="/GetClientSecretTestPage">GETCLIENTTESTTAPGE</a>
                 }
         </div>
     </div>
