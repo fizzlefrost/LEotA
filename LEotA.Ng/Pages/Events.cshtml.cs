@@ -10,27 +10,34 @@ namespace LEotA.Pages
 {
     public class  EventsModel : PageModel
     {
-        private readonly ILogger<EventsModel> _logger;
         private readonly EngineClientManager _engineClientManager;
-        public IList<Event>? _eventsList { get; set; }
-        public Dictionary<List<Image>, Event> _eventImages { get; set; }
         public EventsModel(EngineClientManager engineClientManager)
         {
             _engineClientManager = engineClientManager;
         }
+        
         public void OnGet()
         {
+            var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
+            var eventReturnList = new List<Event>();
             try
             {
-                _eventsList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
-                foreach (var _event in _eventsList)
+                foreach (var _event in eventList)
                 {
-                    _eventImages.Add(_engineClientManager.ImageGetByMasterId(_event.Id).Result.Items, _event);
+                    var resultItems = _engineClientManager.ImageGetByMasterId(_event.Id)?.Result.Items;
+                    if (resultItems != null)
+                        ViewData.Add("images", new Dictionary<List<Image>, Event>
+                        {
+                            {resultItems, _event}
+                        });
+                    eventReturnList.Add(_event);
                 }
+
+                ViewData.Add("event", eventReturnList);
             }
-            catch (Exception e)
+            catch 
             {
-                Console.WriteLine("smth gone wrong");
+                
             }
         }
     }
