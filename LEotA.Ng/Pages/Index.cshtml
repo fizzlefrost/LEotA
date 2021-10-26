@@ -12,18 +12,17 @@
     <p>@localizer.Get("Learn")</p>
     
 </div>
-<div class="text-center">
+<div class="border-bottom-last-0 first-pt-0">
     @{
         try
         {
             foreach (var news in (List<News>)ViewData["newsList"])
             {
-                <div class="container mb-3 border">
-                    <a asp-page="/News" asp-route-id="@news.Id">
-                        <article class="special align-left">
-                            <h2>@LocalizationHelper.GetTextByCulture(news.Name, culture)</h2>
-                        </article>
-                    </a>
+                <div class="jumbotron p-3 p-mb-5 text-white rounded">
+                    <div class="col-mb-6 px-0">
+                        <h1 class="display-4"><a asp-area="" asp-page="/News" asp-route="@news.Id">@LocalizationHelper.GetTextByCulture(news.Name, culture)</a></h1>
+                    </div>
+                    <p class="lead my-3">@LocalizationHelper.GetTextByCulture(news.Description, culture)</p>
                 </div>
             }
         }
@@ -34,7 +33,4 @@
             </div>
         }
     }
-
-    
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
