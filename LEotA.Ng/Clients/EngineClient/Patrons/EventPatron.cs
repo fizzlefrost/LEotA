@@ -22,7 +22,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<Event>> EventGetViewModelForCreationAsync()
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-creation");
+            var httpResponse = await _httpClient.GetAsync($"/api/event/get-viewmodel-for-creation");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -40,7 +40,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
-            using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
+            using var response = await _httpClient.PostAsync($"/api/event/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<EventGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
@@ -49,7 +49,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<CalabongaViewModel<Event>> EventGetViewModelForEditingAsync(string id)
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-editing/{id}");
+            var httpResponse = await _httpClient.GetAsync($"/api/event/get-viewmodel-for-editing/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -59,7 +59,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<Event>> EventPutAsync(EventUpdateModel EventUpdateModel)
         {
-            using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", EventUpdateModel);
+            using var response = await _httpClient.PutAsJsonAsync($"/api/event/post-item", EventUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<EventGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
@@ -68,7 +68,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<Event>> EventDeleteAsync(string id)
         {
-            var httpResponse = await _httpClient.DeleteAsync($"api/about-us/delete-item/{id}");
+            var httpResponse = await _httpClient.DeleteAsync($"api/event/delete-item/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -78,7 +78,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<CalabongaViewModel<Event>> EventGetByIdAsync(string id)
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-by-id/{id}");
+            var httpResponse = await _httpClient.GetAsync($"/api/event/get-by-id/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -88,7 +88,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaGetPagedModel<Event>> EventGetPagedAsync(CalabongaGetPagedRequestModel parameters)
         {
-            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/about-us/get-paged");
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/event/get-paged");
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["PageIndex"] = parameters.PageIndex.ToString();
             query["PageSize"] = parameters.PageSize.ToString();
