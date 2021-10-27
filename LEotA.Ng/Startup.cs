@@ -50,6 +50,10 @@ namespace LEotA
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
+            services.AddHttpClient<INewsPatron, NewsPatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
 
             services.AddHttpClient();
 

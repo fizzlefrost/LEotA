@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Threading.Tasks;
 using LEotA.Clients.EngineClient.Patrons;
 using LEotA.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -216,15 +217,19 @@ namespace LEotA.Clients.EngineClient
         public CalabongaViewModel<News>? NewsGetById(Guid id) =>
             _newsPatron?.NewsGetByIdAsync(id.ToString()).Result;
 
-        public List<News>? NewsGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
-            bool disabledDefaultIncludes) => _newsPatron?.NewsGetPagedAsync(new CalabongaGetPagedRequestModel()
+        public async Task<List<News>?> NewsGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
+            bool disabledDefaultIncludes)
         {
-            PageIndex = pageIndex,
-            PageSize = pageSize,
-            SortDirection = sortDirection,
-            Search = search,
-            DisabledDefaultIncludes = disabledDefaultIncludes
-        }).Result.Result.Items;
+            var newsGetPaged = await _newsPatron?.NewsGetPagedAsync(new CalabongaGetPagedRequestModel()
+            {
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                SortDirection = sortDirection,
+                Search = search,
+                DisabledDefaultIncludes = disabledDefaultIncludes
+            })!;
+            return newsGetPaged.Result.Items;
+        }
 
         public CalabongaViewModel<Project>? ProjectPost(CultureBase text, string embedLink) =>
             _projectPatron?.ProjectPostAsync(new ProjectCreateModel()
