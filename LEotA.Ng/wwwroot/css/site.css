@@ -55,6 +55,10 @@ body {
 .bheader-image-wrapper{
     position:relative
 }
+.card-full {
+    background-color: transparent !important;
+    border: 0;
+}
 ul {
     list-style: none;
 }

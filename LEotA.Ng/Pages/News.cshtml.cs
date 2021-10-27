@@ -11,18 +11,19 @@ namespace LEotA.Pages
 {
     public class NewsModel : PageModel
     {
-        private readonly ILogger<EventsModel> _logger;
         private readonly EngineClientManager _engineClientManager;
-        public string _title;
 
         public NewsModel(EngineClientManager engineClientManager)
         {
             _engineClientManager = engineClientManager;
         }
 
-        public IActionResult OnGet(Guid? id)
+        public IActionResult OnGet(Guid id)
         {
-            return Page();
+            ViewData.Clear();
+            var news = _engineClientManager.NewsGetById(id);
+            ViewData.Add("newsId", news);
+            return Page(); 
         }
     }
 }

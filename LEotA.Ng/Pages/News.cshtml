@@ -1,7 +1,30 @@
 ﻿@page "/News/{id}"
 @inject CommonLocalizationService localizer
 @using LEotA.Services
+@using Microsoft.AspNetCore.Localization
 @model NewsModel
 @{
     ViewData["Title"] = "Home page";
+    var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+}
+@{
+    try
+    {
+        foreach (var news in (List<News>)ViewData["newsId"])
+        {
+            <div class="jumbotron p-3 p-mb-5 text-white rounded">
+                <div class="col-mb-6 px-0">
+                    <h1 class="display-4"><a asp-area="" asp-page="/News" asp-route="@news.Id">@LocalizationHelper.GetTextByCulture(news.Name, culture)</a></h1>
+                </div>
+                <p class="lead my-3">@LocalizationHelper.GetTextByCulture(news.Description, culture)</p>
+                <p class="lead my-3">@LocalizationHelper.GetTextByCulture(news.Text, culture)</p>
+            </div>
+        }
+    }
+    catch (Exception e)
+    {
+        <div class="container mb-3 border">
+            <p>NULL</p>
+        </div>
+    }
 }
