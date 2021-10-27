@@ -8,21 +8,24 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using LEotA.Models;
+using LEotA.Settings;
 
 namespace LEotA.Clients.EngineClient.Patrons
 {
     public class EventParticipantPatron : IEventParticipantPatron
     {
         private HttpClient _httpClient;
+        private readonly ApplicationSettings _applicationSettings;
 
-        public EventParticipantPatron(HttpClient httpClient)
+        public EventParticipantPatron(HttpClient httpClient, ApplicationSettings applicationSettings)
         {
             _httpClient = httpClient;
+            _applicationSettings = applicationSettings;
         }
         
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantGetViewModelForCreationAsync()
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-creation");
+            var httpResponse = await _httpClient.GetAsync($"/api/event-participant/get-viewmodel-for-creation");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -39,7 +42,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
-            using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
+            using var response = await _httpClient.PostAsync($"/api/event-participant/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
@@ -48,7 +51,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantGetViewModelForEditingAsync(string id)
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-editing/{id}");
+            var httpResponse = await _httpClient.GetAsync($"/api/event-participant/get-viewmodel-for-editing/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -58,7 +61,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantPutAsync(EventParticipantUpdateModel EventParticipantUpdateModel)
         {
-            using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", EventParticipantUpdateModel);
+            using var response = await _httpClient.PutAsJsonAsync($"/api/event-participant/post-item", EventParticipantUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
@@ -67,7 +70,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantDeleteAsync(string id)
         {
-            var httpResponse = await _httpClient.DeleteAsync($"api/about-us/delete-item/{id}");
+            var httpResponse = await _httpClient.DeleteAsync($"api/event-participant/delete-item/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -77,7 +80,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantGetByIdAsync(string id)
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-by-id/{id}");
+            var httpResponse = await _httpClient.GetAsync($"/api/event-participant/get-by-id/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -85,9 +88,19 @@ namespace LEotA.Clients.EngineClient.Patrons
             return EventParticipantGetModelToAboutUs(report);
         }
         
+        public async Task<CalabongaViewModel<List<EventParticipant>>> EventParticipantGetByUserIdAsync(string id)
+        {
+            var httpResponse = await _httpClient.GetAsync($"/api/event-participant/by-user-id/{id}");
+            httpResponse.EnsureSuccessStatusCode();
+            var result = await httpResponse.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<List<EventParticipant>>>(result, options);
+            return (report);
+        }
+        
         public async Task<CalabongaGetPagedModel<EventParticipant>> EventParticipantGetPagedAsync(CalabongaGetPagedRequestModel parameters)
         {
-            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/about-us/get-paged");
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/event-participant/get-paged");
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["PageIndex"] = parameters.PageIndex.ToString();
             query["PageSize"] = parameters.PageSize.ToString();

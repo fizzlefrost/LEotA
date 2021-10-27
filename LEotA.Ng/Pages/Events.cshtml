@@ -14,28 +14,48 @@
 	}
 }
 <div class="container border border-2">
-	@* @{ *@
-	@* 	// try *@
-	@* 	// { *@
-	@* 	// 	foreach (var _event in ((List<Event>) ViewData["event"])) *@
-	@* 	// 	{ *@
-	<div class="row" style="border:none; background:white; height:210px;">
-		<div class="col-xs-6">
-			<img src="DROL4632.JPG" style="height:200px; margin-left:4px; margin-top: 4px;" />
-		</div>
-		<div class="col">  
-			<h3 class="align-center">Event Name</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa.</p>
-			<a onclick="EventFunction()"class="btn btn-primary btn-dark" href="https://google.com">Записаться</a>
-		</div>
-	</div>
-	@* 		} *@
-	@* 	} *@
-	@* 	catch (Exception e) *@
-	@* 	{ *@
-	@* 		<p>NULL</p> *@
-	@* 	} *@
-	@* } *@
+	<h2>About Us</h2>
+	@{
+		try
+		{
+			foreach (var _event in ((List<Event>) ViewData["event"]))
+			{
+				<div class="row" style="border:none; background:white; height:210px;">
+					<div class="col-xs-6">
+						<img src="DROL4632.JPG" style="height:200px; margin-left:4px; margin-top: 4px;" />
+					</div>
+					<div class="col">  
+						<h3 class="align-center">Event Name</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa.</p>
+						<a onclick="EventFunction()"class="btn btn-primary btn-dark" href="https://google.com">Записаться</a>
+					</div>
+				</div>
+				
+				@if(((List<Guid>)ViewData["isInvolvedList"]).Contains(_event.Id))
+				{
+					<p>ТЫ УЧАСТВУЕШЬ</p>
+				}
+				else
+				{
+					<p>ТЫ НЕ УЧАСТВУЕШЬ</p>
+				}
+                
+                @* <img class="float-right" src="data:image/jpeg;base64,@Convert.ToBase64String(aboutUs.Image)"/> *@
+                
+
+                @* <img alt="" src="@ViewData["img8642ECA1-1577-40C8-6FAA-08D98E3B2BA1"]" style="height:256px;width:256px;"/> *@
+
+                @* <td>@product.Id</td> *@
+                @* <td>@product.Text</td> *@
+                @* <td>@product.Image</td> *@
+                
+			}
+		}
+		catch (Exception e)
+		{
+			<p>NULL</p>
+		}
+	}
 </div>
 @section Scripts
 {

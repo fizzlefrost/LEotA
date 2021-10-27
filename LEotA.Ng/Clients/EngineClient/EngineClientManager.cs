@@ -144,12 +144,19 @@ namespace LEotA.Clients.EngineClient
                 NewId = newId.ToString()
             }).Result;
         
-        public CalabongaViewModel<EventParticipant>? EventParticipantDelete(Guid id) =>
+        public CalabongaViewModel<EventParticipant>? EventParticipantDeleteAsync(Guid id) =>
             _eventParticipantPatron?.EventParticipantDeleteAsync(id.ToString()).Result;
         
         public CalabongaViewModel<EventParticipant>? EventParticipantGetByIdAsync(Guid id) =>
             _eventParticipantPatron?.EventParticipantGetByIdAsync(id.ToString()).Result;
 
+        public async Task<CalabongaViewModel<List<EventParticipant>>?> EventParticipantGetByUserIdAsync(Guid id)
+        {
+            var eventParticipants = await _eventParticipantPatron?.EventParticipantGetByUserIdAsync(id.ToString())!;
+            return eventParticipants;
+        }
+            
+        
         public List<EventParticipant>? EventParticipantGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes) => _eventParticipantPatron?.EventParticipantGetPagedAsync(new CalabongaGetPagedRequestModel()
         {
@@ -217,7 +224,7 @@ namespace LEotA.Clients.EngineClient
         public CalabongaViewModel<News>? NewsGetById(Guid id) =>
             _newsPatron?.NewsGetByIdAsync(id.ToString()).Result;
 
-        public async Task<List<News>?> NewsGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
+        public async Task<List<News>?> NewsGetPagedAsync(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes)
         {
             var newsGetPaged = await _newsPatron?.NewsGetPagedAsync(new CalabongaGetPagedRequestModel()

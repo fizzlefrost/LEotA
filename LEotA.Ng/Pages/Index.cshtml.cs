@@ -18,7 +18,7 @@ namespace LEotA.Pages
 
         public void OnGet()
         {
-            var newsList = _engineClientManager.NewsGetPaged(null, 10, null, null, false);
+            var newsList = _engineClientManager.NewsGetPagedAsync(null, 10, null, null, false);
             ViewData.Add("newsList", newsList);
         }
     }
