@@ -22,7 +22,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<Publication>> PublicationGetViewModelForCreationAsync()
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-creation");
+            var httpResponse = await _httpClient.GetAsync($"/api/publication/get-viewmodel-for-creation");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -40,7 +40,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
-            using var response = await _httpClient.PostAsync($"/api/about-us/post-item", stringContent);
+            using var response = await _httpClient.PostAsync($"/api/publication/post-item", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
@@ -49,7 +49,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<CalabongaViewModel<Publication>> PublicationGetViewModelForEditingAsync(string id)
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-viewmodel-for-editing/{id}");
+            var httpResponse = await _httpClient.GetAsync($"/api/publication/get-viewmodel-for-editing/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -59,7 +59,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<Publication>> PublicationPutAsync(PublicationUpdateModel PublicationUpdateModel)
         {
-            using var response = await _httpClient.PutAsJsonAsync($"/api/about-us/post-item", PublicationUpdateModel);
+            using var response = await _httpClient.PutAsJsonAsync($"/api/publication/post-item", PublicationUpdateModel);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
@@ -68,7 +68,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaViewModel<Publication>> PublicationDeleteAsync(string id)
         {
-            var httpResponse = await _httpClient.DeleteAsync($"api/about-us/delete-item/{id}");
+            var httpResponse = await _httpClient.DeleteAsync($"api/publication/delete-item/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -78,7 +78,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<CalabongaViewModel<Publication>> PublicationGetByIdAsync(string id)
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/about-us/get-by-id/{id}");
+            var httpResponse = await _httpClient.GetAsync($"/api/publication/get-by-id/{id}");
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
@@ -88,7 +88,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         public async Task<CalabongaGetPagedModel<Publication>> PublicationGetPagedAsync(CalabongaGetPagedRequestModel parameters)
         {
-            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/about-us/get-paged");
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/publication/get-paged");
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["PageIndex"] = parameters.PageIndex.ToString();
             query["PageSize"] = parameters.PageSize.ToString();

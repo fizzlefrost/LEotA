@@ -23,10 +23,10 @@ namespace LEotA.Engine.Web.Controllers
         }
 
         // [Authorize(Policy = "Logs:UserRoles:View", Roles = AppData.SystemAdministratorRoleName)]
-        [Route("[action]")]
-        public string Secret()
-        {
-            return "Secret string from Orders APaI";
-        }
+        // [Route("[action]")]
+        // public string Secret()
+        // {
+        //     return "Secret string from Orders APaI";
+        // }
     }
 }

@@ -42,4 +42,8 @@
     <ProjectReference Include="..\LEotA.Engine.Data\LEotA.Engine.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controllers\FileController.cs" />
+  </ItemGroup>
+
 </Project>
