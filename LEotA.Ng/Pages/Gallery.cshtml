@@ -1,7 +1,10 @@
 ﻿@page "/Gallery"
+@using Microsoft.AspNetCore.Localization
 @model GalleryModel
 @{
-    ViewData["Title"] = "Get ready!";
+    ViewData["Title"] = "Gallery";
+	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+
 }
 
 <!-- Container for the image gallery -->
@@ -42,7 +45,7 @@
   <!-- Thumbnail images -->
   <div class="row">
     <div class="column">
-      <img class="demo cursor" src="" style="width:100%" onclick="currentSlide(1)" alt="The Woods">
+      <img class="demo cursor" src="images/_JPG0343.JPG" style="width:100%" onclick="currentSlide(1)" alt="The Woods">
     </div>
     <div class="column">
       <img class="demo cursor" src="" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
