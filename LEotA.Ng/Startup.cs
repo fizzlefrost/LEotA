@@ -56,14 +56,14 @@ namespace LEotA
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
-            services.AddHttpClient<IEventParticipantPatron, EventParticipantPatron>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:10001");
-            });
-            services.AddHttpClient<IEventPatron, EventPatron>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:10001");
-            });
+            // services.AddHttpClient<IEventParticipantPatron, EventParticipantPatron>(client =>
+            // {
+            //     client.BaseAddress = new Uri("https://localhost:10001");
+            // });
+            // services.AddHttpClient<IEventPatron, EventPatron>(client =>
+            // {
+            //     client.BaseAddress = new Uri("https://localhost:10001");
+            // });
 
             services.AddHttpClient();
 

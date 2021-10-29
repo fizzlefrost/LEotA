@@ -65,7 +65,15 @@ namespace LEotA.Clients.EngineClient.Patrons
             var report = JsonSerializer.Deserialize<CalabongaViewModel<NewsGetModel>>(result, options);
             return NewsGetModelToNews(report);
         }
-        
+
+        public async Task<int> NewsGetTotalPages(int? pageSize)
+        {
+            var httpResponse = await _httpClient.GetAsync($"/api/news/total-pages");
+            httpResponse.EnsureSuccessStatusCode();
+            var result = await httpResponse.Content.ReadAsStringAsync();
+            var report = JsonSerializer.Deserialize<int>(result);
+            return report;
+        }
         public async Task<CalabongaGetPagedModel<News>> NewsGetPagedAsync(CalabongaGetPagedRequestModel parameters)
         {
             var builder = new UriBuilder($"{_httpClient.BaseAddress}api/news/get-paged");

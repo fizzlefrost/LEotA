@@ -10,5 +10,6 @@ namespace LEotA.Clients.EngineClient.Patrons
         public Task<CalabongaViewModel<News>> NewsDeleteAsync(string id);
         public Task<CalabongaViewModel<News>> NewsGetByIdAsync(string id);
         public Task<CalabongaGetPagedModel<News>> NewsGetPagedAsync(CalabongaGetPagedRequestModel parameters);
+        public Task<int> NewsGetTotalPages(int? pageSize);
     }
 }

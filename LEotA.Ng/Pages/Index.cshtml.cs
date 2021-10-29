@@ -1,7 +1,9 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
+using JW;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,25 +15,35 @@ namespace LEotA.Pages
     public class IndexModel : PageModel
     {
         private readonly EngineClientManager _engineClientManager;
-        
+        public int TotalPages = 1;
+        public int PageSize = 10;
+        public IEnumerable<string> Items { get; set; }
+        public Pager Pager { get; set; }
         public IndexModel(EngineClientManager engineClientManager)
         {
             _engineClientManager = engineClientManager;
         }
-        public PaginatedList<News> News { get; set; }
-
-        public void OnGet()
+        
+        public void OnGet(int p)
         {
-            var newsList = _engineClientManager.NewsGetPagedAsync(null, 10, null, null, false);
-            ViewData.Add("newsList", newsList);
-        }
+            switch (p)
+            {
+                case 0: 
+                    TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
+                    OnGet(1);
+                    break;
+                default:
+                    TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
 
-        public async Task OnGetAsync(int page, int size)
-        {
-            var skip = (page + 1);
-            var take = size;
-            var newsList = _engineClientManager.NewsGetPaged(skip, take, null, null, false);
-            ViewData.Add("newsList", newsList);
+                    // get pagination info for the current page
+                    Pager = new Pager(TotalPages, p);
+
+                    // assign the current page of items to the Items property
+                    Items = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n=>n.Name.English);
+            
+                    // ViewData.Add("newsList", newsList);
+                    break;
+            }
         }
     }
 }

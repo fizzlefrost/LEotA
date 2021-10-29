@@ -224,6 +224,7 @@ namespace LEotA.Clients.EngineClient
         public CalabongaViewModel<News>? NewsGetById(Guid id) =>
             _newsPatron?.NewsGetByIdAsync(id.ToString()).Result;
 
+        public async Task<int> NewsGetTotalPages(int? pageSize) => _newsPatron.NewsGetTotalPages(pageSize).Result;
         public async Task<List<News>?> NewsGetPagedAsync(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes)
         {
