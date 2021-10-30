@@ -162,7 +162,31 @@ a:hover {
     max-width: calc(100% - 5em);
     width: 60em;
 }
+.subtitle{
+    color: #8d97ad;
+    line-height: 24px;
+    font-size: 13px;
+}
+.targetDiv{
+    display: none;
+}
 
+.hide{
+    display: none;
+}
+.bottomize{
+    bottom:0;
+    position: absolute;
+}
+.align-center ul{
+    display: inline-block;
+    margin:0;
+    padding:0;
+    *display: inline;
+}
+.align-center ul li{
+    float: left;
+}
 @media screen and (max-width: 840px) {
 
     .container {
