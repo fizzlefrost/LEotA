@@ -13,55 +13,77 @@
 <!-- items being paged -->
 <table class="table table-sm table-striped border border-dark">
     @{
-        var nameresult = Model.Items.Zip(Model.Description, (i, s) => new {Name = i, Desc = s});
-        var result = nameresult.Zip(Model.Id, (i, s) => new {It = i, Id = s});
-        foreach (var items in result)
+        try
         {
-            <tr>
-                <td>
+            var nameresult = Model.Items.Zip(Model.Description, (i, s) => new {Name = i, Desc = s});
+            var result = nameresult.Zip(Model.Id, (i, s) => new {It = i, Id = s});
+            foreach (var items in result)
+            {
+                <tr>
+                    <td>
                     
-                    <h2><a asp-area="" asp-page="/News" asp-route-id="@items.Id">@items.It.Name</a></h2>
-                    <p>@items.It.Desc</p>
-                </td>
-            </tr>
+                        <h2><a asp-area="" asp-page="/News" asp-route-id="@items.Id">@items.It.Name</a></h2>
+                        <p>@items.It.Desc</p>
+                    </td>
+                </tr>
+            }
+        }
+        catch(Exception e)
+        {
+            <td>
+                <h2>ERROR:</h2>
+                <p>@e</p>
+            </td>    
         }
     }
 </table>   
 
 
 <!-- pager -->
-@if (Model.Pager.Pages.Any())
-{
-    <nav class="table-responsive mb-5">
-        <ul class="pagination justify-content-center d-flex flex-wrap">
-            @if (Model.Pager.CurrentPage > 1)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="/">First</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="/?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
-                </li>
-            }
+@{
+    try
+    {
+        if (Model.Pager.Pages.Any())
+        {
+            <nav class="table-responsive mb-5">
+                <ul class="pagination justify-content-center d-flex flex-wrap">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                        </li>
+                    }
 
-            @foreach (var p in Model.Pager.Pages)
-            {
-                <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
-                    <a class="page-link" href="/?p=@p">@p</a>
-                </li>
-            }
+                    @foreach (var p in Model.Pager.Pages)
+                    {
+                        <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
+                            <a class="page-link" href="/?p=@p">@p</a>
+                        </li>
+                    }
 
-            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="/?p=@(Model.Pager.CurrentPage + 1)">Next</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="/?p=@(Model.Pager.TotalPages)">Last</a>
-                </li>
-            }
-        </ul>
-    </nav>
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/?p=@(Model.Pager.CurrentPage + 1)">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/?p=@(Model.Pager.TotalPages)">Last</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+    catch (Exception e)
+    {
+        <td>
+            <h2>ERROR:</h2>
+            <p>@e</p>
+        </td>  
+    }
 }
 
 @* <div class="border-bottom-last-0 first-pt-0"> *@

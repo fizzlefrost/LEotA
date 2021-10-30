@@ -31,7 +31,7 @@ namespace LEotA.Engine.Web.AppStart.Configures
             {
                 mapper.CompileMappings();
             }
-
+            
             app.UseDefaultFiles();
             app.UseStaticFiles(new StaticFileOptions
             {
