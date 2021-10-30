@@ -35,9 +35,7 @@ namespace LEotA
             // services.Configure<ApplicationSettings>(sectionApplicationSettings);
             // var applicationSettings = sectionApplicationSettings.Get<ApplicationSettings>();
             
-            services.AddRazorPages(options => {
-                options.Conventions.Add(new CultureTemplatePageRouteModelConvention());
-            });
+            services.AddRazorPages();
             services.AddHttpClient();
             services.AddSingleton<EngineClientManager>();
             services.AddSingleton<CommonLocalizationService>();
@@ -99,14 +97,7 @@ namespace LEotA
                 });
             services.AddAuthorization();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options =>
-            {
-                options.DataAnnotationLocalizerProvider = (type, factory) =>
-                {
-                    var assemblyName = new AssemblyName(typeof(CommonResources).GetTypeInfo().Assembly.FullName!);
-                    return factory.Create(nameof(CommonResources), assemblyName.Name!);
-                };
-            });
+            services.AddMvc().AddViewLocalization();
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
