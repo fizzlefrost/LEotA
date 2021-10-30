@@ -23,22 +23,28 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            var aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
-            var aboutUsReturnList = new List<AboutUs>();
-       
-            foreach (var aboutUs in aboutUsList)
+            try
             {
-                var resultItems = _engineClientManager.ImageGetByMasterId(aboutUs.Id)?.Result.Items;
-                if (resultItems != null)
-                    ViewData.Add("images", new Dictionary<List<Image>, AboutUs>
-                    {
-                        {resultItems, aboutUs}
-                    });
-                aboutUsReturnList.Add(aboutUs);
+                var aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
+                var aboutUsReturnList = new List<AboutUs>();
+
+                foreach (var aboutUs in aboutUsList)
+                {
+                    var resultItems = _engineClientManager.ImageGetByMasterId(aboutUs.Id)?.Result;
+                    if (resultItems != null)
+                        ViewData.Add("images", new Dictionary<List<Image>, AboutUs>
+                        {
+                            {resultItems, aboutUs}
+                        });
+                    aboutUsReturnList.Add(aboutUs);
+                }
+
+                ViewData.Add("aboutUs", aboutUsReturnList);
             }
-            
-            ViewData.Add("aboutUs", aboutUsReturnList);
-            
+            catch (Exception e)
+            {
+                
+            }
         }
     }
 }

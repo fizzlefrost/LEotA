@@ -32,40 +32,52 @@ namespace LEotA.Pages
         
         public void OnGet(int p)
         {
-            switch (p)
+            try
             {
-                case 0: 
-                    TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
-                    OnGet(1);
-                    break;
-                default:
-                    TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
+                switch (p)
+                {
+                    case 0:
+                        TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
+                        OnGet(1);
+                        break;
+                    default:
+                        TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
 
-                    // get pagination info for the current page
-                    Pager = new Pager(TotalPages, p);
+                        // get pagination info for the current page
+                        Pager = new Pager(TotalPages, p);
 
-                    // assign the current page of items to the Items property
-                     Id = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n =>
-                         n.Id);
-                    
-                    if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
-                    {
-                        Items = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n =>
-                            n.Name.Russian);
-                        Description = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n =>
-                            n.Description.Russian);
-                    }
-                    else
-                    {
-                        Items = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n=>n.Name.English);
-                        Description = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n =>
-                            n.Description.English);
-                    }
+                        // assign the current page of items to the Items property
+                        Id = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n =>
+                            n.Id);
 
-                    
-                    // ViewData.Add("newsList", newsList);
-                    break;
+                        if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                        {
+                            Items = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(
+                                n =>
+                                    n.Name.Russian);
+                            Description = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!
+                                .Select(n =>
+                                    n.Description.Russian);
+                        }
+                        else
+                        {
+                            Items = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(
+                                n => n.Name.English);
+                            Description = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!
+                                .Select(n =>
+                                    n.Description.English);
+                        }
+
+
+                        // ViewData.Add("newsList", newsList);
+                        break;
+                }
             }
+            catch (Exception e)
+            {
+                // do smth
+            }
+            
         }
     }
 }

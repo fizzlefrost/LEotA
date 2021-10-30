@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LEotA.Models;
 
 namespace LEotA.Clients.EngineClient.Patrons
@@ -10,6 +11,6 @@ namespace LEotA.Clients.EngineClient.Patrons
         public Task<CalabongaViewModel<Image>> ImageDeleteAsync(string id);
         public Task<CalabongaViewModel<Image>> ImageGetByIdAsync(string id);
         public Task<CalabongaGetPagedModel<Image>> ImageGetPagedAsync(CalabongaGetPagedRequestModel parameters);
-        public Task<CalabongaGetPagedModel<Image>> ImageGetByMasterIdAsync(string id);
+        public Task<CalabongaViewModel<List<Image>>> ImageGetByMasterIdAsync(string id);
     }
 }

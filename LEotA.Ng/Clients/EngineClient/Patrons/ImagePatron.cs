@@ -27,7 +27,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
             var report = JsonSerializer.Deserialize<CalabongaViewModel<ImageGetModel>>(result, options);
-            return ImageGetModelToAboutUs(report);
+            return ImageGetModelToImage(report);
         }
 
         public async Task<CalabongaViewModel<Image>> ImagePostAsync(ImageCreateModel ImageCreateModel)
@@ -44,7 +44,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<ImageGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            return ImageGetModelToAboutUs(report);
+            return ImageGetModelToImage(report);
         }
 
         public async Task<CalabongaViewModel<Image>> ImageGetViewModelForEditingAsync(string id)
@@ -54,7 +54,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
             var report = JsonSerializer.Deserialize<CalabongaViewModel<ImageGetModel>>(result, options);
-            return ImageGetModelToAboutUs(report);
+            return ImageGetModelToImage(report);
         }
         
         public async Task<CalabongaViewModel<Image>> ImagePutAsync(ImageUpdateModel ImageUpdateModel)
@@ -63,7 +63,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<ImageGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            return ImageGetModelToAboutUs(report);
+            return ImageGetModelToImage(report);
         }
         
         public async Task<CalabongaViewModel<Image>> ImageDeleteAsync(string id)
@@ -73,7 +73,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
             var report = JsonSerializer.Deserialize<CalabongaViewModel<ImageGetModel>>(result, options);
-            return ImageGetModelToAboutUs(report);
+            return ImageGetModelToImage(report);
         }
 
         public async Task<CalabongaViewModel<Image>> ImageGetByIdAsync(string id)
@@ -83,7 +83,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
             var report = JsonSerializer.Deserialize<CalabongaViewModel<ImageGetModel>>(result, options);
-            return ImageGetModelToAboutUs(report);
+            return ImageGetModelToImage(report);
         }
         
         public async Task<CalabongaGetPagedModel<Image>> ImageGetPagedAsync(CalabongaGetPagedRequestModel parameters)
@@ -102,10 +102,10 @@ namespace LEotA.Clients.EngineClient.Patrons
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
             var report = JsonSerializer.Deserialize<CalabongaGetPagedModel<ImageGetModel>>(result, options);
-            return ImageGetPagedModelToAboutUs(report);
+            return ImageGetPagedModelToImage(report);
         }
 
-        public async Task<CalabongaGetPagedModel<Image>> ImageGetByMasterIdAsync(string id)
+        public async Task<CalabongaViewModel<List<Image>>> ImageGetByMasterIdAsync(string id)
         {
             var builder = new UriBuilder($"{_httpClient.BaseAddress}api/image/image-by-master-id");
             var query = HttpUtility.ParseQueryString(builder.Query);
@@ -116,11 +116,31 @@ namespace LEotA.Clients.EngineClient.Patrons
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaGetPagedModel<ImageGetModel>>(result, options);
-            return ImageGetPagedModelToAboutUs(report);
+            var report = JsonSerializer.Deserialize<CalabongaViewModel<List<ImageGetModel>>>(result, options);
+            var ret = new CalabongaViewModel<List<Image>>()
+            {
+                ActivityId = report.ActivityId,
+                Exception = report.Exception,
+                Logs = report.Logs,
+                Metadata = report.Metadata,
+                Ok = report.Ok,
+                Result = new List<Image>()
+            };
+            foreach (var imageGetModel in report.Result)
+            {
+                var culturedName = JsonSerializer.Deserialize<CultureBase>(imageGetModel.Name);
+                ret.Result.Add(new Image()
+                {
+                    Id = new Guid(imageGetModel.Id),
+                    Name = culturedName,
+                    ImageRaw = Convert.FromBase64String(imageGetModel.ImageRaw),
+                    MasterId = new Guid(imageGetModel.MasterId)
+                });
+            }
+            return ret;
         }
         
-        private CalabongaViewModel<Image> ImageGetModelToAboutUs(CalabongaViewModel<ImageGetModel> pageModel)
+        private CalabongaViewModel<Image> ImageGetModelToImage(CalabongaViewModel<ImageGetModel> pageModel)
         {
             var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
             var returnModel = new CalabongaViewModel<Image>()
@@ -141,7 +161,7 @@ namespace LEotA.Clients.EngineClient.Patrons
             return returnModel;
         }
 
-        private CalabongaGetPagedModel<Image> ImageGetPagedModelToAboutUs(CalabongaGetPagedModel<ImageGetModel> pageModel)
+        private CalabongaGetPagedModel<Image> ImageGetPagedModelToImage(CalabongaGetPagedModel<ImageGetModel> pageModel)
         {
             try
             {
