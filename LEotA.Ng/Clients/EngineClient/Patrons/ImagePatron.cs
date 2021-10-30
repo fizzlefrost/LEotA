@@ -107,7 +107,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<CalabongaGetPagedModel<Image>> ImageGetByMasterIdAsync(string id)
         {
-            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/image/get-image-by-masterId");
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/image/image-by-master-id");
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["PageSize"] = 100.ToString();
             builder.Query = query.ToString() ?? string.Empty;

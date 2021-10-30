@@ -1,11 +1,9 @@
 ﻿@page
 @inject CommonLocalizationService localizer
 @using LEotA.Services
-@using Microsoft.AspNetCore.Localization
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
 <div class="text-center">
     <h1 class="display-4">@localizer.Get("Welcome")</h1>
@@ -13,14 +11,23 @@
 </div>
 
 <!-- items being paged -->
-<table class="table table-sm table-striped table-bordered">
-    @foreach (var item in Model.Items)
-    {
-        <tr>
-            <td>@item</td>
-        </tr>
+<table class="table table-sm table-striped border border-dark">
+    @{
+        var nameresult = Model.Items.Zip(Model.Description, (i, s) => new {Name = i, Desc = s});
+        var result = nameresult.Zip(Model.Id, (i, s) => new {It = i, Id = s});
+        foreach (var items in result)
+        {
+            <tr>
+                <td>
+                    
+                    <h2><a asp-area="" asp-page="/News" asp-route-id="@items.Id">@items.It.Name</a></h2>
+                    <p>@items.It.Desc</p>
+                </td>
+            </tr>
+        }
     }
-</table>                
+</table>   
+
 
 <!-- pager -->
 @if (Model.Pager.Pages.Any())

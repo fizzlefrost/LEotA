@@ -6,10 +6,8 @@ using System.Security.Claims;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Logging;
+
 namespace LEotA.Pages
 {
     public class  EventsModel : PageModel
@@ -25,14 +23,13 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
+            try {
             var userId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewData.Add("userId", userId);
             var thisUserEventsList = _engineClientManager.EventParticipantGetByUserIdAsync(new Guid(userId)).Result.Result;
             var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
             var eventReturnList = new List<Event>();
             var isInvolvedList = new List<Guid>();
-            try
-            {
                 foreach (var _event in eventList)
                 {
                     var resultItems = _engineClientManager.ImageGetByMasterId(_event.Id)?.Result.Items;

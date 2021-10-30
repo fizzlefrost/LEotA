@@ -1,27 +1,20 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using LEotA.Clients.EngineClient;
 using LEotA.Clients.EngineClient.Patrons;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
-using LEotA.Data;
-using LEotA.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using System.Globalization;
+using System.Reflection;
+using LEotA.Resources;
+using LEotA.RouteModelConventions;
 using LEotA.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 
 namespace LEotA
@@ -42,7 +35,9 @@ namespace LEotA
             // services.Configure<ApplicationSettings>(sectionApplicationSettings);
             // var applicationSettings = sectionApplicationSettings.Get<ApplicationSettings>();
             
-            services.AddRazorPages();
+            services.AddRazorPages(options => {
+                options.Conventions.Add(new CultureTemplatePageRouteModelConvention());
+            });
             services.AddHttpClient();
             services.AddSingleton<EngineClientManager>();
             services.AddSingleton<CommonLocalizationService>();
@@ -52,7 +47,7 @@ namespace LEotA
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
-            services.AddHttpClient<INewsPatron, NewsPatron>(client =>
+            services.AddHttpClient<IAlbumPatron, AlbumPatron>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
@@ -60,10 +55,28 @@ namespace LEotA
             // {
             //     client.BaseAddress = new Uri("https://localhost:10001");
             // });
-            // services.AddHttpClient<IEventPatron, EventPatron>(client =>
-            // {
-            //     client.BaseAddress = new Uri("https://localhost:10001");
-            // });
+            services.AddHttpClient<IEventPatron, EventPatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
+            services.AddHttpClient<IImagePatron, ImagePatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
+            services.AddHttpClient<INewsPatron, NewsPatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
+            services.AddHttpClient<IPublicationPatron, PublicationPatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
+            services.AddHttpClient<IProjectPatron, ProjectPatron>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:10001");
+            });
+            
+           
 
             services.AddHttpClient();
 
@@ -86,7 +99,14 @@ namespace LEotA
                 });
             services.AddAuthorization();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc().AddViewLocalization();
+            services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options =>
+            {
+                options.DataAnnotationLocalizerProvider = (type, factory) =>
+                {
+                    var assemblyName = new AssemblyName(typeof(CommonResources).GetTypeInfo().Assembly.FullName!);
+                    return factory.Create(nameof(CommonResources), assemblyName.Name!);
+                };
+            });
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
@@ -98,7 +118,10 @@ namespace LEotA
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
-            
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+            });
             services.AddHttpContextAccessor();
 
 

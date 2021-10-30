@@ -20,20 +20,27 @@ namespace LEotA.Engine.Web.Controllers
             : base(entityManagerFactory, unitOfWork, mapper)
         {
         }
-        
-        // [Authorize]
-        // [Route("[action]")]
-        // public async Task<IActionResult> GetImageByMasterIdAsync(Guid id)
-        // {
-        //     try
-        //     {
-        //         var images = Repository.GetAll(true).Where(i => i.MasterId == id);
-        //         return Ok(images);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return StatusCode(500, "Internal Server Error");
-        //     }
-        // }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpGet]
+#pragma warning disable 1998
+        public async Task<IActionResult> ImageByMasterIdAsync(Guid id)
+#pragma warning restore 1998
+        {
+            try
+            {
+                var images = Repository.GetAll(true).Where(i => i.MasterId == id);
+                return Ok(images);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

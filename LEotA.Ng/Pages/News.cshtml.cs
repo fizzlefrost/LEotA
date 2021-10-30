@@ -1,11 +1,10 @@
 ﻿#nullable enable
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using LEotA.Clients.EngineClient;
-using LEotA.Models;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace LEotA.Pages
 {
@@ -21,7 +20,7 @@ namespace LEotA.Pages
         public IActionResult OnGet(Guid id)
         {
             ViewData.Clear();
-            var news = _engineClientManager.NewsGetById(id);
+            var news = _engineClientManager.NewsGetById(id)?.Result;
             ViewData.Add("newsId", news);
             return Page(); 
         }
