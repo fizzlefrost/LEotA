@@ -155,7 +155,8 @@ a:hover {
     width: 60em;
     position: relative;
     padding-bottom: 150px;
-    height: 100vh;
+    min-height: 100vh;
+    margin-bottom: 10px;
 }
 .container {
     margin: 0 auto;
