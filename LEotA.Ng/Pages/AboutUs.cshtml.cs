@@ -30,12 +30,19 @@ namespace LEotA.Pages
 
                 foreach (var aboutUs in aboutUsList)
                 {
-                    var resultItems = _engineClientManager.ImageGetByMasterId(aboutUs.Id)?.Result;
-                    if (resultItems != null)
-                        ViewData.Add("images", new Dictionary<List<Image>, AboutUs>
-                        {
-                            {resultItems, aboutUs}
-                        });
+                    try
+                    {
+                        var resultItems = _engineClientManager.ImageGetByMasterId(aboutUs.Id);
+                        if (resultItems != null)
+                            ViewData.Add("images", new Dictionary<List<Image>, AboutUs>
+                            {
+                                {resultItems, aboutUs}
+                            });
+                    }
+                    catch (Exception e)
+                    {
+                        ViewData.Add("imageErrors", $"Error when finding an image of {aboutUs.Id} about us");
+                    }
                     aboutUsReturnList.Add(aboutUs);
                 }
 

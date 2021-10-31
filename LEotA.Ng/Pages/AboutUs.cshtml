@@ -1,7 +1,7 @@
 ﻿@page "/AboutUs"
-@using Microsoft.EntityFrameworkCore
 @using Microsoft.AspNetCore.Localization
 @using LEotA.Services
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @model LEotA.Pages.AboutUsModel
 @inject CommonLocalizationService localizer
 @{
@@ -27,9 +27,31 @@
                         
                         <div class="row">
                              <div class="bheader-intro-continue">
-                                <img class="floatingimg" src="IMG_5122.JPG" width="50%" height="30%"/>
-                                <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p>
-                            </div>и
+                                 @* <img class="floatingimg" src="IMG_5122.JPG" width="50%" height="30%"/> *@
+                                 @{
+                                     try
+                                     {
+                                         var images = (Dictionary<List<Image>, AboutUs>)ViewData["images"];
+                                         foreach (var image in images.Where(i => i.Value.Id == aboutUs.Id).Select(i => i.Key).FirstOrDefault())
+                                         {
+                                             try
+                                             {
+                                                 <img class="floatingimg" src="data:image/jpeg;base64,@Convert.ToBase64String(image.ImageRaw)" height="30%"/>
+                                             }
+                                             catch (Exception e)
+                                             {
+                                                 <p>ERROR WHEN CONVERTING @image.ImageRaw</p>
+                                             }
+                                         }
+                                     }
+                                     catch (Exception e)
+                                     {
+                                         <p>NO IMAGE</p>
+                                     }
+                                 }
+                                 <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p>
+                                @* <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p> *@
+                            </div>
                             <figure class="bheader-image">
                                 <div class="bheader-image-wrapper ">
                                     @* <img src="data:image/jpeg;base64,@Convert.ToBase64String(aboutUs.Image)"/> *@
@@ -43,7 +65,7 @@
         }
         catch (Exception e)
         {
-            <p>NULL</p>
+            <p>@e</p>
         }
     }
 </div>

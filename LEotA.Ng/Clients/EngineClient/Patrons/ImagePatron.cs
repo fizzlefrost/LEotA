@@ -105,37 +105,46 @@ namespace LEotA.Clients.EngineClient.Patrons
             return ImageGetPagedModelToImage(report);
         }
 
-        public async Task<CalabongaViewModel<List<Image>>> ImageGetByMasterIdAsync(string id)
+        public async Task<List<Image>> ImageGetByMasterIdAsync(string id)
         {
             var builder = new UriBuilder($"{_httpClient.BaseAddress}api/image/image-by-master-id");
             var query = HttpUtility.ParseQueryString(builder.Query);
-            query["PageSize"] = 100.ToString();
+            query["id"] = id;
             builder.Query = query.ToString() ?? string.Empty;
             string url = builder.ToString();
             var httpResponse = await _httpClient.GetAsync(url);
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<List<ImageGetModel>>>(result, options);
-            var ret = new CalabongaViewModel<List<Image>>()
+            // var report = JsonSerializer.Deserialize<CalabongaViewModel<List<ImageGetModel>>>(result, options);
+            var report = JsonSerializer.Deserialize<List<ImageGetModel>>(result, options);
+            // var ret = new CalabongaViewModel<List<Image>>()
+            // {
+            //     ActivityId = report.ActivityId,
+            //     Exception = report.Exception,
+            //     Logs = report.Logs,
+            //     Metadata = report.Metadata,
+            //     Ok = report.Ok,
+            //     Result = new List<Image>()
+            // };
+            var ret = new List<Image>();
+            foreach (var imageGetModel in report)
             {
-                ActivityId = report.ActivityId,
-                Exception = report.Exception,
-                Logs = report.Logs,
-                Metadata = report.Metadata,
-                Ok = report.Ok,
-                Result = new List<Image>()
-            };
-            foreach (var imageGetModel in report.Result)
-            {
-                var culturedName = JsonSerializer.Deserialize<CultureBase>(imageGetModel.Name);
-                ret.Result.Add(new Image()
+                try
                 {
-                    Id = new Guid(imageGetModel.Id),
-                    Name = culturedName,
-                    ImageRaw = Convert.FromBase64String(imageGetModel.ImageRaw),
-                    MasterId = new Guid(imageGetModel.MasterId)
-                });
+                    var culturedName = JsonSerializer.Deserialize<CultureBase>(imageGetModel.Name);
+                    ret.Add(new Image()
+                    {
+                        Id = new Guid(imageGetModel.Id),
+                        Name = culturedName,
+                        ImageRaw = Convert.FromBase64String(imageGetModel.ImageRaw),
+                        MasterId = new Guid(imageGetModel.MasterId)
+                    });
+                }
+                catch (Exception e)
+                {
+                    
+                }
             }
             return ret;
         }
