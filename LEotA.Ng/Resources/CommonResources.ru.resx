@@ -78,4 +78,7 @@
     <data name="LabName" xml:space="preserve">
         <value>Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики».</value>
     </data>
+    <data name="CurrentCulture" xml:space="preserve">
+        <value>ru</value>
+    </data>
 </root>

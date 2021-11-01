@@ -5,105 +5,157 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<div class="text-center">
-    <h1 class="display-4">@localizer.Get("Welcome")</h1>
-    <p>@localizer.Get("Learn")</p>
+
+<div class="text-center mb-5">
+    <h1 class="display-4 ">@localizer.Get("Welcome")</h1>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17cda9bc208%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17cda9bc208%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22114%22%20y%3D%22120.6%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17cda9bc208%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17cda9bc208%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22114%22%20y%3D%22120.6%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17cda9bc208%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17cda9bc208%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22114%22%20y%3D%22120.6%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- items being paged -->
-<table class="table table-sm table-striped border border-dark">
-    @{
-        try
-        {
-            var nameresult = Model.Items.Zip(Model.Description, (i, s) => new {Name = i, Desc = s});
-            var result = nameresult.Zip(Model.Id, (i, s) => new {It = i, Id = s});
-            foreach (var items in result)
+<!-- pagination -->
+@{
+    if (Model.Pager == null)
+    {
+        <SfSpinner Visible="true" Lable="Loading data ...">
+        </SfSpinner>
+    }
+    else
+    {
+        <!-- items being paged -->
+        
+        <div class="album py-5 bg-light">
+            <div class="container">
+                @{
+            try
             {
-                <tr>
-                    <td>
+                var nameresult = Model.Items.Zip(Model.Description, (i, s) => new {Name = i, Desc = s});
+                var result = nameresult.Zip(Model.Id, (i, s) => new {It = i, Id = s});
+                foreach (var items in result)
+                {
+
                     
-                        <h2><a asp-area="" asp-page="/News" asp-route-id="@items.Id">@items.It.Name</a></h2>
-                        <p>@items.It.Desc</p>
-                    </td>
-                </tr>
+                    <h2 class="align-center"><a asp-area="" asp-page="/News" asp-route-id="@items.Id">@items.It.Name</a></h2>
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="is-indented-2">@items.It.Desc</p>
+                        </div>
+                        <div class="col-4 img-wrap mb-2">
+                            <img src="images/_JPG0330.JPG">
+                        </div>
+                    </div>
+                    
+                    <hr aria-hidden="true">
+                }
+            }
+            catch (Exception e)
+            {
+                <td>
+                    <h2>ERROR:</h2>
+                    <p>@e</p>
+                </td>
             }
         }
-        catch(Exception e)
+    </div>
+</div>
+        <!-- pager -->
         {
-            <td>
-                <h2>ERROR:</h2>
-                <p>@e</p>
-            </td>    
+            try
+            {
+                if (Model.Pager.Pages.Any())
+                {
+                    <nav class="table-responsive mb-5">
+                        <ul class="pagination justify-content-center d-flex flex-wrap">
+                            @if (Model.Pager.CurrentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/">First</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="/?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                </li>
+                            }
+
+                            @foreach (var p in Model.Pager.Pages)
+                            {
+                                <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
+                                    <a class="page-link" href="/?p=@p">@p</a>
+                                </li>
+                            }
+
+                            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="/?p=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="/?p=@(Model.Pager.TotalPages)">Last</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+            catch (Exception e)
+            {
+                <td>
+                    <h2>ERROR:</h2>
+                    <p>@e</p>
+                </td>  
+            }
         }
-    }
-</table>   
-
-
-<!-- pager -->
-@{
-    try
-    {
-        if (Model.Pager.Pages.Any())
-        {
-            <nav class="table-responsive mb-5">
-                <ul class="pagination justify-content-center d-flex flex-wrap">
-                    @if (Model.Pager.CurrentPage > 1)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="/">First</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="/?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
-                        </li>
-                    }
-
-                    @foreach (var p in Model.Pager.Pages)
-                    {
-                        <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
-                            <a class="page-link" href="/?p=@p">@p</a>
-                        </li>
-                    }
-
-                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="/?p=@(Model.Pager.CurrentPage + 1)">Next</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="/?p=@(Model.Pager.TotalPages)">Last</a>
-                        </li>
-                    }
-                </ul>
-            </nav>
-        }
-    }
-    catch (Exception e)
-    {
-        <td>
-            <h2>ERROR:</h2>
-            <p>@e</p>
-        </td>  
     }
 }
 
-@* <div class="border-bottom-last-0 first-pt-0"> *@
-@*     @{ *@
-@*         try *@
-@*         { *@
-@*             foreach (var news in (List<News>)ViewData["newsList"]) *@
-@*             { *@
-@*                 <div class="jumbotron p-3 p-mb-5 text-white rounded"> *@
-@*                     <div class="col-mb-6 px-0"> *@
-@*                         <h1 class="display-4"><a asp-area="" asp-page="/News" asp-route="@news.Id">@LocalizationHelper.GetTextByCulture(news.Name, culture)</a></h1> *@
-@*                     </div> *@
-@*                     <p class="lead my-3">@LocalizationHelper.GetTextByCulture(news.Description, culture)</p> *@
-@*                 </div> *@
-@*             } *@
-@*         } *@
-@*         catch (Exception e) *@
-@*         { *@
-@*             <div class="container mb-3 border"> *@
-@*                 <p>NULL</p> *@
-@*             </div> *@
-@*         } *@
-@*     } *@
+<!-- laboratory staff photo -->
+
+<div class="container-fluid">
+    <i class="flag flag-ru"></i>
+    <img src="../images/IMG_4463.JPG"/>
+</div>

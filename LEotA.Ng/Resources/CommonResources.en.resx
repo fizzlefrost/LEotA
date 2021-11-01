@@ -80,4 +80,7 @@
         <value>International Research Laboratory
 “Arctic Linguistic Ecology”</value>
     </data>
+    <data name="CurrentCulture" xml:space="preserve">
+        <value>en</value>
+    </data>
 </root>

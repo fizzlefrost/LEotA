@@ -18,7 +18,7 @@ namespace LEotA.Pages
     {
         private readonly EngineClientManager _engineClientManager;
         public int TotalPages = 1;
-        public int PageSize = 10;
+        public int PageSize = 3;
 
         
         public IEnumerable<string> Items { get; set; }
@@ -30,7 +30,7 @@ namespace LEotA.Pages
             _engineClientManager = engineClientManager;
         }
         
-        public void OnGet(int p)
+        public async Task OnGet(int p)
         {
             try
             {

@@ -1,74 +1,76 @@
 ﻿@page "/AboutUs"
-@using Microsoft.AspNetCore.Localization
 @using LEotA.Services
-@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using Microsoft.AspNetCore.Localization
 @model LEotA.Pages.AboutUsModel
 @inject CommonLocalizationService localizer
 @{
     ViewBag.Title = "My Home Page";
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+    //  aboutUs = (Dictionary<string, List<AboutUs>>)ViewData["aboutUs"];
 }
-<div class="container border border-2">
-    @{
-        try
-        {
-            foreach (var aboutUs in ((List<AboutUs>) ViewData["aboutUs"]))
-            {
-                @* <img alt="" src="@ViewData["img8642ECA1-1577-40C8-6FAA-08D98E3B2BA1"]" style="height:256px;width:256px;"/> *@
-                <div class="bcontainer">
-                    <header class="align-items-start flex-wrap bheader bpadding">
-                        <div class="row">
-                            <div class="bheader-intro">
-                                <div class="bheader-intro-text">
-                                    <h3>@localizer.Get("LabName")</h3>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                             <div class="bheader-intro-continue">
-                                 @* <img class="floatingimg" src="IMG_5122.JPG" width="50%" height="30%"/> *@
-                                 @{
-                                     try
-                                     {
-                                         var images = (Dictionary<List<FileContent>, AboutUs>)ViewData["images"];
-                                         foreach (var image in images.Where(i => i.Value.Id == aboutUs.Id).Select(i => i.Key).FirstOrDefault())
-                                         {
-                                             try
-                                             {
-                                                 @*<img class="floatingimg" src="data:image/jpeg;base64,@Convert.ToBase64String(image.ImageRaw)" height="30%"/>*@
-                                             }
-                                             catch (Exception e)
-                                             {
-                                                 @*<p>ERROR WHEN CONVERTING @image.ImageRaw</p>*@
-                                             }
-                                         }
-                                     }
-                                     catch (Exception e)
-                                     {
-                                         <p>NO IMAGE</p>
-                                     }
-                                 }
-                                 <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p>
-                                @* <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p> *@
-                            </div>
-                            <figure class="bheader-image">
-                                <div class="bheader-image-wrapper ">
-                                    @* <img src="data:image/jpeg;base64,@Convert.ToBase64String(aboutUs.Image)"/> *@
-    
-                                </div>
-                            </figure>
-                        </div>
-                    </header>
+<div class="container">
+    <div class="container">
+        <header class="align-items-start flex-wrap">
+            
+            <h1 class="align-center mb-5">@localizer.Get("LabName")</h1>
+            <img src="images/JPG_5874.JPG">
+            <div class="row">
+                <div class="container">
+                    <p class="p-2 align-center is-indented">Современные вызовы общества, связанные с угрозой утраты
+                        национальной и культурной идентичности российских граждан, ставят перед
+                        учеными задачу решения комплекса проблем широкого социально-
+                        гуманитарного характера.</p>
+                    <hr aria-hidden="true">
+                    <p class="p-2 align-center is-indented">Сохранение языков и культуры способствует сохранению
+                                   национальной самобытности, национальной идентичности, жизненной
+                                   энергии любого народа. К сожалению, сегодня многие языки народов Севера
+                                   находятся на грани исчезновения. Одним из факторов, влияющих на
+                                   языковой сдвиг, являются миграции, урбанизация и промышленное освоение
+                                   северных территорий. Коренные народы, которые сохраняют связи с
+                                   традиционным образом жизни, демонстрируют более высокий уровень
+                                   сохранения языка, как с точки зрения его передачи последующим
+                                   поколениям, так и в плане сохранения различных языковых доменов.</p>
+                    <hr aria-hidden="true">
+                    <p class="p-2 align-center is-indented">В рамках проекта «Сохранение языкового и культурного многообразия
+                        и устойчивое развитие Арктики и Субарктики Российской Федерации» в
+                        2021 году при Северо-Восточном федеральном университете им. М.К.
+                        Аммосова создана Международная научно-исследовательская лаборатория
+                        «Лингвистическая экология Арктики». Научным руководителем лаборатории
+                        является Ленора Гренобль, профессор университета Чикаго (США).
+                        Профессор Гренобль является ведущим международным экспертом в области
+                        языковых контактов, языкового сдвига и ревитализации исчезающих языков,
+                        включая языки Арктики.</p>
+                    <hr aria-hidden="true">
+                    <p class="p-2 align-center is-indented">Совместно с исследователями СВФУ имени М.К.Аммосова в
+                        лаборатории работают ученые из университета Чикаго (США),
+                        Европейского университета в Санкт-Петербурге, Института языкознания
+                        РАН, Института истории имени Ш.Марджани Академии наук Республики
+                        Татарстан, Института гуманитарных исследований и проблем
+                                                            
+                        малочисленных народов Севера СО РАН, Чукотского филиала СВФУ.
+                        География проводимых исследований довольно обширна и охватывает почти
+                        всю территорию РС(Я) и ЧАО.</p>
+                    <hr aria-hidden="true">
+                    <p class="p-2 align-center is-indented">Лаборатория «Лингвистическая экология Арктики» направлена на
+                        решение следующих задач:
+                        1. Создание международной научной коллаборации в области
+                        исследования лингвистической экологии, социокультурного
+                        ландшафта Арктики и Субарктики России (на примере РС(Я) и ЧАО);
+                        2. Привлечение молодых ученых к научным исследованиям современных
+                        языковых процессов как комплексной проблемы устойчивого развития
+                        территории.</p>
+                    <hr aria-hidden="true">
+                    <p class="p-2 align-center is-indented">Лаборатория Арктики заложит основы научной школы
+                       лингвистической экологии - комплексного изучения языков, культур и
+                       социальной среды их бытования как одного из важных индикаторов
+                       устойчивого развития Арктической зоны Российской Федерации и
+                       сопредельных (субарктических) территорий, а также как основы
+                       благополучия отдельной этнической группы и российского общества в
+                       целом.</p>
+                    
+                    
                 </div>
-            }
-        }
-        catch (Exception e)
-        {
-            <p>@e</p>
-        }
-    }
+            </div>
+        </header>
+    </div>
 </div>
-@* <p>@LocalizationHelper.GetTextByCulture(aboutUs.Text, culture)</p> *@
-@* <img src="data:image/jpeg;base64,@Convert.ToBase64String(aboutUs.Image)"/> *@
-@* <img alt="s" src="data:image/png;base64, @Convert.ToBase64String(Model.imgSrcDict.FirstOrDefault().Key)"/> *@

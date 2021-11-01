@@ -1,4 +1,7 @@
 ﻿@using LEotA.Services
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using System.Threading
 @inject CommonLocalizationService localizer
 <title>@ViewData["Title"] - @localizer.Get("Localisation")</title>
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-1" id="nav-bg">
@@ -7,17 +10,45 @@
             <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png"></a>
         </div>
         <div>
-        <vc:culture-switcher/>
-        @if(User.Identity.IsAuthenticated)
+            @* @{ *@
+            @*     if (localizer.Get("CurrentCulture") == "ru") *@
+            @*     { *@
+            @*         <i class="flag flag-ru" style="width: 100px; height:auto;"></i> *@
+            @*     } *@
+            @*     else *@
+            @*     { *@
+            @*         <i class="flag flag-es" style="width: 100px; height:auto;"></i> *@
+            @*     } *@
+            @* } *@
+            
+            <div class="align-right">
+                
+                @if (Thread.CurrentThread.CurrentUICulture.Name == "ru")
                 {
-                    <p>@User.Identity.Name</p>
-                 
-                    <a asp-page="/Logout">@localizer.Get("Logout")</a>
+                    <img src="images/ru.svg" style="max-width: 30px;">
                 }
                 else
                 {
-                    <a asp-page="/Login">@localizer.Get("Login")</a>
+                    <img src="images/us.svg" style="max-width: 30px;">
                 }
+                <vc:culture-switcher/>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="align-right">
+                    <small><p>Hello, @User.Claims.Where(d => d.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname").Select(d => d.Value).FirstOrDefault().ToString() @User.Claims.Where(d => d.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname").Select(d => d.Value).FirstOrDefault().ToString()</p> </small>
+                    <small><a asp-page="/Logout">@localizer.Get("Logout")</a></small>
+                </div>
+            }
+            else
+            {
+                <div class="align-right">
+                    <small><a asp-page="/Login">@localizer.Get("Login")</a></small>
+                </div>
+                <div class="align-right">
+                    <small><a asp-page="/Login">@localizer.Get("Register")</a></small>
+                </div>
+            }
         </div>
     </div>
     

@@ -20,4 +20,7 @@
     <data name="LabName" xml:space="preserve">
         <value />
     </data>
+    <data name="CurrentCulture" xml:space="preserve">
+        <value />
+    </data>
 </root>

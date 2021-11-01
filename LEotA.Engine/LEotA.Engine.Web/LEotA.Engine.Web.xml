@@ -187,7 +187,16 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:LEotA.Engine.Web.Controllers.ImageController.ImageByMasterIdAsync(System.Guid)">
+        <member name="M:LEotA.Engine.Web.Controllers.FileContentController.Upload(Microsoft.AspNetCore.Http.IFormFile,System.Guid,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="file"></param>
+            <param name="masterId"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LEotA.Engine.Web.Controllers.FileContentController.FileByMasterIdAsync(System.Guid)">
             <summary>
             
             </summary>
@@ -1189,16 +1198,16 @@
             <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: 0cae17e</summary>
+            <summary>Commit: adb5549</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: 0cae17ec1898bfcf32c3436dff806d90821967d0</summary>
+            <summary>Sha: adb5549876ebe1703a1f10c5b9f988dc6bb89dc1</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2021-10-30T19:52:36+09:00</summary>
+            <summary>Commit date: 2021-11-01T16:31:01+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 69</summary>
+            <summary>Commits on top of base version: 77</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1228,7 +1237,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 69</summary>
+            <summary>Patch: 77</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>

@@ -70,6 +70,15 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to en.
+        /// </summary>
+        internal static string CurrentCulture {
+            get {
+                return ResourceManager.GetString("CurrentCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your e-mail.
         /// </summary>
         internal static string Email {

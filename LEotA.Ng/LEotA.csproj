@@ -7,15 +7,20 @@
 
     <ItemGroup>
         <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+        <None Include="wwwroot\images\ru.svg" />
+        <None Include="wwwroot\images\us.svg" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Google.Apis.Drive.v2" Version="1.55.0.2481" />
+        <PackageReference Include="Google.Apis.Drive.v3" Version="1.55.0.2481" />
         <PackageReference Include="IdentityModel" Version="4.4.0" />
         <PackageReference Include="JW.Pager" Version="1.0.1" />
         <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
@@ -32,6 +37,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.8" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Syncfusion.Blazor.Spinner" Version="19.3.0.47" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.13.1" />
     </ItemGroup>
 
