@@ -3,7 +3,7 @@ using LEotA.Engine.Entities;
 
 namespace LEotA.Engine.Web.Infrastructure.Engine.EntityValidators
 {
-    public class ImageValidator : EntityValidator<Image>
+    public class FileContentValidator : EntityValidator<FileContent>
     {
         
     }

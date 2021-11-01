@@ -24,28 +24,28 @@ namespace LEotA.Pages
         public void OnGet()
         {
             try {
-            var userId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            ViewData.Add("userId", userId);
-            var thisUserEventsList = _engineClientManager.EventParticipantGetByUserIdAsync(new Guid(userId)).Result.Result;
-            var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
-            var eventReturnList = new List<Event>();
-            var isInvolvedList = new List<Guid>();
-                foreach (var _event in eventList)
-                {
-                    var resultItems = _engineClientManager.ImageGetByMasterId(_event.Id)?.Result;
-                    if (resultItems != null)
-                        ViewData.Add("images", new Dictionary<List<Image>, Event>
-                        {
-                            {resultItems, _event}
-                        });
-                    eventReturnList.Add(_event);
-                    
-                    // is involved check
-                    if (thisUserEventsList.Any(e => e.EventId == _event.Id))
+                var userId = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                ViewData.Add("userId", userId);
+                var thisUserEventsList = _engineClientManager.EventParticipantGetByUserIdAsync(new Guid(userId)).Result.Result;
+                var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
+                var eventReturnList = new List<Event>();
+                var isInvolvedList = new List<Guid>();
+                    foreach (var _event in eventList)
                     {
-                        isInvolvedList.Add(_event.Id);
+                        var resultItems = _engineClientManager.FileContentGetByMasterId(_event.Id);
+                        if (resultItems != null)
+                            ViewData.Add("images", new Dictionary<List<FileContent>, Event>
+                            {
+                                {resultItems, _event}
+                            });
+                        eventReturnList.Add(_event);
+                        
+                        // is involved check
+                        if (thisUserEventsList.Any(e => e.EventId == _event.Id))
+                        {
+                            isInvolvedList.Add(_event.Id);
+                        }
                     }
-                }
 
                 ViewData.Add("event", eventReturnList);
                 ViewData.Add("isInvolvedList", isInvolvedList);

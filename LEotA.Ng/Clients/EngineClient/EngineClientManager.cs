@@ -15,7 +15,7 @@ namespace LEotA.Clients.EngineClient
         private readonly IAlbumPatron? _albumPatron;
         private readonly IEventPatron? _eventPatron;
         private readonly IEventParticipantPatron? _eventParticipantPatron;
-        private readonly IImagePatron? _imagePatron;
+        private readonly IFileContentPatron? _FileContentPatron;
         private readonly INewsPatron? _newsPatron;
         private readonly IProjectPatron? _projectPatron;
         private readonly IPublicationPatron? _publicationPatron;
@@ -26,25 +26,25 @@ namespace LEotA.Clients.EngineClient
             _albumPatron = serviceProvider.GetService<IAlbumPatron>();
             _eventPatron = serviceProvider.GetService<IEventPatron>();
             _eventParticipantPatron = serviceProvider.GetService<IEventParticipantPatron>();
-            _imagePatron = serviceProvider.GetService<IImagePatron>();
+            _FileContentPatron = serviceProvider.GetService<IFileContentPatron>();
             _newsPatron = serviceProvider.GetService<INewsPatron>();
             _projectPatron = serviceProvider.GetService<IProjectPatron>();
             _publicationPatron = serviceProvider.GetService<IPublicationPatron>();
         }
         
-        public CalabongaViewModel<AboutUs>? AboutUsPost(CultureBase text, byte[] imageRaw) =>
+        public CalabongaViewModel<AboutUs>? AboutUsPost(CultureBase text, byte[] FileContentRaw) =>
             _aboutUsPatron?.AboutUsPostAsync(new AboutUsCreateModel()
             {
                 Text = JsonSerializer.Serialize(text),
-                Image = Convert.ToBase64String(imageRaw),
+                Image = Convert.ToBase64String(FileContentRaw),
             }).Result;
         
-        public CalabongaViewModel<AboutUs>? AboutUsPut(Guid id, CultureBase text, byte[] image, Guid newId) => 
+        public CalabongaViewModel<AboutUs>? AboutUsPut(Guid id, CultureBase text, byte[] FileContent, Guid newId) => 
             _aboutUsPatron?.AboutUsPutAsync(new AboutUsUpdateModel()
         {
             Id = id.ToString(),
             Text = JsonSerializer.Serialize(text),
-            Image = Convert.ToBase64String(image),
+            Image = Convert.ToBase64String(FileContent),
             NewId = newId.ToString()
         }).Result;
         
@@ -155,7 +155,6 @@ namespace LEotA.Clients.EngineClient
             var eventParticipants = await _eventParticipantPatron?.EventParticipantGetByUserIdAsync(id.ToString())!;
             return eventParticipants;
         }
-            
         
         public List<EventParticipant>? EventParticipantGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes) => _eventParticipantPatron?.EventParticipantGetPagedAsync(new CalabongaGetPagedRequestModel()
@@ -166,32 +165,35 @@ namespace LEotA.Clients.EngineClient
             Search = search,
             DisabledDefaultIncludes = disabledDefaultIncludes
         }).Result.Result.Items;
-        public CalabongaViewModel<Image>? ImagePost(byte[] imageRaw, Guid masterId) =>
-            _imagePatron?.ImagePostAsync(new ImageCreateModel()
+        
+        public CalabongaViewModel<FileContent>? FileContentPost(byte[] content, Guid masterId, string mimeType) =>
+            _FileContentPatron?.FileContentPostAsync(new FileContentCreateModel()
             {
-                ImageRaw = Convert.ToBase64String(imageRaw),
-                MasterId = masterId.ToString()
+                Content = Convert.ToBase64String(content),
+                MasterId = masterId.ToString(),
+                MimeType = mimeType
             }).Result;
         
-        public CalabongaViewModel<Image>? ImagePut(Guid id, byte[] imageRaw, Guid masterId, Guid newId) => 
-            _imagePatron?.ImagePutAsync(new ImageUpdateModel()
+        public CalabongaViewModel<FileContent>? FileContentPut(Guid id, byte[] content, Guid masterId, Guid newId, string mimeType) => 
+            _FileContentPatron?.FileContentPutAsync(new FileContentUpdateModel()
             {
                 Id = id.ToString(),
-                ImageRaw = Convert.ToBase64String(imageRaw),
+                Content = Convert.ToBase64String(content),
                 MasterId = masterId.ToString(),
+                MimeType = mimeType,
                 NewId = newId.ToString(),
             }).Result;
         
-        public CalabongaViewModel<Image>? ImageDelete(Guid id) =>
-            _imagePatron?.ImageDeleteAsync(id.ToString()).Result;
+        public CalabongaViewModel<FileContent>? FileContentDelete(Guid id) =>
+            _FileContentPatron?.FileContentDeleteAsync(id.ToString()).Result;
         
-        public CalabongaViewModel<Image>? ImageGetById(Guid id) =>
-            _imagePatron?.ImageGetByIdAsync(id.ToString()).Result;
+        public CalabongaViewModel<FileContent>? FileContentGetById(Guid id) =>
+            _FileContentPatron?.FileContentGetByIdAsync(id.ToString()).Result;
 
-        public CalabongaViewModel<List<Image>>? ImageGetByMasterId(Guid id) =>
-            _imagePatron?.ImageGetByMasterIdAsync(id.ToString()).Result;
-        public List<Image>? ImageGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
-            bool disabledDefaultIncludes) => _imagePatron?.ImageGetPagedAsync(new CalabongaGetPagedRequestModel()
+        public List<FileContent>? FileContentGetByMasterId(Guid id) =>
+            _FileContentPatron?.FileContentGetByMasterIdAsync(id.ToString()).Result;
+        public List<FileContent>? FileContentGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
+            bool disabledDefaultIncludes) => _FileContentPatron?.FileContentGetPagedAsync(new CalabongaGetPagedRequestModel()
         {
             PageIndex = pageIndex,
             PageSize = pageSize,
