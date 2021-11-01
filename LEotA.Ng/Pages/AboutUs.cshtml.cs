@@ -32,9 +32,9 @@ namespace LEotA.Pages
                 {
                     try
                     {
-                        var resultItems = _engineClientManager.ImageGetByMasterId(aboutUs.Id);
+                        var resultItems = _engineClientManager.FileContentGetByMasterId(aboutUs.Id);
                         if (resultItems != null)
-                            ViewData.Add("images", new Dictionary<List<Image>, AboutUs>
+                            ViewData.Add("images", new Dictionary<List<FileContent>, AboutUs>
                             {
                                 {resultItems, aboutUs}
                             });

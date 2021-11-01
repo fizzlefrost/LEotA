@@ -17,7 +17,7 @@ namespace LEotA.Engine.Data
         DbSet<ApplicationUserProfile> Profiles { get; set; }
         DbSet<MicroservicePermission> Permissions { get; set; }
         DbSet<News> News { get; set; }
-        DbSet<Image> Images { get; set; }
+        DbSet<FileContent> FileContents { get; set; }
         DbSet<AboutUs> AboutUs { get; set; }
         DbSet<Album> Albums { get; set; }
         DbSet<Event> Events { get; set; }

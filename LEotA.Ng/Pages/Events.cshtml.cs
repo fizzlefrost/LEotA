@@ -32,9 +32,9 @@ namespace LEotA.Pages
                 var isInvolvedList = new List<Guid>();
                     foreach (var _event in eventList)
                     {
-                        var resultItems = _engineClientManager.ImageGetByMasterId(_event.Id);
+                        var resultItems = _engineClientManager.FileContentGetByMasterId(_event.Id);
                         if (resultItems != null)
-                            ViewData.Add("images", new Dictionary<List<Image>, Event>
+                            ViewData.Add("images", new Dictionary<List<FileContent>, Event>
                             {
                                 {resultItems, _event}
                             });

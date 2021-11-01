@@ -31,16 +31,16 @@
                                  @{
                                      try
                                      {
-                                         var images = (Dictionary<List<Image>, AboutUs>)ViewData["images"];
+                                         var images = (Dictionary<List<FileContent>, AboutUs>)ViewData["images"];
                                          foreach (var image in images.Where(i => i.Value.Id == aboutUs.Id).Select(i => i.Key).FirstOrDefault())
                                          {
                                              try
                                              {
-                                                 <img class="floatingimg" src="data:image/jpeg;base64,@Convert.ToBase64String(image.ImageRaw)" height="30%"/>
+                                                 @*<img class="floatingimg" src="data:image/jpeg;base64,@Convert.ToBase64String(image.ImageRaw)" height="30%"/>*@
                                              }
                                              catch (Exception e)
                                              {
-                                                 <p>ERROR WHEN CONVERTING @image.ImageRaw</p>
+                                                 @*<p>ERROR WHEN CONVERTING @image.ImageRaw</p>*@
                                              }
                                          }
                                      }

@@ -21,7 +21,7 @@ namespace LEotA.Pages
         }
 
         public List<Album>? _albumList { get; set; }
-        public List<Image>? _imageList { get; set; }
+        public List<FileContent>? _imageList { get; set; }
 
         public void OnGet()
         {

@@ -57,7 +57,7 @@ namespace LEotA
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
-            services.AddHttpClient<IImagePatron, ImagePatron>(client =>
+            services.AddHttpClient<IFileContentPatron, FileContentPatron>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:10001");
             });
