@@ -365,9 +365,14 @@ footer{
 .active,
 .demo:hover {
     opacity: 1;
+}   
+.coverdiv{
+    text-align:center;
 }
 .cover {
     object-fit: cover;
     width: 100%;
-    /*height: 300px;  optional, you can remove it, but in my case it was good */
+}
+.album-row{
+    margin: 2px auto;
 }
