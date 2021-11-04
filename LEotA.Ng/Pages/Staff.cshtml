@@ -1,8 +1,16 @@
 ﻿@page
+@using System.Collections
 @{
     ViewData["Title"] = "MODS";
+    var i = 0;
 }
 
+        @* @{ *@
+        @*     foreach (var user in ((List<AboutUs>) ViewData["Staff"])) *@
+        @*     { *@
+        @*          *@
+        @*     } *@
+@* } *@
 <div class="py-5">
     <div class="container">
         <div class="row justify-content-center mb-4">
@@ -12,14 +20,12 @@
             </div>
         </div>
         <div class="row">
-            <!-- column  -->
-            <div class="col-lg-3 mb-4">
-                <!-- Row -->
-                <div class="row">
+            <div class="col-lg-3 mb-4 ml-3">
+                <div class="row border border-dark">
                     <div class="col-md-12 align-center">
-                        <img src="https://www.s-vfu.ru/upload/iblock/268/2689334e95e478cd9cde4ac792db1f24.JPG" alt="wrapkit" class="img-fluid rounded-circle" style="height: 200px"/>
+                        <img src="https://www.s-vfu.ru/upload/main/249/2495ff09ad0f87cfbc65411c50b074da.jpg" alt="wrapkit" class="img-fluid" style="height: 200px"/>
                     </div>
-                    <div class="col-md-12 text-center border border-dark" style="height:250px">
+                    <div class="col-md-12 text-center" style="height:250px">
                         <div class="pt-2">
                             <h5 class="mt-4 font-weight-medium mb-0">Людмила Софроновна Заморщикова</h5>
                             <h6 class="subtitle mb-3">Профессор, доцент, кандидат филологических наук. </h6>
@@ -30,10 +36,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Row -->
             </div>
             <div class="col-lg-3 mb-4 ml-3">
-                <!-- Row -->
                 <div class="row">
                     <div class="col-md-12 align-center">
                         <img src="https://www.s-vfu.ru/upload/main/249/2495ff09ad0f87cfbc65411c50b074da.jpg" alt="wrapkit" class="img-fluid rounded-circle" style="height: 200px"/>
@@ -49,7 +53,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Row -->
             </div>
         </div>
     </div>

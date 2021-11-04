@@ -1,9 +1,12 @@
 ﻿@page
 @inject CommonLocalizationService localizer
 @using LEotA.Services
+@using Microsoft.AspNetCore.Localization
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
+    var requestCulture = requestCultureFeature.RequestCulture;
 }
 
 <div class="text-center mb-5">
