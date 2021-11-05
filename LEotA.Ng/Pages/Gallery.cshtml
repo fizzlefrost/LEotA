@@ -1,108 +1,62 @@
-﻿@page
+﻿@page "/Gallery/{id}"
 @using Microsoft.AspNetCore.Localization
-@model LEotA.Pages.GalleryModel
+@using System.Collections
+@model GalleryModel
 @{
-	ViewBag.Title = "Albums";
+    ViewData["Title"] = "Gallery";
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+  var images = (List<FileContent>)ViewData["albumId"];
+  var name = (Album)ViewData["albumName"];
+  var totalimage = images.Count / 4 + 1;
+  var lastimages = images.Count % 4;
+  var j = 1;
 }
-<h2 style="text-align:center">Lightbox</h2>
+@if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
+{
+  <h2 style="text-align:center">@name.Name.English</h2>
+}
+else
+{
+  <h2 style="text-align:center">@name.Name.Russian</h2>
+}
 <div class="container">
-  <div class="row mb-2">
-    <div class="col-3 coverdiv">
-      <img src="/images/_JPG0327.JPG" onclick="openModal();currentSlide(1)" class="hover-shadow cursor cover">
+  @for (int i = 0; i < totalimage; i++)
+  {
+    <div class="row mb-2">
+      @if (i == totalimage-1)
+      {
+        foreach (var x in images.GetRange(i*4,lastimages))
+        {
+          <div class="col-3 coverdiv">
+            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.EgorPidor[x.Id])" class="hover-shadow cursor cover">
+          </div>
+          j++;
+        }
+      }
+      else
+      {
+        foreach (var x in images.GetRange(i * 4, 4))
+        {
+          <div class="col-3 coverdiv">
+            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.EgorPidor[x.Id])" class="hover-shadow cursor cover">
+          </div>
+          j++;
+        }
+      }
     </div>
-    <div class="col-3 coverdiv">
-      <img src="/images/_JPG0330.JPG" onclick="openModal();currentSlide(2)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="images/_JPG0335.JPG" onclick="openModal();currentSlide(3)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="images/_JPG0343.JPG" onclick="openModal();currentSlide(4)" class="hover-shadow cursor cover">
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-3 coverdiv">
-      <img src="/images/_JPG0346.JPG" onclick="openModal();currentSlide(5)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="/images/_JPG0366.JPG" onclick="openModal();currentSlide(6)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="images/_JPG0376.JPG" onclick="openModal();currentSlide(7)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="images/_JPG0389.JPG" onclick="openModal();currentSlide(8)" class="hover-shadow cursor cover">
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-3 coverdiv">
-      <img src="/images/_JPG0391.JPG" onclick="openModal();currentSlide(9)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="/images/_JPG0393.JPG" onclick="openModal();currentSlide(10)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="images/_JPG0395.JPG" onclick="openModal();currentSlide(11)" class="hover-shadow cursor cover">
-    </div>
-    <div class="col-3 coverdiv">
-      <img src="images/_JPG0396.JPG" onclick="openModal();currentSlide(12)" class="hover-shadow cursor cover">
-    </div>
-  </div>
+  }
 </div>
 
 <div id="myModal" class="modal">
   <span class="close cursor" onclick="closeModal()">&times;</span>
   <div class="modal-content">
 
-    <div class="mySlides">
-      <img src="images/_JPG0327.JPG"  style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img src="images/_JPG0330.JPG"  style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img src="images/_JPG0335.JPG"  style="width:100%">
-    </div>
-    
-    <div class="mySlides">
-      <img src="images/_JPG0343.JPG"  style="width:100%">
-    </div>
-    
-    <div class="mySlides">
-      <img src="images/_JPG0346.JPG"  style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img src="images/_JPG0366.JPG"  style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img src="images/_JPG0376.JPG"  style="width:100%">
-    </div>
-    
-    <div class="mySlides">
-      <img src="images/_JPG0389.JPG"  style="width:100%">
-    </div>
-    
-    <div class="mySlides">
-      <img src="images/_JPG0391.JPG"  style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img src="images/_JPG0393.JPG"  style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img src="images/_JPG0395.JPG"  style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <img src="images/_JPG0396.JPG"  style="width:100%">
-    </div>
-    
+    @foreach (var x in images)
+    {
+      <div class="mySlides">
+        <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" style="width:100%">
+      </div>
+    }
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
 

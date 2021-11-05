@@ -63,9 +63,6 @@ namespace LEotA.Pages
                                 .Select(n =>
                                     n.Description.English);
                         }
-
-
-                        // ViewData.Add("newsList", newsList);
                         break;
                 }
             }

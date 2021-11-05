@@ -1,32 +1,36 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace LEotA.Pages
 {
     public class  GalleryModel : PageModel
     {
-        private readonly ILogger<GalleryModel> _logger;
         private readonly EngineClientManager _engineClientManager;
 
-        public GalleryModel(ILogger<GalleryModel> logger, EngineClientManager engineClientManager)
-            //public TestModel( EngineClientManager engineClientManager)
-            //public TestModel( EngineClientManager engineClientManager)
-        {
-            _logger = logger;
+        public GalleryModel(EngineClientManager engineClientManager) {
             _engineClientManager = engineClientManager;
         }
+        public Dictionary<Guid, int> EgorPidor = new Dictionary<Guid, int>();
 
-        public List<Album>? _albumList { get; set; }
-        public List<FileContent>? _imageList { get; set; }
-
-        public void OnGet()
+        public IActionResult OnGet(Guid id)
         {
-
-            _albumList = _engineClientManager.AlbumGetPaged(null, 10, null, null, false);
+            ViewData.Clear();
+            var album = _engineClientManager.AlbumGetById(id)?.Result;
+            var images = _engineClientManager.FileContentGetByMasterId(id);
+            ViewData.Add("albumName", album);
+            ViewData.Add("albumId", images);
+            var j = 1;
+            foreach (var x in images)
+            {
+                EgorPidor.Add(x.Id,j);
+                j++;
+            }
+            return Page(); 
         }
     }
 }

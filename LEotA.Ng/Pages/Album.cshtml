@@ -1,0 +1,27 @@
+﻿@page "/Gallery"
+@using Microsoft.AspNetCore.Localization
+@model AlbumModel
+@{
+    ViewData["Title"] = "Gallery";
+}
+<div class="container">
+	<div class="row">
+		@{
+			System.Diagnostics.Debug.Assert(Model._albumList != null, "Model._albumList != null");
+		}
+		@foreach (var i in Model._albumList)
+		{
+			<div>
+				@{
+					if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en"){
+						<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.English</a>
+					}
+					else
+					{
+						<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
+					}
+				}
+			</div>
+		}
+	</div>
+</div>

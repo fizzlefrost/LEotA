@@ -361,10 +361,8 @@ footer{
 .next {
     cursor: pointer;
     position: absolute;
-    top: 50%;
     width: auto;
     padding: 16px;
-    margin-top: -50px;
     color: white;
     font-weight: bold;
     font-size: 20px;
@@ -372,6 +370,8 @@ footer{
     border-radius: 0 3px 3px 0;
     user-select: none;
     -webkit-user-select: none;
+    vertical-align: middle;
+    height: 100%;
 }
 
 /* Position the "next button" to the right */

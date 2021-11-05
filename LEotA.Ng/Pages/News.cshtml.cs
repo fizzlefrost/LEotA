@@ -1,8 +1,6 @@
 ﻿#nullable enable
 using System;
-using System.Linq;
 using LEotA.Clients.EngineClient;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,7 +14,6 @@ namespace LEotA.Pages
         {
             _engineClientManager = engineClientManager;
         }
-
         public IActionResult OnGet(Guid id)
         {
             ViewData.Clear();

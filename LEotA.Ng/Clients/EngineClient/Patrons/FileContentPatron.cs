@@ -107,7 +107,7 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<List<FileContent>> FileContentGetByMasterIdAsync(string id)
         {
-            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/FileContent/FileContent-by-master-id");
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}file-by-master-id");
             var query = HttpUtility.ParseQueryString(builder.Query);
             query["id"] = id;
             builder.Query = query.ToString() ?? string.Empty;
