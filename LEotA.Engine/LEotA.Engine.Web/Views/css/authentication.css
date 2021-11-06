@@ -1,0 +1,19 @@
+﻿.login {
+    min-height: 100vh;
+}
+
+.bg-images {
+    background-image: url('https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-heading {
+    font-weight: 300;
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}

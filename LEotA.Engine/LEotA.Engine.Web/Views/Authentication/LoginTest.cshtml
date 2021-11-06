@@ -1,47 +1,14 @@
-﻿@model LEotA.Engine.Web.ViewModels.AccountViewModels.LoginViewModel
-
-@* <div class="row"> *@
-@* *@
-@*     <div class="col-md-6 offset-md-3"> *@
-@* *@
-@*         <h1>Enter zone</h1> *@
-@* *@
-@*         <form asp-action="Login" method="post"> *@
-@* *@
-@*             <input hidden asp-for="ReturnUrl" /> *@
-@* *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="UserName"></label> *@
-@*                 <input class="form-control" type="text" asp-for="UserName" /> *@
-@*             </div> *@
-@* *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Password"></label> *@
-@*                 <input class="form-control" type="password" asp-for="Password" /> *@
-@*             </div> *@
-@*             <p> *@
-@*                 <button class="btn btn-primary" type="submit">Log in</button> *@
-@*             </p> *@
-@* *@
-@*         </form> *@
-@*     </div> *@
-@* </div> *@
+﻿<link rel="stylesheet" href="authentication.css">
 
 <div class="container-fluid ps-md-0">
     <div class="row g-0">
-        <div class="col-md-6 ">
-            <div class="d-flex align-items-center py-5" style="min-height: 100vh">
-                <div class="container" style="background-color: red;display: inline-block;">
-                    <img src="https://nauka.s-vfu.ru/offers/linglab_arctic/block/logo_w.png">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="d-flex align-items-center py-5" style="min-height: 100vh;">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="mb-4" style="font-weight: 300;">Welcome back!</h3>
+                            <h3 class="login-heading mb-4">Welcome back!</h3>
 
                             <!-- Sign In Form -->
                             <form>
@@ -62,7 +29,7 @@
                                 </div>
 
                                 <div class="d-grid">
-                                    <button class="btn btn-lg btn-primary text-uppercase fw-bold mb-2" style="font-size: 0.9rem; letter-spacing: 0.05rem; padding: 0.75rem 1rem;" type="submit">Sign in</button>
+                                    <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit">Sign in</button>
                                     <div class="text-center">
                                         <a class="small" href="#">Forgot password?</a>
                                     </div>
