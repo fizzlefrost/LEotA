@@ -15,6 +15,7 @@ namespace LEotA.Engine.Data.ModelConfigurations
             builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
             builder.Property(x => x.Text).HasMaxLength(10000).IsRequired();
             builder.Property(x => x.EmbedLink).HasMaxLength(5000).IsRequired();
+            builder.Property(x => x.DateTime);
         }
 
         protected override string TableName()

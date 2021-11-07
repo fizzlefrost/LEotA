@@ -7,8 +7,12 @@
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
   var images = (List<FileContent>)ViewData["albumId"];
   var name = (Album)ViewData["albumName"];
-  var totalimage = images.Count / 4 + 1;
+  var totalimage = images.Count / 4;
   var lastimages = images.Count % 4;
+  if (lastimages != 0)
+  {
+    totalimage++;
+  }
   var j = 1;
 }
 @if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
@@ -28,7 +32,7 @@ else
         foreach (var x in images.GetRange(i*4,lastimages))
         {
           <div class="col-3 coverdiv">
-            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.EgorPidor[x.Id])" class="hover-shadow cursor cover">
+            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.IntAssign[x.Id])" class="hover-shadow cursor cover">
           </div>
           j++;
         }
@@ -38,7 +42,7 @@ else
         foreach (var x in images.GetRange(i * 4, 4))
         {
           <div class="col-3 coverdiv">
-            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.EgorPidor[x.Id])" class="hover-shadow cursor cover">
+            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.IntAssign[x.Id])" class="hover-shadow cursor cover">
           </div>
           j++;
         }

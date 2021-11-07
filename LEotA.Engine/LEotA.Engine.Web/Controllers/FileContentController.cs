@@ -25,18 +25,18 @@ namespace LEotA.Engine.Web.Controllers
         /// 
         /// </summary>
         /// <param name="file"></param>
-        /// <param name="masterId"></param>
+        /// <param name="id"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         [Route("[action]")]
         [HttpPost]
 #pragma warning disable 1998
-        public async Task<IActionResult> Upload(IFormFile file, Guid masterId, string mimeType)
+        public async Task<IActionResult> Upload(IFormFile file, Guid id, string mimeType)
 #pragma warning restore 1998
         {
             try
             {
-                var uploadedFile = await FileContentManager.Upload(file, masterId, mimeType);
+                var uploadedFile = await FileContentManager.Upload(file, id, mimeType);
                 return Ok(uploadedFile);
             }
             catch (Exception e)
@@ -53,12 +53,12 @@ namespace LEotA.Engine.Web.Controllers
         [Route("[action]")]
         [HttpGet]
 #pragma warning disable 1998
-        public async Task<IActionResult> FileByMasterIdAsync(Guid masterId)
+        public async Task<IActionResult> FileByMasterIdAsync(string id)
 #pragma warning restore 1998
         {
             try
             {
-                var file = FileContentManager.GetByMasterId(masterId);
+                var file = FileContentManager.GetByMasterId(new Guid(id));
                 return Ok(file);
             }
             catch (Exception e)

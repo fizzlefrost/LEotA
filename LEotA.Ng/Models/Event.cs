@@ -14,6 +14,8 @@ namespace LEotA.Models
         public CultureBase Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        [JsonPropertyName("dateTime")]
+        public DateTime DateTime { get; set; }
     }
     
     public class EventGetModel  
@@ -26,6 +28,9 @@ namespace LEotA.Models
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        
+        [JsonPropertyName("dateTime")]
+        public string DateTime { get; set; }
     }
     
     public class EventCreateModel
@@ -36,6 +41,9 @@ namespace LEotA.Models
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        
+        [JsonPropertyName("dateTime")]
+        public string DateTime { get; set; }
     }
     
     public class EventUpdateModel
@@ -48,6 +56,9 @@ namespace LEotA.Models
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        
+        [JsonPropertyName("dateTime")]
+        public string DateTime { get; set; }
         [JsonPropertyName("newId")]
         public string NewId { get; set; }
     }

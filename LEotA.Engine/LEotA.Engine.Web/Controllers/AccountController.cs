@@ -31,10 +31,11 @@ namespace LEotA.Engine.Web.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost("[action]")]
         [AllowAnonymous]
+        [HttpPost("[action]")]
         [ProducesResponseType(200, Type = typeof(OperationResult<UserProfileViewModel>))]
-        public async Task<ActionResult<OperationResult<UserProfileViewModel>>> Register([FromBody] RegisterViewModel model)
+        // public async Task<ActionResult<OperationResult<UserProfileViewModel>>> Register([FromBody] RegisterViewModel model)
+        public async Task<ActionResult<OperationResult<UserProfileViewModel>>> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -66,5 +67,13 @@ namespace LEotA.Engine.Web.Controllers
             var claimsOperationResult = await _accountService.GetProfileByIdAsync(userId.ToString());
             return Ok(claimsOperationResult);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Register() => View();
     }
 }

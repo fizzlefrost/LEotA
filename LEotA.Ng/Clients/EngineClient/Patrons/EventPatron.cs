@@ -36,7 +36,8 @@ namespace LEotA.Clients.EngineClient.Patrons
             {
                 EmbedLink = EventCreateModel.EmbedLink,
                 Name = EventCreateModel.Name,
-                Text = EventCreateModel.Text
+                Text = EventCreateModel.Text, 
+                DateTime = EventCreateModel.DateTime
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
@@ -121,7 +122,8 @@ namespace LEotA.Clients.EngineClient.Patrons
                     Id = new Guid(pageModel.Result.Id),
                     EmbedLink = pageModel.Result.EmbedLink,
                     Name = culturedName,
-                    Text = culturedText
+                    Text = culturedText, 
+                    DateTime = Convert.ToDateTime(pageModel.Result.DateTime)
                 }
             };
             return returnModel;
@@ -159,7 +161,8 @@ namespace LEotA.Clients.EngineClient.Patrons
                         Id = new Guid(Event.Id),
                         EmbedLink = Event.EmbedLink,
                         Name = culturedName,
-                        Text = culturedText
+                        Text = culturedText, 
+                        DateTime = Convert.ToDateTime(Event.DateTime)
                     });
                 }
 

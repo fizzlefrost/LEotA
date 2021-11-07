@@ -15,7 +15,7 @@ namespace LEotA.Pages
         public GalleryModel(EngineClientManager engineClientManager) {
             _engineClientManager = engineClientManager;
         }
-        public Dictionary<Guid, int> EgorPidor = new Dictionary<Guid, int>();
+        public Dictionary<Guid, int> IntAssign = new Dictionary<Guid, int>();
 
         public IActionResult OnGet(Guid id)
         {
@@ -27,7 +27,7 @@ namespace LEotA.Pages
             var j = 1;
             foreach (var x in images)
             {
-                EgorPidor.Add(x.Id,j);
+                IntAssign.Add(x.Id,j);
                 j++;
             }
             return Page(); 

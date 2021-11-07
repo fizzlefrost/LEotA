@@ -245,6 +245,9 @@ namespace LEotA.Engine.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("EmbedLink")
                         .IsRequired()
                         .HasMaxLength(5000)

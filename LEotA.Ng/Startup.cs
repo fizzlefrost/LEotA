@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
+using System.IO.Compression;
 using System.Reflection;
 using LEotA.Resources;
 using LEotA.RouteModelConventions;
@@ -14,6 +15,7 @@ using LEotA.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 
@@ -38,7 +40,15 @@ namespace LEotA
             services.AddRazorPages();
             services.AddHttpClient();
             services.AddSingleton<EngineClientManager>();
+            services.AddSingleton<EngineAuthenticationManager>();
             services.AddSingleton<CommonLocalizationService>();
+            
+            services.Configure<GzipCompressionProviderOptions>
+                (options => options.Level = CompressionLevel.Optimal);
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+            });
             
             // i know i know
             services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
@@ -132,6 +142,8 @@ namespace LEotA
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+            app.UseResponseCompression();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

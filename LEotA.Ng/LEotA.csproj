@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+        <None Include="wwwroot\images\LOGO.png" />
         <None Include="wwwroot\images\ru.svg" />
         <None Include="wwwroot\images\us.svg" />
     </ItemGroup>
@@ -25,6 +26,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.2.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
           <PrivateAssets>all</PrivateAssets>
@@ -96,6 +98,10 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>CommonResources.ru.resx</DependentUpon>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LEotA.Engine\LEotA.Engine.Web\LEotA.Engine.Web.csproj" />
     </ItemGroup>
 
 </Project>

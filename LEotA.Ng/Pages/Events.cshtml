@@ -1,88 +1,57 @@
 ﻿@page "/Events"
 @using LEotA.Services
 @using Microsoft.AspNetCore.Localization
+@using System.Collections
 @model LEotA.Pages.EventsModel
 @{
 	ViewBag.Title = "Events";
-	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-}
-@functions{
-
-	public void EventRoleGive()
-	{
-		 
-	}
+	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
 }
 
-
-	@* @{ *@
-	@* 	// try *@
-	@* 	// { *@
-	@* 	// 	foreach (var _event in ((List<Event>) ViewData["event"])) *@
-@* 	// 	{ *@
 <div class="container">
 	<div class="container mb-5">
-		<div class="row" style="min-height:210px; max-height:350px;">
-			<div class="col-xs-6 img-wrap mb-2">
-				<img src="DROL4632.JPG" style="margin-left:4px; margin-top: 4px;" />
+		@foreach (var _event in (IEnumerable<Event>) ViewData["event"])
+		{
+			<div class="row" >
+				<div class="eventcard mb-3">
+					<div class="row g-0">
+						<div class="col-md-3 text-center border-right">
+							<div class="big">@_event.DateTime.Day</div>
+							<div class="bottom_event">@_event.DateTime.ToString("MMM") @_event.DateTime.Year</div> 
+						</div>
+						<div class="col-md-9">
+							<div class="row">
+								<div class="col-md-3">
+									<img style="width:45%" src="/images/Logos LEA.png">
+								</div>
+								<div class="col-md-9">
+									<h1 class="card-title text-center">@_event.Name.English</h1>
+								</div>
+							</div>
+							<div class="row eventimage">
+								<div class="col-md-9">
+									<h5 class="card-title text-center">@_event.Text.English</h5>
+								</div>
+								<div class="col-md-3">
+									<img src="/images/_JPG0330.JPG">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="col mb-2">  
-				<h3 class="align-center">Event Name</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa.</p>
-				<a target="_blank" class="btn btn-primary btn-dark align-center" style="display: block; margin: 0 auto;" href="https://google.com">Записаться</a>
-				<hr aria-hidden="true">
-			</div>
-		</div>
-	</div>
-	<div class="container mb-5">
-    		<div class="row" style="min-height:210px; max-height:350px;">
-    			<div class="col-xs-6 img-wrap mb-2">
-    				<img src="DROL4632.JPG" style="margin-left:4px; margin-top: 4px;" />
-    			</div>
-    			<div class="col mb-2">  
-    				<h3 class="align-center">Event Name</h3>
-				    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa.</p>
-				    <a target="_blank" class="btn btn-primary btn-dark align-center" style="display: block; margin: 0 auto;" href="https://google.com">Записаться</a>
-				    <hr aria-hidden="true">
-			    </div>
-		    </div>
-	</div>
-	<div class="container mb-5">
-		<div class="row" style="min-height:210px; max-height:350px;">
-			<div class="col-xs-6 img-wrap mb-2">
-				<img src="DROL4632.JPG" style="margin-left:4px; margin-top: 4px;" />
-			</div>
-			<div class="col mb-2">  
-				<h3 class="align-center">Event Name</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa.</p>
-				<a target="_blank" class="btn btn-primary btn-dark align-center" style="display: block; margin: 0 auto;" href="https://google.com">Записаться</a>
-				<hr aria-hidden="true">
-			</div>
-		</div>
-	</div>
-	<div class="container mb-5">
-		<div class="row" style="min-height:210px; max-height:350px;">
-			<div class="col-xs-6 img-wrap mb-2">
-				<img src="DROL4632.JPG" style="margin-left:4px; margin-top: 4px;" />
-			</div>
-			<div class="col mb-2">  
-				<h3 class="align-center">Event Name</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa.</p>
-				<a target="_blank" class="btn btn-primary btn-dark align-center" style="display: block; margin: 0 auto;" href="https://google.com">Записаться</a>
-			</div>
-		</div>
+			<hr aria-hidden="true">
+		}
 	</div>
 </div>
-@* 		} *@
-	@* 	} *@
-	@* 	catch (Exception e) *@
-	@* 	{ *@
-	@* 		<p>NULL</p> *@
-	@* 	} *@
-	@* } *@
-@* @section Scripts *@
+
+
+@* @if ((TimeSpan)ViewData[_event.Id.ToString()] == new TimeSpan()) *@
 @* { *@
-@* 	function EventFunction(){ *@
-@* 		$("a").html('	 *@
-@* 	} *@
+@*   <p>Sorry the event is already over.</p> *@
+@* } *@
+@* else *@
+@* { *@
+@*   var x = (TimeSpan) ViewData[_event.Id.ToString()]; *@
+@*   <p> @x.Days days and @x.Hours hours left</p>  *@
 @* } *@

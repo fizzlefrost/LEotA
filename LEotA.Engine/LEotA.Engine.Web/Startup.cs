@@ -1,9 +1,11 @@
+using System.IO.Compression;
 using Calabonga.UnitOfWork.Controllers.DependencyContainer;
 using LEotA.Engine.Web.AppStart.Configures;
 using LEotA.Engine.Web.AppStart.ConfigureServices;
 using LEotA.Engine.Web.Infrastructure.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +29,14 @@ namespace LEotA.Engine.Web
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.Configure<GzipCompressionProviderOptions>
+                (options => options.Level = CompressionLevel.Optimal);
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+            
             ConfigureServicesBase.ConfigureServices(services, Configuration);
             ConfigureServicesAuthentication.ConfigureServices(services, Configuration);
             ConfigureServicesSwagger.ConfigureServices(services, Configuration);

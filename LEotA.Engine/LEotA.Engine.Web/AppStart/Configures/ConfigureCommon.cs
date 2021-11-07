@@ -32,6 +32,8 @@ namespace LEotA.Engine.Web.AppStart.Configures
                 mapper.CompileMappings();
             }
             
+            app.UseResponseCompression();
+            
             app.UseDefaultFiles();
             app.UseStaticFiles(new StaticFileOptions
             {

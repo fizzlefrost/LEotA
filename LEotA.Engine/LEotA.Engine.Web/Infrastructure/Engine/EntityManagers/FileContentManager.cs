@@ -58,7 +58,7 @@ namespace LEotA.Engine.Web.Infrastructure.Engine.EntityManagers
         {
             var repository = _unitOfWork.GetRepository<FileContent>();
 
-            var ret = repository.GetAllAsync(disableTracking: true).Result.ToList();
+            var ret = repository.GetAll(disableTracking: true).Where(f => f.MasterId == masterId).ToList();
             
             return ret;
         }

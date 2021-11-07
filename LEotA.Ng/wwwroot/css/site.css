@@ -1,11 +1,12 @@
 ﻿@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic");
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;1,800&display=swap');
 html, body, div, a, img, ul, li, footer, header, nav {
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
+    font-family: 'Alegreya', serif;
 }
 html, body {
     overflow: auto;
@@ -75,6 +76,12 @@ img{
 .floatingimg{
     float: right;
 }
+.eventimage > .col-md-3 > img{
+    float: right;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    height: 8.75rem;
+}
 body {
     -webkit-text-size-adjust: none;
 }
@@ -95,6 +102,19 @@ body {
 
 }
 
+.bottom-left {
+    background-color: grey;
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    opacity: 0.6;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.bottom-left > h1 > a{
+    color: white; !important;
+    font-family: 'Alegreya', serif;
+}
 select#culture-options {
     background-color: #0c5460;
 }
@@ -131,9 +151,7 @@ a:hover {
 }
 
 /* Container */
-#nav-bg{
-    background-color: #0c5460;
-}
+
 .main-container {
     margin: 0 auto;
     margin-top: 3em;
@@ -150,7 +168,13 @@ a:hover {
     font-size: 1.375rem;
     line-height: 2.125rem;
 }
-
+.news-container{
+    position: relative;
+}
+.news-container > .bottom-left {
+    background-color: white;
+    left:0;
+}
 .first_container {
     margin: 0 auto;
     width: 100%;
@@ -172,6 +196,13 @@ a:hover {
 .bottomize{
     bottom:0;
     position: absolute;
+}
+.header-bottomize{
+    bottom:0;
+}
+.bottom_event{
+    bottom:0;
+    right:50%;
 }
 .align-center ul{
     display: inline-block;
@@ -200,6 +231,9 @@ a:hover {
 /* Header */
 #lower-nav{
     clear:both;
+}
+#nav-bg{
+    background-image: url("../images/background LEA.jpg");
 }
 /* Footer */
 
@@ -429,5 +463,24 @@ img.hover-shadow {
 .cover {
     object-fit: cover;
     width: 100%;
-    height:8em;
+    height:12em;
+}
+.bottom-left:hover{
+    opacity: 1;
+}
+.eventcard{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-clip: border-box;
+    width: 100%;
+}
+.big{
+    font-size: 120px;
+}
+.nav-item:hover{
+    background-color: #eeeeee;
 }

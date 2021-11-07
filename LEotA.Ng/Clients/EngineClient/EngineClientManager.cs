@@ -94,21 +94,23 @@ namespace LEotA.Clients.EngineClient
             DisabledDefaultIncludes = disabledDefaultIncludes
         }).Result.Result.Items;
         
-        public CalabongaViewModel<Event>? EventPost(string embedLink, CultureBase name, CultureBase text) =>
+        public CalabongaViewModel<Event>? EventPost(string embedLink, CultureBase name, CultureBase text, DateTime dateTime) =>
             _eventPatron?.EventPostAsync(new EventCreateModel()
             {
                 EmbedLink = embedLink,
                 Name = JsonSerializer.Serialize(name),
-                Text = JsonSerializer.Serialize(text)
+                Text = JsonSerializer.Serialize(text),
+                DateTime = dateTime.ToString("g")
             }).Result;
         
-        public CalabongaViewModel<Event>? EventPut(Guid id, string embedLink, CultureBase name, CultureBase text, Guid newId) => 
+        public CalabongaViewModel<Event>? EventPut(Guid id, string embedLink, CultureBase name, CultureBase text, Guid newId, DateTime dateTime) => 
             _eventPatron?.EventPutAsync(new EventUpdateModel()
             {
                 Id = id.ToString(),
                 EmbedLink = embedLink,
                 Name = JsonSerializer.Serialize(name),
                 Text = JsonSerializer.Serialize(text),
+                DateTime = dateTime.ToString("g"),
                 NewId = newId.ToString(),
             }).Result;
         

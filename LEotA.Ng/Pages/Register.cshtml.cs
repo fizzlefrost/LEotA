@@ -23,55 +23,16 @@ namespace LEotA.Pages
             this._engineAuthentication = _engineAuthentication;
         }
         
-        public class RegisterViewModel
-        {
-            [Required]
-            [JsonPropertyName("firstName")]
-            [Display(Name = "FirstName")]
-            public string FirstName { get; set; }
-        
-            [Required]
-            [JsonPropertyName("lastName")]
-            [Display(Name = "LastName")]
-            public string LastName { get; set; }
-        
-            [JsonPropertyName("patronimicName")]
-            [Display(Name = "PatronimicName")]
-            public string? PatronomicName { get; set; }
-        
-            [JsonPropertyName("embedLink")]
-            [Display(Name = "EmbedLink")]
-            public string EmbedLink { get; set; }
-        
-            [Required]
-            [EmailAddress]
-            [JsonPropertyName("email")]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
-        
-            [Required]
-            [JsonPropertyName("password")]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]  
-            [DataType(DataType.Password)]  
-            [Display(Name = "Пароль")]
-            public string Password { get; set; }
-        
-            [DataType(DataType.Password)]  
-            [Display(Name = "Confirm password")]  
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]  
-            public string ConfirmPassword { get; set; }
-        }
-        
         public string ReturnUrl { get; set; }  
         [BindProperty]  
         public RegisterViewModel Input { get; set; }
         
-        public void OnGet(string returnUrl = null)
+        public async Task<IActionResult> OnGet()
         {
-            ReturnUrl = returnUrl;
+            return Redirect("Index");
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");  
             if (ModelState.IsValid)  
@@ -94,5 +55,44 @@ namespace LEotA.Pages
             // If we got this far, something failed, redisplay form  
             return Page();  
         }
+    }
+    
+    public class RegisterViewModel
+    {
+        [Required]
+        [JsonPropertyName("firstName")]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+        
+        [Required]
+        [JsonPropertyName("lastName")]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+        
+        [JsonPropertyName("patronimicName")]
+        [Display(Name = "PatronimicName")]
+        public string? PatronomicName { get; set; }
+        
+        [JsonPropertyName("embedLink")]
+        [Display(Name = "EmbedLink")]
+        public string EmbedLink { get; set; }
+        
+        [Required]
+        [EmailAddress]
+        [JsonPropertyName("email")]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        
+        [Required]
+        [JsonPropertyName("password")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]  
+        [DataType(DataType.Password)]  
+        [Display(Name = "Пароль")]
+        public string Password { get; set; }
+        
+        [DataType(DataType.Password)]  
+        [Display(Name = "Confirm password")]  
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]  
+        public string ConfirmPassword { get; set; }
     }
 }

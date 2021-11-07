@@ -2,11 +2,12 @@
 @inject CommonLocalizationService localizer
 @using LEotA.Services
 @using Microsoft.AspNetCore.Localization
+@using System.Collections
+@using System.Linq;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var requestCultureFeature = HttpContext.Features.Get<IRequestCultureFeature>();
-    var requestCulture = requestCultureFeature.RequestCulture;
+    var newsCount = Model.NewsGetPaged.Count();
 }
 
 <div class="text-center mb-5">
@@ -71,42 +72,52 @@
     }
     else
     {
-        <!-- items being paged -->
-        
-        <div class="album py-5 bg-light">
-            <div class="container">
-                @{
-            try
-            {
-                var nameresult = Model.Items.Zip(Model.Description, (i, s) => new {Name = i, Desc = s});
-                var result = nameresult.Zip(Model.Id, (i, s) => new {It = i, Id = s});
-                foreach (var items in result)
-                {
+    <div class="album py-5 bg-light"> 
+        <div class="container">
+            @for(int i=0;i<newsCount/2;i++){
+                <div class="row">
+                    @if (i + 1 == newsCount && newsCount % 2 == 1)
+                    {
+                        foreach (var currentNews in Model.NewsGetPaged.GetRange(i * 2, 1))
+                        {
+                            <div class="col-6">
+                                <div class="news-container">
+                                    <img src="images/_JPG0330.JPG">
+                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Id">@currentNews.Name.English</a></h2>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="is-indented-2">@currentNews.Description.English</p>
+                                    </div>
+                                </div>
+                                <hr aria-hidden="true">
+                            </div>
+                        }
+                    }
+                    else{
+                    foreach (var currentNews in Model.NewsGetPaged.GetRange(i * 2, 2))
+                    {
+                        <div class="col-6">
+                            <div class="news-container">
+                                <img src="images/_JPG0330.JPG">
+                                <div class="bottom-left">
+                                    <h2 ><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Id">@currentNews.Name.English</a></h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="is-indented-2">@currentNews.Description.English</p>
+                                </div>
+                            </div>
+                            <hr aria-hidden="true">
+                        </div>
+                    }
+                    }
+                </div>
 
-                    
-                    <h2 class="align-center"><a asp-area="" asp-page="/News" asp-route-id="@items.Id">@items.It.Name</a></h2>
-                    <div class="row">
-                        <div class="col-8">
-                            <p class="is-indented-2">@items.It.Desc</p>
-                        </div>
-                        <div class="col-4 img-wrap mb-2">
-                            <img src="images/_JPG0330.JPG">
-                        </div>
-                    </div>
-                    
-                    <hr aria-hidden="true">
-                }
             }
-            catch (Exception e)
-            {
-                <td>
-                    <h2>ERROR:</h2>
-                    <p>@e</p>
-                </td>
-            }
-        }
-    </div>
-</div>
+        </div>
+        </div>
         <!-- pager -->
         {
             try

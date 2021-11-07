@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using JW;
 using LEotA.Clients.EngineClient;
+using LEotA.Engine.Entities;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace LEotA.Pages
 {
@@ -14,12 +16,9 @@ namespace LEotA.Pages
     {
         private readonly EngineClientManager _engineClientManager;
         public int TotalPages = 1;
-        public int PageSize = 3;
-
+        public int PageSize = 4;
         
-        public IEnumerable<string> Items { get; set; }
-        public IEnumerable<string> Description { get; set; }
-        public IEnumerable<Guid> Id { get; set; }
+        public List<Models.News>? NewsGetPaged { get; set; }
         public Pager Pager { get; set; }
         public IndexModel(EngineClientManager engineClientManager)
         {
@@ -43,27 +42,65 @@ namespace LEotA.Pages
                         Pager = new Pager(TotalPages, p);
 
                         // assign the current page of items to the Items property
-                        Id = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(n =>
-                            n.Id);
-
-                        if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
-                        {
-                            Items = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(
-                                n =>
-                                    n.Name.Russian);
-                            Description = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!
-                                .Select(n =>
-                                    n.Description.Russian);
-                        }
-                        else
-                        {
-                            Items = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!.Select(
-                                n => n.Name.English);
-                            Description = _engineClientManager.NewsGetPagedAsync(p - 1, 10, null, null, false).Result!
-                                .Select(n =>
-                                    n.Description.English);
-                        }
+                        NewsGetPaged = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result;
                         break;
+
+                    // ViewData.Add("id",Id.ToList());
+                        // if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                        // {
+                        //     foreach (var newsId in Id.ToList())
+                        //     {
+                        //         ViewData.Add(newsId.ToString(), new News
+                        //         {
+                        //             Id = newsId
+                        //         });
+                        //     }
+                        //     
+                        //     Names = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result!.Select(
+                        //         n =>
+                        //             n.Name.Russian);
+                        //     foreach (var newsId in Id.ToList())
+                        //     {
+                        //         ViewData.Add(newsId.ToString(), new Dictionary<string, IEnumerable<string>>
+                        //         {
+                        //             ["news"] = Names
+                        //         });
+                        //     }
+                        //     
+                        //     Description = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result!
+                        //         .Select(n =>
+                        //             n.Description.Russian);
+                        //     foreach (var newsId in Id.ToList())
+                        //     {
+                        //         ViewData.Add(newsId.ToString(), new Dictionary<string, IEnumerable<string>>
+                        //         {
+                        //             ["desc"] = Description
+                        //         });
+                        //     }
+                        // }
+                        // else
+                        // {
+                        //     Names = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result!.Select(
+                        //         n => n.Name.English);
+                        //     foreach (var newsId in Id.ToList())
+                        //     {
+                        //         ViewData.Add(newsId.ToString(), new Dictionary<string, IEnumerable<string>>
+                        //         {
+                        //             ["news"] = Names
+                        //         });
+                        //     }
+                        //     Description = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result!
+                        //         .Select(n =>
+                        //             n.Description.English);
+                        //     foreach (var newsId in Id.ToList())
+                        //     {
+                        //         ViewData.Add(newsId.ToString(), new Dictionary<string, IEnumerable<string>>
+                        //         {
+                        //             ["desc"] = Description
+                        //         });
+                        //     }
+                        // }
+                        // break;
                 }
             }
             catch (Exception e)
