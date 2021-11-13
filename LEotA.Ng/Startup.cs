@@ -15,6 +15,7 @@ using LEotA.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
@@ -37,7 +38,9 @@ namespace LEotA
             // services.Configure<ApplicationSettings>(sectionApplicationSettings);
             // var applicationSettings = sectionApplicationSettings.Get<ApplicationSettings>();
             
-            services.AddRazorPages();
+            services.AddRazorPages(options => {
+                options.Conventions.Add(new CultureTemplatePageRouteModelConvention());
+            });
             services.AddHttpClient();
             services.AddSingleton<EngineClientManager>();
             services.AddSingleton<EngineAuthenticationManager>();
@@ -118,6 +121,7 @@ namespace LEotA
                 options.DefaultRequestCulture = new RequestCulture(culture: "ru", uiCulture:"ru");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
+                options.RequestCultureProviders.Insert(0, new RouteDataRequestCultureProvider { Options = options });
             });
             services.Configure<RouteOptions>(options =>
             {

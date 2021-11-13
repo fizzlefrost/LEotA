@@ -16,6 +16,9 @@ namespace LEotA.Pages
         private readonly EngineClientManager _engineClientManager;
         [BindProperty(SupportsGet = true)]
         public string SearchYear { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchName { get; set; }
+        
         public PublicationsModel(EngineClientManager engineClientManager)
         {
             _engineClientManager = engineClientManager;
@@ -27,18 +30,43 @@ namespace LEotA.Pages
             var publicationsListGetPaged= _engineClientManager.PublicationGetPaged(null, 10, null, null, false);
             var publicationsList = new List<Publication>();
             if (!string.IsNullOrEmpty(SearchYear)){
-                if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                if (!string.IsNullOrEmpty(SearchName))
                 {
-                    publicationsList = publicationsListGetPaged!.Where(s => s.Text.Russian.Contains(SearchYear)).ToList();
+                    publicationsList = publicationsListGetPaged;
                 }
                 else
                 {
-                    publicationsList = publicationsListGetPaged!.Where(s => s.Text.English.Contains(SearchYear)).ToList();
+                    if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                    {
+                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.Russian.Contains(SearchYear))
+                            .ToList();
+                    }
+                    else
+                    {
+                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.English.Contains(SearchYear))
+                            .ToList();
+                    }
                 }
             }
-            else
+            else 
             {
-                publicationsList = publicationsListGetPaged;
+                if (!string.IsNullOrEmpty(SearchName))
+                {
+                    if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                    {
+                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.Russian.Contains(SearchYear))
+                            .ToList();
+                    }
+                    else
+                    {
+                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.English.Contains(SearchYear))
+                            .ToList();
+                    }
+                }
+                else
+                {
+                    publicationsList = publicationsListGetPaged;
+                }
             }
             ViewData.Add("Publication",publicationsList);
         }

@@ -214,21 +214,7 @@ a:hover {
 .align-center ul li{
     float: left;
 }
-@media screen and (max-width: 840px) {
 
-    .container {
-        width: 100% !important;
-    }
-
-}
-
-@media screen and (max-width: 736px) {
-
-    .container {
-        max-width: 100%;
-    }
-
-}
 /* Header */
 #lower-nav{
     clear:both;
@@ -243,84 +229,6 @@ footer{
     position: relative;
     height: 9.375em;
     margin-top: -9.375em;
-}
-
-/* Wide */
-
-@media screen and (max-width: 1680px) {
-
-    /* Basic */
-
-    body, input, select, textarea {
-        font-size: 13pt;
-    }
-
-}
-
-/* Normal */
-
-@media screen and (max-width: 1280px) {
-
-    /* Basic */
-
-    body, input, select, textarea {
-        font-size: 11pt;
-    }
-
-}
-
-/* Narrow */
-
-@media screen and (max-width: 980px) {
-
-    /* Basic */
-
-    body, input, select, textarea {
-        font-size: 11pt;
-    }
-
-}
-
-/* Narrower */
-
-@media screen and (max-width: 840px) {
-
-    /* Basic */
-
-    html, body {
-        overflow-x: hidden;
-    }
-
-    body{
-        font-size: 11pt;
-    }
-
-
-}
-/* Mobile */
-
-@media screen and (max-width: 736px) {
-
-    /* Basic */
-
-    body {
-        font-size: 11pt;
-    }
-}
-
-/* Mobile (Portrait) */
-
-@media screen and (max-width: 480px) {
-
-    /* Basic */
-
-    html, body {
-        min-width: 320px;
-    }
-
-    body {
-        font-size: 11pt;
-    }
 }
 
 * {
@@ -477,4 +385,53 @@ img.hover-shadow {
 .event_button{
     width:auto;
     margin:0 auto;
+}
+.carousel-item{
+    transition:none;
+}
+/*Media do not touch*/
+@media all and (min-width: 1024px) and (max-width: 1280px) { 
+    
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) { }
+
+@media all and (min-width: 480px) and (max-width: 768px) { }
+
+@media all and (max-width: 480px) { }
+
+
+/* Portrait */
+@media screen and (orientation:portrait) { /* Portrait styles here */ }
+/* Landscape */
+@media screen and (orientation:landscape) { /* Landscape styles here */ }
+
+
+/* CSS for iPhone, iPad, and Retina Displays */
+
+/* Non-Retina */
+@media screen and (-webkit-max-device-pixel-ratio: 1) {
+}
+
+/* Retina */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+}
+
+/* iPhone Portrait */
+@media screen and (max-device-width: 480px) and (orientation:portrait) {
+}
+
+/* iPhone Landscape */
+@media screen and (max-device-width: 480px) and (orientation:landscape) {
+}
+
+/* iPad Portrait */
+@media screen and (min-device-width: 481px) and (orientation:portrait) {
+}
+
+/* iPad Landscape */
+@media screen and (min-device-width: 481px) and (orientation:landscape) {
 }
