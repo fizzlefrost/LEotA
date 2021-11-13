@@ -115,7 +115,7 @@ namespace LEotA
                     new CultureInfo("en"),
                     new CultureInfo("ru")
                 };
-                options.DefaultRequestCulture = new RequestCulture("en");
+                options.DefaultRequestCulture = new RequestCulture(culture: "ru", uiCulture:"ru");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
@@ -149,7 +149,7 @@ namespace LEotA
             app.UseStaticFiles();
 
             app.UseRouting();
-            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
             app.UseRequestLocalization(localizationOptions);
 
 

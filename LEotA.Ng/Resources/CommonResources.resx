@@ -12,15 +12,66 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="FooterSocial" xml:space="preserve">
-        <value />
+        <value>Наши страницы в соцсетях</value>
     </data>
     <data name="Footer" xml:space="preserve">
-        <value />
+        <value>2021 © Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики».</value>
     </data>
     <data name="LabName" xml:space="preserve">
-        <value />
+        <value>Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики».</value>
     </data>
     <data name="CurrentCulture" xml:space="preserve">
-        <value />
+        <value>ru</value>
+    </data>
+    <data name="AboutUs" xml:space="preserve">
+        <value>О Нас</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>Введите электронную почту</value>
+    </data>
+    <data name="Events" xml:space="preserve">
+        <value>Мероприятия</value>
+    </data>
+    <data name="Gallery" xml:space="preserve">
+        <value>Галерея</value>
+    </data>
+    <data name="Home" xml:space="preserve">
+        <value>Главная</value>
+    </data>
+    <data name="Learn" xml:space="preserve">
+        <value>Учись</value>
+    </data>
+    <data name="Localization" xml:space="preserve">
+        <value>Локализация</value>
+    </data>
+    <data name="Login" xml:space="preserve">
+        <value>Войти</value>
+    </data>
+    <data name="Logout" xml:space="preserve">
+        <value>Выйти</value>
+    </data>
+    <data name="Materials" xml:space="preserve">
+        <value>Материалы</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Введите пароль</value>
+    </data>
+    <data name="PasswordA" xml:space="preserve">
+        <value>Введите пароль заново</value>
+    </data>
+    <data name="Projects" xml:space="preserve">
+        <value>Проекты</value>
+    </data>
+    <data name="Publications" xml:space="preserve">
+        <value>Публикации</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Регистрация</value>
+    </data>
+    <data name="Staff" xml:space="preserve">
+        <value>Сотрудники</value>
+    </data>
+    <data name="Welcome" xml:space="preserve">
+        <value>Добро пожаловать</value>
     </data>
 </root>
