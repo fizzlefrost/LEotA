@@ -111,6 +111,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
 }
+
 .bottom-left > h1 > a{
     color: white; !important;
     font-family: 'Alegreya', serif;
@@ -201,8 +202,8 @@ a:hover {
     bottom:0;
 }
 .bottom_event{
-    bottom:0;
-    right:50%;
+    margin-top: 70px;
+    font-size: 50px;
 }
 .align-center ul{
     display: inline-block;
@@ -240,8 +241,8 @@ a:hover {
 footer{
     clear: both;
     position: relative;
-    height: 150px;
-    margin-top: -150px;
+    height: 9.375em;
+    margin-top: -9.375em;
 }
 
 /* Wide */
@@ -420,33 +421,11 @@ footer{
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Number text (1/3 etc) */
-.numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-}
-
-img {
-    margin-bottom: -4px;
-}
-
 .caption-container {
     text-align: center;
     background-color: black;
     padding: 2px 16px;
     color: white;
-}
-
-.demo {
-    opacity: 0.6;
-}
-
-.active,
-.demo:hover {
-    opacity: 1;
 }
 
 img.hover-shadow {
@@ -479,8 +458,23 @@ img.hover-shadow {
     width: 100%;
 }
 .big{
-    font-size: 120px;
+    font-size: 12.5rem;
+    margin-top: 1.25rem;
 }
 .nav-item:hover{
     background-color: #eeeeee;
+}
+.carousel-caption{
+    bottom: 1.9em;
+    background-color: gray;
+    opacity: 0.8;
+    left:0;
+    right:0;
+}
+.carousel-indicators{
+    bottom: 1.5em;
+}
+.event_button{
+    width:auto;
+    margin:0 auto;
 }

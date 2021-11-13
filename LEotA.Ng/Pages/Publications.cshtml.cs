@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -22,11 +23,24 @@ namespace LEotA.Pages
 
         public void OnGet()
         {
-            var _publicationsList = _engineClientManager.PublicationGetPaged(null, 10, null, null, false);
+            ViewData.Clear();
+            var publicationsListGetPaged= _engineClientManager.PublicationGetPaged(null, 10, null, null, false);
+            var publicationsList = new List<Publication>();
             if (!string.IsNullOrEmpty(SearchYear)){
-                _publicationsList = (List<Publication>?) _publicationsList.Where(s => s.Text.English.Contains(SearchYear));
+                if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                {
+                    publicationsList = publicationsListGetPaged!.Where(s => s.Text.Russian.Contains(SearchYear)).ToList();
+                }
+                else
+                {
+                    publicationsList = publicationsListGetPaged!.Where(s => s.Text.English.Contains(SearchYear)).ToList();
+                }
             }
-            ViewData.Add("publication",_publicationsList);
+            else
+            {
+                publicationsList = publicationsListGetPaged;
+            }
+            ViewData.Add("Publication",publicationsList);
         }
     }
 }

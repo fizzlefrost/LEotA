@@ -24,5 +24,10 @@ namespace LEotA.Pages
         {
             //_aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
         }
+        public void OnPost()
+        {
+            //_aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
+        }
+        
     }
 }

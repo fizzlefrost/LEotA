@@ -187,16 +187,22 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:LEotA.Engine.Web.Controllers.AccountController.Register">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:LEotA.Engine.Web.Controllers.FileContentController.Upload(Microsoft.AspNetCore.Http.IFormFile,System.Guid,System.String)">
             <summary>
             
             </summary>
             <param name="file"></param>
-            <param name="masterId"></param>
+            <param name="id"></param>
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:LEotA.Engine.Web.Controllers.FileContentController.FileByMasterIdAsync(System.Guid)">
+        <member name="M:LEotA.Engine.Web.Controllers.FileContentController.FileByMasterIdAsync(System.String)">
             <summary>
             
             </summary>
@@ -1198,16 +1204,16 @@
             <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: 8219b75</summary>
+            <summary>Commit: f30c364</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: 8219b757b00832c4fb12b0f1459cce707704d075</summary>
+            <summary>Sha: f30c364ee7d0a4d3f6e415877de2e74fcaaa6932</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2021-11-01T19:59:39+09:00</summary>
+            <summary>Commit date: 2021-11-13T13:20:22+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 78</summary>
+            <summary>Commits on top of base version: 87</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1237,7 +1243,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 78</summary>
+            <summary>Patch: 87</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>

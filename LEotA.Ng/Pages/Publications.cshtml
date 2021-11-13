@@ -1,11 +1,14 @@
 ﻿@page
 @using Microsoft.AspNetCore.Mvc.Localization
+@using System.Collections
+@using Microsoft.AspNetCore.Localization
 @model PublicationsModel
 
 @inject IViewLocalizer Localizer
 
 @{
     ViewData["Title"] = "SUS!";
+	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
 }
 <div class="container border border-2">
 	<form method="get">
@@ -24,14 +27,27 @@
 			</div>
 		</div>
 	</form>
-	<div class="row" style="border:none; background:white; min-height:210px; max-height:350px;">
-		<div class="col mb-2">
-			<h3 class="align-center">Event Name</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit adipiscing blandit. Aliquam placerat, velit a fermentum fermentum, mi felis vehicula justo, a dapibus quam augue non massa.</p>
-			<a target="_blank" class="btn btn-primary btn-dark align-center" style="display: block; margin: 0 auto;" href="https://google.com">Записаться</a>
+	
+	@foreach (var _public in (IEnumerable<Publication>) ViewData["publication"])
+	{
+		<div class="row" style="border:none; background:white; min-height:210px; max-height:350px;">
+			<div class="col mb-2">
+				<h3 class="align-center">Event Name</h3>
+				<p>
+					@if (culture == "en")
+					{
+						@_public.Text.English
+					}
+					else
+					{
+						@_public.Text.Russian
+					}
+				</p>
+				<a target="_blank" class="btn btn-primary btn-dark align-center" style="display: block; margin: 0 auto;" href="https://google.com">Записаться</a>
+			</div>
+			<div class="col-xs-6 img-wrap mb-2">
+				<img src="DROL4632.JPG" style="margin-left:4px; margin-top: 4px;"/>
+			</div>
 		</div>
-		<div class="col-xs-6 img-wrap mb-2">
-			<img src="DROL4632.JPG" style="margin-left:4px; margin-top: 4px;"/>
-		</div>
-	</div>
+	}
 </div>

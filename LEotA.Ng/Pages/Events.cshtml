@@ -6,52 +6,82 @@
 @{
 	ViewBag.Title = "Events";
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
+	bool isFirst = true;
 }
 
 <div class="container">
 	<div class="container mb-5">
 		@foreach (var _event in (IEnumerable<Event>) ViewData["event"])
 		{
+			@if (!isFirst)
+			{
+				<hr aria-hidden="true">
+			}
+			else
+			{
+				isFirst = false;
+			}
 			<div class="row" >
 				<div class="eventcard mb-3">
 					<div class="row g-0">
 						<div class="col-md-3 text-center border-right">
+							
 							<div class="big">@_event.DateTime.Day</div>
-							<div class="bottom_event">@_event.DateTime.ToString("MMM") @_event.DateTime.Year</div> 
+							<div class="bottom_event">@_event.DateTime.ToString("MMM") @_event.DateTime.Year</div>
+							@if ((TimeSpan)ViewData[_event.Id.ToString()] == new TimeSpan())
+							{
+								<div class="bottomize">Sorry the event is already over.</div>
+							}
+							else
+							{
+								var x = (TimeSpan) ViewData[_event.Id.ToString()];
+								<div class="bottomize"> @x.Days days and @x.Hours hours left</div>
+							}
 						</div>
 						<div class="col-md-9">
 							<div class="row">
 								<div class="col-md-3">
 									<img style="width:45%" src="/images/Logos LEA.png">
 								</div>
-								<div class="col-md-9">
-									<h1 class="card-title text-center">@_event.Name.English</h1>
-								</div>
+								@if (culture == "ru")
+								{
+									<div class="col-md-9">
+										<h1 class="card-title text-center">@_event.Name.Russian</h1>
+									</div>
+								}
+								else
+								{
+									<div class="col-md-9">
+										<h1 class="card-title text-center">@_event.Name.English</h1>
+									</div>
+								}
 							</div>
 							<div class="row eventimage">
-								<div class="col-md-9">
-									<h5 class="card-title text-center">@_event.Text.English</h5>
-								</div>
+								@if (culture == "ru")
+								{
+									<div class="col-md-9">
+										<h5 class="card-title text-center">@_event.Text.Russian</h5>
+									</div>
+								}
+								else
+								{
+									<div class="col-md-9">
+										<h5 class="card-title text-center">@_event.Text.English</h5>
+									</div>
+								}
 								<div class="col-md-3">
 									<img src="/images/_JPG0330.JPG">
+								</div>
+								<div class="event_button">
+									<a class="align-center" target="_blank" rel="noopener noreferrer" href="@_event.EmbedLink">Register</a>
 								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
-			<hr aria-hidden="true">
 		}
 	</div>
 </div>
 
-
-@* @if ((TimeSpan)ViewData[_event.Id.ToString()] == new TimeSpan()) *@
-@* { *@
-@*   <p>Sorry the event is already over.</p> *@
-@* } *@
-@* else *@
-@* { *@
-@*   var x = (TimeSpan) ViewData[_event.Id.ToString()]; *@
-@*   <p> @x.Days days and @x.Hours hours left</p>  *@
-@* } *@

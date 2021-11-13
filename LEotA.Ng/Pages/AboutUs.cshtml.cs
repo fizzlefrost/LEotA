@@ -22,7 +22,7 @@ namespace LEotA.Pages
         {
             try
             {
-                var aboutUsList = _engineClientManager.AboutUsGetPaged(null, 10, null, null, false);
+                var aboutUsList = _engineClientManager.AboutUsGetPaged(null, 100, null, null, false);
                 var aboutUsReturnList = new List<AboutUs>();
 
                 foreach (var aboutUs in aboutUsList)
