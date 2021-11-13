@@ -209,36 +209,9 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:LEotA.Engine.Web.Controllers.LogsReadonly2Controller">
-            <summary>
-            ReadOnlyController Demo
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Controllers.LogsReadonly2Controller.#ctor(Microsoft.Extensions.Options.IOptions{LEotA.Engine.Web.Infrastructure.Settings.CurrentAppSettings},Calabonga.UnitOfWork.IUnitOfWork{LEotA.Engine.Data.ApplicationDbContext},AutoMapper.IMapper)">
-            <inheritdoc />
-        </member>
-        <member name="M:LEotA.Engine.Web.Controllers.LogsReadonly2Controller.ValidateQueryParams(Calabonga.Microservices.Core.QueryParams.PagedListQueryParams)">
-            <inheritdoc />
-        </member>
         <member name="T:LEotA.Engine.Web.Controllers.LogsReadonlyController">
             <summary>
             ReadOnlyController Demo
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Controllers.LogsWritable2Controller">
-            <summary>
-            WritableController Demo
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Controllers.LogsWritable2Controller.#ctor(Microsoft.Extensions.Options.IOptions{LEotA.Engine.Web.Infrastructure.Settings.CurrentAppSettings},Calabonga.UnitOfWork.Controllers.Factories.IEntityManagerFactory,Calabonga.UnitOfWork.IUnitOfWork{LEotA.Engine.Data.ApplicationDbContext},AutoMapper.IMapper)">
-            <inheritdoc />
-        </member>
-        <member name="M:LEotA.Engine.Web.Controllers.LogsWritable2Controller.ValidateQueryParams(Calabonga.Microservices.Core.QueryParams.PagedListQueryParams)">
-            <inheritdoc />
-        </member>
-        <member name="T:LEotA.Engine.Web.Controllers.LogsWritableController">
-            <summary>
-            WritableController Demo
             </summary>
         </member>
         <member name="T:LEotA.Engine.Web.Extensions.ApplicationBuilderExtensions">
@@ -467,30 +440,6 @@
             </summary>
             <param name="services"></param>
         </member>
-        <member name="T:LEotA.Engine.Web.Infrastructure.Engine.EntityManagers.LogManager">
-            <summary>
-            Entity manager for <see cref="T:LEotA.Engine.Entities.Log"/>
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Infrastructure.Engine.EntityManagers.LogManager.#ctor(AutoMapper.IMapper,Calabonga.UnitOfWork.Controllers.Factories.IViewModelFactory{LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel,LEotA.Engine.Web.ViewModels.LogViewModels.LogUpdateViewModel},Calabonga.Microservices.Core.Validators.IEntityValidator{LEotA.Engine.Entities.Log})">
-            <inheritdoc />
-        </member>
-        <member name="T:LEotA.Engine.Web.Infrastructure.Engine.EntityValidators.LogValidator">
-            <summary>
-            Entity Validator for <see cref="T:LEotA.Engine.Entities.Log"/>
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Infrastructure.Engine.ViewModelFactories.LogViewModelFactory">
-            <summary>
-            ViewModel factory for <see cref="T:LEotA.Engine.Entities.Log"/>
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Infrastructure.Engine.ViewModelFactories.LogViewModelFactory.GenerateForCreateAsync">
-            <inheritdoc />
-        </member>
-        <member name="M:LEotA.Engine.Web.Infrastructure.Engine.ViewModelFactories.LogViewModelFactory.GenerateForUpdateAsync(System.Guid)">
-            <inheritdoc />
-        </member>
         <member name="T:LEotA.Engine.Web.Infrastructure.EventLogs.EventNumbers">
             <summary>
             The number identifiers for events in the microservices
@@ -556,14 +505,6 @@
             <param name="destination">Destination object</param>
             <param name="context">Resolution context</param>
             <returns>Destination object</returns>
-        </member>
-        <member name="T:LEotA.Engine.Web.Infrastructure.Mappers.LogMapperConfiguration">
-            <summary>
-            Mapper Configuration for entity Log
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Infrastructure.Mappers.LogMapperConfiguration.#ctor">
-            <inheritdoc />
         </member>
         <member name="T:LEotA.Engine.Web.Infrastructure.Mappers.UserMapperConfiguration">
             <summary>
@@ -874,81 +815,6 @@
             Request: Returns user roles 
             </summary>
         </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsReadonly.LogGetByIdRequest">
-            <summary>
-            Request for Log by Identifier
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Mediator.LogsReadonly.LogGetByIdRequest.#ctor(System.Guid)">
-            <summary>
-            Request for Log by Identifier
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsReadonly.LogGetByIdRequestHandler">
-            <summary>
-            Response for  Request for Log by Identifier
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsReadonly.LogGetPagedRequest">
-            <summary>
-            Request for paged list of Logs
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Mediator.LogsReadonly.LogGetPagedRequest.#ctor(Calabonga.Microservices.Core.QueryParams.PagedListQueryParams)">
-            <summary>
-            Request for paged list of Logs
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsReadonly.LogGetPagedRequestHandler">
-            <summary>
-            Request for paged list of Logs
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsWritable.LogDeleteItemRequest">
-            <summary>
-            Request: Log delete
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Mediator.LogsWritable.LogDeleteItemRequest.#ctor(System.Guid)">
-            <summary>
-            Request: Log delete
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsWritable.LogDeleteItemRequestHandler">
-            <summary>
-            Request: Log delete
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsWritable.LogPostItemRequest">
-            <summary>
-            Request: Log creation
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Mediator.LogsWritable.LogPostItemRequest.#ctor(LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel)">
-            <summary>
-            Request: Log creation
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsWritable.LogPostItemRequestHandler">
-            <summary>
-            Request: Log creation
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsWritable.LogPutItemRequest">
-            <summary>
-            Request: Log edit
-            </summary>
-        </member>
-        <member name="M:LEotA.Engine.Web.Mediator.LogsWritable.LogPutItemRequest.#ctor(LEotA.Engine.Web.ViewModels.LogViewModels.LogUpdateViewModel)">
-            <summary>
-            Request: Log edit
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.Mediator.LogsWritable.LogPutItemRequestHandler">
-            <summary>
-            Request: Log creation
-            </summary>
-        </member>
         <member name="T:LEotA.Engine.Web.Middlewares.ErrorHandlingMiddleware">
             <summary>
             Custom error handler. It allows to view error messages on UI
@@ -1110,81 +976,6 @@
             Position Name
             </summary>
         </member>
-        <member name="T:LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel">
-            <summary>
-            Data Transfer Object for Log entity
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel.CreatedAt">
-            <summary>
-            Log Created At
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel.Logger">
-            <summary>
-            Service name or provider
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel.Level">
-            <summary>
-            Log level for logging. See <see cref="T:Microsoft.Extensions.Logging.LogLevel"/>
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel.Message">
-            <summary>
-            Log Message
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel.ThreadId">
-            <summary>
-            Thread identifier
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogCreateViewModel.ExceptionMessage">
-            <summary>
-            Exception message
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.ViewModels.LogViewModels.LogUpdateViewModel">
-            <summary>
-            Log View model for Update operations
-            </summary>
-        </member>
-        <member name="T:LEotA.Engine.Web.ViewModels.LogViewModels.LogViewModel">
-            <summary>
-            Log ViewModel
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogViewModel.CreatedAt">
-            <summary>
-            Created at
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogViewModel.Logger">
-            <summary>
-            Logger name
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogViewModel.Level">
-            <summary>
-            Level
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogViewModel.Message">
-            <summary>
-            Message text
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogViewModel.ThreadId">
-            <summary>
-            Thread ID
-            </summary>
-        </member>
-        <member name="P:LEotA.Engine.Web.ViewModels.LogViewModels.LogViewModel.ExceptionMessage">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:ThisAssembly">
             <summary>Provides access to the current assembly information.</summary>
         </member>
@@ -1204,16 +995,16 @@
             <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: f30c364</summary>
+            <summary>Commit: 724bc10</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: f30c364ee7d0a4d3f6e415877de2e74fcaaa6932</summary>
+            <summary>Sha: 724bc107803798068af3dc085edf2e6d7edcdc26</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2021-11-13T13:20:22+09:00</summary>
+            <summary>Commit date: 2021-11-13T17:12:16+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 87</summary>
+            <summary>Commits on top of base version: 89</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1243,7 +1034,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 87</summary>
+            <summary>Patch: 89</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>
