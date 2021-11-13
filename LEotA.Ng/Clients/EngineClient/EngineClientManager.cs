@@ -36,7 +36,6 @@ namespace LEotA.Clients.EngineClient
             _aboutUsPatron?.AboutUsPostAsync(new AboutUsCreateModel()
             {
                 Text = JsonSerializer.Serialize(text),
-                Image = Convert.ToBase64String(FileContentRaw),
             }).Result;
         
         public CalabongaViewModel<AboutUs>? AboutUsPut(Guid id, CultureBase text, byte[] FileContent, Guid newId) => 
@@ -44,7 +43,6 @@ namespace LEotA.Clients.EngineClient
         {
             Id = id.ToString(),
             Text = JsonSerializer.Serialize(text),
-            Image = Convert.ToBase64String(FileContent),
             NewId = newId.ToString()
         }).Result;
         
@@ -111,7 +109,7 @@ namespace LEotA.Clients.EngineClient
                 Name = JsonSerializer.Serialize(name),
                 Text = JsonSerializer.Serialize(text),
                 DateTime = dateTime.ToString("g"),
-                NewId = newId.ToString(),
+                NewId = newId.ToString()
             }).Result;
         
         public CalabongaViewModel<Event>? EventDelete(Guid id) =>
@@ -168,7 +166,7 @@ namespace LEotA.Clients.EngineClient
             DisabledDefaultIncludes = disabledDefaultIncludes
         }).Result.Result.Items;
         
-        public CalabongaViewModel<FileContent>? FileContentPost(byte[] content, Guid masterId, string mimeType) =>
+        public CalabongaViewModel<FileContent>? FileContentPost(byte[] content, Guid masterId, string mimeType, CultureBase author) =>
             _FileContentPatron?.FileContentPostAsync(new FileContentCreateModel()
             {
                 Content = Convert.ToBase64String(content),
@@ -279,8 +277,7 @@ namespace LEotA.Clients.EngineClient
             _publicationPatron?.PublicationPostAsync(new PublicationCreateModel()
             {
                 Text = JsonSerializer.Serialize(text),
-                EmbedLink = embedLink,
-                PDFRaw = Convert.ToBase64String(PDFRaw)
+                EmbedLink = embedLink
             }).Result;
 
         public CalabongaViewModel<Publication>? PublicationPut(Guid id, CultureBase text, string embedLink, byte[] PDFRaw, Guid newId) => 
@@ -289,7 +286,6 @@ namespace LEotA.Clients.EngineClient
                 Id = id.ToString(),
                 Text = JsonSerializer.Serialize(text),
                 EmbedLink = embedLink,
-                PDFRaw = Convert.ToBase64String(PDFRaw),
                 NewId = newId.ToString()
             }).Result;
         

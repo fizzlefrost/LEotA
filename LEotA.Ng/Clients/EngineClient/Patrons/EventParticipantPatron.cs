@@ -23,16 +23,6 @@ namespace LEotA.Clients.EngineClient.Patrons
             _applicationSettings = applicationSettings;
         }
         
-        public async Task<CalabongaViewModel<EventParticipant>> EventParticipantGetViewModelForCreationAsync()
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/event-participant/get-viewmodel-for-creation");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(result, options);
-            return EventParticipantGetModelToAboutUs(report);
-        }
-
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantPostAsync(EventParticipantCreateModel EventParticipantCreateModel)
         {
             var request = new EventParticipantCreateModel()
@@ -49,16 +39,6 @@ namespace LEotA.Clients.EngineClient.Patrons
             return EventParticipantGetModelToAboutUs(report);
         }
 
-        public async Task<CalabongaViewModel<EventParticipant>> EventParticipantGetViewModelForEditingAsync(string id)
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/event-participant/get-viewmodel-for-editing/{id}");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventParticipantGetModel>>(result, options);
-            return EventParticipantGetModelToAboutUs(report);
-        }
-        
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantPutAsync(EventParticipantUpdateModel EventParticipantUpdateModel)
         {
             using var response = await _httpClient.PutAsJsonAsync($"/api/event-participant/post-item", EventParticipantUpdateModel);

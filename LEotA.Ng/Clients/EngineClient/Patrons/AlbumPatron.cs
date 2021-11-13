@@ -20,21 +20,13 @@ namespace LEotA.Clients.EngineClient.Patrons
             _httpClient = httpClient;
         }
         
-        public async Task<CalabongaViewModel<Album>> AlbumGetViewModelForCreationAsync()
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/album/get-viewmodel-for-creation");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<AlbumGetModel>>(result, options);
-            return AlbumGetModelToAboutUs(report);
-        }
-
         public async Task<CalabongaViewModel<Album>> AlbumPostAsync(AlbumCreateModel AlbumCreateModel)
         {
             var request = new AlbumCreateModel()
             {
-                Name = AlbumCreateModel.Name
+                Name = AlbumCreateModel.Name,
+                Author = AlbumCreateModel.Author,
+                MasterId = AlbumCreateModel.MasterId
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
@@ -42,16 +34,6 @@ namespace LEotA.Clients.EngineClient.Patrons
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<AlbumGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            return AlbumGetModelToAboutUs(report);
-        }
-
-        public async Task<CalabongaViewModel<Album>> AlbumGetViewModelForEditingAsync(string id)
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/album/get-viewmodel-for-editing/{id}");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<AlbumGetModel>>(result, options);
             return AlbumGetModelToAboutUs(report);
         }
         
@@ -106,6 +88,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         private CalabongaViewModel<Album> AlbumGetModelToAboutUs(CalabongaViewModel<AlbumGetModel> pageModel)
         {
             var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
+            var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Author!);
             var returnModel = new CalabongaViewModel<Album>()
             {
                 ActivityId = pageModel.ActivityId,
@@ -116,7 +99,9 @@ namespace LEotA.Clients.EngineClient.Patrons
                 Result = new Album()
                 {
                     Id = new Guid(pageModel.Result.Id),
-                    Name = culturedName
+                    Name = culturedName,
+                    Author = culturedAuthor,
+                    MasterId = new Guid(pageModel.Result.MasterId!)
                 }
             };
             return returnModel;
@@ -148,10 +133,13 @@ namespace LEotA.Clients.EngineClient.Patrons
                 foreach (var album in pageModel.Result.Items)
                 {
                     var culturedName = JsonSerializer.Deserialize<CultureBase>(album.Name);
+                    var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(album.Author!);
                     returnModel.Result.Items.Add(new Album()
                     {
                         Id = new Guid(album.Id),
-                        Name = culturedName
+                        Name = culturedName,
+                        Author = culturedAuthor,
+                        MasterId = new Guid(album.MasterId!)
                     });
                 }
 

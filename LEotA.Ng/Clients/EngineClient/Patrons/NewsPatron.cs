@@ -26,7 +26,9 @@ namespace LEotA.Clients.EngineClient.Patrons
             {
                 Description = NewsCreateModel.Description,
                 Name = NewsCreateModel.Name,
-                Text = NewsCreateModel.Text
+                Text = NewsCreateModel.Text,
+                Author = NewsCreateModel.Author,
+                Time = NewsCreateModel.Time
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
@@ -97,6 +99,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
             var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
+            var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Author!);
             var culturedDescription = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Description);
             var returnModel = new CalabongaViewModel<News>()
             {
@@ -110,7 +113,9 @@ namespace LEotA.Clients.EngineClient.Patrons
                     Id = new Guid(pageModel.Result.Id),
                     Name = culturedName,
                     Text = culturedText,
-                    Description = culturedDescription
+                    Description = culturedDescription,
+                    Author = culturedAuthor,
+                    Time = Convert.ToDateTime(pageModel.Result.Time)
                 }
             };
             return returnModel;
@@ -143,13 +148,16 @@ namespace LEotA.Clients.EngineClient.Patrons
                 {
                     var culturedText = JsonSerializer.Deserialize<CultureBase>(News.Text);
                     var culturedName = JsonSerializer.Deserialize<CultureBase>(News.Name);
+                    var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(News.Author);
                     var culturedDescription = JsonSerializer.Deserialize<CultureBase>(News.Description);
                     returnModel.Result.Items.Add(new News()
                     {
                         Id = new Guid(News.Id),
                         Text = culturedText,
                         Description = culturedDescription,
-                        Name = culturedName
+                        Name = culturedName,
+                        Author = culturedAuthor,
+                        Time = Convert.ToDateTime(News.Time)
                     });
                 }
 

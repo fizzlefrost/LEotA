@@ -9,10 +9,12 @@ namespace LEotA.Models
         public Guid Id { get; set; }
         [JsonPropertyName("text")]
         public CultureBase Text { get; set; }
-        [JsonPropertyName("pdfRaw")]
-        public byte[] PDFRaw { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        [JsonPropertyName("name")]
+        public CultureBase Name { get; set; }
+        [JsonPropertyName("time")]
+        public DateTime Time { get; set; }
     }
     
     public class PublicationGetModel
@@ -21,20 +23,24 @@ namespace LEotA.Models
         public string Id { get; set; }
         [JsonPropertyName("text")]
         public string Text { get; set; }
-        [JsonPropertyName("pdfRaw")]
-        public string PDFRaw { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("time")]
+        public string Time { get; set; }
     }
     
     public class PublicationCreateModel
     {
         [JsonPropertyName("text")]
         public string Text { get; set; }
-        [JsonPropertyName("pdfRaw")]
-        public string PDFRaw { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("time")]
+        public string Time { get; set; }
     }
     
     public class PublicationUpdateModel
@@ -43,11 +49,13 @@ namespace LEotA.Models
         public string Id { get; set; }
         [JsonPropertyName("text")]
         public string Text { get; set; }
-        [JsonPropertyName("pdfRaw")]
-        public string PDFRaw { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
         [JsonPropertyName("newId")]
         public string NewId { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("time")]
+        public string Time { get; set; }
     }
 }

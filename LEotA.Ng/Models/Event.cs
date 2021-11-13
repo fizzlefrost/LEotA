@@ -13,7 +13,7 @@ namespace LEotA.Models
         [JsonPropertyName("text")]
         public CultureBase Text { get; set; }
         [JsonPropertyName("embedLink")]
-        public string EmbedLink { get; set; }
+        public string? EmbedLink { get; set; }
         [JsonPropertyName("dateTime")]
         public DateTime DateTime { get; set; }
     }

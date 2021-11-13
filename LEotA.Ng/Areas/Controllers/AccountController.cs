@@ -56,7 +56,7 @@ namespace LEotA.Areas.Controllers
                     }
                 }
             }
-            return View(model);
+            return View();
         }
         
         [HttpGet]

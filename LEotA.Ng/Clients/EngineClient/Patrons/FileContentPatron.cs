@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -20,23 +21,15 @@ namespace LEotA.Clients.EngineClient.Patrons
             _httpClient = httpClient;
         }
         
-        public async Task<CalabongaViewModel<FileContent>> FileContentGetViewModelForCreationAsync()
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/FileContent/get-viewmodel-for-creation");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<FileContentGetModel>>(result, options);
-            return FileContentGetModelToFileContent(report);
-        }
-
         public async Task<CalabongaViewModel<FileContent>> FileContentPostAsync(FileContentCreateModel FileContentCreateModel)
         {
             var request = new FileContentCreateModel()
             {
                 Content = FileContentCreateModel.Content,
                 MasterId = FileContentCreateModel.MasterId,
-                MimeType = FileContentCreateModel.MimeType
+                MimeType = FileContentCreateModel.MimeType,
+                Author = FileContentCreateModel.Author,
+                FileType = FileContentCreateModel.FileType
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
@@ -47,16 +40,6 @@ namespace LEotA.Clients.EngineClient.Patrons
             return FileContentGetModelToFileContent(report);
         }
 
-        public async Task<CalabongaViewModel<FileContent>> FileContentGetViewModelForEditingAsync(string id)
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/FileContent/get-viewmodel-for-editing/{id}");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<FileContentGetModel>>(result, options);
-            return FileContentGetModelToFileContent(report);
-        }
-        
         public async Task<CalabongaViewModel<FileContent>> FileContentPutAsync(FileContentUpdateModel FileContentUpdateModel)
         {
             using var response = await _httpClient.PutAsJsonAsync($"/api/FileContent/post-item", FileContentUpdateModel);
@@ -132,12 +115,15 @@ namespace LEotA.Clients.EngineClient.Patrons
             {
                 try
                 {
+                    var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(fileContentGetModel.Author);
                     ret.Add(new FileContent()
                     {
                         Id = new Guid(fileContentGetModel.Id),
                         MimeType = fileContentGetModel.MimeType,
                         Content = Convert.FromBase64String(fileContentGetModel.Content),
-                        MasterId = new Guid(fileContentGetModel.MasterId)
+                        MasterId = new Guid(fileContentGetModel.MasterId),
+                        Author = culturedAuthor,
+                        FileType = (FileType) fileContentGetModel.FileType
                     });
                 }
                 catch (Exception e)
@@ -150,6 +136,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         private CalabongaViewModel<FileContent> FileContentGetModelToFileContent(CalabongaViewModel<FileContentGetModel> pageModel)
         {
+            var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Author!);
             var returnModel = new CalabongaViewModel<FileContent>()
             {
                 ActivityId = pageModel.ActivityId,
@@ -162,7 +149,9 @@ namespace LEotA.Clients.EngineClient.Patrons
                     Id = new Guid(pageModel.Result.Id),
                     MimeType = pageModel.Result.MimeType,
                     Content = Convert.FromBase64String(pageModel.Result.Content),
-                    MasterId = new Guid(pageModel.Result.MasterId)
+                    MasterId = new Guid(pageModel.Result.MasterId),
+                    Author = culturedAuthor,
+                    FileType = (FileType) pageModel.Result.FileType
                 }
             };
             return returnModel;
@@ -193,12 +182,15 @@ namespace LEotA.Clients.EngineClient.Patrons
                 };
                 foreach (var fileContent in pageModel.Result.Items)
                 {
+                    var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(fileContent.Author!);
                     returnModel.Result.Items.Add(new FileContent()
                     {
                         Id = new Guid(fileContent.Id),
                         MimeType = fileContent.MimeType,
                         Content = Convert.FromBase64String(fileContent.Content),
-                        MasterId = new Guid(fileContent.MasterId)
+                        MasterId = new Guid(fileContent.MasterId),
+                        Author = culturedAuthor,
+                        FileType = (FileType) fileContent.FileType
                     });
                 }
 

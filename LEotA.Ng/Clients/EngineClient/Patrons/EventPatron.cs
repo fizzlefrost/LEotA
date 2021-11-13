@@ -20,16 +20,6 @@ namespace LEotA.Clients.EngineClient.Patrons
             _httpClient = httpClient;
         }
         
-        public async Task<CalabongaViewModel<Event>> EventGetViewModelForCreationAsync()
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/event/get-viewmodel-for-creation");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventGetModel>>(result, options);
-            return EventGetModelToAboutUs(report);
-        }
-
         public async Task<CalabongaViewModel<Event>> EventPostAsync(EventCreateModel EventCreateModel)
         {
             var request = new EventCreateModel()
@@ -45,16 +35,6 @@ namespace LEotA.Clients.EngineClient.Patrons
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<EventGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            return EventGetModelToAboutUs(report);
-        }
-
-        public async Task<CalabongaViewModel<Event>> EventGetViewModelForEditingAsync(string id)
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/event/get-viewmodel-for-editing/{id}");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<EventGetModel>>(result, options);
             return EventGetModelToAboutUs(report);
         }
         

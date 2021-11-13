@@ -9,6 +9,10 @@ namespace LEotA.Models
         public Guid Id { get; set; }
         [JsonPropertyName("name")]
         public CultureBase Name { get; set; }
+        [JsonPropertyName("masterId")]
+        public Guid? MasterId { get; set; }
+        [JsonPropertyName("author")]
+        public CultureBase? Author { get; set; }
     }
     
     public class AlbumGetModel
@@ -17,12 +21,20 @@ namespace LEotA.Models
         public string Id { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("masterId")]
+        public string? MasterId { get; set; }
+        [JsonPropertyName("author")]
+        public string? Author { get; set; }
     }
     
     public class AlbumCreateModel
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("masterId")]
+        public string? MasterId { get; set; }
+        [JsonPropertyName("author")]
+        public string? Author { get; set; }
     }
     
     public class AlbumUpdateModel
@@ -33,5 +45,9 @@ namespace LEotA.Models
         public string Name { get; set; }
         [JsonPropertyName("newId")]
         public string NewId { get; set; }
+        [JsonPropertyName("masterId")]
+        public string? MasterId { get; set; }
+        [JsonPropertyName("author")]
+        public string? Author { get; set; }
     }
 }

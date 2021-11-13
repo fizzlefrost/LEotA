@@ -35,8 +35,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             var request = new AboutUsCreateModel()
             {
-                Text = JsonSerializer.Serialize(aboutUsCreateModel.Text), 
-                Image = aboutUsCreateModel.Image
+                Text = JsonSerializer.Serialize(aboutUsCreateModel.Text)
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
@@ -127,7 +126,6 @@ namespace LEotA.Clients.EngineClient.Patrons
                 Result = new AboutUs()
                 {
                     Id = new Guid(pageModel.Result.Id),
-                    Image = Convert.FromBase64String(pageModel.Result.Image),
                     Text = culturedText
                 }
             };
@@ -163,7 +161,6 @@ namespace LEotA.Clients.EngineClient.Patrons
                     returnModel.Result.Items.Add(new AboutUs()
                     {
                         Id = new Guid(aboutUs.Id),
-                        Image = Convert.FromBase64String(aboutUs.Image),
                         Text = culturedText
                     });
                 }

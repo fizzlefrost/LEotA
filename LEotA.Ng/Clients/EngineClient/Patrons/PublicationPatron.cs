@@ -19,24 +19,15 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             _httpClient = httpClient;
         }
-        
-        public async Task<CalabongaViewModel<Publication>> PublicationGetViewModelForCreationAsync()
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/publication/get-viewmodel-for-creation");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(result, options);
-            return PublicationGetModelToPublication(report);
-        }
 
         public async Task<CalabongaViewModel<Publication>> PublicationPostAsync(PublicationCreateModel PublicationCreateModel)
         {
             var request = new PublicationCreateModel()
             {
                 EmbedLink = PublicationCreateModel.EmbedLink,
-                PDFRaw = PublicationCreateModel.PDFRaw,
-                Text = PublicationCreateModel.Text
+                Text = PublicationCreateModel.Text,
+                Name = PublicationCreateModel.Name,
+                Time = PublicationCreateModel.Time
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
@@ -44,16 +35,6 @@ namespace LEotA.Clients.EngineClient.Patrons
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(json, new JsonSerializerOptions{PropertyNameCaseInsensitive = true});
-            return PublicationGetModelToPublication(report);
-        }
-
-        public async Task<CalabongaViewModel<Publication>> PublicationGetViewModelForEditingAsync(string id)
-        {
-            var httpResponse = await _httpClient.GetAsync($"/api/publication/get-viewmodel-for-editing/{id}");
-            httpResponse.EnsureSuccessStatusCode();
-            var result = await httpResponse.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var report = JsonSerializer.Deserialize<CalabongaViewModel<PublicationGetModel>>(result, options);
             return PublicationGetModelToPublication(report);
         }
         
@@ -108,6 +89,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         private CalabongaViewModel<Publication> PublicationGetModelToPublication(CalabongaViewModel<PublicationGetModel> pageModel)
         {
             var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
+            var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
             var returnModel = new CalabongaViewModel<Publication>()
             {
                 ActivityId = pageModel.ActivityId,
@@ -120,7 +102,8 @@ namespace LEotA.Clients.EngineClient.Patrons
                     Id = new Guid(pageModel.Result.Id),
                     Text = culturedText,
                     EmbedLink = pageModel.Result.EmbedLink,
-                    PDFRaw = Convert.FromBase64String(pageModel.Result.PDFRaw)
+                    Name = culturedName,
+                    Time = Convert.ToDateTime(pageModel.Result.Time)
                 }
             };
             return returnModel;
@@ -152,12 +135,14 @@ namespace LEotA.Clients.EngineClient.Patrons
                 foreach (var Publication in pageModel.Result.Items)
                 {
                     var culturedText = JsonSerializer.Deserialize<CultureBase>(Publication.Text);
+                    var culturedName = JsonSerializer.Deserialize<CultureBase>(Publication.Name);
                     returnModel.Result.Items.Add(new Publication()
                     {
                         Id = new Guid(Publication.Id),
                         Text = culturedText,
                         EmbedLink = Publication.EmbedLink,
-                        PDFRaw = Convert.FromBase64String(Publication.PDFRaw)
+                        Name = culturedName,
+                        Time = Convert.ToDateTime(Publication.Time)
                     });
                 }
 
