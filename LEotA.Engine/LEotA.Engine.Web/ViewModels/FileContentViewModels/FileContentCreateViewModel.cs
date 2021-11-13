@@ -1,5 +1,6 @@
 ﻿using System;
 using Calabonga.EntityFrameworkCore.Entities.Base;
+using LEotA.Engine.Entities;
 
 namespace LEotA.Engine.Web.ViewModels.FileContentViewModels
 {
@@ -8,5 +9,7 @@ namespace LEotA.Engine.Web.ViewModels.FileContentViewModels
         public byte[] Content { get; set; }
         public string MimeType { get; set; }
         public Guid MasterId { get; set; }
+        public string Author { get; set; }
+        public FileType FileType { get; set; }
     }
 }

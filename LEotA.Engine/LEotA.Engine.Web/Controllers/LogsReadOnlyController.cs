@@ -26,14 +26,5 @@ namespace LEotA.Engine.Web.Controllers
         public async Task<IActionResult> GetRoles() =>
             //Get Roles for current user
             Ok(await _mediator.Send(new GetRolesRequest(), HttpContext.RequestAborted));
-
-        [HttpGet("[action]/{id:guid}")]
-        [ProducesResponseType(200)]
-        public async Task<IActionResult> GetById(Guid id) => Ok(await _mediator.Send(new LogGetByIdRequest(id), HttpContext.RequestAborted));
-
-
-        [HttpGet("[action]")]
-        [ProducesResponseType(200)]
-        public async Task<IActionResult> GetPaged([FromQuery] PagedListQueryParams queryParams) => Ok(await _mediator.Send(new LogGetPagedRequest(queryParams), HttpContext.RequestAborted));
     }
 }

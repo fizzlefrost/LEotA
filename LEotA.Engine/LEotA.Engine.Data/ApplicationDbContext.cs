@@ -13,11 +13,8 @@ namespace LEotA.Engine.Data
             : base(options) { }
 
         #region System
-
-        public DbSet<Log> Logs { get; set; }
-
+        
         public DbSet<ApplicationUserProfile> Profiles { get; set; }
-
         /// <inheritdoc />
         public DbSet<MicroservicePermission> Permissions { get; set; }
 

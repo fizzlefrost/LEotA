@@ -12,7 +12,6 @@ namespace LEotA.Engine.Data
     {
         #region System
 
-        DbSet<Log> Logs { get; set; }
         DbSet<ApplicationUser> Users { get; set; }
         DbSet<ApplicationUserProfile> Profiles { get; set; }
         DbSet<MicroservicePermission> Permissions { get; set; }
