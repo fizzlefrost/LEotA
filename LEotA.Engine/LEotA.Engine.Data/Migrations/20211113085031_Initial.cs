@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LEotA.Engine.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,7 @@ namespace LEotA.Engine.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,7 +24,9 @@ namespace LEotA.Engine.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    MasterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +86,8 @@ namespace LEotA.Engine.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
-                    EmbedLink = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false)
+                    EmbedLink = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,34 +108,19 @@ namespace LEotA.Engine.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
+                name: "FileContent",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageRaw = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    MasterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Content = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    MimeType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MasterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Images", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Logs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Logger = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Level = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
-                    ThreadId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ExceptionMessage = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logs", x => x.Id);
+                    table.PrimaryKey("PK_FileContent", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -143,7 +130,9 @@ namespace LEotA.Engine.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,6 +144,7 @@ namespace LEotA.Engine.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmbedLink = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -168,9 +158,10 @@ namespace LEotA.Engine.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PDFRaw = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    EmbedLink = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EmbedLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -428,10 +419,7 @@ namespace LEotA.Engine.Data.Migrations
                 name: "EventParticipant");
 
             migrationBuilder.DropTable(
-                name: "Images");
-
-            migrationBuilder.DropTable(
-                name: "Logs");
+                name: "FileContent");
 
             migrationBuilder.DropTable(
                 name: "MicroservicePermissions");
