@@ -17,7 +17,7 @@ namespace LEotA.Pages
         private readonly EngineClientManager _engineClientManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         [BindProperty(SupportsGet = true)]
-        public string ActiveOnly { get; set; }
+        public bool ActiveOnly { get; set; }
         public EventsModel(EngineClientManager engineClientManager, IHttpContextAccessor httpContextAccessor)
         {
             _engineClientManager = engineClientManager;
@@ -29,7 +29,7 @@ namespace LEotA.Pages
             
             var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
             ViewData.Add("event", eventList);
-            if (eventList != null && ActiveOnly.IsNullOrEmpty())
+            if (eventList != null && !ActiveOnly)
             {
                 foreach (var _event in eventList)
                 {
@@ -42,7 +42,7 @@ namespace LEotA.Pages
                 ViewData.Add("event", eventList);
             }
 
-            else if (eventList != null && !ActiveOnly.IsNullOrEmpty())
+            else if (eventList != null && ActiveOnly)
             {
                 var activeEventList = eventList;
                 foreach (var _event in eventList)

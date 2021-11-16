@@ -1,7 +1,5 @@
 ﻿@page "/Events"
-@using LEotA.Services
 @using Microsoft.AspNetCore.Localization
-@using System.Collections
 @model LEotA.Pages.EventsModel
 @{
 	ViewBag.Title = "Events";
@@ -11,7 +9,7 @@
 <form method="post" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed">
 	<div class="row">
 		<div class="col input-group">
-			<input class="checkbox" asp-for="ActiveOnly" value="true">
+			<input class="checkbox" asp-for="ActiveOnly">
 			<div class="input-group-append">
 				<button class="btn btn-primary" type="submit">Show only active events</button>
 			</div>
