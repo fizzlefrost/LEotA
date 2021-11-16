@@ -1,8 +1,9 @@
 ﻿using Calabonga.EntityFrameworkCore.Entities.Base;
+using LEotA.Engine.Entities;
 
-namespace LEotA.Engine.Entities
+namespace LEotA.Engine.Web.ViewModels.StaffViewModels
 {
-    public class Staff : Identity
+    public class StaffCreateViewModel : IViewModel
     {
         public string Name { get; set; }
         public StaffRoles Role { get; set; }
@@ -10,9 +11,4 @@ namespace LEotA.Engine.Entities
         public string Email { get; set; }
         public string Text { get; set; }
     }
-
-    public enum StaffRoles
-    {
-        Director, KeyMember, Member
-    } 
 }

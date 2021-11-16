@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LEotA.Clients.EngineClient.Patrons;
 using LEotA.Models;
 using Microsoft.Extensions.DependencyInjection;
+using StaffRoles = LEotA.Engine.Entities.StaffRoles;
 
 namespace LEotA.Clients.EngineClient
 {
@@ -19,6 +20,7 @@ namespace LEotA.Clients.EngineClient
         private readonly INewsPatron? _newsPatron;
         private readonly IProjectPatron? _projectPatron;
         private readonly IPublicationPatron? _publicationPatron;
+        private readonly IStaffPatron? _staffPatron;
 
         public EngineClientManager(IServiceProvider serviceProvider)
         {
@@ -30,6 +32,7 @@ namespace LEotA.Clients.EngineClient
             _newsPatron = serviceProvider.GetService<INewsPatron>();
             _projectPatron = serviceProvider.GetService<IProjectPatron>();
             _publicationPatron = serviceProvider.GetService<IPublicationPatron>();
+            _staffPatron = serviceProvider.GetService<IStaffPatron>();
         }
         
         public CalabongaViewModel<AboutUs>? AboutUsPost(CultureBase text, byte[] FileContentRaw) =>
@@ -297,6 +300,44 @@ namespace LEotA.Clients.EngineClient
 
         public List<Publication>? PublicationGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes) => _publicationPatron?.PublicationGetPagedAsync(new CalabongaGetPagedRequestModel()
+        {
+            PageIndex = pageIndex,
+            PageSize = pageSize,
+            SortDirection = sortDirection,
+            Search = search,
+            DisabledDefaultIncludes = disabledDefaultIncludes
+        }).Result.Result.Items;
+        
+        public CalabongaViewModel<Staff>? StaffPost(CultureBase name, string embedLink, StaffRoles role, string email, CultureBase text) =>
+            _staffPatron?.StaffPostAsync(new StaffCreateModel()
+            {
+                Name = JsonSerializer.Serialize(name),
+                EmbedLink = embedLink,
+                Role = JsonSerializer.Serialize(role),
+                Email = email,
+                Text = JsonSerializer.Serialize(text),
+            }).Result;
+
+        public CalabongaViewModel<Staff>? StaffPut(Guid id, CultureBase name, string embedLink, StaffRoles role, string email, CultureBase text ,Guid newId) => 
+            _staffPatron?.StaffPutAsync(new StaffUpdateModel()
+            {
+                Id = id.ToString(),
+                Name = JsonSerializer.Serialize(name),
+                EmbedLink = embedLink,
+                Role = JsonSerializer.Serialize(role),
+                Email = email,
+                Text = JsonSerializer.Serialize(text),
+                NewId = newId.ToString()
+            }).Result;
+        
+        public CalabongaViewModel<Staff>? StaffDelete(Guid id) =>
+            _staffPatron?.StaffDeleteAsync(id.ToString()).Result;
+        
+        public CalabongaViewModel<Staff>? StaffGetById(Guid id) =>
+            _staffPatron?.StaffGetByIdAsync(id.ToString()).Result;
+
+        public List<Staff>? StaffGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
+            bool disabledDefaultIncludes) => _staffPatron?.StaffGetPagedAsync(new CalabongaGetPagedRequestModel()
         {
             PageIndex = pageIndex,
             PageSize = pageSize,

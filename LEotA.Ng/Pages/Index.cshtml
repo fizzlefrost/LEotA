@@ -1,13 +1,12 @@
 ﻿@page
 @inject CommonLocalizationService localizer
 @using LEotA.Services
-@using Microsoft.AspNetCore.Localization
-@using System.Collections
 @using System.Linq;
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var newsCount = Model.NewsGetPaged.Count();
+    var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
+    var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
 }
 
 <div class="text-center mb-5">
@@ -65,7 +64,7 @@
 
 <!-- pagination -->
 @{
-    if (Model.Pager == null)
+    if (!(newsGetPagedCount>0))
     {
         <SfSpinner Visible="true" Lable="Loading data ...">
         </SfSpinner>
@@ -74,15 +73,15 @@
     {
     <div class="album py-5 bg-light"> 
         <div class="container">
-            @for(int i=0;i<newsCount/2;i++){
+            @for(int i=0;i<newsGetPagedCount/2;i++){
                 <div class="row">
-                    @if (i + 1 == newsCount && newsCount % 2 == 1)
+                    @if (i + 1 == newsGetPagedCount && newsGetPagedCount % 2 == 1)
                     {
-                        foreach (var currentNews in Model.NewsGetPaged.GetRange(i * 2, 1))
+                        foreach (var currentNews in newsGetPaged.GetRange(i * 2, 1))
                         {
                             <div class="col-6">
                                 <div class="news-container">
-                                    <img src="images/_JPG0330.JPG">
+                                    <img src="/images/_JPG0330.JPG">
                                     <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Id">@currentNews.Name.English</a></h2>
                                 </div>
                                 <div class="row">
@@ -95,7 +94,7 @@
                         }
                     }
                     else{
-                    foreach (var currentNews in Model.NewsGetPaged.GetRange(i * 2, 2))
+                    foreach (var currentNews in newsGetPaged.GetRange(i * 2, 2))
                     {
                         <div class="col-6">
                             <div class="news-container">
@@ -171,5 +170,5 @@
 
 <div class="container-fluid">
     <i class="flag flag-ru"></i>
-    <img src="../images/IMG_4463.JPG"/>
+    <img src="/images/IMG_4463.JPG"/>
 </div>

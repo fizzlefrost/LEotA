@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Globalization;
+using System.IO;
 using System.IO.Compression;
 using System.Reflection;
 using LEotA.Resources;
@@ -16,7 +17,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Localization.Routing;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 
@@ -34,12 +37,26 @@ namespace LEotA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // var sectionApplicationSettings = Configuration.GetSection("App");
+            Uri engineUrl = new Uri(Configuration.GetSection("EngineUrl").Value ?? throw new InvalidOperationException("Invalid engine url in appsettings.json"));
+            // var builder = new ConfigurationBuilder().AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "Properties", "launchSettings.json"));
+            // var _Configuration = builder.Build();
             // services.Configure<ApplicationSettings>(sectionApplicationSettings);
             // var applicationSettings = sectionApplicationSettings.Get<ApplicationSettings>();
             
             services.AddRazorPages(options => {
-                options.Conventions.Add(new CultureTemplatePageRouteModelConvention());
+                options.Conventions.AddFolderRouteModelConvention("/", model =>
+                {
+                    foreach (var selector in model.Selectors)
+                    {
+                        selector.AttributeRouteModel = new AttributeRouteModel
+                        {
+                            Order = -1,
+                            Template = AttributeRouteModel.CombineTemplates(
+                                "{culture?}",
+                                selector.AttributeRouteModel.Template),
+                        };
+                    }
+                });
             });
             services.AddHttpClient();
             services.AddSingleton<EngineClientManager>();
@@ -56,39 +73,41 @@ namespace LEotA
             // i know i know
             services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:10001");
+                client.BaseAddress = engineUrl;
             });
             services.AddHttpClient<IAlbumPatron, AlbumPatron>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:10001");
+                client.BaseAddress = engineUrl;
             });
             // services.AddHttpClient<IEventParticipantPatron, EventParticipantPatron>(client =>
             // {
-            //     client.BaseAddress = new Uri("https://localhost:10001");
+            //     client.BaseAddress = new Uri(engineUrl);
             // });
             services.AddHttpClient<IEventPatron, EventPatron>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:10001");
+                client.BaseAddress = engineUrl;
             });
             services.AddHttpClient<IFileContentPatron, FileContentPatron>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:10001");
+                client.BaseAddress = engineUrl;
             });
             services.AddHttpClient<INewsPatron, NewsPatron>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:10001");
+                client.BaseAddress = engineUrl;
             });
             services.AddHttpClient<IPublicationPatron, PublicationPatron>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:10001");
+                client.BaseAddress = engineUrl;
             });
             services.AddHttpClient<IProjectPatron, ProjectPatron>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:10001");
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<IStaffPatron, StaffPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
             });
             
-           
-
             services.AddHttpClient();
 
             services.AddAuthentication(config =>
@@ -147,6 +166,7 @@ namespace LEotA
                 app.UseHsts();
             }
             
+            
             app.UseResponseCompression();
 
             app.UseHttpsRedirection();
@@ -155,7 +175,9 @@ namespace LEotA
             app.UseRouting();
             var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
             app.UseRequestLocalization(localizationOptions);
-
+            
+            var options = new RewriteOptions().Add(new FirstLoadRewriteRule());
+            app.UseRewriter(options);
 
             app.UseAuthentication();
             app.UseAuthorization();

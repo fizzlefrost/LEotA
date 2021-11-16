@@ -31,12 +31,12 @@ namespace LEotA.Engine.Web.Controllers
         [Route("[action]")]
         [HttpPost]
 #pragma warning disable 1998
-        public async Task<IActionResult> Upload(IFormFile file, Guid id, string mimeType)
+        public async Task<IActionResult> Upload(IFormFile file, string mimeType, Guid masterId, string? author)
 #pragma warning restore 1998
         {
             try
             {
-                var uploadedFile = await FileContentManager.Upload(file, id, mimeType);
+                var uploadedFile = await FileContentManager.Upload(file, mimeType, masterId, author);
                 return Ok(uploadedFile);
             }
             catch (Exception e)

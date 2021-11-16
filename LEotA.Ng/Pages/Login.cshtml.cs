@@ -21,16 +21,5 @@ namespace LEotA.Pages
         {
             return Redirect("Index");
         }
-        
-        // public async Task OnPost(string email, string password, string passwordConfirm, string _RequestVerificationToken)
-        // {
-        //     // var ordersClient = _httpClientFactory.CreateClient();
-        //     //
-        //     // var response = await ordersClient.GetAsync("localhost:10001");
-        //     //
-        //     // var message = response.Content.ReadAsStreamAsync();
-        //     //
-        //     // ViewData["Message"] = message;
-        // }
     }
 }

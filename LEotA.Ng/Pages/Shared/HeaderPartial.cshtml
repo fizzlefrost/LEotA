@@ -7,7 +7,7 @@
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-1" id="nav-bg">
     <div class="container">
         <div>
-            <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="images/SecondLogo.png"></a>
+            <a class="navbar-brand" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img src="/images/SecondLogo.png"></a>
         </div>
         <div>
             @* @{ *@
@@ -25,11 +25,11 @@
                 
                 @if (Thread.CurrentThread.CurrentUICulture.Name == "ru")
                 {
-                    <img src="images/ru.svg" style="max-width: 30px;">
+                    <img src="/images/ru.svg" style="max-width: 30px;">
                 }
                 else
                 {
-                    <img src="images/us.svg" style="max-width: 30px;">
+                    <img src="/images/us.svg" style="max-width: 30px;">
                 }
                 <vc:culture-switcher/>
             </div>
@@ -63,7 +63,7 @@
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/AboutUs">@localizer.Get("AboutUs")</a>
+                        <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/AboutUs">@localizer.Get("AboutUs")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">

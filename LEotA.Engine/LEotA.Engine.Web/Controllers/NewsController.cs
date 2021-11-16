@@ -24,7 +24,7 @@ namespace LEotA.Engine.Web.Controllers
         
         [Route("[action]")]
         [HttpGet]
-        public async Task<IActionResult> TotalPages(int pageSize)
+        public async Task<IActionResult> TotalPages([FromQuery] int pageSize)
         {
             try
             {

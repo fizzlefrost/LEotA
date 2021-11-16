@@ -26,6 +26,7 @@ namespace LEotA.Engine.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Publication> Publications { get; set; }
         public DbSet<FileContent> FileContents { get; set; }
+        public DbSet<Staff> Staff { get; set; }
         
 
         #endregion

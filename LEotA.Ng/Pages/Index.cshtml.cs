@@ -18,7 +18,6 @@ namespace LEotA.Pages
         public int TotalPages = 1;
         public int PageSize = 4;
         
-        public List<Models.News>? NewsGetPaged { get; set; }
         public Pager Pager { get; set; }
         public IndexModel(EngineClientManager engineClientManager)
         {
@@ -42,7 +41,9 @@ namespace LEotA.Pages
                         Pager = new Pager(TotalPages, p);
 
                         // assign the current page of items to the Items property
-                        NewsGetPaged = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result;
+                        var newsGetPaged = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result;
+                        ViewData.Add("newsGetPaged", newsGetPaged);
+                        ViewData.Add("newsGetPagedCount", newsGetPaged!.Count());
                         break;
 
                     // ViewData.Add("id",Id.ToList());
@@ -105,6 +106,7 @@ namespace LEotA.Pages
             }
             catch (Exception e)
             {
+                Redirect("/ErrorPage");
                 // do smth
             }
             

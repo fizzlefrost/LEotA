@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using FileContent = LEotA.Engine.Entities.FileContent;
 
 namespace LEotA.Pages
 {
@@ -15,7 +16,7 @@ namespace LEotA.Pages
     {
         private readonly EngineClientManager _engineClientManager;
         [BindProperty(SupportsGet = true)]
-        public string SearchYear { get; set; }
+        public int SearchYear { get; set; }
         [BindProperty(SupportsGet = true)]
         public string SearchName { get; set; }
         
@@ -26,40 +27,41 @@ namespace LEotA.Pages
 
         public void OnGet()
         {
+            var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
             ViewData.Clear();
             var publicationsListGetPaged= _engineClientManager.PublicationGetPaged(null, 10, null, null, false);
             var publicationsList = new List<Publication>();
-            if (!string.IsNullOrEmpty(SearchYear)){
+            if (SearchYear != 0){
                 if (!string.IsNullOrEmpty(SearchName))
                 {
-                    publicationsList = publicationsListGetPaged;
-                }
-                else
-                {
-                    if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                    if (culture == "ru")
                     {
-                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.Russian.Contains(SearchYear))
-                            .ToList();
+                        publicationsList = publicationsListGetPaged
+                            .Where(s => s.Name.Russian.Contains(SearchName)).Where(s => s.Time.Year.Equals(SearchYear)).ToList();
                     }
                     else
                     {
-                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.English.Contains(SearchYear))
-                            .ToList();
+                        publicationsList = publicationsListGetPaged
+                            .Where(s => s.Name.English.Contains(SearchName)).Where(s => s.Time.Year.Equals(SearchYear)).ToList();
                     }
+                }
+                else
+                {
+                    publicationsList = publicationsListGetPaged.Where(s => s.Time.Year.Equals(SearchYear)).ToList();
                 }
             }
             else 
             {
                 if (!string.IsNullOrEmpty(SearchName))
                 {
-                    if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "ru")
+                    if (culture == "ru")
                     {
-                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.Russian.Contains(SearchYear))
+                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.Russian.Contains(SearchName))
                             .ToList();
                     }
                     else
                     {
-                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.English.Contains(SearchYear))
+                        publicationsList = publicationsListGetPaged!.Where(s => s.Text.English.Contains(SearchName))
                             .ToList();
                     }
                 }

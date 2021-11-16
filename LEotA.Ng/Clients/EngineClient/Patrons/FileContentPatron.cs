@@ -115,7 +115,26 @@ namespace LEotA.Clients.EngineClient.Patrons
             {
                 try
                 {
-                    var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(fileContentGetModel.Author);
+                    var culturedAuthor = new CultureBase()
+                    {
+                        English = "System",
+                        Russian = "Система"
+                    };
+                    if (fileContentGetModel.Author != null)
+                    {
+                        try
+                        {
+                            culturedAuthor = JsonSerializer.Deserialize<CultureBase>(fileContentGetModel.Author);
+                        }
+                        catch (Exception e)
+                        {
+                            culturedAuthor = new CultureBase()
+                            {
+                                English = "Invalid author",
+                                Russian = "Некорректно заполненное поле 'Автор'"
+                            };
+                        }
+                    }
                     ret.Add(new FileContent()
                     {
                         Id = new Guid(fileContentGetModel.Id),
