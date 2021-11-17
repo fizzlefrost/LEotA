@@ -13,11 +13,11 @@ namespace LEotA.Clients.EngineClient.Patrons
 {
     public class AboutUsPatron : IAboutUsPatron
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
-        public AboutUsPatron(HttpClient httpClient)
+        public AboutUsPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
         
         public async Task<CalabongaViewModel<AboutUs>> AboutUsGetViewModelForCreationAsync()

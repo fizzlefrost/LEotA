@@ -15,9 +15,9 @@ namespace LEotA.Clients.EngineClient.Patrons
     {
         private HttpClient _httpClient;
 
-        public EventPatron(HttpClient httpClient)
+        public EventPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
         
         public async Task<CalabongaViewModel<Event>> EventPostAsync(EventCreateModel EventCreateModel)

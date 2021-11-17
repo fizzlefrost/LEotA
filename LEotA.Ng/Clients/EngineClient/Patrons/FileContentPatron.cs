@@ -16,9 +16,9 @@ namespace LEotA.Clients.EngineClient.Patrons
     {
         private HttpClient _httpClient;
 
-        public FileContentPatron(HttpClient httpClient)
+        public FileContentPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
         
         public async Task<CalabongaViewModel<FileContent>> FileContentPostAsync(FileContentCreateModel FileContentCreateModel)

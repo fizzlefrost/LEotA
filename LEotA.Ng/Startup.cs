@@ -9,7 +9,9 @@ using Microsoft.Extensions.Hosting;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
+using System.Net.Http;
 using System.Reflection;
+using Google.Apis.Drive.v2.Data;
 using LEotA.Resources;
 using LEotA.RouteModelConventions;
 using LEotA.Services;
@@ -38,10 +40,6 @@ namespace LEotA
         public void ConfigureServices(IServiceCollection services)
         {
             Uri engineUrl = new Uri(Configuration.GetSection("EngineUrl").Value ?? throw new InvalidOperationException("Invalid engine url in appsettings.json"));
-            // var builder = new ConfigurationBuilder().AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "Properties", "launchSettings.json"));
-            // var _Configuration = builder.Build();
-            // services.Configure<ApplicationSettings>(sectionApplicationSettings);
-            // var applicationSettings = sectionApplicationSettings.Get<ApplicationSettings>();
             
             services.AddRazorPages(options => {
                 options.Conventions.AddFolderRouteModelConvention("/", model =>
@@ -59,7 +57,18 @@ namespace LEotA
                 });
             });
             services.AddHttpClient();
-            services.AddSingleton<EngineClientManager>();
+
+            services.AddTransient<IAboutUsPatron, AboutUsPatron>();
+            services.AddTransient<IAlbumPatron, AlbumPatron>();
+            services.AddTransient<IEventParticipantPatron, EventParticipantPatron>();
+            services.AddTransient<IEventPatron, EventPatron>();
+            services.AddTransient<IFileContentPatron, FileContentPatron>();
+            services.AddTransient<INewsPatron, NewsPatron>();
+            services.AddTransient<IProjectPatron, ProjectPatron>();
+            services.AddTransient<IPublicationPatron, PublicationPatron>();
+            services.AddTransient<IStaffPatron, StaffPatron>();
+            
+            services.AddScoped<EngineClientManager>();
             services.AddSingleton<EngineAuthenticationManager>();
             services.AddSingleton<CommonLocalizationService>();
             
@@ -71,44 +80,57 @@ namespace LEotA
             });
             
             // i know i know
-            services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
-            services.AddHttpClient<IAlbumPatron, AlbumPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
+            // services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
+            // services.AddHttpClient<IAlbumPatron, AlbumPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
             // services.AddHttpClient<IEventParticipantPatron, EventParticipantPatron>(client =>
             // {
             //     client.BaseAddress = new Uri(engineUrl);
             // });
-            services.AddHttpClient<IEventPatron, EventPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
-            services.AddHttpClient<IFileContentPatron, FileContentPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
-            services.AddHttpClient<INewsPatron, NewsPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
-            services.AddHttpClient<IPublicationPatron, PublicationPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
-            services.AddHttpClient<IProjectPatron, ProjectPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
-            services.AddHttpClient<IStaffPatron, StaffPatron>(client =>
-            {
-                client.BaseAddress = engineUrl;
-            });
+            // services.AddHttpClient<IEventPatron, EventPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
+            // services.AddHttpClient<IFileContentPatron, FileContentPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
+            // services.AddHttpClient<INewsPatron, NewsPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
+            // services.AddHttpClient<IPublicationPatron, PublicationPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
+            // services.AddHttpClient<IProjectPatron, ProjectPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
+            // services.AddHttpClient<IStaffPatron, StaffPatron>(client =>
+            // {
+            //     client.BaseAddress = engineUrl;
+            // });
             
-            services.AddHttpClient();
+            services.AddHttpClient("Engine", config =>
+            {
+                config.BaseAddress = new Uri(Configuration.GetSection("EngineUrl").Value ??
+                                             throw new InvalidOperationException(
+                                                 "Invalid engine url in appsettings.json"));
+            }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+            {
+                ClientCertificateOptions = ClientCertificateOption.Manual,
+                ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    }
+            });
 
             services.AddAuthentication(config =>
                 {
@@ -118,7 +140,7 @@ namespace LEotA
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, config =>
                 {
-                    config.Authority = "https://localhost:10001";
+                    config.Authority = "https://10.241.135.117:10001";
                     config.ClientId = "leota_client_id";
                     config.ClientSecret = "leota_client_secret";
                     config.SaveTokens = true;

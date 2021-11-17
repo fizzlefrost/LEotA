@@ -12,24 +12,26 @@ namespace LEotA.Clients.EngineClient
 {
     public class EngineClientManager
     {
+        private readonly INewsPatron _newsPatron;
         private readonly IAboutUsPatron? _aboutUsPatron;
         private readonly IAlbumPatron? _albumPatron;
         private readonly IEventPatron? _eventPatron;
         private readonly IEventParticipantPatron? _eventParticipantPatron;
         private readonly IFileContentPatron? _FileContentPatron;
-        private readonly INewsPatron? _newsPatron;
+        // private readonly INewsPatron? _newsPatron;
         private readonly IProjectPatron? _projectPatron;
         private readonly IPublicationPatron? _publicationPatron;
         private readonly IStaffPatron? _staffPatron;
 
-        public EngineClientManager(IServiceProvider serviceProvider)
+        public EngineClientManager(IServiceProvider serviceProvider, INewsPatron newsPatron)
         {
+            _newsPatron = newsPatron;
             _aboutUsPatron = serviceProvider.GetService<IAboutUsPatron>();
             _albumPatron = serviceProvider.GetService<IAlbumPatron>();
             _eventPatron = serviceProvider.GetService<IEventPatron>();
             _eventParticipantPatron = serviceProvider.GetService<IEventParticipantPatron>();
             _FileContentPatron = serviceProvider.GetService<IFileContentPatron>();
-            _newsPatron = serviceProvider.GetService<INewsPatron>();
+            // _newsPatron = serviceProvider.GetService<INewsPatron>();
             _projectPatron = serviceProvider.GetService<IProjectPatron>();
             _publicationPatron = serviceProvider.GetService<IPublicationPatron>();
             _staffPatron = serviceProvider.GetService<IStaffPatron>();

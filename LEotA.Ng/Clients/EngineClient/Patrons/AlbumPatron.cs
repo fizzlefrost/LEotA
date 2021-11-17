@@ -15,9 +15,9 @@ namespace LEotA.Clients.EngineClient.Patrons
     {
         private HttpClient _httpClient;
 
-        public AlbumPatron(HttpClient httpClient)
+        public AlbumPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
         
         public async Task<CalabongaViewModel<Album>> AlbumPostAsync(AlbumCreateModel AlbumCreateModel)

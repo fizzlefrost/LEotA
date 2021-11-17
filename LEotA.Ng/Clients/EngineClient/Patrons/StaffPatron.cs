@@ -16,9 +16,9 @@ namespace LEotA.Clients.EngineClient.Patrons
     {
         private HttpClient _httpClient;
 
-        public StaffPatron(HttpClient httpClient)
+        public StaffPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
         
         public async Task<CalabongaViewModel<Staff>> StaffPostAsync(StaffCreateModel staffCreateModel)

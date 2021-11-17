@@ -7,7 +7,7 @@
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
-            "applicationUrl": "https://localhost:10001;http://localhost:10000"
+            "applicationUrl": "https://10.241.135.117:10001;http://10.241.135.117:10000"
         },
         "Kestrel_prod": {
             "commandName": "Project",
