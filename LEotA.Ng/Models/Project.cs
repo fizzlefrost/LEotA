@@ -11,8 +11,9 @@ namespace LEotA.Models
         public CultureBase Text { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
+        // TODO Name   
     }
-    
+
     public class ProjectGetModel
     {
         [JsonPropertyName("id")]
