@@ -10,6 +10,16 @@
     <DocumentationFile>C:\Users\user\Desktop\repos\he\LEotA\LEotA.Engine\LEotA.Engine.Web\LEotA.Engine.Web.xml</DocumentationFile>
   </PropertyGroup>
 
+  <!-- Custom Property Group added to add the Environment name during publish
+ The EnvironmentName property is used during the publish for the Environment variable in web.config
+ -->
+<!--  <PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug'">-->
+<!--    <EnvironmentName>Development</EnvironmentName>-->
+<!--  </PropertyGroup>-->
+<!--  <PropertyGroup Condition=" '$(Configuration)' != '' AND '$(Configuration)' != 'Debug' ">-->
+<!--    <EnvironmentName>'$(Configuration)'</EnvironmentName>-->
+<!--  </PropertyGroup>-->
+  
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />

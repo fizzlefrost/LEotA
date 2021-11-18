@@ -23,6 +23,7 @@ namespace LEotA.Engine.Data
         DbSet<EventParticipant> EventParticipants { get; set; }
         DbSet<Project> Projects { get; set; }
         DbSet<Publication> Publications { get; set; }
+        DbSet<Staff> Staff { get; set; }
         DatabaseFacade Database { get; }
         ChangeTracker ChangeTracker { get; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;

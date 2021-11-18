@@ -13,11 +13,11 @@ namespace LEotA.Clients.EngineClient.Patrons
 {
     public class NewsPatron : INewsPatron
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
-        public NewsPatron(HttpClient httpClient)
+        public NewsPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
 
         public async Task<CalabongaViewModel<News>> NewsPostAsync(NewsCreateModel NewsCreateModel)
@@ -70,7 +70,12 @@ namespace LEotA.Clients.EngineClient.Patrons
 
         public async Task<int> NewsGetTotalPages(int? pageSize)
         {
-            var httpResponse = await _httpClient.GetAsync($"/api/news/total-pages");
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/news/total-pages");
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["PageSize"] = pageSize.ToString();
+            builder.Query = query.ToString() ?? string.Empty;
+            string url = builder.ToString();
+            var httpResponse = await _httpClient.GetAsync(url);
             httpResponse.EnsureSuccessStatusCode();
             var result = await httpResponse.Content.ReadAsStringAsync();
             var report = JsonSerializer.Deserialize<int>(result);
@@ -99,7 +104,16 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
             var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
-            var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Author!);
+            var culturedAuthor = new CultureBase();
+            try
+            {
+                culturedAuthor = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Author);
+            }
+            catch
+            {
+                culturedAuthor.English = "System";
+                culturedAuthor.Russian = "Система";
+            }
             var culturedDescription = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Description);
             var returnModel = new CalabongaViewModel<News>()
             {
@@ -148,7 +162,8 @@ namespace LEotA.Clients.EngineClient.Patrons
                 {
                     var culturedText = JsonSerializer.Deserialize<CultureBase>(News.Text);
                     var culturedName = JsonSerializer.Deserialize<CultureBase>(News.Name);
-                    var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(News.Author);
+                    CultureBase? culturedAuthor = null;
+                    if (News.Author!=null) culturedAuthor = JsonSerializer.Deserialize<CultureBase>(News.Author ?? string.Empty);
                     var culturedDescription = JsonSerializer.Deserialize<CultureBase>(News.Description);
                     returnModel.Result.Items.Add(new News()
                     {

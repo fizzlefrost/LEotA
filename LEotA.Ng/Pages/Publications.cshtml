@@ -9,45 +9,38 @@
 @{
     ViewData["Title"] = "SUS!";
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
+	var publications = (List<Publication>) ViewData["publication"];
 }
-<div class="container border border-2">
+<div class="container mb-5">
 	<form method="get">
 		<div class="row">
 			<div class="col input-group">
 				<input class="form-control" asp-for="SearchYear">
 				<div class="input-group-append">
-					<button class="btn btn-primary" type="submit">Search by Year</button>
+					<button class="btn btn-secondary" type="submit">Search by Year</button>
 				</div>
 			</div>
 			<div class="col input-group">
 				<input class="form-control" asp-for="SearchName">
 				<div class="input-group-append">
-					<button class="btn btn-primary" type="submit">Search by Name</button>
+					<button class="btn btn-secondary" type="submit">Search by Name</button>
 				</div>
 			</div>
 		</div>
 	</form>
-	
-	@foreach (var _public in (IEnumerable<Publication>) ViewData["publication"])
-	{
-		<div class="row" style="border:none; background:white; min-height:210px; max-height:350px;">
-			<div class="col mb-2">
-				<h3 class="align-center">Event Name</h3>
-				<p>
-					@if (culture == "en")
-					{
-						@_public.Text.English
-					}
-					else
-					{
-						@_public.Text.Russian
-					}
-				</p>
-				<a target="_blank" class="btn btn-primary btn-dark align-center" style="display: block; margin: 0 auto;" href="@_public.EmbedLink">Записаться</a>
-			</div>
-			<div class="col-xs-6 img-wrap mb-2">
-				<img src="DROL4632.JPG" style="margin-left:4px; margin-top: 4px;"/>
-			</div>
-		</div>
-	}
 </div>
+
+@foreach (var _public in publications)
+{
+	<div class="list-group mt-3">
+		<a target="_blank" rel="noopener noreferrer" href="@_public.EmbedLink" class="list-group-item list-group-item-action">
+			<div class="d-flex w-100 justify-content-between">
+				<h5 class="mb-1">@_public.Name.Russian</h5>
+				<small>@_public.Time.Day / @_public.Time.Month / @_public.Time.Year </small>
+			</div>
+			<div class="d-flex flex-row-reverse">
+				<small>@_public.Text.Russian </small>
+			</div>
+		</a>
+	</div>
+}

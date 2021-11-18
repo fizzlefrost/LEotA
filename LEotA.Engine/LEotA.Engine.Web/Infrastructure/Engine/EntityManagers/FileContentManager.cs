@@ -31,7 +31,7 @@ namespace LEotA.Engine.Web.Infrastructure.Engine.EntityManagers
 
         protected override IIdentity? GetIdentity() => null;
 
-        public static async Task<FileContent> Upload(IFormFile file, Guid masterId, string mimeType)
+        public static async Task<FileContent> Upload(IFormFile file, string mimeType, Guid masterId, string? author)
         {
             var repository = _unitOfWork.GetRepository<FileContent>();
             FileContent fileContent = new FileContent();
@@ -45,7 +45,8 @@ namespace LEotA.Engine.Web.Infrastructure.Engine.EntityManagers
                     Id = Guid.NewGuid(),
                     Content = fileBytes,
                     MasterId = masterId,
-                    MimeType = mimeType
+                    MimeType = mimeType,
+                    Author = author
                 };
                 await repository.InsertAsync(fileContent);
                 _unitOfWork.SaveChanges();

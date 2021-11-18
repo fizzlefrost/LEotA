@@ -15,9 +15,9 @@ namespace LEotA.Clients.EngineClient.Patrons
     {
         private HttpClient _httpClient;
 
-        public ProjectPatron(HttpClient httpClient)
+        public ProjectPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
 
         public async Task<CalabongaViewModel<Project>> ProjectPostAsync(ProjectCreateModel ProjectCreateModel)

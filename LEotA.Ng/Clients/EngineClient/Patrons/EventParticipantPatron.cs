@@ -8,19 +8,16 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using LEotA.Models;
-using LEotA.Settings;
 
 namespace LEotA.Clients.EngineClient.Patrons
 {
     public class EventParticipantPatron : IEventParticipantPatron
     {
         private HttpClient _httpClient;
-        private readonly ApplicationSettings _applicationSettings;
 
-        public EventParticipantPatron(HttpClient httpClient, ApplicationSettings applicationSettings)
+        public EventParticipantPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
-            _applicationSettings = applicationSettings;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
         
         public async Task<CalabongaViewModel<EventParticipant>> EventParticipantPostAsync(EventParticipantCreateModel EventParticipantCreateModel)

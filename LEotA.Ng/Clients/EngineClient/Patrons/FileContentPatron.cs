@@ -16,9 +16,9 @@ namespace LEotA.Clients.EngineClient.Patrons
     {
         private HttpClient _httpClient;
 
-        public FileContentPatron(HttpClient httpClient)
+        public FileContentPatron(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
         
         public async Task<CalabongaViewModel<FileContent>> FileContentPostAsync(FileContentCreateModel FileContentCreateModel)
@@ -115,7 +115,26 @@ namespace LEotA.Clients.EngineClient.Patrons
             {
                 try
                 {
-                    var culturedAuthor = JsonSerializer.Deserialize<CultureBase>(fileContentGetModel.Author);
+                    var culturedAuthor = new CultureBase()
+                    {
+                        English = "System",
+                        Russian = "Система"
+                    };
+                    if (fileContentGetModel.Author != null)
+                    {
+                        try
+                        {
+                            culturedAuthor = JsonSerializer.Deserialize<CultureBase>(fileContentGetModel.Author);
+                        }
+                        catch (Exception e)
+                        {
+                            culturedAuthor = new CultureBase()
+                            {
+                                English = "Invalid author",
+                                Russian = "Некорректно заполненное поле 'Автор'"
+                            };
+                        }
+                    }
                     ret.Add(new FileContent()
                     {
                         Id = new Guid(fileContentGetModel.Id),
