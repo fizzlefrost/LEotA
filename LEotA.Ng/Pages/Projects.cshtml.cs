@@ -19,11 +19,8 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            ViewData.Add("TestProject", new Project()
-            {
-                EmbedLink = "ykt.ru",
-                
-            });
+            var _projectList = _engineClientManager.ProjectGetPaged(null, 10, null, null, false);
+            ViewData.Add("projects",_projectList);
         }
     }
 }

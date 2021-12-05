@@ -12,7 +12,7 @@ namespace LEotA.Models
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
     }
-    
+
     public class ProjectGetModel
     {
         [JsonPropertyName("id")]

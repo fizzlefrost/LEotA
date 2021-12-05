@@ -1,14 +1,21 @@
 ﻿@page "/Events"
-@using LEotA.Services
 @using Microsoft.AspNetCore.Localization
-@using System.Collections
 @model LEotA.Pages.EventsModel
 @{
 	ViewBag.Title = "Events";
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
 	bool isFirst = true;
 }
-
+<form method="post" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed">
+	<div class="row">
+		<div class="col input-group">
+			<input class="checkbox" asp-for="ActiveOnly">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit">Show only active events</button>
+			</div>
+		</div>
+	</div>
+</form>
 <div class="container">
 	<div class="container mb-5">
 		@foreach (var _event in (IEnumerable<Event>) ViewData["event"])
