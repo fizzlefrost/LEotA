@@ -10,13 +10,9 @@ namespace LEotA.Pages
     [Authorize]
     public class LoginModel : PageModel
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        public LoginModel(IHttpClientFactory httpClientFactory)
+        public LoginModel()
         {
-            _httpClientFactory = httpClientFactory;
         }
-        
         public async Task<IActionResult> OnGet()
         {
             return Redirect("Index");

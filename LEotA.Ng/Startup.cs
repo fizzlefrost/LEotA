@@ -178,6 +178,8 @@ namespace LEotA
         {
             if (env.IsDevelopment())
             {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback += 
+                    (sender, certificate, chain, sslPolicyErrors) => true;
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }

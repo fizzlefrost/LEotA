@@ -24,6 +24,8 @@ namespace LEotA.Engine.Web.AppStart.Configures
         {
             if (env.IsDevelopment())
             {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback += 
+                    (sender, certificate, chain, sslPolicyErrors) => true;
                 mapper.AssertConfigurationIsValid();
                 app.UseDeveloperExceptionPage();
             }
