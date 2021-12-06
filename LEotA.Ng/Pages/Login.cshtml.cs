@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +9,11 @@ namespace LEotA.Pages
     [Authorize]
     public class LoginModel : PageModel
     {
-        public LoginModel()
+        public async Task<IActionResult> OnGet(string returnUrl)
         {
-        }
-        public async Task<IActionResult> OnGet()
-        {
-            return Redirect("Index");
+            if (returnUrl == null)
+                returnUrl = "Index";
+            return Redirect(returnUrl);
         }
     }
 }

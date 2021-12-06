@@ -27,7 +27,7 @@ namespace LEotA.Clients.EngineClient
             };
             using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
-            using var response = await _httpClient.PostAsync($"/api/account/register", stringContent);
+            using var response = await _httpClient.PostAsync($"/account/register", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = new CalabongaViewModel<EngineRegisteredViewModel>();

@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Services;
+﻿using System;
+using IdentityServer4.Services;
 using LEotA.Engine.Data;
 using LEotA.Engine.Web.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -29,17 +30,17 @@ namespace LEotA.Engine.Web.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Login(string returnUrl) => View();
+        public async Task<IActionResult> Login() => View();
 
         [HttpPost("[action]")]
 
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("", "Please. Validate your credentials and try again.");
-                return View(model);
-            }
+            // if (!ModelState.IsValid)
+            // {
+            //     ModelState.AddModelError("", "Please. Validate your credentials and try again.");
+            //     return View(model);
+            // }
 
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user == null)
@@ -51,11 +52,11 @@ namespace LEotA.Engine.Web.Controllers
             var signResult = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
             if (!signResult.Succeeded)
             {
-                ModelState.AddModelError("", "Something went wrong");
+                ModelState.AddModelError("", "Incorrect password");
                 return View(model);
             }
-
-            return Redirect(model.ReturnUrl);
+            
+            return Redirect("https://localhost:5003/en/Index");
         }
 
         [HttpGet("[action]")]

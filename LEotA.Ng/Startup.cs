@@ -11,6 +11,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Reflection;
+using System.Security.Authentication;
 using Google.Apis.Drive.v2.Data;
 using LEotA.Resources;
 using LEotA.RouteModelConventions;
@@ -24,6 +25,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Logging;
 
 namespace LEotA
 {
@@ -124,12 +126,15 @@ namespace LEotA
                                                  "Invalid engine url in appsettings.json"));
             }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
-                ClientCertificateOptions = ClientCertificateOption.Manual,
-                ServerCertificateCustomValidationCallback =
-                    (httpRequestMessage, cert, cetChain, policyErrors) =>
-                    {
-                        return true;
-                    }
+                // ClientCertificateOptions = ClientCertificateOption.Manual,
+                // ServerCertificateCustomValidationCallback =
+                //     (httpRequestMessage, cert, cetChain, policyErrors) =>
+                //     {
+                //         return true;
+                //     }
+                AllowAutoRedirect = false,
+                ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true,
+                SslProtocols = SslProtocols.Tls
             });
 
             services.AddAuthentication(config =>
@@ -140,7 +145,7 @@ namespace LEotA
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, config =>
                 {
-                    config.Authority = "https://10.241.135.117:10001";
+                    config.Authority = "https://localhost:10001";
                     config.ClientId = "leota_client_id";
                     config.ClientSecret = "leota_client_secret";
                     config.SaveTokens = true;
@@ -169,8 +174,6 @@ namespace LEotA
                 options.LowercaseUrls = true;
             });
             services.AddHttpContextAccessor();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

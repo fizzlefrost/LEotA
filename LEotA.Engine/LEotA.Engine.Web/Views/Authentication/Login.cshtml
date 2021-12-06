@@ -1,32 +1,5 @@
 ﻿@model LEotA.Engine.Web.ViewModels.AccountViewModels.LoginViewModel
 
-@* <div class="row"> *@
-@* *@
-@*     <div class="col-md-6 offset-md-3"> *@
-@* *@
-@*         <h1>Enter zone</h1> *@
-@* *@
-@*         <form asp-action="Login" method="post"> *@
-@* *@
-@*             <input hidden asp-for="ReturnUrl" /> *@
-@* *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="UserName"></label> *@
-@*                 <input class="form-control" type="text" asp-for="UserName" /> *@
-@*             </div> *@
-@* *@
-@*             <div class="form-group"> *@
-@*                 <label asp-for="Password"></label> *@
-@*                 <input class="form-control" type="password" asp-for="Password" /> *@
-@*             </div> *@
-@*             <p> *@
-@*                 <button class="btn btn-primary" type="submit">Log in</button> *@
-@*             </p> *@
-@* *@
-@*         </form> *@
-@*     </div> *@
-@* </div> *@
-
 <div class="container-fluid ps-md-0">
     <div class="row g-0">
         <div class="col-md-6 ">
@@ -44,13 +17,13 @@
                             <h3 class="mb-4" style="font-weight: 300;">Welcome back!</h3>
 
                             <!-- Sign In Form -->
-                            <form>
+                            <form method="POST">
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" asp-for="UserName">
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" asp-for="Password">
                                     <label for="floatingPassword">Password</label>
                                 </div>
 
