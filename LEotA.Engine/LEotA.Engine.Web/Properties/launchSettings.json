@@ -16,7 +16,7 @@
             "environmentVariables   ": {
                 "ASPNETCORE_ENVIRONMENT": "Production"
             },
-            "applicationUrl": "https://10.241.135.117:10001;http://10.241.135.117:10000"
+            "applicationUrl": "https://localhost:10001;http://localhost:10000"
         }
     }
 }
