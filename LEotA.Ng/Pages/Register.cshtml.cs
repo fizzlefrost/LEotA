@@ -29,12 +29,14 @@ namespace LEotA.Pages
         
         public async Task<IActionResult> OnGet()
         {
-            return Redirect("Index");
+            return Page();
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");  
+            returnUrl = returnUrl ?? Url.Content("~/");
+            if (Input.Password != Input.ConfirmPassword)
+                return Page();
             if (ModelState.IsValid)  
             {  
                 var user = new EngineRegisterModel()
@@ -43,15 +45,16 @@ namespace LEotA.Pages
                     LastName = Input.LastName,
                     PatronomicName = Input.PatronomicName,
                     EmbedLink = Input.EmbedLink,
-                    Email = Input.Email
+                    Email = Input.Email,
+                    Password = Input.Password,
+                    ConfirmPassword = Input.ConfirmPassword
                 };  
-                var result = await _engineAuthentication.RegisterAsync(user, Input.Password);
-                foreach (var error in result.Logs)  
-                {  
+                var result = await _engineAuthentication.RegisterAsync(user);
+                foreach (var error in result.Logs)
+                {
                     ModelState.AddModelError(string.Empty, error);  
-                }  
-            }  
-  
+                }
+            }
             // If we got this far, something failed, redisplay form  
             return Page();  
         }
@@ -82,17 +85,18 @@ namespace LEotA.Pages
         [JsonPropertyName("email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        
+
         [Required]
         [JsonPropertyName("password")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]  
-        [DataType(DataType.Password)]  
+        [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
-        
-        [DataType(DataType.Password)]  
-        [Display(Name = "Confirm password")]  
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]  
+
+        [Required]
+        [DataType(DataType.Password)]
+        [JsonPropertyName("confirmPassword")]
+        [Display(Name = "Confirm password")]
         public string ConfirmPassword { get; set; }
     }
 }

@@ -192,22 +192,23 @@ namespace LEotA
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
-            
+
             app.UseResponseCompression();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
             var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
             app.UseRequestLocalization(localizationOptions);
             
             var options = new RewriteOptions().Add(new FirstLoadRewriteRule());
             app.UseRewriter(options);
-
-            app.UseAuthentication();
-            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

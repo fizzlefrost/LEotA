@@ -12,22 +12,17 @@ namespace LEotA.Clients.EngineClient
     {
         private readonly HttpClient _httpClient;
 
-        public EngineAuthenticationManager(HttpClient _httpClient)
+        public EngineAuthenticationManager(IHttpClientFactory httpClientFactory)
         {
-            this._httpClient = _httpClient;
+            _httpClient = httpClientFactory.CreateClient("Engine");
         }
 
 
-        public async Task<CalabongaViewModel<EngineRegisteredViewModel>> RegisterAsync(EngineRegisterModel registerViewModel, string password)
+        public async Task<CalabongaViewModel<EngineRegisteredViewModel>> RegisterAsync(EngineRegisterModel registerViewModel)
         {
-            var request = new RegisterRequestTestModel()
-            {
-                RegisterModel = registerViewModel,
-                Password = password
-            };
-            using var stringContent = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8,
+            using var stringContent = new StringContent(JsonSerializer.Serialize(registerViewModel), Encoding.UTF8,
                 MediaTypeNames.Application.Json);
-            using var response = await _httpClient.PostAsync($"/account/register", stringContent);
+            using var response = await _httpClient.PostAsync($"/Account/Register", stringContent);
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Неожиданный ответ от EngineService {response.StatusCode}.{Environment.NewLine}{json}");
             var report = new CalabongaViewModel<EngineRegisteredViewModel>();
@@ -41,11 +36,5 @@ namespace LEotA.Clients.EngineClient
             }
             return report;
         }
-    }
-
-    public class RegisterRequestTestModel
-    {
-        public EngineRegisterModel RegisterModel { get; set; }
-        public string Password { get; set; }
     }
 }

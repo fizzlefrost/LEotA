@@ -36,12 +36,6 @@ namespace LEotA.Engine.Web.Controllers
 
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            // if (!ModelState.IsValid)
-            // {
-            //     ModelState.AddModelError("", "Please. Validate your credentials and try again.");
-            //     return View(model);
-            // }
-
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user == null)
             {
@@ -56,7 +50,7 @@ namespace LEotA.Engine.Web.Controllers
                 return View(model);
             }
             
-            return Redirect("https://localhost:5003/en/Index");
+            return Redirect("https://localhost:5003/en/Login");
         }
 
         [HttpGet("[action]")]

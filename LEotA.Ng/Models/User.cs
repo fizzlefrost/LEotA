@@ -67,7 +67,9 @@ namespace LEotA.Models
         [Display(Name = "Пароль")]
         public string Password { get; set; }
         
+        [Required]
         [DataType(DataType.Password)]  
+        [JsonPropertyName("confirmPassword")]
         [Display(Name = "Confirm password")]  
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]  
         public string ConfirmPassword { get; set; }
@@ -89,6 +91,12 @@ namespace LEotA.Models
         
         [JsonPropertyName("email")]
         public string Email { get; set; }
+        
+        [JsonPropertyName("password")]
+        public string Password { get; set; }
+        
+        [JsonPropertyName("confirmPassword")]
+        public string ConfirmPassword { get; set; }
     }
     
 

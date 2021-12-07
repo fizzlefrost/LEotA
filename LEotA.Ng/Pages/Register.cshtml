@@ -1,4 +1,4 @@
-﻿@page "/Register"
+﻿@page
 @model LEotA.Pages.RegisterModel
 
 @{
@@ -30,11 +30,11 @@
     </div>
     <div>
         @Html.LabelFor(m => m.Input.Password)
-        <input type="text" name="password">
+        <input type="password" name="password">
     </div>
     <div>
         @Html.LabelFor(m => m.Input.ConfirmPassword)
-        <input type="text" name="passwordConfirm">
+        <input type="password" name="confirmPassword">
     </div>
     <div>
         <input type="submit" value="Регистрация"/>
