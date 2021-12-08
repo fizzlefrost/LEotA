@@ -163,7 +163,7 @@ namespace LEotA.Clients.EngineClient.Patrons
                     var culturedText = JsonSerializer.Deserialize<CultureBase>(News.Text);
                     var culturedName = JsonSerializer.Deserialize<CultureBase>(News.Name);
                     CultureBase? culturedAuthor = null;
-                    if (News.Author!=null) culturedAuthor = JsonSerializer.Deserialize<CultureBase>(News.Author ?? string.Empty);
+                    if (News.Author!=null && News.Author != "") culturedAuthor = JsonSerializer.Deserialize<CultureBase>(News.Author ?? string.Empty);
                     var culturedDescription = JsonSerializer.Deserialize<CultureBase>(News.Description);
                     returnModel.Result.Items.Add(new News()
                     {
