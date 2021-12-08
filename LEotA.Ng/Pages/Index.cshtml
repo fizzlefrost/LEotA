@@ -2,11 +2,14 @@
 @inject CommonLocalizationService localizer
 @using LEotA.Services
 @using System.Linq;
+@using Microsoft.AspNetCore.Localization
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
     var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
     var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
+    var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
+    var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
 
 <div class="text-center mb-5">
@@ -24,7 +27,6 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                         </div>
-                        <small class="text-muted">9 mins</small>
                     </div>
                 </div>
             </div>
@@ -39,7 +41,6 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                         </div>
-                        <small class="text-muted">9 mins</small>
                     </div>
                 </div>
             </div>
@@ -54,7 +55,6 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                         </div>
-                        <small class="text-muted">9 mins</small>
                     </div>
                 </div>
             </div>
@@ -77,43 +77,72 @@
                 <div class="row">
                     @if (i + 1 == newsGetPagedCount && newsGetPagedCount % 2 == 1)
                     {
-                        foreach (var currentNews in newsGetPaged.GetRange(i * 2, 1))
+                        foreach (var currentNews in newsImages.Take(1))
                         {
                             <div class="col-6">
                                 <div class="news-container">
-                                    <img src="/images/_JPG0330.JPG">
-                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Id">@currentNews.Name.English</a></h2>
+                                    <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
+                                    @if (culture == "en")
+                                    {
+                                        <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
+                                    }
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
-                                        <p class="is-indented-2">@currentNews.Description.English</p>
-                                    </div>
+                                    @if (culture == "en")
+                                    {
+                                        <div class="col-12">
+                                            <p class="is-indented-2">@currentNews.Key.Description.English</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-12">
+                                            <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
+                                        </div>
+                                    }
                                 </div>
                                 <hr aria-hidden="true">
                             </div>
                         }
                     }
                     else{
-                    foreach (var currentNews in newsGetPaged.GetRange(i * 2, 2))
+                        foreach (var currentNews in newsImages.Take(2))
                     {
                         <div class="col-6">
                             <div class="news-container">
-                                <img src="images/_JPG0330.JPG">
-                                <div class="bottom-left">
-                                    <h2 ><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Id">@currentNews.Name.English</a></h2>
-                                </div>
+                                <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
+                                @if (culture == "en")
+                                {
+                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
+                                }
+                                else
+                                {
+                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
+                                }
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <p class="is-indented-2">@currentNews.Description.English</p>
-                                </div>
+                                @if (culture == "en")
+                                {
+                                    <div class="col-12">
+                                        <p class="is-indented-2">@currentNews.Key.Description.English</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-12">
+                                        <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
+                                    </div>
+                                }
                             </div>
                             <hr aria-hidden="true">
                         </div>
                     }
                     }
                 </div>
-
             }
         </div>
         </div>

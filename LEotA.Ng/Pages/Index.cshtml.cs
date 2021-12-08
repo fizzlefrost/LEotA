@@ -5,10 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using JW;
 using LEotA.Clients.EngineClient;
-using LEotA.Engine.Entities;
-using Microsoft.AspNetCore.Localization;
+using LEotA.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using FileContent = LEotA.Models.FileContent;
 
 namespace LEotA.Pages
 {
@@ -42,6 +41,13 @@ namespace LEotA.Pages
 
                         // assign the current page of items to the Items property
                         var newsGetPaged = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result;
+                        var newsListWithImage = new Dictionary<News, List<FileContent>>();
+                        foreach (var news in newsGetPaged)
+                        {
+                            var newsListImage = _engineClientManager.FileContentGetByMasterId(news.Id);
+                            newsListWithImage.Add(news, newsListImage);
+                        }
+                        ViewData.Add("newsListWithImage",newsListWithImage);
                         ViewData.Add("newsGetPaged", newsGetPaged);
                         ViewData.Add("newsGetPagedCount", newsGetPaged!.Count());
                         break;

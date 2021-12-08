@@ -8,12 +8,10 @@ namespace LEotA.Pages
 {
     public class  ProjectsModel : PageModel
     {
-        private readonly ILogger<ProjectsModel> _logger;
         private readonly EngineClientManager _engineClientManager;
 
-        public ProjectsModel(ILogger<ProjectsModel> logger, EngineClientManager engineClientManager)
+        public ProjectsModel(EngineClientManager engineClientManager)
         {
-            _logger = logger;
             _engineClientManager = engineClientManager;
         }
         

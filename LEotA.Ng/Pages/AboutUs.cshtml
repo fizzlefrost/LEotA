@@ -6,7 +6,8 @@
 @{
     ViewBag.Title = "My Home Page";
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-    //  aboutUs = (Dictionary<string, List<AboutUs>>)ViewData["aboutUs"];
+    var aboutUs = (List<AboutUs>)ViewData["aboutUs"];
+    var image = (Dictionary<List<FileContent>, AboutUs>) ViewData["images"];
 }
 
 <div id="carouselExampleCaptions" class="carousel slide mb-5" data-ride="carousel">
@@ -17,42 +18,40 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/images/_JPG0330.JPG" class="d-block w-100" alt="...">
+      <img src="/images/_JPG0366.JPG" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <p>Современные вызовы общества, связанные с угрозой утраты
-           национальной и культурной идентичности российских граждан, ставят перед
-           учеными задачу решения комплекса проблем широкого социально-
-           гуманитарного характера.</p>
+        @if (culture == "en")
+        {
+          <p>About Us</p>
+        }
+        else
+        {
+          <p>О нас</p>
+        }
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="/images/_JPG0330.JPG" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <p>Сохранение языков и культуры способствует сохранению
-           национальной самобытности, национальной идентичности, жизненной
-           энергии любого народа. К сожалению, сегодня многие языки народов Севера
-           находятся на грани исчезновения. Одним из факторов, влияющих на
-           языковой сдвиг, являются миграции, урбанизация и промышленное освоение
-           северных территорий. Коренные народы, которые сохраняют связи с традиционным образом жизни, 
-           демонстрируют более высокий уровень
-           сохранения языка, как с точки зрения его передачи последующим
-           поколениям, так и в плане сохранения различных языковых доменов.</p>
+    @foreach (var about in aboutUs)
+    {
+      <div class="carousel-item">
+        @foreach (var imagefindr in image)
+        {
+          if (imagefindr.Value.Id == about.Id)
+          {
+            <img src="data:image;base64,@Convert.ToBase64String(@imagefindr.Key.FirstOrDefault().Content)" class="d-block w-100" alt="...">
+          }
+        }
+        <div class="carousel-caption d-none d-md-block">
+          @if (culture == "en")
+          {
+            <p>@about.Text.English</p>
+          }
+          else
+          {
+            <p>@about.Text.Russian</p>
+          }
+        </div>
       </div>
-    </div>
-    <div class="carousel-item">
-      <img src="/images/_JPG0330.JPG" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <p>В рамках проекта «Сохранение языкового и культурного многообразия
-           и устойчивое развитие Арктики и Субарктики Российской Федерации» в
-           2021 году при Северо-Восточном федеральном университете им. М.К.
-           Аммосова создана Международная научно-исследовательская лаборатория
-           «Лингвистическая экология Арктики». Научным руководителем лаборатории
-           является Ленора Гренобль, профессор университета Чикаго (США).
-           Профессор Гренобль является ведущим международным экспертом в области
-           языковых контактов, языкового сдвига и ревитализации исчезающих языков,
-           включая языки Арктики.</p>
-      </div>
-    </div>
+    }
   </div>
   <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
