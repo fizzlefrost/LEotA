@@ -11,36 +11,49 @@
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
 	var publications = (List<Publication>) ViewData["publication"];
 }
-<div class="container mb-5">
-	<form method="get">
-		<div class="row">
-			<div class="col input-group">
-				<input class="form-control" asp-for="SearchYear">
-				<div class="input-group-append">
-					<button class="btn btn-secondary" type="submit">Search by Year</button>
-				</div>
-			</div>
-			<div class="col input-group">
-				<input class="form-control" asp-for="SearchName">
-				<div class="input-group-append">
-					<button class="btn btn-secondary" type="submit">Search by Name</button>
-				</div>
-			</div>
-		</div>
-	</form>
-</div>
+@{
+	try
+	{
 
-@foreach (var _public in publications)
-{
-	<div class="list-group mt-3">
-		<a target="_blank" rel="noopener noreferrer" href="@_public.EmbedLink" class="list-group-item list-group-item-action">
-			<div class="d-flex w-100 justify-content-between">
-				<h5 class="mb-1">@_public.Name.Russian</h5>
-				<small>@_public.Time.Day / @_public.Time.Month / @_public.Time.Year </small>
+	
+
+		<div class="container mb-5">
+			<form method="get">
+				<div class="row">
+					<div class="col input-group">
+						<input class="form-control" asp-for="SearchYear">
+						<div class="input-group-append">
+							<button class="btn btn-secondary" type="submit">Search by Year</button>
+						</div>
+					</div>
+					<div class="col input-group">
+						<input class="form-control" asp-for="SearchName">
+						<div class="input-group-append">
+							<button class="btn btn-secondary" type="submit">Search by Name</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		@foreach (var _public in publications)
+		{
+			<div class="list-group mt-3">
+				<a target="_blank" rel="noopener noreferrer" href="@_public.EmbedLink" class="list-group-item list-group-item-action">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">@_public.Name.Russian</h5>
+						<small>@_public.Time.Day / @_public.Time.Month / @_public.Time.Year </small>
+					</div>
+					<div class="d-flex flex-row-reverse">
+						<small>@_public.Text.Russian </small>
+					</div>
+				</a>
 			</div>
-			<div class="d-flex flex-row-reverse">
-				<small>@_public.Text.Russian </small>
-			</div>
-		</a>
-	</div>
+		}
+	}
+	catch (Exception e)
+	{
+		
+	}
+	
 }

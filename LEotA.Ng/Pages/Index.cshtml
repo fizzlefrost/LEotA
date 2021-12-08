@@ -11,7 +11,7 @@
     var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
-
+@try{
 <div class="text-center mb-5">
     <h1 class="display-4 ">@localizer.Get("Welcome")</h1>
 </div>
@@ -63,7 +63,7 @@
 </div>
 
 <!-- pagination -->
-@{
+
     if (!(newsGetPagedCount>0))
     {
         <SfSpinner Visible="true" Lable="Loading data ...">
@@ -195,6 +195,10 @@
     }
 }
 
+catch (Exception e)
+{
+    <p>NULL</p>
+}
 <!-- laboratory staff photo -->
 
 <div class="container-fluid">

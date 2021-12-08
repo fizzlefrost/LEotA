@@ -11,57 +11,66 @@
 		totalAlbum++;
 	}
 }
-<div class="container">
-	@for (int e = 0; e < totalAlbum; e++){
-		<div class="h-50 row">
-			@if (e == totalAlbum-1){
-				foreach (var i in Model._albumList.GetRange(e*2,1))
-				{
-					<div class="col-6 align-center coverdiv">
-						<img class="cover" src="images/_JPG0395.JPG">
-						<div class="bottom-left">
-							<h1>
-							@{
-								if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
-								{
-									<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.English</a>
-								}
-								else
-								{
+@{
+	try
+	{
+		<div class="container">
+			@for (int e = 0; e < totalAlbum; e++){
+				<div class="h-50 row">
+					@if (e == totalAlbum-1){
+						foreach (var i in Model._albumList.GetRange(e*2,1))
+						{
+							<div class="col-6 align-center coverdiv">
+								<img class="cover" src="images/_JPG0395.JPG">
+								<div class="bottom-left">
+									<h1>
+										@{
+											if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
+											{
+												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.English</a>
+											}
+											else
+											{
 
-									<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
-								}
-							}
-							</h1>
-						</div>
-					</div>
-				}
-			}
-			else
-			{
-				foreach (var i in Model._albumList.GetRange(e* 2, 2))
-				{
-					<div class="col-6 align-center coverdiv">
-						<img class="cover" src="images/_JPG0395.JPG">
-						<div class="bottom-left">
-							<h1>
-							@{
-								if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
-								{
-									<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.English</a>
-								}
-								else
-								{
+												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
+											}
+										}
+									</h1>
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						foreach (var i in Model._albumList.GetRange(e* 2, 2))
+						{
+							<div class="col-6 align-center coverdiv">
+								<img class="cover" src="images/_JPG0395.JPG">
+								<div class="bottom-left">
+									<h1>
+										@{
+											if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
+											{
+												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.English</a>
+											}
+											else
+											{
 
-									<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
-								}
-							}
-							</h1>
-						</div>
-					</div>
-					j++;
-				}
+												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
+											}
+										}
+									</h1>
+								</div>
+							</div>
+							j++;
+						}
+					}
+				</div>
 			}
 		</div>
 	}
-</div>
+	catch (Exception e)
+	{
+		<p>NULL</p>
+	}
+}

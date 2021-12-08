@@ -15,61 +15,70 @@
   }
   var j = 1;
 }
-@if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
-{
-  <h2 style="text-align:center">@name.Name.English</h2>
-}
-else
-{
-  <h2 style="text-align:center">@name.Name.Russian</h2>
-}
-<div class="container">
-  @for (int i = 0; i < totalimage; i++)
+@{
+  try
   {
-    <div class="row mb-2">
-      @if (i == totalimage-1)
+
+    @if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
+    {
+      <h2 style="text-align:center">@name.Name.English</h2>
+    }
+    else
+    {
+      <h2 style="text-align:center">@name.Name.Russian</h2>
+    }
+    <div class="container">
+      @for (int i = 0; i < totalimage; i++)
       {
-        foreach (var x in images.GetRange(i*4,lastimages))
-        {
-          <div class="col-3 coverdiv">
-            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.IntAssign[x.Id])" class="hover-shadow cursor cover">
-          </div>
-          j++;
-        }
+        <div class="row mb-2">
+          @if (i == totalimage-1)
+          {
+            foreach (var x in images.GetRange(i*4,lastimages))
+            {
+              <div class="col-3 coverdiv">
+                <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.IntAssign[x.Id])" class="hover-shadow cursor cover">
+              </div>
+              j++;
+            }
+          }
+          else
+          {
+            foreach (var x in images.GetRange(i * 4, 4))
+            {
+              <div class="col-3 coverdiv">
+                <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.IntAssign[x.Id])" class="hover-shadow cursor cover">
+              </div>
+              j++;
+            }
+          }
+        </div>
       }
-      else
-      {
-        foreach (var x in images.GetRange(i * 4, 4))
+    </div>
+
+    <div id="myModal" class="modal">
+      <span class="close cursor" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+
+        @foreach (var x in images)
         {
-          <div class="col-3 coverdiv">
-            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@Model.IntAssign[x.Id])" class="hover-shadow cursor cover">
+          <div class="mySlides">
+            <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" style="width:100%">
           </div>
-          j++;
         }
-      }
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        <div class="caption-container">
+          <p id="caption"></p>
+        </div>
+      </div>
     </div>
   }
-</div>
-
-<div id="myModal" class="modal">
-  <span class="close cursor" onclick="closeModal()">&times;</span>
-  <div class="modal-content">
-
-    @foreach (var x in images)
-    {
-      <div class="mySlides">
-        <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" style="width:100%">
-      </div>
-    }
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
-  </div>
-</div>
-
+  catch (Exception e)
+  {
+    <p>NULL</p>
+  }
+}
 <script>
 function openModal() {
   document.getElementById("myModal").style.display = "block";
