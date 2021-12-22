@@ -17,7 +17,7 @@ namespace LEotA.Pages
     {
         public IActionResult OnGet()
         {
-            return new RedirectToPageResult("/ru/MainPage");
+            return Redirect("/ru/mainpage");
         }
         
     }
