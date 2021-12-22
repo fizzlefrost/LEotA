@@ -1,0 +1,203 @@
+﻿@page "{language?}"
+@inject CommonLocalizationService localizer
+@using LEotA.Services
+@using System.Linq;
+@using Microsoft.AspNetCore.Localization
+@model MainPageModel
+@{
+    ViewData["Title"] = "Home page";
+    var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
+    var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
+    var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
+    var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+}
+<div class="text-center mb-5">
+    <h1 class="display-4 ">@localizer.Get("Welcome")</h1>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17cda9bc208%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17cda9bc208%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22114%22%20y%3D%22120.6%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17cda9bc208%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17cda9bc208%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22114%22%20y%3D%22120.6%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22348%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20348%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17cda9bc208%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A17pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17cda9bc208%22%3E%3Crect%20width%3D%22348%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22114%22%20y%3D%22120.6%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- pagination -->
+@try
+{
+
+
+    @if (!(newsGetPagedCount > 0))
+    {
+        <SfSpinner Visible="true" Lable="Loading data ...">
+        </SfSpinner>
+    }
+    else
+    {
+        <div class="album py-5 bg-light">
+            <div class="container">
+                @for (int i = 0; i < newsGetPagedCount / 2 + newsGetPagedCount % 2; i++)
+                {
+                    <div class="row">
+                        @if (i + 1 == newsGetPagedCount && newsGetPagedCount % 2 == 1)
+                        {
+                            foreach (var currentNews in newsImages.Take(1))
+                            {
+                                <div class="col-6">
+                                    <div class="news-container">
+                                        <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
+                                        @if (culture == "en")
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
+                                        }
+                                        else
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        @if (culture == "en")
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.English</p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
+                                            </div>
+                                        }
+                                    </div>
+                                    <hr aria-hidden="true">
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var currentNews in newsImages.Take(2))
+                            {
+                                <div class="col-6">
+                                    <div class="news-container">
+                                        <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
+                                        @if (culture == "en")
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
+                                        }
+                                        else
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        @if (culture == "en")
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.English</p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
+                                            </div>
+                                        }
+                                    </div>
+                                    <hr aria-hidden="true">
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- pager -->
+        {
+
+
+            @if (Model.Pager.Pages.Any())
+            {
+                <nav class="table-responsive mb-5">
+                    <ul class="pagination justify-content-center d-flex flex-wrap">
+                        @if (Model.Pager.CurrentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                            </li>
+                        }
+
+                        @foreach (var p in Model.Pager.Pages)
+                        {
+                            <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="/?p=@p">@p</a>
+                            </li>
+                        }
+
+                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/?p=@(Model.Pager.CurrentPage + 1)">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/?p=@(Model.Pager.TotalPages)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        }
+    }
+
+}
+catch (Exception e)
+{
+    <p>NULL</p>
+}
+<!-- laboratory staff photo -->
+
+<div class="container-fluid">
+    <i class="flag flag-ru"></i>
+    <img src="/images/IMG_4463.JPG"/>
+</div>

@@ -33,24 +33,20 @@
             }
           </div>
         </div>
-        @foreach (var about in aboutUs)
+        @foreach (var about in image)
         {
           <div class="carousel-item">
-            @foreach (var imagefindr in image)
             {
-              if (imagefindr.Value.Id == about.Id)
-              {
-                <img src="data:image;base64,@Convert.ToBase64String(@imagefindr.Key.FirstOrDefault().Content)" class="d-block w-100" alt="...">
-              }
+              <img src="data:image;base64,@Convert.ToBase64String(@about.Key.FirstOrDefault().Content)" class="d-block w-100" alt="...">
             }
             <div class="carousel-caption d-none d-md-block">
               @if (culture == "en")
               {
-                <p>@about.Text.English</p>
+                <p>@about.Value.Text.English</p>
               }
               else
               {
-                <p>@about.Text.Russian</p>
+                <p>@about.Value.Text.Russian</p>
               }
             </div>
           </div>

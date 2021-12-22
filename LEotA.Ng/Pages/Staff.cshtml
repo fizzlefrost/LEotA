@@ -1,8 +1,10 @@
 ﻿@page
 @model StaffModel
 @using System.Collections
+@using LEotA.Services
+@inject CommonLocalizationService localizer
 @{
-    ViewData["Title"] = "MODS";
+    ViewData["Title"] = localizer.Get("Staff");
     var staffList = (Dictionary<Staff,List<FileContent>>)ViewData["staff"];
     var staffCount = staffList.Count;
 }
@@ -16,32 +18,61 @@
                         <h6 class="subtitle">You can relay on our amazing features list and also our customer services will be great experience for you without doubt and in no-time</h6>
                     </div>
                 </div>
-                @for (int i = 0; i < staffCount / 4; i++)
+                @if (staffCount >= 4)
                 {
-                    <div class="row justify-content-center">
-                        @foreach(var staff in staffList.Take(4))
-                        {
-                            <div class="col-lg-3 mb-4 ml-3">
-                                <div class="row border border-dark mt-2 mb-2">
-                                    <div class="col-md-12 align-center mt-2">
-                                        <a href="@staff.Key.EmbedLink">
-                                            <img src="data:image;base64,@Convert.ToBase64String(staff.Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-12 text-center" style="height:250px">
-                                        <div class="pt-2">
-                                            <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name</h5>
-                                            <h6 class="subtitle mb-3">@staff.Key.Text</h6>
-                                            <ul class="list-inline align-center bottomize">
-                                                <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staff.Key.Email</a></li>
-                                            </ul>
+                    @for (int i = 0; i < staffCount / 4; i++)
+                    {
+                        <div class="row justify-content-center">
+                            @foreach (var staff in staffList.Take(4))
+                            {
+                                <div class="col-lg-3 mb-4 ml-3">
+                                    <div class="row border border-dark mt-2 mb-2">
+                                        <div class="col-md-12 align-center mt-2">
+                                            <a href="@staff.Key.EmbedLink">
+                                                <img src="data:image;base64,@Convert.ToBase64String(staff.Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-12 text-center" style="height:250px">
+                                            <div class="pt-2">
+                                                <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name</h5>
+                                                <h6 class="subtitle mb-3">@staff.Key.Text</h6>
+                                                <ul class="list-inline align-center bottomize">
+                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staff.Key.Email</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
-                    </div>
+                            }
+                        </div>
+                    }
                 }
+                @if(staffCount%4>0)
+                    {
+                        <div class="row justify-content-center">
+                            @foreach (var staff in staffList.Take(staffCount%4))
+                            {
+                                <div class="col-lg-3 mb-4 ml-3">
+                                    <div class="row border border-dark mt-2 mb-2">
+                                        <div class="col-md-12 align-center mt-2">
+                                            <a href="@staff.Key.EmbedLink">
+                                                <img src="data:image;base64,@Convert.ToBase64String(staff.Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-12 text-center" style="height:250px">
+                                            <div class="pt-2">
+                                                <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.English</h5>
+                                                <h6 class="subtitle mb-3">@staff.Key.Text.English</h6>
+                                                <ul class="list-inline align-center bottomize">
+                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staff.Key.Email</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
             </div>
         </div>
     }

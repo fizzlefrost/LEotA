@@ -32,7 +32,7 @@ namespace LEotA.Models
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("role")]
-        public string Role { get; set; }
+        public StaffRoles Role { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
         [JsonPropertyName("text")]
@@ -57,7 +57,7 @@ namespace LEotA.Models
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("role")]
-        public string Role { get; set; }
+        public StaffRoles Role { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
         [JsonPropertyName("text")]
@@ -73,7 +73,7 @@ namespace LEotA.Models
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("role")]
-        public string Role { get; set; }
+        public StaffRoles Role { get; set; }
         [JsonPropertyName("embedLink")]
         public string EmbedLink { get; set; }
         [JsonPropertyName("text")]

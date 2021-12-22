@@ -113,7 +113,8 @@ namespace LEotA.Clients.EngineClient.Patrons
                     Id = new Guid(pageModel.Result.Id),
                     EmbedLink = pageModel.Result.EmbedLink,
                     Name = culturedName,
-                    Role = (Models.StaffRoles) Enum.Parse(typeof(StaffRoles), pageModel.Result.Role),
+                    //Role = (Models.StaffRoles) Enum.Parse(typeof(StaffRoles), pageModel.Result.Role),
+                    Role = pageModel.Result.Role,
                     Email = pageModel.Result.Email,
                     Text = culturedText
                 }
@@ -153,7 +154,8 @@ namespace LEotA.Clients.EngineClient.Patrons
                         Id = new Guid(staff.Id),
                         Name = culturedName,
                         EmbedLink = staff.EmbedLink,
-                        Role = (Models.StaffRoles) Enum.Parse(typeof(StaffRoles), staff.Role),
+                        //Role = (Models.StaffRoles) Enum.Parse(typeof(StaffRoles), staff.Role),
+                        Role = staff.Role,
                         Email = staff.Email,
                         Text = culturedText
                     });

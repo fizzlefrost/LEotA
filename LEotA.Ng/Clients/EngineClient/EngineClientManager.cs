@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using LEotA.Clients.EngineClient.Patrons;
 using LEotA.Models;
 using Microsoft.Extensions.DependencyInjection;
-using StaffRoles = LEotA.Engine.Entities.StaffRoles;
 
 namespace LEotA.Clients.EngineClient
 {
@@ -246,9 +245,10 @@ namespace LEotA.Clients.EngineClient
             return newsGetPaged.Result.Items;
         }
 
-        public CalabongaViewModel<Project>? ProjectPost(CultureBase text, string embedLink) =>
+        public CalabongaViewModel<Project>? ProjectPost(CultureBase name,CultureBase text, string embedLink) =>
             _projectPatron?.ProjectPostAsync(new ProjectCreateModel()
             {
+                Name = JsonSerializer.Serialize(name),
                 Text = JsonSerializer.Serialize(text),
                 EmbedLink = embedLink
             }).Result;
@@ -315,7 +315,7 @@ namespace LEotA.Clients.EngineClient
             {
                 Name = JsonSerializer.Serialize(name),
                 EmbedLink = embedLink,
-                Role = JsonSerializer.Serialize(role),
+                Role = role,
                 Email = email,
                 Text = JsonSerializer.Serialize(text),
             }).Result;
@@ -326,7 +326,7 @@ namespace LEotA.Clients.EngineClient
                 Id = id.ToString(),
                 Name = JsonSerializer.Serialize(name),
                 EmbedLink = embedLink,
-                Role = JsonSerializer.Serialize(role),
+                Role = role,
                 Email = email,
                 Text = JsonSerializer.Serialize(text),
                 NewId = newId.ToString()

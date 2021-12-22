@@ -24,6 +24,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             var request = new ProjectCreateModel()
             {
+                Name = ProjectCreateModel.Name,
                 EmbedLink = ProjectCreateModel.EmbedLink,
                 Text = ProjectCreateModel.Text
             };
@@ -86,6 +87,7 @@ namespace LEotA.Clients.EngineClient.Patrons
         
         private CalabongaViewModel<Project> ProjectGetModelToProject(CalabongaViewModel<ProjectGetModel> pageModel)
         {
+            var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
             var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
             var returnModel = new CalabongaViewModel<Project>()
             {
@@ -96,7 +98,9 @@ namespace LEotA.Clients.EngineClient.Patrons
                 Ok = pageModel.Ok,
                 Result = new Project()
                 {
+                    
                     Id = new Guid(pageModel.Result.Id),
+                    Name = culturedName,
                     Text = culturedText,
                     EmbedLink = pageModel.Result.EmbedLink
                 }
@@ -129,10 +133,12 @@ namespace LEotA.Clients.EngineClient.Patrons
                 };
                 foreach (var Project in pageModel.Result.Items)
                 {
+                    var culturedName = JsonSerializer.Deserialize<CultureBase>(Project.Name);
                     var culturedText = JsonSerializer.Deserialize<CultureBase>(Project.Text);
                     returnModel.Result.Items.Add(new Project()
                     {
                         Id = new Guid(Project.Id),
+                        Name = culturedName,
                         Text = culturedText,
                         EmbedLink = Project.EmbedLink
                     });

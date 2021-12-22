@@ -28,7 +28,7 @@ namespace LEotA.Pages
         {
             
             var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
-            ViewData.Add("event", eventList);
+                //ViewData.Add("event", eventList);
             if (eventList != null && !ActiveOnly)
             {
                 foreach (var _event in eventList)

@@ -373,7 +373,7 @@ img.hover-shadow {
     background-color: #eeeeee;
 }
 .carousel-caption{
-    bottom: 1.9em;
+    top: 1.9em;
     background-color: gray;
     opacity: 0.8;
     left:0;
