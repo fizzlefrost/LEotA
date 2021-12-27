@@ -374,10 +374,12 @@ img.hover-shadow {
 }
 .carousel-caption{
     top: 1.9em;
-    background-color: gray;
+    height: 3em;
+    background-color: lightgray;
+    text-align: left;
     opacity: 0.8;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
 }
 .carousel-indicators{
     bottom: 1.5em;
