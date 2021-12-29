@@ -111,6 +111,22 @@ body {
     padding-left: 20px;
     padding-right: 20px;
 }
+.top-right {
+    color: black;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.top-right {
+    color: black;
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 .bottom-left > h1 > a{
     color: white; !important;
@@ -204,6 +220,7 @@ a:hover {
 .bottom_event{
     margin-top: 70px;
     font-size: 50px;
+    margin-bottom: 100px;
 }
 .align-center ul{
     display: inline-block;
@@ -374,12 +391,12 @@ img.hover-shadow {
 }
 .carousel-caption{
     top: 1.9em;
-    height: 3em;
+    height: 15em;
     background-color: lightgray;
     text-align: left;
     opacity: 0.8;
-    left: 0;
-    right: 0;
+    left: 1.5em;
+    right: 1.5em;
 }
 .carousel-indicators{
     bottom: 1.5em;

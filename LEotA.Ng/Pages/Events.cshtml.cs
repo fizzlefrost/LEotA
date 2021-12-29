@@ -1,9 +1,6 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using IdentityServer4.Extensions;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +23,6 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            
             var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
                 //ViewData.Add("event", eventList);
             if (eventList != null && !ActiveOnly)
@@ -44,7 +40,8 @@ namespace LEotA.Pages
 
             else if (eventList != null && ActiveOnly)
             {
-                var activeEventList = eventList;
+                List<Event> activeEventList = new List<Event>();
+                //var activeEventList = eventList;
                 foreach (var _event in eventList)
                 {
                     if (_event.DateTime.CompareTo(DateTime.Now) == 1)

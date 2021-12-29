@@ -1,15 +1,7 @@
 ﻿#nullable enable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using JW;
-using LEotA.Clients.EngineClient;
-using LEotA.Models;
-using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using FileContent = LEotA.Models.FileContent;
 
 namespace LEotA.Pages
 {
@@ -17,7 +9,8 @@ namespace LEotA.Pages
     {
         public IActionResult OnGet()
         {
-            return Redirect("/ru/mainpage");
+            var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            return Redirect("/" + culture + "/mainpage");
         }
         
     }

@@ -1,14 +1,11 @@
 ﻿#nullable enable
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using FileContent = LEotA.Engine.Entities.FileContent;
 
 namespace LEotA.Pages
 {

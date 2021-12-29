@@ -70,6 +70,15 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show active events only.
+        /// </summary>
+        internal static string ActiveOnly {
+            get {
+                return ResourceManager.GetString("ActiveOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to en.
         /// </summary>
         internal static string CurrentCulture {
@@ -84,6 +93,15 @@ namespace LEotA.Resources {
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry the event is already over..
+        /// </summary>
+        internal static string Eventover {
+            get {
+                return ResourceManager.GetString("Eventover", resourceCulture);
             }
         }
         
@@ -185,6 +203,15 @@ namespace LEotA.Resources {
         internal static string Materials {
             get {
                 return ResourceManager.GetString("Materials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our Team.
+        /// </summary>
+        internal static string Ourteam {
+            get {
+                return ResourceManager.GetString("Ourteam", resourceCulture);
             }
         }
         

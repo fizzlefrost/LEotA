@@ -1,24 +1,23 @@
 ﻿@page "/Events"
 @using Microsoft.AspNetCore.Localization
+@using LEotA.Services
 @model LEotA.Pages.EventsModel
+@inject CommonLocalizationService localizer
 @{
 	ViewBag.Title = "Events";
-	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
+	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 	bool isFirst = true;
 }
 @{
 	try
 	{
-		<form method="post" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed">
-			<div class="row">
-				<div class="col input-group">
-					<input class="checkbox" asp-for="ActiveOnly">
-					<div class="input-group-append">
-						<button class="btn btn-primary" type="submit">Show only active events</button>
-					</div>
-				</div>
-			</div>
-		</form>
+		<form>
+			<p>
+				@localizer.Get("ActiveOnly")
+				<input class="form-check" asp-for="ActiveOnly">
+				<input type="submit" value="Filter"/>
+			</p>
+        </form>
 		<div class="container">
 			<div class="container mb-5">
 				@foreach (var _event in (IEnumerable<Event>) ViewData["event"])
@@ -35,17 +34,23 @@
 						<div class="eventcard mb-3">
 							<div class="row g-0">
 								<div class="col-md-3 text-center border-right">
-
 									<div class="big">@_event.DateTime.Day</div>
 									<div class="bottom_event">@_event.DateTime.ToString("MMM") @_event.DateTime.Year</div>
 									@if ((TimeSpan) ViewData[_event.Id.ToString()] == new TimeSpan())
 									{
-										<div class="bottomize">Sorry the event is already over.</div>
+										<div class="bottomize">@localizer.Get("Eventover")</div>
 									}
 									else
 									{
 										var x = (TimeSpan) ViewData[_event.Id.ToString()];
-										<div class="bottomize"> @x.Days days and @x.Hours hours left</div>
+										if (culture == "en")
+										{
+											<div class="bottomize"> @x.Days days and @x.Hours hours left</div>
+										}
+										else
+										{
+											<div class="bottomize"> Время до окончания времени @x.Days и @x.Hours</div>
+										}
 									}
 								</div>
 								<div class="col-md-9">
@@ -79,9 +84,12 @@
 												<h5 class="card-title text-center">@_event.Text.English</h5>
 											</div>
 										}
-										<div class="event_button">
-											<a class="align-center" target="_blank" rel="noopener noreferrer" href="@_event.EmbedLink">Register</a>
-										</div>
+										@if ((TimeSpan) ViewData[_event.Id.ToString()] != new TimeSpan())
+										{
+											<div class="event_button">
+												<a class="align-center" target="_blank" rel="noopener noreferrer" href="@_event.EmbedLink">@localizer.Get("Register")</a>
+											</div>
+										}
 									</div>
 								</div>
 							</div>
