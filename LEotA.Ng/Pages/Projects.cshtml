@@ -15,7 +15,16 @@
 			{
 				<div class="row" style="border:none; background:white; min-height:210px; max-height:350px;">
 					<div class="col mb-2">
-						<h3 class="align-center">Project Name</h3>
+						<h3 class="align-center">
+							@if (culture == "en")
+							{
+								@_project.Name.English
+							}
+							else
+							{
+								@_project.Name.Russian
+							}
+						</h3>
 						<p>
 							@if (culture == "en")
 							{

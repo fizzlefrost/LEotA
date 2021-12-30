@@ -1,0 +1,158 @@
+﻿@page "{language?}"
+@inject CommonLocalizationService localizer
+@using LEotA.Services
+@using System.Linq;
+@using Microsoft.AspNetCore.Localization
+@model MainPageModel
+@{
+    ViewData["Title"] = "Home page";
+    var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
+    var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
+    var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
+    var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+}
+<div class="text-center mb-5">
+    <h1 class="display-4 ">@localizer.Get("Welcome")</h1>
+</div>
+<!-- pagination -->
+@try
+{
+
+
+    @if (!(newsGetPagedCount > 0))
+    {
+        <SfSpinner Visible="true" Lable="Loading data ...">
+        </SfSpinner>
+    }
+    else
+    {
+        <div class="album py-5 bg-light">
+            <div class="container">
+                @for (int i = 0; i < newsGetPagedCount / 2 + newsGetPagedCount % 2; i++)
+                {
+                    <div class="row">
+                        @if (i + 1 == newsGetPagedCount && newsGetPagedCount % 2 == 1)
+                        {
+                            foreach (var currentNews in newsImages.Take(1))
+                            {
+                                <div class="col-6">
+                                    <div class="news-container">
+                                        <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
+                                        <p class="top-right">@currentNews.Key.Time.Day - @currentNews.Key.Time.Month - @currentNews.Key.Time.Year</p>
+                                        <p class="bottom-right">@currentNews.Key.Author</p>
+                                        @if (culture == "en")
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
+                                        }
+                                        else
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        @if (culture == "en")
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.English</p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
+                                            </div>
+                                        }
+                                    </div>
+                                    <hr aria-hidden="true">
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var currentNews in newsImages.Take(2))
+                            {
+                                <div class="col-6">
+                                    <div class="news-container">
+                                        <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
+                                        @if (culture == "en")
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
+                                        }
+                                        else
+                                        {
+                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        @if (culture == "en")
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.English</p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-12">
+                                                <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
+                                            </div>
+                                        }
+                                    </div>
+                                    <hr aria-hidden="true">
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- pager -->
+        {
+
+
+            @if (Model.Pager.Pages.Any())
+            {
+                <nav class="table-responsive mb-5">
+                    <ul class="pagination justify-content-center d-flex flex-wrap">
+                        @if (Model.Pager.CurrentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                            </li>
+                        }
+
+                        @foreach (var p in Model.Pager.Pages)
+                        {
+                            <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
+                                <a class="page-link" href="/?p=@p">@p</a>
+                            </li>
+                        }
+
+                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/?p=@(Model.Pager.CurrentPage + 1)">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/?p=@(Model.Pager.TotalPages)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        }
+    }
+
+}
+catch (Exception e)
+{
+    <p>NULL</p>
+}
+<!-- laboratory staff photo -->
+
+<div class="container-fluid">
+    <i class="flag flag-ru"></i>
+    <img src="/images/IMG_4463.JPG"/>
+</div>

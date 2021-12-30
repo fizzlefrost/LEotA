@@ -83,4 +83,13 @@
     <data name="CurrentCulture" xml:space="preserve">
         <value>en</value>
     </data>
+    <data name="Eventover" xml:space="preserve">
+        <value>Sorry the event is already over.</value>
+    </data>
+    <data name="Ourteam" xml:space="preserve">
+        <value>Our Team</value>
+    </data>
+    <data name="ActiveOnly" xml:space="preserve">
+        <value>Show active events only</value>
+    </data>
 </root>

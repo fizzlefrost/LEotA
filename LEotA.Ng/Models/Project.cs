@@ -7,6 +7,8 @@ namespace LEotA.Models
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
+        [JsonPropertyName("name")]
+        public CultureBase Name { get; set; }
         [JsonPropertyName("text")]
         public CultureBase Text { get; set; }
         [JsonPropertyName("embedLink")]
@@ -17,6 +19,9 @@ namespace LEotA.Models
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }
+        
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
         [JsonPropertyName("text")]
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]
@@ -25,6 +30,9 @@ namespace LEotA.Models
     
     public class ProjectCreateModel
     {
+        
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
         [JsonPropertyName("text")]
         public string Text { get; set; }
         [JsonPropertyName("embedLink")]

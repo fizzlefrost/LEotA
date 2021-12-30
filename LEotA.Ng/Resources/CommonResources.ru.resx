@@ -81,4 +81,13 @@
     <data name="CurrentCulture" xml:space="preserve">
         <value>ru</value>
     </data>
+    <data name="Eventover" xml:space="preserve">
+        <value>Извините, но мероприятие уже закончено</value>
+    </data>
+    <data name="Ourteam" xml:space="preserve">
+        <value>Наша команда</value>
+    </data>
+    <data name="ActiveOnly" xml:space="preserve">
+        <value>Показывать только активные мероприятия</value>
+    </data>
 </root>

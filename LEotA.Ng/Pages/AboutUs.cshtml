@@ -12,55 +12,52 @@
 @{
   try
   {
-
-    <div id="carouselExampleCaptions" class="carousel slide mb-5" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-      </ol>
+    <div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="/images/_JPG0366.JPG" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             @if (culture == "en")
             {
-              <p>About Us</p>
+              <p style="margin-left: 10px">About Us</p>
             }
             else
             {
-              <p>О нас</p>
+              <p style="margin-left: 10px">О нас</p>
             }
           </div>
         </div>
-        @foreach (var about in aboutUs)
+          @foreach (var about in image)
         {
           <div class="carousel-item">
-            @foreach (var imagefindr in image)
             {
-              if (imagefindr.Value.Id == about.Id)
-              {
-                <img src="data:image;base64,@Convert.ToBase64String(@imagefindr.Key.FirstOrDefault().Content)" class="d-block w-100" alt="...">
-              }
+            @if (about.Key.Count == 0 || about.Key.Count == null)
+            {
+              <img src="/images/_JPG0366.JPG" class="d-block w-100" alt="...">
+            }
+            else
+            {
+              <img src="data:image;base64,@Convert.ToBase64String(@about.Key.FirstOrDefault().Content)" class="d-block w-100" alt="...">
+            }
             }
             <div class="carousel-caption d-none d-md-block">
               @if (culture == "en")
               {
-                <p>@about.Text.English</p>
+                <p style="margin-left: 10px">@about.Value.Text.English</p>
               }
               else
               {
-                <p>@about.Text.Russian</p>
+                <p style="margin-left: 10px">@about.Value.Text.Russian</p>
               }
             </div>
           </div>
         }
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>

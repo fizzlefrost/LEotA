@@ -1,6 +1,4 @@
 ﻿@using LEotA.Services
-@using Microsoft.AspNetCore.Builder
-@using Microsoft.AspNetCore.Localization
 @using System.Threading
 @inject CommonLocalizationService localizer
 <title>@ViewData["Title"] - @localizer.Get("Localisation")</title>
@@ -58,7 +56,7 @@
         <div id="page-wrapper" class="navbar-collapse collapse d-sm-inline-flex justify-content-around">
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index">@localizer.Get("Home")</a>
+                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/MainPage">@localizer.Get("Home")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
