@@ -45,7 +45,7 @@
                         </div>
                     }
                 }
-                @if(staffCount%4>0)
+                else if(staffCount%4>0)
                     {
                         <div class="row justify-content-center">
                             @foreach (var staff in staffList.Take(staffCount%4))
