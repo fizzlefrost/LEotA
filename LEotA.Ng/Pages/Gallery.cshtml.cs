@@ -18,18 +18,25 @@ namespace LEotA.Pages
 
         public IActionResult OnGet(Guid id)
         {
-            ViewData.Clear();
-            var album = _engineClientManager.AlbumGetById(id)?.Result;
-            var images = _engineClientManager.FileContentGetByMasterId(id);
-            ViewData.Add("albumName", album);
-            ViewData.Add("albumId", images);
-            var j = 1;
-            foreach (var x in images)
+            try
             {
-                IntAssign.Add(x.Id,j);
-                j++;
+                ViewData.Clear();
+                var album = _engineClientManager.AlbumGetById(id)?.Result;
+                var images = _engineClientManager.FileContentGetByMasterId(id);
+                ViewData.Add("albumName", album);
+                ViewData.Add("albumId", images);
+                var j = 1;
+                foreach (var x in images)
+                {
+                    IntAssign.Add(x.Id,j);
+                    j++;
+                }
+                return Page(); 
             }
-            return Page(); 
+            catch (Exception e)
+            {
+                return Page();
+            }
         }
     }
 }

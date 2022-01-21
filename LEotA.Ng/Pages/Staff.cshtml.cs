@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using LEotA.Clients.EngineClient;
@@ -22,16 +23,24 @@ namespace LEotA.Pages
 
         public void OnGet()
         {
-            var staffList = _engineClientManager.StaffGetPaged(null,30,null,null,true);
-            var sortedStaffList = staffList.OrderBy(o => o.Role).ToList();
-            var staffListWithImage = new Dictionary<Staff, List<FileContent>>();
-            foreach (var staff in sortedStaffList)
+            try
             {
-                var image = _engineClientManager.FileContentGetByMasterId(staff.Id);
+                var staffList = _engineClientManager.StaffGetPaged(null,30,null,null,true);
+                var sortedStaffList = staffList.OrderBy(o => o.Role).ToList();
+                var staffListWithImage = new Dictionary<Staff, List<FileContent>>();
+                foreach (var staff in sortedStaffList)
+                {
+                    var image = _engineClientManager.FileContentGetByMasterId(staff.Id);
                 
-                staffListWithImage.Add(staff, image);
+                    staffListWithImage.Add(staff, image);
+                }
+                ViewData.Add("staff",staffListWithImage);
             }
-            ViewData.Add("staff",staffListWithImage);
+            catch (Exception e)
+            {
+                
+            }
+            
         }
     }
 }

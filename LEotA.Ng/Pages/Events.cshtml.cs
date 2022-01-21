@@ -23,34 +23,40 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
+            try
+            {
+                var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
                 //ViewData.Add("event", eventList);
-            if (eventList != null && !ActiveOnly)
-            {
-                foreach (var _event in eventList)
+                if (eventList != null && !ActiveOnly)
                 {
-                    TimeSpan Compare() => (_event.DateTime.CompareTo(DateTime.Now) == 1)
-                        ? _event.DateTime - DateTime.Now
-                        : new TimeSpan();
-
-                    ViewData.Add(_event.Id.ToString(), Compare());
-                }
-                ViewData.Add("event", eventList);
-            }
-
-            else if (eventList != null && ActiveOnly)
-            {
-                List<Event> activeEventList = new List<Event>();
-                //var activeEventList = eventList;
-                foreach (var _event in eventList)
-                {
-                    if (_event.DateTime.CompareTo(DateTime.Now) == 1)
+                    foreach (var _event in eventList)
                     {
-                        activeEventList.Add(_event);
-                        ViewData.Add(_event.Id.ToString(), _event.DateTime - DateTime.Now);
+                        TimeSpan Compare() => (_event.DateTime.CompareTo(DateTime.Now) == 1)
+                            ? _event.DateTime - DateTime.Now
+                            : new TimeSpan();
+
+                        ViewData.Add(_event.Id.ToString(), Compare());
                     }
+                    ViewData.Add("event", eventList);
                 }
-                ViewData.Add("event", activeEventList);
+
+                else if (eventList != null && ActiveOnly)
+                {
+                    List<Event> activeEventList = new List<Event>();
+                    //var activeEventList = eventList;
+                    foreach (var _event in eventList)
+                    {
+                        if (_event.DateTime.CompareTo(DateTime.Now) == 1)
+                        {
+                            activeEventList.Add(_event);
+                            ViewData.Add(_event.Id.ToString(), _event.DateTime - DateTime.Now);
+                        }
+                    }
+                    ViewData.Add("event", activeEventList);
+                }
+            }
+            catch (Exception e)
+            {
             }
         }
     }

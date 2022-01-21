@@ -4,7 +4,6 @@
 @model ProjectsModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "LULE";
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
 @{

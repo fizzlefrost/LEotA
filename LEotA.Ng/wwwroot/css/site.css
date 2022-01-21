@@ -237,6 +237,7 @@ a:hover {
     clear:both;
 }
 #nav-bg{
+    /*background-color: beige;*/
     background-image: url("../images/background LEA.jpg");
 }
 /* Footer */
