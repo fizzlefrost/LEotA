@@ -1,4 +1,5 @@
-﻿using IdentityServer4.AccessTokenValidation;
+﻿using IdentityServer4;
+using IdentityServer4.AccessTokenValidation;
 using LEotA.Engine.Data;
 using LEotA.Engine.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -32,7 +33,13 @@ namespace LEotA.Engine.Web.AppStart.ConfigureServices
                         options.Authority = url;
                         options.EnableCaching = true;
                         options.RequireHttpsMetadata = false;
-                    });
+                    })
+                .AddGoogle("Google", options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    options.ClientId = "190166849064-fa2j7v5eiej6918atu1m35b2e34fmipc.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
+                });
 
             services.AddIdentityServer(options =>
                 {
