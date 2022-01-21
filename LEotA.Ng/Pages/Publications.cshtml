@@ -6,7 +6,6 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "SUS!";
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
 	var publications = (List<Publication>) ViewData["publication"];
 }

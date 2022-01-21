@@ -114,8 +114,7 @@ namespace LEotA.Pages
             }
             catch (Exception e)
             {
-                Redirect("/ErrorPage");
-                // do smth
+                
             }
             
         }

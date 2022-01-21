@@ -11,12 +11,13 @@
     var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
-<div class="text-center mb-5">
-    <h1 class="display-4 ">@localizer.Get("Welcome")</h1>
-</div>
+
 <!-- pagination -->
 @try
 {
+    <div class="text-center mb-5">
+        <h1 class="display-4 ">@localizer.Get("Welcome")</h1>
+    </div>
 
 
     @if (!(newsGetPagedCount > 0))
@@ -144,7 +145,10 @@
             }
         }
     }
-
+    <div class="container-fluid">
+        <i class="flag flag-ru"></i>
+        <img src="/images/IMG_4463.JPG"/>
+    </div>
 }
 catch (Exception e)
 {
@@ -152,7 +156,3 @@ catch (Exception e)
 }
 <!-- laboratory staff photo -->
 
-<div class="container-fluid">
-    <i class="flag flag-ru"></i>
-    <img src="/images/IMG_4463.JPG"/>
-</div>

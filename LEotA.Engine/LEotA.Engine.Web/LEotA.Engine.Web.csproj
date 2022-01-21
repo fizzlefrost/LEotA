@@ -62,5 +62,7 @@
   <ItemGroup>
     <Content Include="Views\css\authentication.css" />
   </ItemGroup>
-
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
 </Project>

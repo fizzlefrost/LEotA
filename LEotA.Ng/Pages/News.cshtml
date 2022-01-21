@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Localization
 @model NewsModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "News";
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
     var news = (News)ViewData["newsId"];
 }
