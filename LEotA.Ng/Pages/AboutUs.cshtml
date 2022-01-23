@@ -4,14 +4,13 @@
 @model LEotA.Pages.AboutUsModel
 @inject CommonLocalizationService localizer
 @{
+  try
+  {
     ViewBag.Title = "My Home Page";
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
     var aboutUs = (List<AboutUs>)ViewData["aboutUs"];
     var image = (Dictionary<List<FileContent>, AboutUs>) ViewData["images"];
-}
-@{
-  try
-  {
+  
     <div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">

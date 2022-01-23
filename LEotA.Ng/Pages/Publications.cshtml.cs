@@ -74,7 +74,9 @@ namespace LEotA.Pages
             }
             catch (Exception e)
             {
-                
+                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+
+                Response.Redirect("/"+culture+"/errorpage");
             }
             
         }

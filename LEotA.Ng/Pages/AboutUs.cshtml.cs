@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LEotA.Pages
@@ -47,7 +48,8 @@ namespace LEotA.Pages
             }
             catch (Exception e)
             {
-                
+                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+                Response.Redirect("/"+culture+"/errorpage");
             }
         }
     }

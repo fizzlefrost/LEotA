@@ -1,5 +1,7 @@
 ﻿#nullable enable
+using System;
 using LEotA.Clients.EngineClient;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LEotA.Pages
@@ -15,8 +17,18 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            var _projectList = _engineClientManager.ProjectGetPaged(null, 10, null, null, false);
-            ViewData.Add("projects",_projectList);
+            try
+            {
+                var _projectList = _engineClientManager.ProjectGetPaged(null, 10, null, null, false);
+                ViewData.Add("projects",_projectList);
+                
+            }
+            catch (Exception e)
+            {
+                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+
+                Response.Redirect("/"+culture+"/errorpage");
+            }
         }
     }
 }

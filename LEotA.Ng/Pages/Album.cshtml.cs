@@ -1,7 +1,9 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -23,9 +25,18 @@ namespace LEotA.Pages
 
         public IActionResult OnGet()
         {
+            try
+            {
+                
+                _albumList = _engineClientManager.AlbumGetPaged(null, 10, null, null, false);
+                return Page(); 
+            }
+            catch (Exception e)
+            {
+                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 
-             _albumList = _engineClientManager.AlbumGetPaged(null, 10, null, null, false);
-             return Page(); 
+                return Redirect("/" + culture + "/errorpage");
+            }
         }
     }
 }
