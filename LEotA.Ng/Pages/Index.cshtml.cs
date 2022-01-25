@@ -10,7 +10,7 @@ namespace LEotA.Pages
         public IActionResult OnGet()
         {
             var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            return Redirect("/" + culture + "/redirpage");
+            return Redirect("/" + culture + "/mainpage");
         }
         
     }

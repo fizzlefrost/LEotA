@@ -17,10 +17,10 @@
 
 <article>
     <img src="/images/Secondlogo.png" alt="" style="margin-left: -45px;">
-
     <h1>We&rsquo;ll be back soon!</h1>
     <div>
         <p>Sorry for the inconvenience. The page you are trying to access cannot be loaded. Please try again later.</p>
         <p>Извиняемся за неудобство. Cтраница, к которой вы пытаетесь получить доступ, не может быть загружена. Пожалуйста, попробуйте позже.</p>
     </div>
+    <asp:button id="backButton" OnClientClick="JavaScript:window.history.back(1);return false;" runat="server" text="Back"></asp:button>
 </article>
