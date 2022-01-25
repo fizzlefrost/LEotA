@@ -4,6 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <UserSecretsId>aspnet-LEotA-2F3E0CF9-D64E-4E36-8EA2-9B7ABD342543</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
     </PropertyGroup>
 
     <ItemGroup>
@@ -103,5 +104,7 @@
     <ItemGroup>
       <ProjectReference Include="..\LEotA.Engine\LEotA.Engine.Web\LEotA.Engine.Web.csproj" />
     </ItemGroup>
+
+
 
 </Project>
