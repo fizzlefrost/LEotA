@@ -24,8 +24,8 @@ namespace LEotA.Pages
 
         public void OnGet()
         {
-            try
-            {
+            //try
+            //{
                 var staffList = _engineClientManager.StaffGetPaged(null,30,null,null,true);
                 var sortedStaffList = staffList.OrderBy(o => o.Role).ToList();
                 var staffListWithImage = new Dictionary<Staff, List<FileContent>>();
@@ -36,13 +36,13 @@ namespace LEotA.Pages
                     staffListWithImage.Add(staff, image);
                 }
                 ViewData.Add("staff",staffListWithImage);
-            }
-            catch (Exception e)
-            {
-                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-
-                Response.Redirect("/"+culture+"/errorpage");
-            }
+            // }
+            // catch (Exception e)
+            // {
+            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            //
+            //     Response.Redirect("/"+culture+"/errorpage");
+            // }
             
         }
     }

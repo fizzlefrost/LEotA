@@ -58,7 +58,6 @@ namespace LEotA
                     }
                 });
             });
-            services.AddHttpClient();
 
             services.AddTransient<IAboutUsPatron, AboutUsPatron>();
             services.AddTransient<IAlbumPatron, AlbumPatron>();
@@ -81,43 +80,6 @@ namespace LEotA
                 options.Providers.Add<GzipCompressionProvider>();
             });
             
-            // i know i know
-            // services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IAlbumPatron, AlbumPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IEventParticipantPatron, EventParticipantPatron>(client =>
-            // {
-            //     client.BaseAddress = new Uri(engineUrl);
-            // });
-            // services.AddHttpClient<IEventPatron, EventPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IFileContentPatron, FileContentPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<INewsPatron, NewsPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IPublicationPatron, PublicationPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IProjectPatron, ProjectPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IStaffPatron, StaffPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
             
             services.AddHttpClient("Engine", config =>
             {
@@ -126,14 +88,14 @@ namespace LEotA
                                                  "Invalid engine url in appsettings.json"));
             }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
-                // ClientCertificateOptions = ClientCertificateOption.Manual,
-                // ServerCertificateCustomValidationCallback =
-                //     (httpRequestMessage, cert, cetChain, policyErrors) =>
-                //     {
-                //         return true;
-                //     }
+                ClientCertificateOptions = ClientCertificateOption.Manual,
+                ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    },
                 AllowAutoRedirect = false,
-                ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true,
+                //ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true,
                 SslProtocols = SslProtocols.Tls
             });
 
@@ -188,6 +150,8 @@ namespace LEotA
             }
             else
             {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback += 
+                    (sender, certificate, chain, sslPolicyErrors) => true;
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
