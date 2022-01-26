@@ -403,6 +403,11 @@ img.hover-shadow {
 .carousel-caption > h1{
     padding-left:50px;
     display: table-cell;
+    width: 50%;
+}
+#firstslide{
+    padding-left:50px;
+    display: table-cell;
     width: 17em;
 }
 .carousel-caption > h4{
@@ -410,12 +415,16 @@ img.hover-shadow {
     padding-left:50px;
 }
 .carousel-caption > p{
-    right:50%;
-    padding-top:50px;
+    /*right:50%;*/
     display: table-cell;
-    width:50%;
+    /*width:50%;*/
+    padding-right:15px;
+    position: relative;
+    top:-50px;
 }
-
+.carousel-inner > .item {
+.transition(10s ease-in-out left);
+}
 .carousel-indicators{
     bottom: 1.5em;
 }
@@ -424,7 +433,7 @@ img.hover-shadow {
     margin:0 auto;
 }
 .carousel-item{
-    /*transition:none;*/
+    transition:none;
 }
 /*Media do not touch*/
 @media all and (min-width: 1024px) and (max-width: 1280px) { 
