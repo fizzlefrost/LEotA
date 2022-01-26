@@ -392,13 +392,39 @@ img.hover-shadow {
     background-color: #eeeeee;
 }
 .carousel-caption{
-    top: 1.9em;
-    height: 15em;
-    background-color: lightgray;
+    height: 35%;
+    background-color: white;
     text-align: left;
-    opacity: 0.8;
-    left: 1.5em;
-    right: 1.5em;
+    color: black;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.carousel-caption > h1{
+    padding-left:50px;
+    display: table-cell;
+    width: 50%;
+}
+#firstslide{
+    padding-left:50px;
+    display: table-cell;
+    width: 17em;
+}
+.carousel-caption > h4{
+    padding-top:50px;
+    padding-left:50px;
+}
+.carousel-caption > p{
+    /*right:50%;*/
+    display: table-cell;
+    /*width:50%;*/
+    padding-right:15px;
+    position: relative;
+    top:-50px;
+}
+.carousel-inner > .item {
+.transition(10s ease-in-out left);
 }
 .carousel-indicators{
     bottom: 1.5em;
