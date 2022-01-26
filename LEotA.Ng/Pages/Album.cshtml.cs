@@ -28,7 +28,7 @@ namespace LEotA.Pages
             //try
             //{
                 
-                _albumList = _engineClientManager.AlbumGetPaged(null, 10, null, null, false);
+                _albumList = _engineClientManager.AlbumGetPaged(1, 10, null, null, false);
                 return Page(); 
             //}
             // catch (Exception e)

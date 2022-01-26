@@ -122,16 +122,30 @@ namespace LEotA.Clients.EngineClient
         public CalabongaViewModel<Event>? EventGetById(Guid id) =>
             _eventPatron?.EventGetByIdAsync(id.ToString()).Result;
 
+        // public List<Event>? EventGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
+        //     bool disabledDefaultIncludes) => _eventPatron?.EventGetPagedAsync(new CalabongaGetPagedRequestModel()
+        // {
+        //     PageIndex = pageIndex,
+        //     PageSize = pageSize,
+        //     SortDirection = sortDirection,
+        //     Search = search,
+        //     DisabledDefaultIncludes = disabledDefaultIncludes
+        // }).Result.Result.Items;
+
         public List<Event>? EventGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
-            bool disabledDefaultIncludes) => _eventPatron?.EventGetPagedAsync(new CalabongaGetPagedRequestModel()
+            bool disabledDefaultIncludes)
         {
-            PageIndex = pageIndex,
-            PageSize = pageSize,
-            SortDirection = sortDirection,
-            Search = search,
-            DisabledDefaultIncludes = disabledDefaultIncludes
-        }).Result.Result.Items;
-        
+            var task = _eventPatron?.EventGetPagedAsync(new CalabongaGetPagedRequestModel()
+            {
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                SortDirection = sortDirection,  
+                Search = search,
+                DisabledDefaultIncludes = disabledDefaultIncludes
+            });
+            return task.GetAwaiter().GetResult().Result.Items;
+        }
+
         public CalabongaViewModel<EventParticipant>? EventParticipantPost(Guid eventId, Guid userId) =>
             _eventParticipantPatron?.EventParticipantPostAsync(new EventParticipantCreateModel()
             {

@@ -9,7 +9,9 @@ using AutoMapper;
 using Calabonga.UnitOfWork;
 using Calabonga.UnitOfWork.Controllers.Controllers;
 using Calabonga.UnitOfWork.Controllers.Factories;
+using LEotA.Engine.Web.Infrastructure.Engine.EntityManagers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace LEotA.Engine.Web.Controllers
 {
@@ -31,6 +33,21 @@ namespace LEotA.Engine.Web.Controllers
                 if (pageSize == 0) pageSize = 1;
                 int vspm (int pageSize) => (Repository.Count() % pageSize == 0) ? ((Repository.Count() / pageSize) + 1) : Repository.Count() / pageSize;
                 return Ok(vspm(pageSize));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> LargePost(IFormFile text, string description, string name, string author, string time)
+        {
+            try
+            {
+                var uploadedFile = await NewsManager.LargePost(text, description, name, author, time);
+                return Ok(uploadedFile);
             }
             catch (Exception e)
             {
