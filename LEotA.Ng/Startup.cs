@@ -82,42 +82,42 @@ namespace LEotA
             });
             
             // i know i know
-            // services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IAlbumPatron, AlbumPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IEventParticipantPatron, EventParticipantPatron>(client =>
-            // {
-            //     client.BaseAddress = new Uri(engineUrl);
-            // });
-            // services.AddHttpClient<IEventPatron, EventPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IFileContentPatron, FileContentPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<INewsPatron, NewsPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IPublicationPatron, PublicationPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IProjectPatron, ProjectPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
-            // services.AddHttpClient<IStaffPatron, StaffPatron>(client =>
-            // {
-            //     client.BaseAddress = engineUrl;
-            // });
+            services.AddHttpClient<IAboutUsPatron, AboutUsPatron>(client =>
+            {
+                 client.BaseAddress = engineUrl;
+             });
+             services.AddHttpClient<IAlbumPatron, AlbumPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<IEventParticipantPatron, EventParticipantPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<IEventPatron, EventPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<IFileContentPatron, FileContentPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<INewsPatron, NewsPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<IPublicationPatron, PublicationPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<IProjectPatron, ProjectPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
+            services.AddHttpClient<IStaffPatron, StaffPatron>(client =>
+            {
+                client.BaseAddress = engineUrl;
+            });
             
             services.AddHttpClient("Engine", config =>
             {
