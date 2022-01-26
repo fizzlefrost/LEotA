@@ -88,14 +88,14 @@ namespace LEotA
                                                  "Invalid engine url in appsettings.json"));
             }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
-                // ClientCertificateOptions = ClientCertificateOption.Manual,
-                // ServerCertificateCustomValidationCallback =
-                //     (httpRequestMessage, cert, cetChain, policyErrors) =>
-                //     {
-                //         return true;
-                //     }
+                ClientCertificateOptions = ClientCertificateOption.Manual,
+                ServerCertificateCustomValidationCallback =
+                    (httpRequestMessage, cert, cetChain, policyErrors) =>
+                    {
+                        return true;
+                    },
                 AllowAutoRedirect = false,
-                ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true,
+                //ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true,
                 SslProtocols = SslProtocols.Tls
             });
 
@@ -150,6 +150,8 @@ namespace LEotA
             }
             else
             {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback += 
+                    (sender, certificate, chain, sslPolicyErrors) => true;
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
