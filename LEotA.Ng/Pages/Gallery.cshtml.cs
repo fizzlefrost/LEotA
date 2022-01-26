@@ -19,8 +19,8 @@ namespace LEotA.Pages
 
         public IActionResult OnGet(Guid id)
         {
-            try
-            {
+            // try
+            // {
                 ViewData.Clear();
                 var album = _engineClientManager.AlbumGetById(id)?.Result;
                 var images = _engineClientManager.FileContentGetByMasterId(id);
@@ -33,12 +33,12 @@ namespace LEotA.Pages
                     j++;
                 }
                 return Page(); 
-            }
-            catch (Exception e)
-            {
-                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-                return Redirect("/" + culture + "/errorpage");
-            }
+            //}
+            // catch (Exception e)
+            // {
+            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            //     return Redirect("/" + culture + "/errorpage");
+            // }
         }
     }
 }

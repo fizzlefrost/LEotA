@@ -21,8 +21,8 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            try
-            {
+            //try
+            //{
                 var aboutUsList = _engineClientManager.AboutUsGetPaged(null, 100, null, null, false);
                 var aboutUsReturnList = new List<AboutUs>();
 
@@ -45,12 +45,12 @@ namespace LEotA.Pages
                 }
 
                 ViewData.Add("aboutUs", aboutUsReturnList);
-            }
-            catch (Exception e)
-            {
-                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-                Response.Redirect("/"+culture+"/errorpage");
-            }
+            //}
+            // catch (Exception e)
+            // {
+            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            //     Response.Redirect("/"+culture+"/errorpage");
+            // }
         }
     }
 }

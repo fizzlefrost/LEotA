@@ -25,18 +25,18 @@ namespace LEotA.Pages
 
         public IActionResult OnGet()
         {
-            try
-            {
+            //try
+            //{
                 
                 _albumList = _engineClientManager.AlbumGetPaged(null, 10, null, null, false);
                 return Page(); 
-            }
-            catch (Exception e)
-            {
-                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-
-                return Redirect("/" + culture + "/errorpage");
-            }
+            //}
+            // catch (Exception e)
+            // {
+            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            //
+            //     return Redirect("/" + culture + "/errorpage");
+            // }
         }
     }
 }

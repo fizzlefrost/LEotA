@@ -28,8 +28,8 @@ namespace LEotA.Pages
         public async Task OnGet(int p)
         {
             
-            try
-            {
+            //try
+            //{
                 switch (p)
                 {
                     case 0:
@@ -112,13 +112,13 @@ namespace LEotA.Pages
                         // }
                         // break;
                 }
-            }
-            catch (Exception e)
-            {
-                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-
-                Response.Redirect("/"+culture+"/errorpage");
-            }
+            //}
+            // catch (Exception e)
+            // {
+            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            //
+            //     Response.Redirect("/"+culture+"/errorpage");
+            // }
             
         }
         

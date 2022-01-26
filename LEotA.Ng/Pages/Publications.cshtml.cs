@@ -25,8 +25,8 @@ namespace LEotA.Pages
 
         public void OnGet()
         {
-            try
-            {
+            //try
+            //{
                 var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
                 ViewData.Clear();
                 var publicationsListGetPaged= _engineClientManager.PublicationGetPaged(null, 10, null, null, false);
@@ -71,13 +71,13 @@ namespace LEotA.Pages
                     }
                 }
                 ViewData.Add("Publication",publicationsList);
-            }
-            catch (Exception e)
-            {
-                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-
-                Response.Redirect("/"+culture+"/errorpage");
-            }
+            // }
+            // catch (Exception e)
+            // {
+            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            //
+            //     Response.Redirect("/"+culture+"/errorpage");
+            // }
             
         }
     }
