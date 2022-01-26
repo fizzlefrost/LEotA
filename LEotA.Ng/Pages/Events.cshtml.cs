@@ -24,8 +24,8 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            try
-            {
+            //try
+            //{
                 var eventList = _engineClientManager.EventGetPaged(null, 10, null, null, false);
                 //ViewData.Add("event", eventList);
                 if (eventList != null && !ActiveOnly)
@@ -55,12 +55,12 @@ namespace LEotA.Pages
                     }
                     ViewData.Add("event", activeEventList);
                 }
-            }
-            catch (Exception e)
-            {
+            //}
+            //catch (Exception e)
+            /*{
                 var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
                 Response.Redirect("/"+culture+"/errorpage");
-            }
+            }*/
         }
     }
 }
