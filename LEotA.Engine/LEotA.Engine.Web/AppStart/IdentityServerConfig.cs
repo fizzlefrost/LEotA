@@ -64,7 +64,7 @@ namespace LEotA.Engine.Web.AppStart
                 },
                 RedirectUris =
                 {
-                    "https://0.0.0.0:80/signin-oidc"
+                    "https://0.0.0.0:5001/signin-oidc"
                 },
                 AlwaysIncludeUserClaimsInIdToken = true
             }
