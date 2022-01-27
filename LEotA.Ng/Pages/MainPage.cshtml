@@ -8,8 +8,12 @@
     
         ViewData["Title"] = "Home page";
         var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
+    
         var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
+    try
+    {
         var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
+    
         var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
         
     <div class="text-center mb-5">
@@ -23,8 +27,8 @@
         </SfSpinner>
     }
     else
-    {try
     {
+        
         <div class="album py-5 bg-light">
             <div class="container">
                 @for (int i = 0; i < newsGetPagedCount / 2 + newsGetPagedCount % 2; i++)
@@ -143,12 +147,12 @@
             }
         }
     }
-    catch (Exception e)
-        { 
-        @*     <p>NULL</p> *@
-        <a><img class="construction-img" src="/images/11162020.jpg"></a>
-        }
+    
     }
 
-
+    catch (Exception e)
+    { 
+        @*     <p>NULL</p> *@
+        <a><img class="construction-img" src="/images/11162020.jpg"></a>
+    }
 }
