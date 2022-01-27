@@ -5,8 +5,7 @@
 @using Microsoft.AspNetCore.Localization
 @model MainPageModel
 @{
-    try
-    {
+    
         ViewData["Title"] = "Home page";
         var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
         var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
@@ -24,6 +23,7 @@
         </SfSpinner>
     }
     else
+    {try
     {
         <div class="album py-5 bg-light">
             <div class="container">
@@ -143,18 +143,12 @@
             }
         }
     }
-        
-        // TODO: create an image
-        
-    @* <div class="container-fluid"> *@
-        @* <i class="flag flag-ru"></i> *@
-        @* <img src="/images/IMG_4463.JPG"/> *@
-    @* </div> *@
-}
-catch (Exception e)
-{ 
-@*     <p>NULL</p> *@
-    <a><img class="construction-img" src="/images/11162020.jpg"></a>
-}
+    catch (Exception e)
+        { 
+        @*     <p>NULL</p> *@
+        <a><img class="construction-img" src="/images/11162020.jpg"></a>
+        }
+    }
+
 
 }
