@@ -5,13 +5,13 @@
 @using Microsoft.AspNetCore.Localization
 @model MainPageModel
 @{
-    
+    try
+    {
         ViewData["Title"] = "Home page";
         var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
     
         var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
-    try
-    {
+   
         var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
     
         var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
