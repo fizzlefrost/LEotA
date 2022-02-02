@@ -27,29 +27,29 @@
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
                                             <a href="@staffList.ElementAt(i*4+j).Key.EmbedLink">
-                                                <img src="data:image;base64,@Convert.ToBase64String(staffList.ElementAt(i*4+j+1).Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
+                                                <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(i*4+j).FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
                                             </a>
                                         </div>
                                         <div class="col-md-12 text-center" style="height:400px">
                                             <div class="pt-2">
                                                 @if (culture == "en")
                                                 {
-                                                    <h5 class="mt-4 font-weight-medium mb-0">@staffList.ElementAt(i*4+j).Key.Name.English</h5>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Degree.English</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Title.English</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Position.English</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Text.English</h6>
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@staffList.Keys.ElementAt(i*4+j).Name.English</h5>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Degree.English</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Title.English</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Position.English</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Text.English</h6>
                                                 }
                                                 else
                                                 {
-                                                    <h5 class="mt-4 font-weight-medium mb-0">@staffList.ElementAt(i*4+j).Key.Name.Russian</h5>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Degree.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Title.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Position.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(i*4+j).Key.Text.Russian</h6>
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@staffList.Keys.ElementAt(i*4+j).Name.Russian</h5>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Degree.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Title.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Position.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(i*4+j).Text.Russian</h6>
                                                 }
                                                 <ul class="list-inline align-center bottomize" style="left:0;">
-                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staffList.ElementAt(staffCount/4*4+j).Key.Email</a></li>
+                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staffList.Keys.ElementAt(i*4+j).Email</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -67,29 +67,29 @@
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
                                             <a href="@staffList.ElementAt(staffCount/4*4+j).Key.EmbedLink">
-                                                <img src="data:image;base64,@Convert.ToBase64String(staffList.ElementAt(staffCount/4*4+j+1).Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
+                                                <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(staffCount/4*4+j).FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
                                             </a>
                                         </div>
                                         <div class="col-md-12 text-center" style="height:400px">
                                             <div class="pt-2">
                                                 @if (culture == "en")
                                                 {
-                                                    <h5 class="mt-4 font-weight-medium mb-0">@staffList.ElementAt(staffCount/4*4+j).Key.Name.English</h5>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Degree.English</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Title.English</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Position.English</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Text.English</h6>
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@staffList.Keys.ElementAt(staffCount/4*4+j).Name.English</h5>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Degree.English</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Title.English</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Position.English</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Text.English</h6>
                                                 }
                                                 else
                                                 {
                                                     <h5 class="mt-4 font-weight-medium mb-0">@staffList.ElementAt(staffCount/4*4+j).Key.Name.Russian</h5>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Degree.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Title.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Position.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staffList.ElementAt(staffCount/4*4+j).Key.Text.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Degree.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Title.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Position.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staffList.Keys.ElementAt(staffCount/4*4+j).Text.Russian</h6>
                                                 }
                                                 <ul class="list-inline align-center bottomize" style="left:0">
-                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staffList.ElementAt(staffCount/4*4+j).Key.Email</a></li>
+                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staffList.Keys.ElementAt(staffCount/4*4+j).Email</a></li>
                                                 </ul>
                                             </div>
                                         </div>
