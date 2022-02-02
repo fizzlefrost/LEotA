@@ -1,14 +1,17 @@
 ﻿@page
 @model StaffModel
 @using LEotA.Services
+@using Microsoft.AspNetCore.Localization
 @inject CommonLocalizationService localizer
 @{
     ViewData["Title"] = localizer.Get("Staff");
     var staffList = (Dictionary<Staff,List<FileContent>>)ViewData["staff"];
+    var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
     var staffCount = staffList.Count;
 }
 @{
     try{
+        <h1>@staffCount</h1>
         <div class="py-5">
             <div class="container">
                 <div class="row justify-content-center mb-4">
@@ -23,7 +26,7 @@
                         <div class="row justify-content-center">
                             @foreach (var staff in staffList.Take(4))
                             {
-                                <div class="col-lg-3 mb-4 ml-3">
+                                <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
                                             <a href="@staff.Key.EmbedLink">
@@ -32,8 +35,22 @@
                                         </div>
                                         <div class="col-md-12 text-center" style="height:250px">
                                             <div class="pt-2">
-                                                <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name</h5>
-                                                <h6 class="subtitle mb-3">@staff.Key.Text</h6>
+                                                @if (culture == "en")
+                                                {
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.English</h5>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.English</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Title.English</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Position.English</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Text.English</h6>
+                                                }
+                                                else
+                                                {
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.Russian</h5>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Title.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Position.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Text.Russian</h6>
+                                                }
                                                 <ul class="list-inline align-center bottomize">
                                                     <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staff.Key.Email</a></li>
                                                 </ul>
@@ -50,7 +67,7 @@
                         <div class="row justify-content-center">
                             @foreach (var staff in staffList.Take(staffCount%4))
                             {
-                                <div class="col-lg-3 mb-4 ml-3">
+                                <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
                                             <a href="@staff.Key.EmbedLink">
@@ -59,8 +76,22 @@
                                         </div>
                                         <div class="col-md-12 text-center" style="height:250px">
                                             <div class="pt-2">
-                                                <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.English</h5>
-                                                <h6 class="subtitle mb-3">@staff.Key.Text.English</h6>
+                                                @if (culture == "en")
+                                                {
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.English</h5>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.English</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Title.English</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Position.English</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Text.English</h6>
+                                                }
+                                                else
+                                                {
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.Russian</h5>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Title.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Position.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@staff.Key.Text.Russian</h6>
+                                                }
                                                 <ul class="list-inline align-center bottomize">
                                                     <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staff.Key.Email</a></li>
                                                 </ul>
