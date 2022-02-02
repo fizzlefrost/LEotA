@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
 using Microsoft.AspNetCore.Localization;
@@ -22,7 +23,7 @@ namespace LEotA.Pages
             _engineClientManager = engineClientManager;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
             //try
             //{
