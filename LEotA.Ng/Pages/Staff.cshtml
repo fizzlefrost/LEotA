@@ -19,40 +19,38 @@
                         <h3 class="mb-3">@localizer.Get("OurTeam")</h3>
                     </div>
                 </div>
-                @if (staffCount >= 4)
-                {
                     @for (int i = 0; i < staffCount / 4; i++)
                     {
                         <div class="row justify-content-center">
-                            @foreach (var staff in staffList.Take(4))
+                            @foreach (var currentStaff in staffList.Take(4))
                             {
                                 <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
-                                            <a href="@staff.Key.EmbedLink">
-                                                <img src="data:image;base64,@Convert.ToBase64String(staff.Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
+                                            <a href="@currentStaff.Key.EmbedLink">
+                                                <img src="data:image;base64,@Convert.ToBase64String(currentStaff.Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
                                             </a>
                                         </div>
                                         <div class="col-md-12 text-center" style="height:400px">
                                             <div class="pt-2">
                                                 @if (culture == "en")
                                                 {
-                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.English</h5>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.English</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Title.English</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Position.English</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Text.English</h6>
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@currentStaff.Key.Name.English</h5>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Degree.English</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Title.English</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Position.English</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Text.English</h6>
                                                 }
                                                 else
                                                 {
-                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.Russian</h5>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Title.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Position.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Text.Russian</h6>
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@currentStaff.Key.Name.Russian</h5>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Degree.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Title.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Position.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Text.Russian</h6>
                                                 }
                                                 <ul class="list-inline align-center bottomize" style="left:0;">
-                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staff.Key.Email</a></li>
+                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@currentStaff.Key.Email</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -61,39 +59,38 @@
                             }
                         </div>
                     }
-                }
                 @if(staffCount%4>0)
                     {
                         <div class="row justify-content-center">
-                            @foreach (var staff in staffList.Take(staffCount%4))
+                            @foreach (var currentStaff in staffList.Take(staffCount%4))
                             {
                                 <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
-                                            <a href="@staff.Key.EmbedLink">
-                                                <img src="data:image;base64,@Convert.ToBase64String(staff.Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
+                                            <a href="@currentStaff.Key.EmbedLink">
+                                                <img src="data:image;base64,@Convert.ToBase64String(currentStaff.Value.FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
                                             </a>
                                         </div>
                                         <div class="col-md-12 text-center" style="height:400px">
                                             <div class="pt-2">
                                                 @if (culture == "en")
                                                 {
-                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.English</h5>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.English</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Title.English</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Position.English</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Text.English</h6>
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@currentStaff.Key.Name.English</h5>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Degree.English</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Title.English</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Position.English</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Text.English</h6>
                                                 }
                                                 else
                                                 {
-                                                    <h5 class="mt-4 font-weight-medium mb-0">@staff.Key.Name.Russian</h5>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Degree.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Title.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Position.Russian</h6>
-                                                    <h6 class="subtitle mb-1">@staff.Key.Text.Russian</h6>
+                                                    <h5 class="mt-4 font-weight-medium mb-0">@currentStaff.Key.Name.Russian</h5>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Degree.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Title.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Position.Russian</h6>
+                                                    <h6 class="subtitle mb-1">@currentStaff.Key.Text.Russian</h6>
                                                 }
                                                 <ul class="list-inline align-center bottomize" style="left:0">
-                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staff.Key.Email</a></li>
+                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@currentStaff.Key.Email</a></li>
                                                 </ul>
                                             </div>
                                         </div>
