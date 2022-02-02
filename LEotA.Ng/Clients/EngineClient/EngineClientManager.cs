@@ -324,21 +324,27 @@ namespace LEotA.Clients.EngineClient
             DisabledDefaultIncludes = disabledDefaultIncludes
         }).Result.Result.Items;
         
-        public CalabongaViewModel<Staff>? StaffPost(CultureBase name, string embedLink, StaffRoles role, string email, CultureBase text) =>
+        public CalabongaViewModel<Staff>? StaffPost(CultureBase name, CultureBase degree, CultureBase title, CultureBase position, string embedLink, StaffRoles role, string email, CultureBase text) =>
             _staffPatron?.StaffPostAsync(new StaffCreateModel()
             {
                 Name = JsonSerializer.Serialize(name),
+                Degree = JsonSerializer.Serialize(degree),
+                Title = JsonSerializer.Serialize(title),
+                Position = JsonSerializer.Serialize(position),
                 EmbedLink = embedLink,
                 Role = role,
                 Email = email,
                 Text = JsonSerializer.Serialize(text),
             }).Result;
 
-        public CalabongaViewModel<Staff>? StaffPut(Guid id, CultureBase name, string embedLink, StaffRoles role, string email, CultureBase text ,Guid newId) => 
+        public CalabongaViewModel<Staff>? StaffPut(Guid id, CultureBase name, CultureBase degree, CultureBase title, CultureBase position, string embedLink, StaffRoles role, string email, CultureBase text ,Guid newId) => 
             _staffPatron?.StaffPutAsync(new StaffUpdateModel()
             {
                 Id = id.ToString(),
                 Name = JsonSerializer.Serialize(name),
+                Degree = JsonSerializer.Serialize(degree),
+                Title = JsonSerializer.Serialize(title),
+                Position = JsonSerializer.Serialize(position),
                 EmbedLink = embedLink,
                 Role = role,
                 Email = email,

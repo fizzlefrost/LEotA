@@ -27,6 +27,9 @@ namespace LEotA.Clients.EngineClient.Patrons
             {
                 EmbedLink = staffCreateModel.EmbedLink,
                 Name = staffCreateModel.Name,
+                Degree = staffCreateModel.Degree,
+                Title = staffCreateModel.Title,
+                Position = staffCreateModel.Position,
                 Role = staffCreateModel.Role,
                 Email = staffCreateModel.Email,
                 Text = staffCreateModel.Text
@@ -101,6 +104,9 @@ namespace LEotA.Clients.EngineClient.Patrons
         {
             var culturedName = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Name);
             var culturedText = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Text);
+            var culturedTitle = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Title);
+            var culturedDegree = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Degree);
+            var culturedPosition = JsonSerializer.Deserialize<CultureBase>(pageModel.Result.Position);
             var returnModel = new CalabongaViewModel<Staff>()
             {
                 ActivityId = pageModel.ActivityId,
@@ -113,6 +119,9 @@ namespace LEotA.Clients.EngineClient.Patrons
                     Id = new Guid(pageModel.Result.Id),
                     EmbedLink = pageModel.Result.EmbedLink,
                     Name = culturedName,
+                    Degree = culturedDegree,
+                    Title = culturedTitle,
+                    Position = culturedPosition,
                     //Role = (Models.StaffRoles) Enum.Parse(typeof(StaffRoles), pageModel.Result.Role),
                     Role = pageModel.Result.Role,
                     Email = pageModel.Result.Email,
@@ -149,10 +158,16 @@ namespace LEotA.Clients.EngineClient.Patrons
                 {
                     var culturedName = JsonSerializer.Deserialize<CultureBase>(staff.Name);
                     var culturedText = JsonSerializer.Deserialize<CultureBase>(staff.Text);
+                    var culturedTitle = JsonSerializer.Deserialize<CultureBase>(staff.Title);
+                    var culturedDegree = JsonSerializer.Deserialize<CultureBase>(staff.Degree);
+                    var culturedPosition = JsonSerializer.Deserialize<CultureBase>(staff.Position);
                     returnModel.Result.Items.Add(new Staff()
                     {
                         Id = new Guid(staff.Id),
                         Name = culturedName,
+                        Degree = culturedDegree,
+                        Title = culturedTitle,
+                        Position = culturedPosition,
                         EmbedLink = staff.EmbedLink,
                         //Role = (Models.StaffRoles) Enum.Parse(typeof(StaffRoles), staff.Role),
                         Role = staff.Role,

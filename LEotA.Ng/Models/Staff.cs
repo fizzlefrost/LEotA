@@ -10,6 +10,12 @@ namespace LEotA.Models
         public Guid Id { get; set; }
         [JsonPropertyName("name")]
         public CultureBase Name { get; set; }
+        [JsonPropertyName("degree")]
+        public CultureBase Degree { get; set; }
+        [JsonPropertyName("title")]
+        public CultureBase Title { get; set; }
+        [JsonPropertyName("position")]
+        public CultureBase Position { get; set; }
         [JsonPropertyName("role")]
         public StaffRoles Role { get; set; }
         [JsonPropertyName("embedLink")]
@@ -31,6 +37,12 @@ namespace LEotA.Models
         public string Id { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("degree")]
+        public string Degree { get; set; }
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
+        [JsonPropertyName("position")]
+        public string Position { get; set; }
         [JsonPropertyName("role")]
         public StaffRoles Role { get; set; }
         [JsonPropertyName("embedLink")]
@@ -56,6 +68,12 @@ namespace LEotA.Models
     {
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("degree")]
+        public string Degree { get; set; }
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
+        [JsonPropertyName("position")]
+        public string Position { get; set; }
         [JsonPropertyName("role")]
         public StaffRoles Role { get; set; }
         [JsonPropertyName("embedLink")]
@@ -72,6 +90,12 @@ namespace LEotA.Models
         public string Id { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("degree")]
+        public string Degree { get; set; }
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
+        [JsonPropertyName("position")]
+        public string Position { get; set; }
         [JsonPropertyName("role")]
         public StaffRoles Role { get; set; }
         [JsonPropertyName("embedLink")]
