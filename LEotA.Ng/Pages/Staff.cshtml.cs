@@ -27,15 +27,15 @@ namespace LEotA.Pages
         {
             //try
             //{
-                var staffList = _engineClientManager.StaffGetPaged(null,50,null,null,true);
-                var staffListWithImage = new Dictionary<Staff, List<FileContent>>();
-                foreach (var staff in staffList)
-                {
-                    var image = _engineClientManager.FileContentGetByMasterId(staff.Id);
-                
-                    staffListWithImage.Add(staff, image);
-                }
-                ViewData.Add("staff",staffListWithImage);
+            var staffList = _engineClientManager.StaffGetPaged(null,50,null,null,true);
+            var sortedStaffList = staffList.OrderBy(o => o.Position).ToList();
+            var staffListWithImage = new Dictionary<Staff, List<FileContent>>();
+            foreach (var staff in sortedStaffList)
+            {
+                var image = _engineClientManager.FileContentGetByMasterId(staff.Id);
+                staffListWithImage.Add(staff, image);
+            }
+            ViewData.Add("staff",staffListWithImage);
             // }
             // catch (Exception e)
             // {
