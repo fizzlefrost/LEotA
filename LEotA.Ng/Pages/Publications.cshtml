@@ -7,14 +7,11 @@
 
 @{
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
-	var publications = (List<Publication>) ViewData["publication"];
+	var publications = (Dictionary<Publication,List<FileContent>>) ViewData["publication"];
 }
 @{
 	try
 	{
-
-	
-
 		<div class="container mb-5">
 			<form method="get">
 				<div class="row">
@@ -36,14 +33,33 @@
 		
 		@foreach (var _public in publications)
 		{
+			var content = _public.Value.FirstOrDefault()?.Content;
+			if (content != null)
+			{
+				await System.IO.File.WriteAllBytesAsync("hello.pdf", content);
+			}
 			<div class="list-group mt-3">
-				<a target="_blank" rel="noopener noreferrer" href="@_public.EmbedLink" class="list-group-item list-group-item-action">
+				<a target="_blank" rel="noopener noreferrer" href="@_public.Key.EmbedLink" class="list-group-item list-group-item-action">
 					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">@_public.Name.Russian</h5>
-						<small>@_public.Time.Day / @_public.Time.Month / @_public.Time.Year </small>
+						@if (culture == "ru")
+						{
+							<h5 class="mb-1">@_public.Key.Name.Russian</h5>
+						}
+						else
+						{
+							<h5 class="mb-1">@_public.Key.Name.English</h5>
+						}
+						<small>@_public.Key.Time.Day / @_public.Key.Time.Month / @_public.Key.Time.Year </small>
 					</div>
 					<div class="d-flex flex-row-reverse">
-						<small>@_public.Text.Russian </small>
+						@if (culture == "ru")
+						{
+							<small>@_public.Key.Text.Russian </small>
+						}
+						else
+						{
+							<small>@_public.Key.Text.English </small>
+						}
 					</div>
 				</a>
 			</div>

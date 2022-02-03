@@ -31,6 +31,7 @@ namespace LEotA.Pages
                 ViewData.Clear();
                 var publicationsListGetPaged= _engineClientManager.PublicationGetPaged(null, 10, null, null, false);
                 var publicationsList = new List<Publication>();
+                var publicationsPdfList = new Dictionary<Publication, List<FileContent>>();
                 if (SearchYear != 0){
                     if (!string.IsNullOrEmpty(SearchName))
                     {
@@ -70,7 +71,15 @@ namespace LEotA.Pages
                         publicationsList = publicationsListGetPaged;
                     }
                 }
-                ViewData.Add("Publication",publicationsList);
+                foreach (var publication in publicationsList)
+                {
+                    var pdf = _engineClientManager.FileContentGetByMasterId(publication.Id);
+                    if (pdf != null)
+                    {
+                        publicationsPdfList.Add(publication, pdf);
+                    }
+                }
+                ViewData.Add("Publication",publicationsPdfList);
             // }
             // catch (Exception e)
             // {
