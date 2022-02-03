@@ -23,10 +23,11 @@
                         <div class="row justify-content-center">
                             @for (int j = 0; j < 4; j++)
                             {
+                                var staff = staffList.Keys.ElementAt(i * 4 + j);
                                 <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
-                                            <a href="@staffList.ElementAt(i*4+j).Key.EmbedLink">
+                                            <a href="@staffList.Keys.ElementAt(i*4+j).EmbedLink">
                                                 <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(i*4+j).FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
                                             </a>
                                         </div>
@@ -66,7 +67,7 @@
                                 <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
-                                            <a href="@staffList.ElementAt(staffCount/4*4+j).Key.EmbedLink">
+                                            <a href="@staffList.Keys.ElementAt(staffCount/4*4+j).EmbedLink">
                                                 <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(staffCount/4*4+j).FirstOrDefault()?.Content)" alt="wrapkit" class="img-fluid" style="height: 200px"/>
                                             </a>
                                         </div>
