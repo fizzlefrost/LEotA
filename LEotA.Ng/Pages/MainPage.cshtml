@@ -70,7 +70,46 @@
                         }
                         
                     }
-                @*@for (int i = 0; i < newsGetPagedCount / 2 + newsGetPagedCount % 2; i++)
+                    @if (newsGetPagedCount%2 > 0)
+        
+                    {
+                        for (int i = 0; i < newsGetPagedCount % 2; i++)
+                        {
+                            var image = newsImages.Values.ElementAt(Model.Pager.CurrentPage * 4 + i);
+                            var newsText = newsImages.Keys.ElementAt(Model.Pager.CurrentPage * 4 + i);
+                            <div class="col-6">
+                                <div class="news-container">
+                                    <img src="data:image;base64,@Convert.ToBase64String(image.FirstOrDefault().Content)">
+                                    <p class="top-right">@newsText.Time.Day - @newsText.Time.Month - @newsText.Time.Year</p>
+                                    <p class="bottom-right">@newsText.Author</p>
+                                    @if (culture == "en")
+                                    {
+                                        <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                    }
+                                </div>
+                                <div class="row">
+                                    @if (culture == "en")
+                                    {
+                                        <div class="col-12">
+                                            <p class="is-indented-2">@newsText.Description.English</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-12">
+                                            <p class="is-indented-2">@newsText.Description.Russian</p>
+                                        </div>
+                                    }
+                                </div>
+                                <hr aria-hidden="true">
+                            </div>
+                        }
+                    }
+                    @*@for (int i = 0; i < newsGetPagedCount / 2 + newsGetPagedCount % 2; i++)
                 {
                     <div class="row">
                         @if (i + 1 == newsGetPagedCount && newsGetPagedCount % 2 == 1)
