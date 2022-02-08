@@ -31,7 +31,7 @@
         
         <div class="album py-5 bg-light">
             <div class="container">
-                    @for (int i = 0; i < newsGetPagedCount/2; i++)
+                    @for (int i = 0; i < (newsGetPagedCount+1)/2; i++)
                     {
                         @for (int j = 0; j < 2; j++)
                         {
@@ -71,7 +71,6 @@
                         
                     }
                     @if (newsGetPagedCount%2 > 0)
-        
                     {
                         for (int i = 0; i < newsGetPagedCount % 2; i++)
                         {
