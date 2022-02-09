@@ -22,12 +22,12 @@ namespace LEotA.Pages
             var newsWithImage = new Dictionary<News, List<FileContent>?>();
             ViewData.Clear();
             var news = _engineClientManager.NewsGetById(id)?.Result;
-            if (news != null)
-            {
-                var newsImage = _engineClientManager.FileContentGetByMasterId(news.Id);
-                newsWithImage.Add(news, newsImage);
-                ViewData.Add("newsId",newsWithImage);
-            }
+            // if (news != null)
+            // {
+            //     var newsImage = _engineClientManager.FileContentGetByMasterId(news.Id);
+            //     newsWithImage.Add(news, newsImage);
+            //     ViewData.Add("newsId",newsWithImage);
+            // }
             ViewData.Add("newsId", news);
             return Page(); 
         }
