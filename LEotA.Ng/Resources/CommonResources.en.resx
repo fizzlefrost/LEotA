@@ -73,7 +73,7 @@
         <value>Our socials</value>
     </data>
     <data name="Footer" xml:space="preserve">
-        <value>2021 © International Research Laboratory
+        <value>2022 © International Research Laboratory
 “Arctic Linguistic Ecology”</value>
     </data>
     <data name="LabName" xml:space="preserve">
@@ -86,10 +86,10 @@
     <data name="Eventover" xml:space="preserve">
         <value>Sorry the event is already over.</value>
     </data>
-    <data name="Ourteam" xml:space="preserve">
-        <value>Our Team</value>
-    </data>
     <data name="ActiveOnly" xml:space="preserve">
         <value>Show active events only</value>
+    </data>
+    <data name="OurTeam" xml:space="preserve">
+        <value>Meet Our Team</value>
     </data>
 </root>

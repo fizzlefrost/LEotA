@@ -115,7 +115,7 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2021 © Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики»..
+        ///   Looks up a localized string similar to 2022 © Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики»..
         /// </summary>
         internal static string Footer {
             get {
@@ -205,11 +205,11 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Наша команда.
+        ///   Looks up a localized string similar to Встречайте нашу команду.
         /// </summary>
-        internal static string Ourteam {
+        internal static string OurTeam {
             get {
-                return ResourceManager.GetString("Ourteam", resourceCulture);
+                return ResourceManager.GetString("OurTeam", resourceCulture);
             }
         }
         

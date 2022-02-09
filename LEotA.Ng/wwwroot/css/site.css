@@ -237,7 +237,10 @@ a:hover {
 .align-center ul li{
     float: left;
 }
-
+.narrower{
+    max-width: 75%; 
+    margin: auto auto 60px;
+}
 /* Header */
 #lower-nav{
     clear:both;

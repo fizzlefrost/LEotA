@@ -34,12 +34,12 @@
 		@foreach (var _public in publications)
 		{
 			var content = _public.Value.FirstOrDefault()?.Content;
-			if (content != null)
+			@*if (content != null)
 			{
 				await System.IO.File.WriteAllBytesAsync("hello.pdf", content);
 				<iframe src="hello.pdf"></iframe>
-			}
-			<div class="list-group mt-3">
+			}*@
+			<div class="narrower list-group mt-3">
 				<a target="_blank" rel="noopener noreferrer" href="@_public.Key.EmbedLink" class="list-group-item list-group-item-action">
 					<div class="d-flex w-100 justify-content-between">
 						@if (culture == "ru")

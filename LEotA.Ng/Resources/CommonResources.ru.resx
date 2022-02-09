@@ -73,7 +73,7 @@
         <value>Наши страницы в соцсетях</value>
     </data>
     <data name="Footer" xml:space="preserve">
-        <value>2021 © Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики».</value>
+        <value>2022 © Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики».</value>
     </data>
     <data name="LabName" xml:space="preserve">
         <value>Международная научно-исследовательская лаборатория «Лингвистическая экология Арктики».</value>
@@ -84,10 +84,10 @@
     <data name="Eventover" xml:space="preserve">
         <value>Извините, но мероприятие уже закончено</value>
     </data>
-    <data name="Ourteam" xml:space="preserve">
-        <value>Наша команда</value>
-    </data>
     <data name="ActiveOnly" xml:space="preserve">
         <value>Показывать только активные мероприятия</value>
+    </data>
+    <data name="OurTeam" xml:space="preserve">
+        <value>Встречайте нашу команду</value>
     </data>
 </root>
