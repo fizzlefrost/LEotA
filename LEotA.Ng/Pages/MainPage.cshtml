@@ -56,20 +56,6 @@
                                                 <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
                                             }
                                         </div>
-                                        <div class="row">
-                                            @if (culture == "en")
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.English</p>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.Russian</p>
-                                                </div>
-                                            }
-                                        </div>
                                         <hr aria-hidden="true">
                                     </div>
                                 }
@@ -139,7 +125,7 @@
                                                 <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
                                             }
                                         </div>
-                                        <div class="row">
+                                        @*<div class="row">
                                             @if (culture == "en")
                                             {
                                                 <div class="col-12">
@@ -153,7 +139,7 @@
                                                 </div>
                                             }
                                         </div>
-                                        <hr aria-hidden="true">
+                                        <hr aria-hidden="true">*@
                                     </div>
                                 }
                             }

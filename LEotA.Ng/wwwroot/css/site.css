@@ -195,8 +195,10 @@ a:hover {
     position: relative;
 }
 .news-container > .bottom-left {
-    background-color: white;
-    left:0;
+    background-color: #7d78c8;
+    left: 0;
+    text-align: center;
+    opacity: 1;
 }
 .first_container {
     margin: 0 auto;
