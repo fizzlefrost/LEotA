@@ -82,21 +82,6 @@
                                                 <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
                                             }
                                         </div>
-                                        <div class="row">
-                                            @if (culture == "en")
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.English</p>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.Russian</p>
-                                                </div>
-                                            }
-                                        </div>
-                                        <hr aria-hidden="true">
                                     </div>
                                 }
                             }
@@ -125,21 +110,6 @@
                                                 <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
                                             }
                                         </div>
-                                        @*<div class="row">
-                                            @if (culture == "en")
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.English</p>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.Russian</p>
-                                                </div>
-                                            }
-                                        </div>
-                                        <hr aria-hidden="true">*@
                                     </div>
                                 }
                             }
@@ -165,21 +135,7 @@
                                                 <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
                                             }
                                         </div>
-                                        <div class="row">
-                                            @if (culture == "en")
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.English</p>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-12">
-                                                    <p class="is-indented-2">@newsText.Description.Russian</p>
-                                                </div>
-                                            }
-                                        </div>
-                                        <hr aria-hidden="true">
+                                        
                                     </div>
                                 }
                             }
@@ -187,81 +143,7 @@
                         }
                         
                     }
-                    @*@for (int i = 0; i < newsGetPagedCount / 2 + newsGetPagedCount % 2; i++)
-                {
-                    <div class="row">
-                        @if (i + 1 == newsGetPagedCount && newsGetPagedCount % 2 == 1)
-                        {
-                            foreach (var currentNews in newsImages.Take(1))
-                            {
-                                <div class="col-6">
-                                    <div class="news-container">
-                                        <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
-                                        <p class="top-right">@currentNews.Key.Time.Day - @currentNews.Key.Time.Month - @currentNews.Key.Time.Year</p>
-                                        <p class="bottom-right">@currentNews.Key.Author</p>
-                                        @if (culture == "en")
-                                        {
-                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
-                                        }
-                                        else
-                                        {
-                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
-                                        }
-                                    </div>
-                                    <div class="row">
-                                        @if (culture == "en")
-                                        {
-                                            <div class="col-12">
-                                                <p class="is-indented-2">@currentNews.Key.Description.English</p>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="col-12">
-                                                <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
-                                            </div>
-                                        }
-                                    </div>
-                                    <hr aria-hidden="true">
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            foreach (var currentNews in newsImages.Take(2))
-                            {
-                                <div class="col-6">
-                                    <div class="news-container">
-                                        <img src="data:image;base64,@Convert.ToBase64String(currentNews.Value.FirstOrDefault()?.Content)">
-                                        @if (culture == "en")
-                                        {
-                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.English</a></h2>
-                                        }
-                                        else
-                                        {
-                                            <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@currentNews.Key.Id">@currentNews.Key.Name.Russian</a></h2>
-                                        }
-                                    </div>
-                                    <div class="row">
-                                        @if (culture == "en")
-                                        {
-                                            <div class="col-12">
-                                                <p class="is-indented-2">@currentNews.Key.Description.English</p>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="col-12">
-                                                <p class="is-indented-2">@currentNews.Key.Description.Russian</p>
-                                            </div>
-                                        }
-                                    </div>
-                                    <hr aria-hidden="true">
-                                </div>
-                            }
-                        }
-                    </div>
-                }*@
+                   
             </div>
         </div>
         <!-- pager -->
@@ -276,24 +158,24 @@
                                 <a class="page-link" href="/">First</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="/?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                <a class="page-link" href="/mainpage?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
                             </li>
                         }
 
-                        @foreach (var p in Model.Pager.Pages)
+                        @for (int p=1;p<Model.Pager.TotalPages+1;p++)
                         {
                             <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
-                                <a class="page-link" href="/?p=@p">@p</a>
+                                <a class="page-link" href="/mainpage?p=@p">@p</a>
                             </li>
                         }
 
                         @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                         {
                             <li class="page-item">
-                                <a class="page-link" href="/?p=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                <a class="page-link" href="/mainpage?p=@(Model.Pager.CurrentPage + 1)">Next</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="/?p=@(Model.Pager.TotalPages)">Last</a>
+                                <a class="page-link" href="/mainpage?p=@(Model.Pager.TotalPages)">Last</a>
                             </li>
                         }
                     </ul>

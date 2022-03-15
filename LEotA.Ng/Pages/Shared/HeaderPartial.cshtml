@@ -5,6 +5,9 @@
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-1" id="nav-bg">
     <div class="container">
         <div>
+            <div class="align-left">
+                <img src="/header.png" style="max-width: 30px;">
+            </div>
             <a class="navbar-brand" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="margin-left: 45%; max-width: 80%;" src="/images/Logo LEA with white elme.png"></a>
         </div>
         <div>
@@ -18,9 +21,6 @@
             @*         <i class="flag flag-es" style="width: 100px; height:auto;"></i> *@
             @*     } *@
             @* } *@
-            <div class="align-left">
-                <img src="/header.png" style="max-width: 30px;">
-            </div>
             <div class="align-right">
                 
                 @if (Thread.CurrentThread.CurrentUICulture.Name == "ru")
