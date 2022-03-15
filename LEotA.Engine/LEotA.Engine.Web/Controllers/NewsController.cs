@@ -31,7 +31,7 @@ namespace LEotA.Engine.Web.Controllers
             try
             {
                 if (pageSize == 0) pageSize = 1;
-                int vspm (int pageSize) => (Repository.Count() % pageSize == 0) ? ((Repository.Count() / pageSize) + 1) : Repository.Count() / pageSize;
+                int vspm (int pageSize) => (Repository.Count() % pageSize == 0) ?  Repository.Count() / pageSize : ((Repository.Count() / pageSize) + 1);
                 return Ok(vspm(pageSize));
             }
             catch (Exception e)

@@ -15,7 +15,8 @@ namespace LEotA.Pages
     public class MainPageModel : PageModel
     {
         private readonly EngineClientManager _engineClientManager;
-        public int TotalPages = 1;
+        public int cPage;
+        public int TotalPages;
         public int PageSize = 4;
         public bool isFirst = true;
         
@@ -34,13 +35,14 @@ namespace LEotA.Pages
                 {
                     case 0:
                         TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
+                        cPage = p;
                         OnGet(1);
                         break;
                     default:
                         TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
-
+                        cPage = p;
                         // get pagination info for the current page
-                        Pager = new Pager(TotalPages, p);
+                        Pager = new Pager(TotalPages, p, PageSize);
 
                         // assign the current page of items to the Items property
                         var newsGetPaged = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result;

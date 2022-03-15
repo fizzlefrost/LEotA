@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+# appsettings
+LEotA.Ng/appsettings.json
+LEotA.Engine.Web/appsettings.json
+LEotA.Engine.Web/appsettings.Development.json
+LEotA.Ng/Properties/launchSettings.json
+
 # Distribution / packaging
 .Python
 build/

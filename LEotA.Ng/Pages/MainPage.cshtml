@@ -9,12 +9,11 @@
     {
         ViewData["Title"] = "Home page";
         var newsGetPagedCount = (int) ViewData["newsGetPagedCount"];
-    
-        var newsGetPaged = (List<News>) ViewData["newsGetPaged"];
-   
+        var currentPage = Model.cPage;
         var newsImages = (Dictionary<News, List<FileContent>>) ViewData["newsListWithImage"];
     
         var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+        
         
     <div class="text-center mb-5">
         <h1 class="display-4 ">@localizer.Get("Welcome")</h1>
@@ -146,41 +145,38 @@
                    
             </div>
         </div>
-        <!-- pager -->
+        @if (Model.Pager.Pages.Any())
         {
-            @if (Model.Pager.Pages.Any())
-            {
-                <nav class="table-responsive mb-5">
-                    <ul class="pagination justify-content-center d-flex flex-wrap">
-                        @if (Model.Pager.CurrentPage > 1)
-                        {
-                            <li class="page-item">
-                                <a class="page-link" href="/">First</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="/mainpage?p=@(Model.Pager.CurrentPage - 1)">Previous</a>
-                            </li>
-                        }
-
-                        @for (int p=1;p<Model.Pager.TotalPages+1;p++)
-                        {
-                            <li class="page-item @(p == Model.Pager.CurrentPage ? "active" : "")">
-                                <a class="page-link" href="/mainpage?p=@p">@p</a>
-                            </li>
-                        }
-
-                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-                        {
-                            <li class="page-item">
-                                <a class="page-link" href="/mainpage?p=@(Model.Pager.CurrentPage + 1)">Next</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="/mainpage?p=@(Model.Pager.TotalPages)">Last</a>
-                            </li>
-                        }
-                    </ul>
-                </nav>
-            }
+            <nav class="table-responsive mb-5">
+                <ul class="pagination justify-content-center d-flex flex-wrap">
+                    @if (currentPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/@culture/mainpage?p=@(currentPage - 1)">Previous</a>
+                        </li>
+                    }
+    
+                    @for (int p=1;p<Model.Pager.TotalItems+1;p++)
+                    {
+                        <li class="page-item @(p == currentPage ? "active" : "")">
+                            <a class="page-link" href="/@culture/mainpage?p=@p">@p</a>
+                        </li>
+                    }
+    
+                    @if (currentPage < Model.Pager.TotalItems)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/@culture/mainpage?p=@(currentPage + 1)">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="/@culture/mainpage?p=@(Model.Pager.TotalItems)">Last</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
         }
     }
     
