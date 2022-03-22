@@ -17,6 +17,7 @@ namespace LEotA.Pages
         private readonly EngineClientManager _engineClientManager;
         public int cPage;
         public int TotalPages;
+        public int TotalItems;
         public int PageSize = 4;
         public bool isFirst = true;
         
@@ -35,17 +36,21 @@ namespace LEotA.Pages
                 {
                     case 0:
                         TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
+                        TotalItems = _engineClientManager.NewsGetTotalPages(1).Result;
                         cPage = p;
                         OnGet(1);
                         break;
                     default:
                         TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
+                        TotalItems = _engineClientManager.NewsGetTotalPages(1).Result;
+                        var newsUnsorted = _engineClientManager.NewsGetPagedAsync(null, TotalItems, null, null, false).Result;
+                        var newsSorted = (newsUnsorted ?? throw new InvalidOperationException()).OrderByDescending(o => o.Time).ToList();
                         cPage = p;
                         // get pagination info for the current page
                         Pager = new Pager(TotalPages, p, PageSize);
-
+                        
                         // assign the current page of items to the Items property
-                        var newsGetPaged = _engineClientManager.NewsGetPagedAsync(p - 1, PageSize, null, null, false).Result;
+                        var newsGetPaged = newsSorted.GetRange((p - 1) * 4,(TotalItems<p*4)? TotalItems%4 : 4);
                         var newsListWithImage = new Dictionary<News, List<FileContent>>();
                         foreach (var news in newsGetPaged)
                         {

@@ -2,13 +2,25 @@
 @using System.Threading
 @inject CommonLocalizationService localizer
 <title>@ViewData["Title"] - @localizer.Get("Localisation")</title>
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-1" id="nav-bg">
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow" id="nav-bg">
     <div class="container">
         <div>
-            <div class="align-left">
-                <img src="/header.png" style="max-width: 30px;">
+            <div class="align-left header-container">
+                <div class="mr5"> 
+                    <img src="/images/Лого1 (1).png" style="max-height: 70px;">
+                </div>
+                <div class="mr5">
+                    <img src="/header.png" style="max-height: 70px;">
+                </div>
+                <div class="mr5"> 
+                    <img src="/Min-nauki.png" style="max-height: 70px;">
+                </div>
+                <div>
+                    <a class="navbar-brand" style="margin-left: 30%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 75%;" src="/images/SecondLogo.png"></a>
+                </div>
+                
             </div>
-            <a class="navbar-brand" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="margin-left: 45%; max-width: 80%;" src="/images/Logo LEA with white elme.png"></a>
+             <p style="margin-left: 45%; color: white;">INTERNATIONAL RESEARCH LABORATORY</p>
         </div>
         <div>
             @* @{ *@
@@ -53,49 +65,49 @@
     </div>
     
 </nav>
-<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<nav style="background-color: #7d78c8; padding: 1rem;" class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
     <div class="container">
         <div id="page-wrapper" class="navbar-collapse collapse d-sm-inline-flex justify-content-around">
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/MainPage">@localizer.Get("Home")</a>
+                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/MainPage">@localizer.Get("Home")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                        <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/AboutUs">@localizer.Get("AboutUs")</a>
+                        <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/AboutUs">@localizer.Get("AboutUs")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Events">@localizer.Get("Events")</a>
+                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Events">@localizer.Get("Events")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Album">@localizer.Get("Gallery")</a>
+                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Album">@localizer.Get("Gallery")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Projects">@localizer.Get("Projects")</a>
+                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Projects">@localizer.Get("Projects")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Publications">@localizer.Get("Publications")</a>
+                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Publications">@localizer.Get("Publications")</a>
                 </li>
             </ul>
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Staff">@localizer.Get("Staff")</a>
+                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Staff">@localizer.Get("Staff")</a>
                 </li>
             </ul>
             @if (User.Identity.IsAuthenticated)
             {
                 <ul class="navbar-nav flex-grow-2">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/MaterialsPage">@localizer.Get("Materials")</a>
+                        <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/MaterialsPage">@localizer.Get("Materials")</a>
                     </li>
                 </ul>
             }

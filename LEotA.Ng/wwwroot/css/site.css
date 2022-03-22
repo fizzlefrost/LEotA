@@ -1,12 +1,109 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,300italic,400italic");
-@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;1,800&display=swap');
+﻿@font-face {
+    font-family: "GothamProRegular";
+    src: url("../fonts/GothamProRegular/GothamProRegular.eot");
+    src: url("../fonts/GothamProRegular/GothamProRegular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProRegular/GothamProRegular.woff") format("woff"),
+    url("../fonts/GothamProRegular/GothamProRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProBold";
+    src: url("../fonts/GothamProBold/GothamProBold.eot");
+    src: url("../fonts/GothamProBold/GothamProBold.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProBold/GothamProBold.woff") format("woff"),
+    url("../fonts/GothamProBold/GothamProBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProBlack";
+    src: url("../fonts/GothamProBlack/GothamProBlack.eot");
+    src: url("../fonts/GothamProBlack/GothamProBlack.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProBlack/GothamProBlack.woff") format("woff"),
+    url("../fonts/GothamProBlack/GothamProBlack.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProItalic";
+    src: url("../fonts/GothamProItalic/GothamProItalic.eot");
+    src: url("../fonts/GothamProItalic/GothamProItalic.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProItalic/GothamProItalic.woff") format("woff"),
+    url("../fonts/GothamProItalic/GothamProItalic.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProMedium";
+    src: url("../fonts/GothamProMedium/GothamProMedium.eot");
+    src: url("../fonts/GothamProMedium/GothamProMedium.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProMedium/GothamProMedium.woff") format("woff"),
+    url("../fonts/GothamProMedium/GothamProMedium.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProLight";
+    src: url("../fonts/GothamProLight/GothamProLight.eot");
+    src: url("../fonts/GothamProLight/GothamProLight.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProLight/GothamProLight.woff") format("woff"),
+    url("../fonts/GothamProLight/GothamProLight.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProMediumItalic";
+    src: url("../fonts/GothamProMediumItalic/GothamProMediumItalic.eot");
+    src: url("../fonts/GothamProMediumItalic/GothamProMediumItalic.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProMediumItalic/GothamProMediumItalic.woff") format("woff"),
+    url("../fonts/GothamProMediumItalic/GothamProMediumItalic.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProLightItalic";
+    src: url("../fonts/GothamProLightItalic/GothamProLightItalic.eot");
+    src: url("../fonts/GothamProLightItalic/GothamProLightItalic.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProLightItalic/GothamProLightItalic.woff") format("woff"),
+    url("../fonts/GothamProLightItalic/GothamProLightItalic.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProBoldItalic";
+    src: url("../fonts/GothamProBoldItalic/GothamProBoldItalic.eot");
+    src: url("../fonts/GothamProBoldItalic/GothamProBoldItalic.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProBoldItalic/GothamProBoldItalic.woff") format("woff"),
+    url("../fonts/GothamProBoldItalic/GothamProBoldItalic.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "GothamProBlackItalic";
+    src: url("../fonts/GothamProBlackItalic/GothamProBlackItalic.eot");
+    src: url("../fonts/GothamProBlackItalic/GothamProBlackItalic.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/GothamProBlackItalic/GothamProBlackItalic.woff") format("woff"),
+    url("../fonts/GothamProBlackItalic/GothamProBlackItalic.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
 html, body, div, a, img, ul, li, footer, header, nav {
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
     vertical-align: baseline;
-    font-family: 'Alegreya', serif;
+    font-family: 'GothamProRegular', serif;
 }
 html, body {
     overflow: auto;
@@ -136,7 +233,7 @@ body {
 
 .bottom-left > h1 > a{
     color: white; !important;
-    font-family: 'Alegreya', serif;
+    font-family: 'GothamProRegular', serif;
 }
 select#culture-options {
     background-color: #0c5460;
@@ -144,7 +241,7 @@ select#culture-options {
 
 body, input, select, textarea {
     color: #777;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: "GothamProRegular", sans-serif;
     font-size: 16pt;
     font-weight: 300;
     line-height: 1.65em;
@@ -153,7 +250,7 @@ body, input, select, textarea {
 
 a {
     transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    color: #e89980;
+    color: white;
     text-decoration: none;
 }
 a:hover {
@@ -174,10 +271,12 @@ a:hover {
 }
 
 /* Container */
-
+.navbar{
+    padding-top: 1rem;
+}
 .main-container {
     margin: 0 auto;
-    margin-top: 3em;
+    margin-top: 1em;
     max-width: calc(100% - 5em);
     position: relative;
     padding-bottom: 150px;
@@ -201,6 +300,7 @@ a:hover {
     opacity: 1;
     bottom:0 !important;
     padding-bottom: 4px;
+    width: 100%;
 }
 .first_container {
     margin: 0 auto;
@@ -317,7 +417,9 @@ footer{
     font-size: 35px;
     font-weight: bold;
 }
-
+.mr5{
+    margin-right: 5px;
+}
 .close:hover,
 .close:focus {
     color: #999;
@@ -404,7 +506,7 @@ img.hover-shadow {
     margin-top: 1.25rem;
 }
 .nav-item:hover{
-    background-color: #eeeeee;
+    background-color:#817ccd;
 }
 .carousel-caption{
     height: 35%;
@@ -450,6 +552,11 @@ img.hover-shadow {
 }
 .carousel-item{
     transition:none;
+}
+.header-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /*Media do not touch*/
 @media all and (min-width: 1024px) and (max-width: 1280px) { 

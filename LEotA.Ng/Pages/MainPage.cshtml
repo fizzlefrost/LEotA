@@ -48,11 +48,11 @@
                                             <p class="bottom-right">@newsText.Author</p>
                                             @if (culture == "en")
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                <h4 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h4>
                                             }
                                             else
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                <h4 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h4>
                                             }
                                         </div>
                                         <hr aria-hidden="true">
@@ -147,7 +147,7 @@
         </div>
         @if (Model.Pager.Pages.Any())
         {
-            <nav class="table-responsive mb-5">
+            <nav class="table-responsive" style="margin-bottom: 75px">
                 <ul class="pagination justify-content-center d-flex flex-wrap">
                     @if (currentPage > 1)
                     {
