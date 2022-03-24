@@ -50,7 +50,13 @@
                                                     <h6 class="subtitle mb-0">@staffList.Keys.ElementAt(i*4+j).Text.Russian</h6>
                                                 }
                                                 <ul class="list-inline align-center bottomize" style="left:0; width:100%">
-                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staffList.Keys.ElementAt(i*4+j).Email</a></li>
+                                                    <li class="list-inline-item">
+                                                        <a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button">
+                                                            <i class="fas fa-inbox mr-3"></i>
+                                                            <p style="width: 182px"><em class="ow-break-word">@staffList.Keys.ElementAt(staffCount / 4 * 4 + j).Email</em></p>
+                                                                                                                        
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -90,7 +96,13 @@
                                                     <h6 class="subtitle mb-0">@staffList.Keys.ElementAt(staffCount/4*4+j).Text.English</h6>
                                                 }
                                                 <ul class="list-inline align-center bottomize" style="left:0; width:100%">
-                                                    <li class="list-inline-item border"><a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button"><i class="fas fa-inbox mr-3"></i>@staffList.Keys.ElementAt(staffCount/4*4+j).Email</a></li>
+                                                    <li class="list-inline-item border">
+                                                        <a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button">
+                                                            <i class="fas fa-inbox mr-3"></i>
+                                                            <p style="width: 182px"><em class="ow-break-word">@staffList.Keys.ElementAt(staffCount / 4 * 4 + j).Email</em></p>
+                                                            
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
