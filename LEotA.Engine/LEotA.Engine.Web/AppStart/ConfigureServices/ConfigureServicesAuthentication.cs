@@ -56,7 +56,7 @@ namespace LEotA.Engine.Web.AppStart.ConfigureServices
                 .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
                 .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
-                .AddInMemoryClients(IdentityServerConfig.GetClients())
+                .AddInMemoryClients(IdentityServerConfig.GetClients(configuration.GetSection("NgSigninOidc").Value))
                 .AddInMemoryApiScopes(IdentityServerConfig.GetAPiScopes())
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddJwtBearerClientAuthentication()
