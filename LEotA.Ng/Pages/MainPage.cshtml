@@ -48,11 +48,26 @@
                                             <p class="bottom-right">@newsText.Author</p>
                                             @if (culture == "en")
                                             {
-                                                <h4 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h4>
+                                                if (newsText.Description.English.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.English" target="_blank">@newsText.Name.English</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                }
+                                                    
                                             }
                                             else
                                             {
-                                                <h4 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h4>
+                                                if (newsText.Description.Russian.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.Russian" target="_blank">@newsText.Name.Russian</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                }
                                             }
                                         </div>
                                         <hr aria-hidden="true">
@@ -74,11 +89,26 @@
                                             <p class="bottom-right">@newsText.Author</p>
                                             @if (culture == "en")
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                if (newsText.Description.English.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.English" target="_blank">@newsText.Name.English</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                }
+                                                    
                                             }
                                             else
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                if (newsText.Description.Russian.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.Russian" target="_blank">@newsText.Name.Russian</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                }
                                             }
                                         </div>
                                     </div>
@@ -102,11 +132,26 @@
                                             <p class="bottom-right">@newsText.Author</p>
                                             @if (culture == "en")
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                if (newsText.Description.English.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.English" target="_blank">@newsText.Name.English</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                }
+                                                    
                                             }
                                             else
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                if (newsText.Description.Russian.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.Russian" target="_blank">@newsText.Name.Russian</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                }
                                             }
                                         </div>
                                     </div>
@@ -127,11 +172,26 @@
                                             <p class="bottom-right">@newsText.Author</p>
                                             @if (culture == "en")
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                if (newsText.Description.English.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.English" target="_blank">@newsText.Name.English</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.English</a></h2>
+                                                }
+                                                    
                                             }
                                             else
                                             {
-                                                <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                if (newsText.Description.Russian.StartsWith("http"))
+                                                {
+                                                    <h2 class="bottom-left"><a href="@newsText.Description.Russian" target="_blank">@newsText.Name.Russian</a></h2>
+                                                }
+                                                else
+                                                {
+                                                    <h2 class="bottom-left"><a asp-area="" asp-page="/News" asp-route-id="@newsText.Id">@newsText.Name.Russian</a></h2>
+                                                }
                                             }
                                         </div>
                                         
