@@ -13,7 +13,7 @@ using IdentityModel;
 using IdentityServer4;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 
 namespace LEotA.Engine.Web.Controllers
 {
@@ -25,15 +25,18 @@ namespace LEotA.Engine.Web.Controllers
         private readonly IIdentityServerInteractionService _interaction;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration _configuration;
 
         public AuthenticationController(
             IIdentityServerInteractionService interaction,
             SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IConfiguration configuration)
         {
             _interaction = interaction;
             _signInManager = signInManager;
             _userManager = userManager;
+            _configuration = configuration;
         }
 
         [HttpGet("[action]")]
@@ -57,7 +60,7 @@ namespace LEotA.Engine.Web.Controllers
                 return View(model);
             }
             
-            return Redirect("https://172.18.0.2:5001/en/Login");
+            return Redirect(_configuration.GetSection("NgLoginPage").Value);
         }
 
         [HttpGet("[action]")]
