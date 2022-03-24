@@ -29,9 +29,8 @@ namespace LEotA.Pages
         
         public async Task OnGet(int p)
         {
-            
-            //try
-            //{
+            try
+            {
                 switch (p)
                 {
                     case 0:
@@ -43,7 +42,7 @@ namespace LEotA.Pages
                     default:
                         TotalPages = _engineClientManager.NewsGetTotalPages(PageSize).Result;
                         TotalItems = _engineClientManager.NewsGetTotalPages(1).Result;
-                        var newsUnsorted = _engineClientManager.NewsGetPagedAsync(null, TotalItems, null, null, false).Result;
+                        var newsUnsorted = _engineClientManager.NewsGetPagedAsync(null, (TotalItems==1)? 2 : TotalItems, null, null, false).Result;
                         var newsSorted = (newsUnsorted ?? throw new InvalidOperationException()).OrderByDescending(o => o.Time).ToList();
                         cPage = p;
                         // get pagination info for the current page
@@ -119,13 +118,13 @@ namespace LEotA.Pages
                         // }
                         // break;
                 }
-            //}
-            // catch (Exception e)
-            // {
-            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            //
-            //     Response.Redirect("/"+culture+"/errorpage");
-            // }
+            }
+            catch (Exception e)
+            {
+                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            
+                Response.Redirect("/"+culture+"/errorpage");
+            }
             
         }
         
