@@ -77,4 +77,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\logo_alel.png" />
+  </ItemGroup>
+
 </Project>
