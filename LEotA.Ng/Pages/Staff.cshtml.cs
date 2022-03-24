@@ -25,24 +25,24 @@ namespace LEotA.Pages
 
         public async Task OnGet()
         {
-            //try
-            //{
-            var staffList = _engineClientManager.StaffGetPaged(null,50,null,null,true);
-            var sortedStaffList = staffList.OrderBy(o => o.Role).ToList();
-            var staffListWithImage = new Dictionary<Staff, List<FileContent>>();
-            foreach (var staff in sortedStaffList)
+            try
             {
-                var image = _engineClientManager.FileContentGetByMasterId(staff.Id);
-                staffListWithImage.Add(staff, image);
+                var staffList = _engineClientManager.StaffGetPaged(null,50,null,null,true);
+                var sortedStaffList = staffList.OrderBy(o => o.Role).ToList();
+                var staffListWithImage = new Dictionary<Staff, List<FileContent>>();
+                foreach (var staff in sortedStaffList)
+                {
+                    var image = _engineClientManager.FileContentGetByMasterId(staff.Id);
+                    staffListWithImage.Add(staff, image);
+                }
+                ViewData.Add("staff",staffListWithImage);
             }
-            ViewData.Add("staff",staffListWithImage);
-            // }
-            // catch (Exception e)
-            // {
-            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            //
-            //     Response.Redirect("/"+culture+"/errorpage");
-            // }
+            catch (Exception e)
+            {
+                var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            
+                Response.Redirect("/"+culture+"/errorpage");
+            }
             
         }
     }
