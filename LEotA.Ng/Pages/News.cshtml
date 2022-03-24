@@ -6,17 +6,19 @@
 @{
     ViewData["Title"] = "News";
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-    var news = (News)ViewData["newsId"];
+    //var news = (News)ViewData["newsId"];
+    var news = (Dictionary<News, List<FileContent>>)ViewData["newsId"];
 }
 @{
     try
     {
         <div class="jumbotron p-3 p-mb-5 rounded narrower" >
             <div class="col-mb-6 px-0">
-                <h1 class="display-4"><a asp-area="" asp-page="/News" asp-route-id="@news.Id">@LocalizationHelper.GetTextByCulture(news.Name, culture)</a></h1>
+                <h1 class="display-4"><a asp-area="" asp-page="/News" asp-route-id="@news.First().Key.Id">@LocalizationHelper.GetTextByCulture(news.First().Key.Text, culture)</a></h1>
             </div>
-            <p class="font-weight-bold my-3">@LocalizationHelper.GetTextByCulture(news.Description, culture)</p>
-            <p class="my-3">@LocalizationHelper.GetTextByCulture(news.Text, culture)</p>
+            <img src="data:image;base64,@Convert.ToBase64String(news.First().Value.First().Content)">
+            <p class="font-weight-bold my-3">@LocalizationHelper.GetTextByCulture(news.First().Key.Description, culture)</p>
+            <p class="my-3">@LocalizationHelper.GetTextByCulture(news.First().Key.Text, culture)</p>
         </div>
     }
     catch (Exception e)
