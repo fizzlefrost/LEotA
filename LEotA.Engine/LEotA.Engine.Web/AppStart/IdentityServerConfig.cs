@@ -1,6 +1,7 @@
 ﻿using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using AutoMapper.Configuration;
 using IdentityModel;
 
 namespace LEotA.Engine.Web.AppStart
@@ -14,7 +15,7 @@ namespace LEotA.Engine.Web.AppStart
         /// clients want to access resources (aka scopes)
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<Client> GetClients() =>
+        public static IEnumerable<Client> GetClients(string oidcEndpoint) =>
             // client credentials client
             new List<Client>
         {
@@ -64,11 +65,12 @@ namespace LEotA.Engine.Web.AppStart
                 },
                 RedirectUris =
                 {
-                    "https://172.18.0.2:5001/signin-oidc"
+                    oidcEndpoint
                 },
                 AlwaysIncludeUserClaimsInIdToken = true
             }
         };
+
 
         /// <summary>
         /// scopes define the resources in your system

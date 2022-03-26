@@ -1,11 +1,9 @@
-﻿using Calabonga.Microservices.Core.QueryParams;
-using LEotA.Engine.Entities.Core;
+﻿using LEotA.Engine.Entities.Core;
 using LEotA.Engine.Web.Infrastructure.Auth;
 using LEotA.Engine.Web.Mediator.LogsReadonly;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace LEotA.Engine.Web.Controllers
