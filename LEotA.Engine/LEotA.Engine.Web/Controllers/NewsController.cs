@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Calabonga.Microservices.Core.QueryParams;
 using LEotA.Engine.Entities;
@@ -10,7 +9,6 @@ using Calabonga.UnitOfWork;
 using Calabonga.UnitOfWork.Controllers.Controllers;
 using Calabonga.UnitOfWork.Controllers.Factories;
 using LEotA.Engine.Web.Infrastructure.Engine.EntityManagers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
 namespace LEotA.Engine.Web.Controllers

@@ -26,7 +26,7 @@ namespace LEotA.Pages
             var newsImage = _engineClientManager.FileContentGetByMasterId(id);
             newsWithImage.Add(news,newsImage);
             ViewData.Add("newsId",newsWithImage);
-            //ViewData.Add("newsId", news);
+            
             return Page(); 
         }
     }

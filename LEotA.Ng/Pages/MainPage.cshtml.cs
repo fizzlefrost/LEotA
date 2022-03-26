@@ -50,7 +50,7 @@ namespace LEotA.Pages
                         
                         // assign the current page of items to the Items property
                         var newsGetPaged = newsSorted.GetRange((p - 1) * 4,(TotalItems<p*4)? TotalItems%4 : 4);
-                        var newsListWithImage = new Dictionary<News, List<FileContent>>();
+                        var newsListWithImage = new Dictionary<News, List<FileContent>?>();
                         foreach (var news in newsGetPaged)
                         {
                             var newsListImage = _engineClientManager.FileContentGetByMasterId(news.Id);
