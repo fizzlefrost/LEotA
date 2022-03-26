@@ -293,6 +293,11 @@ a:hover {
 .news-container{
     position: relative;
 }
+.news-container > img{
+    width:630px;
+    height: 500px;
+    object-fit: cover;
+}
 .news-container > .bottom-left {
     background-color: #7d78c8;
     left: 0;
