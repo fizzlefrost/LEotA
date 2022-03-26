@@ -60,12 +60,12 @@ namespace LEotA.Pages
     
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "First name is required")]
         [JsonPropertyName("firstName")]
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Last name is required")]
         [JsonPropertyName("lastName")]
         [Display(Name = "LastName")]
         public string LastName { get; set; }
@@ -78,20 +78,20 @@ namespace LEotA.Pages
         [Display(Name = "EmbedLink")]
         public string EmbedLink { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
         [JsonPropertyName("email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         [JsonPropertyName("password")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]  
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Confirm password is required")]
         [DataType(DataType.Password)]
         [JsonPropertyName("confirmPassword")]
         [Display(Name = "Confirm password")]
