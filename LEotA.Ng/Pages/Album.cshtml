@@ -3,25 +3,47 @@
 @model AlbumModel
 @{
     ViewData["Title"] = "Gallery";
-	var j = 1;
-	System.Diagnostics.Debug.Assert(Model._albumList != null, "Model._albumList != null");
-	var totalAlbum = Model._albumList.Count / 2;
-	if (Model._albumList.Count % 2 != 0)
-	{
-		totalAlbum++;
-	}
+
+	var albumImage = (Dictionary<Album, List<FileContent>>) ViewData["album"];
+	
+	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
 @{
+	
 	try
 	{
 		<div class="container">
+			@foreach (var album in albumImage)
+			{
+				<div class="h-50 row">
+					<div class="col-6 align-center coverdiv">
+						<img class="cover" src="data:image;base64,@Convert.ToBase64String(album.Value.First().Content)">
+						<div class="bottom-left">
+							<h1>
+								@{
+									if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
+									{
+										<a asp-area="" asp-page="/Gallery" asp-route-id="@album.Key.Id">@album.Key.Name.English</a>
+									}
+									else
+									{
+										<a asp-area="" asp-page="/Gallery" asp-route-id="@album.Key.Id">@album.Key.Name.Russian</a>
+									}
+								}
+							</h1>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		@*<div class="container">
 			@for (int e = 0; e < totalAlbum; e++){
 				<div class="h-50 row">
 					@if (e == totalAlbum-1){
 						foreach (var i in Model._albumList.GetRange(e*2,1))
 						{
 							<div class="col-6 align-center coverdiv">
-								<img class="cover" src="images/_JPG0395.JPG">
+								<img class="cover" src="data:image;base64,@Convert.ToBase64String()">
 								<div class="bottom-left">
 									<h1>
 										@{
@@ -31,7 +53,6 @@
 											}
 											else
 											{
-
 												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
 											}
 										}
@@ -45,7 +66,7 @@
 						foreach (var i in Model._albumList.GetRange(e* 2, 2))
 						{
 							<div class="col-6 align-center coverdiv">
-								<img class="cover" src="images/_JPG0395.JPG">
+								<img class="cover" src="">
 								<div class="bottom-left">
 									<h1>
 										@{
@@ -55,7 +76,6 @@
 											}
 											else
 											{
-
 												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
 											}
 										}
@@ -67,6 +87,11 @@
 					}
 				</div>
 			}
+		</div>*@
+		<div class="container">
+			<div class="h-50 row">
+				
+			</div>
 		</div>
 	}
 	catch (Exception e)

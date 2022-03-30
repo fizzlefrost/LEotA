@@ -22,13 +22,28 @@ namespace LEotA.Pages
 
         public List<Album>? _albumList { get; set; }
         public List<FileContent>? _imageList { get; set; }
+        
 
         public IActionResult OnGet()
         {
             //try
             //{
-                
-                _albumList = _engineClientManager.AlbumGetPaged(1, 10, null, null, false);
+                var albumTotal = _engineClientManager.AlbumGetTotalPages(1).Result;
+                _albumList = _engineClientManager.AlbumGetPaged(null, (albumTotal==1)? 2 : albumTotal, null, null, false);
+                foreach (var album in _albumList)
+                {
+                    var _albumimages = new Dictionary<Album, List<FileContent>?>();
+                    var albumImages = new List<FileContent>();
+                    var images = _engineClientManager.FileContentGetByMasterId(album.Id);
+                    albumImages.AddRange(images);
+                    if (album.MasterId != null)
+                    {
+                        var masterImages = _engineClientManager.FileContentGetByMasterId((Guid) album.MasterId);
+                        albumImages.AddRange(masterImages);
+                    }
+                    _albumimages.Add(album,albumImages);
+                    ViewData.Add("album",_albumimages);
+                }
                 return Page(); 
             //}
             // catch (Exception e)
