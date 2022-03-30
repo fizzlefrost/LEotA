@@ -95,7 +95,7 @@ namespace LEotA.Clients.EngineClient
             Search = search,
             DisabledDefaultIncludes = disabledDefaultIncludes
         }).Result.Result.Items;
-        
+        public async Task<int> AlbumGetTotalPages(int? pageSize) => _albumPatron.AlbumGetTotalPages(pageSize).Result;
         public CalabongaViewModel<Event>? EventPost(string embedLink, CultureBase name, CultureBase text, DateTime dateTime) =>
             _eventPatron?.EventPostAsync(new EventCreateModel()
             {

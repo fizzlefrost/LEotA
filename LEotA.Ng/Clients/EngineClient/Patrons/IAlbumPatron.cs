@@ -10,5 +10,6 @@ namespace LEotA.Clients.EngineClient.Patrons
         public Task<CalabongaViewModel<Album>> AlbumDeleteAsync(string id);
         public Task<CalabongaViewModel<Album>> AlbumGetByIdAsync(string id);
         public Task<CalabongaGetPagedModel<Album>> AlbumGetPagedAsync(CalabongaGetPagedRequestModel parameters);
+        public Task<int> AlbumGetTotalPages(int? pageSize);
     }
 }

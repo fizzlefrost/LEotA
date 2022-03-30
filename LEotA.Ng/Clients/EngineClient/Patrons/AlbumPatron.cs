@@ -150,5 +150,18 @@ namespace LEotA.Clients.EngineClient.Patrons
                 return new CalabongaGetPagedModel<Album>();
             }
         }
+        public async Task<int> AlbumGetTotalPages(int? pageSize)
+        {
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}api/album/total-pages");
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["PageSize"] = pageSize.ToString();
+            builder.Query = query.ToString() ?? string.Empty;
+            string url = builder.ToString();
+            var httpResponse = await _httpClient.GetAsync(url);
+            httpResponse.EnsureSuccessStatusCode();
+            var result = await httpResponse.Content.ReadAsStringAsync();
+            var report = JsonSerializer.Deserialize<int>(result);
+            return report;
+        }
     }
 }
