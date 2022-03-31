@@ -34,7 +34,7 @@
             foreach (var x in images.Values.First().GetRange(i*4,lastimages))
             {
               <div class="col-3 coverdiv">
-                <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" class="hover-shadow cursor cover">
+                <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@j)" class="hover-shadow cursor cover">
               </div>
               j++;
             }
@@ -44,7 +44,7 @@
             foreach (var x in images.Values.First().GetRange(i * 4, 4))
             {
               <div class="col-3 coverdiv">
-                <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" class="hover-shadow cursor cover">
+                <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" onclick="openModal();currentSlide(@j)" class="hover-shadow cursor cover">
               </div>
               j++;
             }
@@ -52,9 +52,72 @@
         </div>
       }
     </div>
+    <div id="myModal" class="modal">
+      <span class="close cursor" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+          @foreach (var x in images.Values.First())
+                {
+                  <div class="mySlides">
+                    <img src="data:image;base64,@Convert.ToBase64String(@x.Content)" style="width:100%">
+                  </div>
+                }
+        
+         <!-- Next/previous controls -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        
+            <!-- Caption text -->
+            <div class="caption-container">
+              <p id="caption"></p>
+            </div>
+      </div>
+    </div>
+    
   }
   catch (Exception e)
   {
     <p>NULL</p>
   }
 }
+<script>
+// Open the Modal
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+// Close the Modal
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
