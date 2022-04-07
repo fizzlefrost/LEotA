@@ -32,6 +32,8 @@ namespace LEotA.Pages
                 j++;
             }
             return Page(); */
+            var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
+            return Redirect("/" + culture + "/errorpage");
             ViewData.Clear();
             var albumWithImages = new Dictionary<Album, List<FileContent>?>();
             var album = _engineClientManager.AlbumGetById(id)?.Result;

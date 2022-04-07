@@ -55,16 +55,17 @@
 					<div class="d-flex flex-row-reverse">
 						@if (culture == "ru")
 						{
-							<small>@_public.Key.Text.Russian </small>
+							<small style="width: 130px;">@_public.Key.Text.Russian </small>
 						}
 						else
 						{
-							<small>@_public.Key.Text.English </small>
+							<small style="width: 130px;">@_public.Key.Text.English </small>
 						}
 					</div>
 				</a>
 			</div>
 		}
+		<div style="margin-bottom: 100px"></div>
 	}
 	catch (Exception e)
 	{
