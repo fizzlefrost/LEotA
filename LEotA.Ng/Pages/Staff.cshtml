@@ -73,8 +73,15 @@
                                 <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
-                                            <a href="@staffList.Keys.ElementAt(staffCount/4*4+j).EmbedLink">
-                                                <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(staffCount/4*4+j).FirstOrDefault()?.Content)" class="img-fluid" style="height: 200px"/>
+                                            <a href="@staffList.Keys.ElementAt(staffCount / 4 * 4 + j).EmbedLink">
+                                                @if (staffList.Values.ElementAt(staffCount / 4 * 4 + j).FirstOrDefault()?.Content != null)
+                                                {
+                                                    <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(staffCount / 4 * 4 + j).FirstOrDefault()?.Content)" class="img-fluid" style="height: 200px"/>
+                                                }
+                                                else
+                                                {
+                                                    <img src="images/outline-gdaf5b1ada_1920.png" class="img-fluid" style="height: 200px"/>
+                                                }
                                             </a>
                                         </div>
                                         <div class="col-md-12 text-center" style="height:400px">
