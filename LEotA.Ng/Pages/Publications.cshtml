@@ -6,7 +6,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.EnglishName;
+	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 	var publications = (Dictionary<Publication,List<FileContent>>) ViewData["publication"];
 }
 @{
