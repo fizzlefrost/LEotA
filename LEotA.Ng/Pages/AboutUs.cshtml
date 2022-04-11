@@ -10,7 +10,7 @@
     ViewBag.Title = "My Home Page";
     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
     var aboutUs = (List<AboutUs>)ViewData["aboutUs"];
-    var image = (Dictionary<List<FileContent>, AboutUs>) ViewData["images"];
+    var image = (Dictionary<List<FileContent>, AboutUs>) ViewData["aboutUs"];
   
     <div id="carouselExampleControls" class="carousel slide narrower" data-bs-ride="carousel">
       <div class="carousel-inner">
