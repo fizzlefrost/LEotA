@@ -21,23 +21,15 @@ namespace LEotA.Pages
         
         public void OnGet()
         {
-            //try
-            //{
-                var aboutUsList = _engineClientManager.AboutUsGetPaged(null, 100, null, null, false);
-                var aboutUsReturnList = new List<AboutUs>();
+            var aboutUsList = _engineClientManager.AboutUsGetPaged(null, 100, null, null, false);
+            var aboutUsReturnList = new Dictionary<AboutUs, List<FileContent>?>();
 
-                foreach (var aboutUs in aboutUsList)
-                {
-                    aboutUsReturnList.Add(aboutUs);
-                }
-
-                ViewData.Add("aboutUs", aboutUsReturnList);
-            //}
-            // catch (Exception e)
-            // {
-            //     var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
-            //     Response.Redirect("/"+culture+"/errorpage");
-            // }
+            foreach (var aboutUs in aboutUsList)
+            {
+                var aboutUswithImage = _engineClientManager.FileContentGetByMasterId(aboutUs.Id);
+                aboutUsReturnList.Add(aboutUs, aboutUswithImage);
+            }
+            ViewData.Add("aboutUs", aboutUsReturnList);
         }
     }
 }
