@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Gallery";
 
-	var albumImage = (Dictionary<Album, List<FileContent>>) ViewData["album"];
+	var albumImage = (Dictionary<Album, FileContent>) ViewData["album"];
 	
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
@@ -17,7 +17,7 @@
 			{
 				<div class="h-50 row">
 					<div class="col-6 align-center coverdiv">
-						<img class="cover" src="data:image;base64,@Convert.ToBase64String(album.Value.First().Content)">
+						<img loading="lazy" class="cover" src="data:image;base64,@Convert.ToBase64String(album.Value.Content)" alt="">
 						<div class="bottom-left">
 							<h1>
 								@{

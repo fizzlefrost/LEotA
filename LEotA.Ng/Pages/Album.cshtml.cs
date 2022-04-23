@@ -21,8 +21,7 @@ namespace LEotA.Pages
             _engineClientManager = engineClientManager;
         }
 
-        public List<Album>? _albumList { get; set; }
-        public List<FileContent>? _imageList { get; set; }
+        public List<Album>? AlbumList { get; set; }
         
 
         public IActionResult OnGet()
@@ -30,22 +29,25 @@ namespace LEotA.Pages
             //try
             //{
                 ViewData.Clear();
-                var _albumimages = new Dictionary<Album, List<FileContent>?>();
+                var albumimages = new Dictionary<Album, FileContent?>();
                 var albumTotal = _engineClientManager.AlbumGetTotalPages(1).Result;
-                _albumList = _engineClientManager.AlbumGetPaged(null, (albumTotal==1)? 2 : albumTotal, null, null, false);
-                foreach (var album in _albumList)
+                AlbumList = _engineClientManager.AlbumGetPaged(null, (albumTotal==1)? 2 : albumTotal, null, null, false);
+                foreach (var album in AlbumList)
                 {
-                    var albumImages = new List<FileContent>();
-                    var images = _engineClientManager.FileContentGetByMasterId(album.Id);
-                    albumImages.AddRange(images);
-                    if (album.MasterId != null)
+                    FileContent? albumImages = null;
+                    var images = _engineClientManager.FileContentGetByMasterIdOne(album.Id);
+                    if (images != null)
                     {
-                        var masterImages = _engineClientManager.FileContentGetByMasterId((Guid) album.MasterId);
-                        albumImages.AddRange(masterImages);
+                        albumImages = images;
                     }
-                    _albumimages.Add(album,albumImages);
+                    else if (album.MasterId != null)
+                    {
+                        var masterImages = _engineClientManager.FileContentGetByMasterIdOne((Guid) album.MasterId);
+                        if (masterImages != null) albumImages = masterImages;
+                    }
+                    albumimages.Add(album,albumImages);
                 }
-                ViewData.Add("album",_albumimages);
+                ViewData.Add("album",albumimages);
                 return Page(); 
             //}
             // catch (Exception e)
