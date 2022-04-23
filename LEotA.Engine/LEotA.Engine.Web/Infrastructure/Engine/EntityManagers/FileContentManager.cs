@@ -63,5 +63,14 @@ namespace LEotA.Engine.Web.Infrastructure.Engine.EntityManagers
             
             return ret;
         }
+
+        public static FileContent? GetOneByMasterId(Guid masterId)
+        {
+            var repository = _unitOfWork.GetRepository<FileContent>();
+
+            var ret = repository.GetAll(disableTracking: true).FirstOrDefault(f => f.MasterId == masterId);
+            
+            return ret;
+        }
     }
 }

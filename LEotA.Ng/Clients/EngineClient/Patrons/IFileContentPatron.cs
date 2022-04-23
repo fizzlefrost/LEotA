@@ -12,5 +12,6 @@ namespace LEotA.Clients.EngineClient.Patrons
         public Task<CalabongaViewModel<FileContent>> FileContentGetByIdAsync(string id);
         public Task<CalabongaGetPagedModel<FileContent>> FileContentGetPagedAsync(CalabongaGetPagedRequestModel parameters);
         public Task<List<FileContent>> FileContentGetByMasterIdAsync(string id);
+        public Task<FileContent> FileContentGetByMasterIdOneAsync(string id);
     }
 }

@@ -210,6 +210,8 @@ namespace LEotA.Clients.EngineClient
 
         public List<FileContent>? FileContentGetByMasterId(Guid id) =>
             _FileContentPatron?.FileContentGetByMasterIdAsync(id.ToString()).Result;
+        public FileContent? FileContentGetByMasterIdOne(Guid id) =>
+            _FileContentPatron?.FileContentGetByMasterIdOneAsync(id.ToString()).Result;
         public List<FileContent>? FileContentGetPaged(int? pageIndex, int? pageSize, int? sortDirection, string? search,
             bool disabledDefaultIncludes) => _FileContentPatron?.FileContentGetPagedAsync(new CalabongaGetPagedRequestModel()
         {

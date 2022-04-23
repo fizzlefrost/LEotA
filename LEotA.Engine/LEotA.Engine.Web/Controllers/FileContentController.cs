@@ -66,5 +66,26 @@ namespace LEotA.Engine.Web.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("[action]")]
+        [HttpGet]
+#pragma warning disable 1998
+        public async Task<IActionResult> FileByMasterIdOneAsync(string id)
+#pragma warning restore 1998
+        {
+            try
+            {
+                var file = FileContentManager.GetOneByMasterId(new Guid(id));
+                return Ok(file);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

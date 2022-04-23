@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Net.Mime;
@@ -149,6 +150,58 @@ namespace LEotA.Clients.EngineClient.Patrons
                 {
                     
                 }
+            }
+            return ret;
+        }
+        //Get only one FileContent from the list
+        public async Task<FileContent> FileContentGetByMasterIdOneAsync(string id)
+        {
+            var builder = new UriBuilder($"{_httpClient.BaseAddress}file-by-master-id-one");
+            var query = HttpUtility.ParseQueryString(builder.Query);
+            query["id"] = id;
+            builder.Query = query.ToString() ?? string.Empty;
+            string url = builder.ToString();
+            var httpResponse = await _httpClient.GetAsync(url);
+            httpResponse.EnsureSuccessStatusCode();
+            var result = await httpResponse.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
+            var report = (JsonSerializer.Deserialize<FileContentGetModel>(result, options) ?? throw new InvalidOperationException());
+            FileContent ret = null;
+            try
+            {
+                var culturedAuthor = new CultureBase()
+                {
+                    English = "System",
+                    Russian = "Система"
+                };
+                if (report.Author != null)
+                {
+                    try
+                    {
+                        culturedAuthor = JsonSerializer.Deserialize<CultureBase>(report.Author);
+                    }
+                    catch (Exception e)
+                    {
+                        culturedAuthor = new CultureBase()
+                        {
+                            English = "Invalid author",
+                            Russian = "Некорректно заполненное поле 'Автор'"
+                        };
+                    }
+                }
+                ret = new FileContent()
+                {
+                    Id = new Guid(report.Id),
+                    MimeType = report.MimeType,
+                    Content = Convert.FromBase64String(report.Content),
+                    MasterId = new Guid(report.MasterId),
+                    Author = culturedAuthor,
+                    FileType = (FileType) report.FileType
+                };
+            }
+            catch (Exception e)
+            {
+                
             }
             return ret;
         }
