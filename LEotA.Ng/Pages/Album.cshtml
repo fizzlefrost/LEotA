@@ -5,7 +5,7 @@
     ViewData["Title"] = "Gallery";
 
 	var albumImage = (Dictionary<Album, FileContent>) ViewData["album"];
-	
+	var albumTotal = (int) ViewData["albumTotal"];
 	var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
 }
 @{
@@ -13,85 +13,33 @@
 	try
 	{
 		<div class="container">
-			@foreach (var album in albumImage)
+			@for (int i = 0; i < albumTotal/2+albumTotal%2; i++)
 			{
-				<div class="h-50 row">
-					<div class="col-6 align-center coverdiv">
-						<img loading="lazy" class="cover" src="data:image;base64,@Convert.ToBase64String(album.Value.Content)" alt="">
-						<div class="bottom-left">
-							<h1>
-								@{
-									if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
-									{
-										<a asp-area="" asp-page="/Gallery" asp-route-id="@album.Key.Id">@album.Key.Name.English</a>
-									}
-									else
-									{
-										<a asp-area="" asp-page="/Gallery" asp-route-id="@album.Key.Id">@album.Key.Name.Russian</a>
-									}
-								}
-							</h1>
-						</div>
-					</div>
-				</div>
-			}
-		</div>
-		@*<div class="container">
-			@for (int e = 0; e < totalAlbum; e++){
-				<div class="h-50 row">
-					@if (e == totalAlbum-1){
-						foreach (var i in Model._albumList.GetRange(e*2,1))
-						{
-							<div class="col-6 align-center coverdiv">
-								<img class="cover" src="data:image;base64,@Convert.ToBase64String()">
-								<div class="bottom-left">
-									<h1>
-										@{
-											if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
-											{
-												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.English</a>
-											}
-											else
-											{
-												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
-											}
-										}
-									</h1>
-								</div>
-							</div>
-						}
-					}
-					else
+				<div class="h-50 row" style="margin-bottom: 40px">
+					@for (int j = 0; j < ((i*2+1==albumTotal)?1 : 2); j++)
 					{
-						foreach (var i in Model._albumList.GetRange(e* 2, 2))
-						{
-							<div class="col-6 align-center coverdiv">
-								<img class="cover" src="">
-								<div class="bottom-left">
-									<h1>
-										@{
-											if (HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name == "en")
-											{
-												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.English</a>
-											}
-											else
-											{
-												<a asp-area="" asp-page="/Gallery" asp-route-id="@i.Id">@i.Name.Russian</a>
-											}
+						var image = albumImage.Values.ElementAt(i*2+j);
+						var data = albumImage.Keys.ElementAt(i*2+j);
+						<div class="col-6 align-center coverdiv">
+							<img loading="lazy" class="cover" src="data:image;base64,@Convert.ToBase64String(image.Content)" alt="">
+							<div class="bottom-left">
+								<h1>
+									@{
+										if (culture == "en")
+										{
+											<a asp-area="" asp-page="/Gallery" asp-route-id="@data.Id">@data.Name.English</a>
 										}
-									</h1>
-								</div>
+										else
+										{
+											<a asp-area="" asp-page="/Gallery" asp-route-id="@data.Id">@data.Name.Russian</a>
+										}
+									}
+								</h1>
 							</div>
-							j++;
-						}
+						</div>
 					}
 				</div>
 			}
-		</div>*@
-		<div class="container">
-			<div class="h-50 row">
-				
-			</div>
 		</div>
 	}
 	catch (Exception e)

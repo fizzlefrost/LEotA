@@ -32,21 +32,25 @@ namespace LEotA.Pages
                 var albumimages = new Dictionary<Album, FileContent?>();
                 var albumTotal = _engineClientManager.AlbumGetTotalPages(1).Result;
                 AlbumList = _engineClientManager.AlbumGetPaged(null, (albumTotal==1)? 2 : albumTotal, null, null, false);
-                foreach (var album in AlbumList)
-                {
-                    FileContent? albumImages = null;
-                    var images = _engineClientManager.FileContentGetByMasterIdOne(album.Id);
-                    if (images != null)
+                if (AlbumList != null)
+                    foreach (var album in AlbumList)
                     {
-                        albumImages = images;
+                        FileContent? albumImages = null;
+                        var images = _engineClientManager.FileContentGetByMasterIdOne(album.Id);
+                        if (images != null)
+                        {
+                            albumImages = images;
+                        }
+                        else if (album.MasterId != null)
+                        {
+                            var masterImages = _engineClientManager.FileContentGetByMasterIdOne((Guid) album.MasterId);
+                            if (masterImages != null) albumImages = masterImages;
+                        }
+
+                        albumimages.Add(album, albumImages);
                     }
-                    else if (album.MasterId != null)
-                    {
-                        var masterImages = _engineClientManager.FileContentGetByMasterIdOne((Guid) album.MasterId);
-                        if (masterImages != null) albumImages = masterImages;
-                    }
-                    albumimages.Add(album,albumImages);
-                }
+
+                ViewData.Add("albumTotal",albumTotal);
                 ViewData.Add("album",albumimages);
                 return Page(); 
             //}
