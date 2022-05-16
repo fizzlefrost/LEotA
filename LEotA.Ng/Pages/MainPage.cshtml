@@ -240,9 +240,12 @@
                 <ul class="pagination justify-content-center d-flex flex-wrap">
                     @if (currentPage > 1)
                     {
-                        <li class="page-item">
-                            <a class="page-link" href="/">First</a>
-                        </li>
+                        @if (Model.Pager.TotalItems > 2)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/">First</a>
+                            </li>
+                        }
                         <li class="page-item">
                             <a class="page-link" href="/@culture/mainpage?p=@(currentPage - 1)">Previous</a>
                         </li>
@@ -260,9 +263,12 @@
                         <li class="page-item">
                             <a class="page-link" href="/@culture/mainpage?p=@(currentPage + 1)">Next</a>
                         </li>
-                        <li class="page-item">
-                            <a class="page-link" href="/@culture/mainpage?p=@(Model.Pager.TotalItems)">Last</a>
-                        </li>
+                        if (Model.Pager.TotalItems > 2)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="/@culture/mainpage?p=@(Model.Pager.TotalItems)">Last</a>
+                            </li>
+                        }
                     }
                 </ul>
             </nav>
