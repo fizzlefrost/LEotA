@@ -40,8 +40,8 @@
                             {
                                 for (int j = 0; j < newsGetPagedCount % 2; j++)
                                 {
-                                    var image = newsImages.Values.ElementAt(Model.Pager.CurrentPage * 4 + i*2+j);
-                                    var newsText = newsImages.Keys.ElementAt(Model.Pager.CurrentPage * 4 + i*2+j);
+                                    var image = newsImages.Values.ElementAt(i*2+j);
+                                    var newsText = newsImages.Keys.ElementAt(i*2+j);
                                     <div class="col-6">
                                         <div class="news-container">
                                             @if (image.FirstOrDefault() != null)
@@ -87,8 +87,8 @@
                             {
                                 @for (int j = 0; j < 2; j++)
                                 {
-                                    var image = newsImages.Values.ElementAt(Model.Pager.CurrentPage * 4 + i * 2 + j);
-                                    var newsText = newsImages.Keys.ElementAt(Model.Pager.CurrentPage * 4 + i * 2 + j);
+                                    var image = newsImages.Values.ElementAt(i * 2 + j);
+                                    var newsText = newsImages.Keys.ElementAt(i * 2 + j);
                                     <div class="col-6">
                                     
                                         <div class="news-container">
@@ -138,8 +138,8 @@
                             {
                                 for (int j = 0; j < newsGetPagedCount % 2; j++)
                                 {
-                                    var image = newsImages.Values.ElementAt((Model.Pager.CurrentPage-1) * 4 + i*2+j);
-                                    var newsText = newsImages.Keys.ElementAt((Model.Pager.CurrentPage-1) * 4 + i*2+j);
+                                    var image = newsImages.Values.ElementAt(i*2+j);
+                                    var newsText = newsImages.Keys.ElementAt(i*2+j);
                                     <div class="col-6">
                                         <div class="news-container">
                                             @if (image.FirstOrDefault() != null)
@@ -184,8 +184,8 @@
                             {
                                 @for (int j = 0; j < 2; j++)
                                 {
-                                    var image = newsImages.Values.ElementAt((Model.Pager.CurrentPage-1) * 4 + i * 2 + j);
-                                    var newsText = newsImages.Keys.ElementAt((Model.Pager.CurrentPage-1) * 4 + i * 2 + j);
+                                    var image = newsImages.Values.ElementAt(i * 2 + j);
+                                    var newsText = newsImages.Keys.ElementAt(i * 2 + j);
                                     <div class="col-6">
                                     
                                         <div class="news-container">
