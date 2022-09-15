@@ -92,4 +92,7 @@
     <data name="OurTeam" xml:space="preserve">
         <value>Meet Our Team</value>
     </data>
+    <data name="Order" xml:space="preserve">
+        <value>Orders</value>
+    </data>
 </root>

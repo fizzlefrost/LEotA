@@ -23,7 +23,7 @@
                         <div class="row justify-content-center">
                             @for (int j = 0; j < 4; j++)
                             {
-                                var staff = staffList.Keys.ElementAt(i * 4 + j);
+                                //var staff = staffList.Keys.ElementAt(i * 4 + j);
                                 <div class="col-lg-2 mb-4 ml-3">
                                     <div class="row border border-dark mt-2 mb-2">
                                         <div class="col-md-12 align-center mt-2">
@@ -31,7 +31,7 @@
                                                @if (staffList.Values.ElementAt(i* 4 + j).FirstOrDefault()?.Content != null)
                                                
                                                {
-                                                   <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(staffCount / 4 * 4 + j).FirstOrDefault()?.Content)" class="img-fluid" style="height: 200px"/>
+                                                   <img src="data:image;base64,@Convert.ToBase64String(staffList.Values.ElementAt(i * 4 + j).FirstOrDefault()?.Content)" class="img-fluid" style="height: 200px"/>
                                                }
                                                else
                                                {
@@ -62,7 +62,6 @@
                                                         <a class="btn btn-outline-light btn-floating m-1 text-black-50" role="button">
                                                             <i class="fas fa-inbox mr-3"></i>
                                                             <p style="width: 182px"><em class="ow-break-word">@staffList.Keys.ElementAt(i*4+j).Email</em></p>
-                                                                                                                        
                                                         </a>
                                                     </li>
                                                 </ul>

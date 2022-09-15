@@ -83,4 +83,7 @@
     <data name="ActiveOnly" xml:space="preserve">
         <value>Показывать только активные мероприятия</value>
     </data>
+    <data name="Order" xml:space="preserve">
+        <value>Приказы</value>
+    </data>
 </root>
