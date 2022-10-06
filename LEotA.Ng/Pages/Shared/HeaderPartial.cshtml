@@ -16,7 +16,14 @@
                     <img src="/Min-nauki.png" style="max-height: 70px;">
                 </div>
                 <div>
-                    <a class="navbar-brand" style="margin-left: 30%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 75%;" src="/images/SecondLogo.png"></a>
+                    @if (Thread.CurrentThread.CurrentUICulture.Name == "ru")
+                    {
+                        <a class="navbar-brand" style="margin-left: 30%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 75%;" src="/images/Logo LEA RUS full white.png"></a>
+                    }
+                    else
+                    {       
+                        <a class="navbar-brand" style="margin-left: 30%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 75%;" src="/images/SecondLogo.png"></a>
+                    }
                 </div>
                 
             </div>
@@ -37,15 +44,15 @@
                 
                 @if (Thread.CurrentThread.CurrentUICulture.Name == "ru")
                 {
-                    <img src="/images/us.svg" style="max-width: 30px;">
+                    <img src="/images/ru.svg" style="max-width: 30px;">
                 }
                 else
                 {
-                    <img src="/images/ru.svg" style="max-width: 30px;">
+                    <img src="/images/us.svg" style="max-width: 30px;">
                 }
                 <vc:culture-switcher/>
             </div>
-            @if (User.Identity.IsAuthenticated)
+            @*@if (User.Identity.IsAuthenticated)
             {
                 <div class="align-right">
                     <small><p>Hello, @User.Claims.Where(d => d.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname").Select(d => d.Value).FirstOrDefault().ToString() @User.Claims.Where(d => d.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname").Select(d => d.Value).FirstOrDefault().ToString()</p> </small>
@@ -60,7 +67,7 @@
                 <div class="align-right">
                     <small><a asp-page="/Errorpage">@localizer.Get("Register")</a></small>
                 </div>
-            }
+            }*@
         </div>
     </div>
     
