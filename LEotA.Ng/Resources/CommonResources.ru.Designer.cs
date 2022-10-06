@@ -142,6 +142,15 @@ namespace LEotA.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сайт Мегагранта.
+        /// </summary>
+        internal static string Grant {
+            get {
+                return ResourceManager.GetString("Grant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Главная.
         /// </summary>
         internal static string Home {

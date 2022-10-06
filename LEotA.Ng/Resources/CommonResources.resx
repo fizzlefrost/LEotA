@@ -86,4 +86,7 @@
     <data name="Order" xml:space="preserve">
         <value>Приказы</value>
     </data>
+    <data name="Grant" xml:space="preserve">
+        <value>Сайт Мегагранта</value>
+    </data>
 </root>

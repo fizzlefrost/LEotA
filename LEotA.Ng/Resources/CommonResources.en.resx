@@ -95,4 +95,7 @@
     <data name="Order" xml:space="preserve">
         <value>Orders</value>
     </data>
+    <data name="Grant" xml:space="preserve">
+        <value>Megagrant's website</value>
+    </data>
 </root>

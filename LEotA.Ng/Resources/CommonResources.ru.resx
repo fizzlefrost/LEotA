@@ -90,4 +90,7 @@
     <data name="OurTeam" xml:space="preserve">
         <value>Встречайте нашу команду</value>
     </data>
+    <data name="Grant" xml:space="preserve">
+        <value>Сайт Мегагранта</value>
+    </data>
 </root>
