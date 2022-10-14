@@ -107,7 +107,6 @@ namespace LEotA
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, config =>
                 {
-                    //config.Authority = "https://localhost:10001";
                     config.Authority = Configuration.GetSection("EngineHttpsUrl").Value;
                     config.ClientId = "leota_client_id";
                     config.ClientSecret = "leota_client_secret";

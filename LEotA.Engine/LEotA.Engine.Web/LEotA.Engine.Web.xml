@@ -126,7 +126,7 @@
             IdentityServer configuration
             </summary>
         </member>
-        <member name="M:LEotA.Engine.Web.AppStart.IdentityServerConfig.GetClients">
+        <member name="M:LEotA.Engine.Web.AppStart.IdentityServerConfig.GetClients(System.String)">
             <summary>
             clients want to access resources (aka scopes)
             </summary>
@@ -203,6 +203,13 @@
             <returns></returns>
         </member>
         <member name="M:LEotA.Engine.Web.Controllers.FileContentController.FileByMasterIdAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LEotA.Engine.Web.Controllers.FileContentController.FileByMasterIdOneAsync(System.String)">
             <summary>
             
             </summary>
@@ -995,16 +1002,16 @@
             <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: 3404122</summary>
+            <summary>Commit: ebce5f1</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: 34041222c99ec69a1051ff76713b225bab43afac</summary>
+            <summary>Sha: ebce5f1b456ce3497ca7522968b2d2f669eef867</summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
-            <summary>Commit date: 2022-02-02T21:08:32+09:00</summary>
+            <summary>Commit date: 2022-10-07T02:51:50+09:00</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 153</summary>
+            <summary>Commits on top of base version: 231</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -1034,7 +1041,7 @@
             <summary>Minor: 0</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 153</summary>
+            <summary>Patch: 231</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>

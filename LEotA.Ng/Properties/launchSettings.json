@@ -24,6 +24,15 @@
       "dotnetRunMessages": "true",
       "applicationUrl": "http://172.18.0.2:5001"
     },
+    "LEotA_dev": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:5001"
+    },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
