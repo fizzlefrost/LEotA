@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Calabonga.EntityFrameworkCore.Entities.Base;
+﻿using Calabonga.EntityFrameworkCore.Entities.Base;
 
 namespace LEotA.Engine.Entities
 {

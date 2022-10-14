@@ -1,6 +1,5 @@
 ﻿using System;
 using Calabonga.EntityFrameworkCore.Entities.Base;
-using LEotA.Engine.Entities.Core;
 
 namespace LEotA.Engine.Entities
 {

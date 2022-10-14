@@ -1,7 +1,6 @@
 ﻿using Calabonga.UnitOfWork;
 using LEotA.Engine.Entities;
 using LEotA.Engine.Web.Infrastructure.Mappers.Base;
-using LEotA.Engine.Web.ViewModels.NewsViewModels;
 using LEotA.Engine.Web.ViewModels.ProjectViewModels;
 
 namespace LEotA.Engine.Web.Infrastructure.Mappers

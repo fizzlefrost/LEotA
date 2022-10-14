@@ -1,8 +1,5 @@
 ﻿using System.Threading.Tasks;
-using System.Web.Mvc;
 using LEotA.Models;
-using LEotA.Pages;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RegisterViewModel = LEotA.Models.RegisterViewModel;

@@ -1,9 +1,7 @@
 ﻿#nullable enable
-using System;
 using System.Collections.Generic;
 using LEotA.Clients.EngineClient;
 using LEotA.Models;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LEotA.Pages

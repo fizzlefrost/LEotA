@@ -1,7 +1,4 @@
 ﻿using LEotA.Models;
-using Microsoft.AspNetCore.Localization;
-using LEotA.Services;
-using Microsoft.AspNetCore.Localization;
 
 namespace LEotA.Services
 {

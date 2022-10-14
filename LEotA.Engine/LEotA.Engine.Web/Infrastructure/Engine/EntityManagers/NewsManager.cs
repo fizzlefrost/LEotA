@@ -2,7 +2,6 @@
 using System.IO;
 using System.Security.Principal;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
 using Calabonga.Microservices.Core.Validators;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Calabonga.EntityFrameworkCore.Entities.Base;
 
 namespace LEotA.Engine.Entities

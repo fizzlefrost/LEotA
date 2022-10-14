@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Calabonga.EntityFrameworkCore.Entities.Base;
-using LEotA.Engine.Entities;
 
 namespace LEotA.Engine.Web.ViewModels.EventViewModel
 {

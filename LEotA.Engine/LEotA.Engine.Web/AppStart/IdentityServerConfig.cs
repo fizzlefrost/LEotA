@@ -1,7 +1,6 @@
 ﻿using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
-using AutoMapper.Configuration;
 using IdentityModel;
 
 namespace LEotA.Engine.Web.AppStart

@@ -1,5 +1,3 @@
-using System;
-
 namespace LEotA.Models
 {
     public class ErrorViewModel

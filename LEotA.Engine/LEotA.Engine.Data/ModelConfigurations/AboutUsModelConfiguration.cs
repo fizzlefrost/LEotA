@@ -1,5 +1,4 @@
-﻿using System;
-using LEotA.Engine.Data.ModelConfigurations.Base;
+﻿using LEotA.Engine.Data.ModelConfigurations.Base;
 using LEotA.Engine.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

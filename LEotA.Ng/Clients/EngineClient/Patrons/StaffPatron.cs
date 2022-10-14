@@ -8,7 +8,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using LEotA.Models;
-using StaffRoles = LEotA.Engine.Entities.StaffRoles;
 
 namespace LEotA.Clients.EngineClient.Patrons
 {

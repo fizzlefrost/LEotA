@@ -3,7 +3,6 @@ using IdentityServer4.AccessTokenValidation;
 using LEotA.Engine.Data;
 using LEotA.Engine.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
