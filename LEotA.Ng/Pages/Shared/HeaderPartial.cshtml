@@ -15,31 +15,27 @@
                 <div class="mr5"> 
                     <img src="/Min-nauki.png" style="max-height: 70px;">
                 </div>
+                <div class="mr5"> 
+                    <img src="/images/INKK.png" style="max-height: 70px;">
+                </div>
                 <div>
                     @if (Thread.CurrentThread.CurrentUICulture.Name == "ru")
                     {
-                        <a class="navbar-brand" style="margin-left: 30%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 75%;" src="/images/Logo LEA RUS full white.png"></a>
+                        <a class="navbar-brand" style="margin-left: 5%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 80%;" src="/images/Logo LEA RUS full white.png"></a>
                     }
                     else
                     {       
-                        <a class="navbar-brand" style="margin-left: 30%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 75%;" src="/images/SecondLogo.png"></a>
+                        <a class="navbar-brand" style="margin-left: 5%;" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Index"><img style="max-width: 80%;" src="/images/SecondLogo.png"></a>
                     }
                 </div>
                 
             </div>
-             <p style="margin-left: 45%; color: white;">INTERNATIONAL RESEARCH LABORATORY</p>
+            @if (Thread.CurrentThread.CurrentUICulture.Name == "en")
+            {
+                <p style="margin-left: 45%; color: white;">INTERNATIONAL RESEARCH LABORATORY</p>
+            }
         </div>
         <div>
-            @* @{ *@
-            @*     if (localizer.Get("CurrentCulture") == "ru") *@
-            @*     { *@
-            @*         <i class="flag flag-ru" style="width: 100px; height:auto;"></i> *@
-            @*     } *@
-            @*     else *@
-            @*     { *@
-            @*         <i class="flag flag-es" style="width: 100px; height:auto;"></i> *@
-            @*     } *@
-            @* } *@
             <div class="align-right">
                 
                 @if (Thread.CurrentThread.CurrentUICulture.Name == "ru")
@@ -52,22 +48,6 @@
                 }
                 <vc:culture-switcher/>
             </div>
-            @*@if (User.Identity.IsAuthenticated)
-            {
-                <div class="align-right">
-                    <small><p>Hello, @User.Claims.Where(d => d.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname").Select(d => d.Value).FirstOrDefault().ToString() @User.Claims.Where(d => d.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname").Select(d => d.Value).FirstOrDefault().ToString()</p> </small>
-                    <small><a asp-page="/Logout">@localizer.Get("Logout")</a></small>
-                </div>
-            }
-            else
-            {
-                <div class="align-right">
-                    <small><a asp-page="/Errorpage">@localizer.Get("Login")</a></small>
-                </div>
-                <div class="align-right">
-                    <small><a asp-page="/Errorpage">@localizer.Get("Register")</a></small>
-                </div>
-            }*@
         </div>
     </div>
     
@@ -85,17 +65,6 @@
                         <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/AboutUs">@localizer.Get("AboutUs")</a>
                 </li>
             </ul>
-            @*<ul class="navbar-nav flex-grow-2">
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Events">@localizer.Get("Events")</a>
-                </li>
-            </ul>*@
-            
-            @*<ul class="navbar-nav flex-grow-2">
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Projects">@localizer.Get("Projects")</a>
-                </li>
-            </ul>*@
             <ul class="navbar-nav flex-grow-2">
                 <li class="nav-item">
                     <a class="nav-link text-white" asp-route-culture="@Context.Request.RouteValues["culture"]" asp-area="" asp-page="/Publications">@localizer.Get("Publications")</a>
