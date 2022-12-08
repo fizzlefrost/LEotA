@@ -28,7 +28,7 @@ namespace LEotA.Pages
             //{
                 var culture = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture.Name;
                 ViewData.Clear();
-                var publicationsListGetPaged= _engineClientManager.PublicationGetPaged(null, 10, null, null, false);
+                var publicationsListGetPaged= _engineClientManager.PublicationGetPaged(null, 50, null, null, false);
                 var publicationsList = new List<Publication>();
                 var publicationsPdfList = new Dictionary<Publication, List<FileContent>>();
                 if (SearchYear != 0){
