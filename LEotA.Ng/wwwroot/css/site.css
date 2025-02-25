@@ -106,7 +106,7 @@ html, body, div, a, img, ul, li, footer, header, nav {
     font-family: 'GothamProRegular', serif;
 }
 html, body {
-    overflow: auto;
+    /*overflow: auto;*/
     min-height: 100%;
 }
 footer, header,  nav{
@@ -187,6 +187,13 @@ img{
 }
 body {
     -webkit-text-size-adjust: none;
+}
+
+/* Элемент для отступа */
+.space {
+    flex-shrink: 0; /* Запрещаем сжатие элемента */
+    height: var(--space-height, 20px); /* Значение по умолчанию, если атрибут не задан */
+    width: var(--space-width, 100%); /* Значение по умолчанию, если атрибут не задан */
 }
 
 /* Basic */
@@ -289,7 +296,7 @@ a:hover {
     max-width: calc(100% - 5em);
     position: relative;
     padding-bottom: 150px;
-    min-height: 100vh;
+   /* min-height: 100vh;*/
     margin-bottom: 10px;
 }
 .container {
@@ -359,17 +366,191 @@ a:hover {
     max-width: 75%; 
     margin: auto auto 60px;
 }
+
+
 /* Header */
+
 #lower-nav{
     clear:both;
 }
-#nav-bg{
+#nav-bg {
     /*background-color: #f5f5f5;*/
     background-image: url("../images/background LEA.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-#foot-bg{
+/*#foot-bg {
     background-image: url("../images/background LEAtwo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}*/
+/* Контейнер для иконок и логотипа */
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
+/* Иконки, растянутые по всему экрану */
+.icons-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+/* Главный логотип и переключатель языка */
+.main-logo {
+    display: flex;
+    align-items: center; /* Выравниваем по центру по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    width: 100%;
+    gap: 20px; /* Отступ между логотипом и переключателем языка */
+}
+
+.navbar-brand {
+    display: flex;
+    justify-content: center;
+    width: 1000px; /* Фиксированная ширина для контейнера логотипа */
+    height: 200px; /* Фиксированная высота для контейнера логотипа */
+}
+
+.navbar-brand img {
+    width: 100%; /* Занимает всю ширину контейнера */
+    height: 100%; /* Занимает всю высоту контейнера */
+    object-fit: contain; /* Сохраняет пропорции и вписывает изображение в заданные размеры */
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center; /* Выравниваем элементы по вертикали */
+}
+
+#page-wrapper {
+    display: flex;
+    justify-content: space-between; /* Прижимаем первый и последний элементы к краям */
+    width: 100%; /* Занимаем всю доступную ширину */
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center; /* Выравниваем элементы по вертикали */
+}
+
+.nav-item {
+    margin: 0 10px; /* Добавляем отступы между элементами меню (опционально) */
+}
+
+.nav-link {
+    color: white; /* Цвет текста */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+
+/* Real Footer */
+
+
+/* Основные стили для контейнера */
+.footer-container {
+    color: rgba(255, 255, 255, 0.8);
+    background-image: url("../images/background LEAtwo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px 0; /* Отступы сверху и снизу */
+}
+
+.footer-content {
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера */
+    padding: 0 20px; /* Отступы слева и справа */
+}
+
+/* Контейнер для левой и правой секций */
+.footer-sections-wrapper {
+    display: flex;
+    justify-content: space-between; /* Разделяет пространство между левой и правой секциями */
+    align-items: center; /* Центрирование по вертикали */
+}
+
+/* Стили для левой секции */
+.footer-left {
+    flex: 1; /* Занимает доступное пространство слева */
+    margin-right: 20px; /* Отступ между левой и правой секциями */
+}
+
+/* Стили для правой секции */
+.footer-right {
+    flex: 1; /* Занимает доступное пространство справа */
+    text-align: right; /* Выравнивание текста по правому краю */
+}
+
+/* Блок для правых текстов */
+.footer-texts {
+    display: flex;
+    flex-direction: column; /* Тексты в колонку */
+    gap: 5px; /* Отступ между текстами */
+}
+
+/* Стили для секций */
+.footer-section {
+    margin-bottom: 20px; /* Отступ между секциями */
+}
+
+.footer-social {
+    text-align: left; /* Текст и иконки выравниваются по левому краю */
+}
+
+/* Стили для социальных иконок */
+.social-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start; /* Иконки выравниваются по левому краю */
+    gap: 10px;
+}
+
+.social-item {
+    display: inline-block; /* Элементы в строку */
+}
+
+.social-link {
+    display: inline-flex; /* Используем flexbox для центрирования */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center; /* Центрируем по горизонтали */
+    width: 40px; /* Ширина */
+    height: 40px; /* Высота (должна быть равна ширине) */
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8); /* Белая рамка с прозрачностью */
+    border-radius: 50%; /* Круглая форма */
+    color: rgba(255, 255, 255, 0.8); /* Цвет иконки */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: background-color 0.3s, color 0.3s; /* Плавные переходы */
+    box-sizing: border-box; /* Учитываем padding и border в общей ширине и высоте */
+}
+
+.social-link i {
+    font-size: 20px; /* Размер иконки */
+}
+
+.social-link:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Белый фон при наведении */
+    color: #000; /* Черный цвет иконки при наведении */
+}
+
+/* Стили для текста */
+.footer-email {
+    font-size: 0.875rem; /* Размер текста */
+}
+
+.footer-text {
+    font-size: 0.875rem; /* Размер текста */
+}
+
+
 /* Footer */
 
 footer{

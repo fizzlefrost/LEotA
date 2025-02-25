@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace LEotA.Engine.Data.DatabaseInitialization
 {
@@ -17,6 +18,9 @@ namespace LEotA.Engine.Data.DatabaseInitialization
         {
             using var scope = serviceProvider.CreateScope();
             await using var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
+
+            // Не успевает запуститься
+            // await Task.Delay(5000);
 
             // Should be uncomment when using UseSqlServer() settings or any other provider.
             // This is should not be used when UseInMemoryDatabase()

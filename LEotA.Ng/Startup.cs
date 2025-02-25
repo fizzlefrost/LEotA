@@ -20,14 +20,27 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
+using System.IO;
 
 namespace LEotA
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            // Проверяем, существует ли файл appsettings.local.json
+            var localAppSettingsPath = Path.Combine(env.ContentRootPath, "appsettings.local.json");
+            if (File.Exists(localAppSettingsPath))
+            {
+                builder.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
+            }
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }

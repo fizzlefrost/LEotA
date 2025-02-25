@@ -1,27 +1,33 @@
 ﻿@using LEotA.Services
 @inject CommonLocalizationService localizer
-<div class="g-color-white-opacity-0_8">
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col ">
-        @localizer.Get("FooterSocial")
-        <ul class="u-list-inline hidden-sm-down">
-          <li class="list-inline-item">
-            <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/channel/UCfd1PeEngXExCudxhNISmag" target="_blank" role="button">
-              <i class="fab fa-youtube" aria-hidden="true"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <small class="d-block mr-5 " style="margin-left: 50px;">arcticlinglab@s-vfu.ru
-      </small>
-    </div>
-    
-    <div>
-      
-      <small class="d-block mr-5 ">@localizer.Get("Footer")</small>
-    </div>
+
+
+<div class="footer-container">
+    <div class="footer-content">
+        <div class="space" data-height="20px" data-width="100%"></div>
+        <div class="footer-sections-wrapper">
+            <!-- Левая секция -->
+            <div class="footer-section footer-left">
+                <div class="footer-social">
+                    @localizer.Get("FooterSocial")
+                    <ul class="social-list">
+                        <li class="social-item">
+                            <a class="social-link" href="https://www.youtube.com/channel/UCfd1PeEngXExCudxhNISmag" target="_blank" role="button">
+                                <i class="fab fa-youtube" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <!-- Добавьте другие социальные сети здесь -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Правая секция -->
+            <div class="footer-section footer-right">
+                <div class="footer-texts">
+                    <small class="footer-email">arcticlinglab@s-vfu.ru</small>
+                    <small class="footer-text">@localizer.Get("Footer")</small>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
