@@ -90,9 +90,7 @@ namespace LEotA
             
             services.AddHttpClient("Engine", config =>
             {
-                config.BaseAddress = new Uri(Configuration.GetSection("EngineUrl").Value ??
-                                             throw new InvalidOperationException(
-                                                 "Invalid engine url in appsettings.json"));
+                config.BaseAddress = engineUrl;
             }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
             {
                 ClientCertificateOptions = ClientCertificateOption.Manual,
