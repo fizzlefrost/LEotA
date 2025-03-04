@@ -1,11 +1,11 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+FROM bfren/aspnet:net5.0.17 AS base
 WORKDIR /app
 EXPOSE 10001
 ENV ASPNETCORE_URLS=http://+:10001
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM bitnami/dotnet-sdk:5.0.408 AS build
 WORKDIR /src
 COPY ["LEotA.Engine/LEotA.Engine.Web/LEotA.Engine.Web.csproj", "LEotA.Engine/LEotA.Engine.Web/"]
 COPY ["LEotA.Engine/LEotA.Engine.Data/LEotA.Engine.Data.csproj", "LEotA.Engine/LEotA.Engine.Data/"]

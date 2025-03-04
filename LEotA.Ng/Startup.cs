@@ -28,6 +28,9 @@ namespace LEotA
     {
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            Console.WriteLine($"ContentRootPath: {env.ContentRootPath}");
+            Console.WriteLine($"WebRootPath: {env.WebRootPath}");
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -48,7 +51,7 @@ namespace LEotA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Uri engineUrl = new Uri(Configuration.GetSection("EngineUrl").Value ?? throw new InvalidOperationException("Invalid engine url in appsettings.json"));
+            Uri engineUrl = new Uri(Configuration.GetSection("EngineUrl").Value ?? throw new InvalidOperationException("Invalid engine url in appsettings.json check"));
             
             services.AddRazorPages(options => {
                 options.Conventions.AddFolderRouteModelConvention("/", model =>

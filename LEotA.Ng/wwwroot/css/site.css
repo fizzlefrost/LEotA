@@ -295,9 +295,9 @@ a:hover {
     margin-top: 1em;
     max-width: calc(100% - 5em);
     position: relative;
-    padding-bottom: 150px;
-   /* min-height: 100vh;*/
-    margin-bottom: 10px;
+    /*padding-bottom: 150px;*/
+    /* min-height: 100vh;*/
+    /*margin-bottom: 10px;*/
 }
 .container {
     margin: 0 auto;
@@ -556,8 +556,8 @@ a:hover {
 footer{
     clear: both;
     position: relative;
-    height: 9.375em;
-    margin-top: -9.375em;
+    /*height: 9.375em;
+    margin-top: -9.375em;*/
 }
 
 * {
