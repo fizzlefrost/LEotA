@@ -1,10 +1,10 @@
 ﻿using LEotA.Engine.Entities.Core;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace LEotA.Engine.Data.DatabaseInitialization
@@ -20,11 +20,11 @@ namespace LEotA.Engine.Data.DatabaseInitialization
             await using var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
             // Не успевает запуститься
-            // await Task.Delay(5000);
+            await Task.Delay(5000);
 
             // Should be uncomment when using UseSqlServer() settings or any other provider.
             // This is should not be used when UseInMemoryDatabase()
-            // await context.Database.MigrateAsync();
+            await context.Database.MigrateAsync();
 
             var roles = AppData.Roles.ToArray();
 

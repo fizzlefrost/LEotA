@@ -21,11 +21,13 @@
 using LEotA.Engine.Data.DatabaseInitialization;
 using LEotA.Engine.Entities.Core;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace LEotA.Engine.Web
@@ -67,6 +69,24 @@ namespace LEotA.Engine.Web
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        var env = hostingContext.HostingEnvironment;
+
+                        config.SetBasePath(Directory.GetCurrentDirectory());
+
+                        // Загружаем стандартные файлы конфигурации
+                        config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                        config.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+                        // Загружаем appsettings.local.json только в Development
+                        if (env.IsDevelopment())
+                        {
+                            config.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
+                        }
+
+                        config.AddEnvironmentVariables();
+                    })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
