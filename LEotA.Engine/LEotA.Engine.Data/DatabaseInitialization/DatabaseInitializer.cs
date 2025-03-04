@@ -24,7 +24,7 @@ namespace LEotA.Engine.Data.DatabaseInitialization
 
             // Should be uncomment when using UseSqlServer() settings or any other provider.
             // This is should not be used when UseInMemoryDatabase()
-            await context.Database.MigrateAsync();
+            // await context.Database.MigrateAsync();
 
             var roles = AppData.Roles.ToArray();
 
