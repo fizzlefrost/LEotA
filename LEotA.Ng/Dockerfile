@@ -6,6 +6,7 @@ EXPOSE 5001
 ENV ASPNETCORE_URLS=http://+:5001
 # явно задаем ContentRootPath т к bfren aspnet:net5.0.17 почему то ставит app live а не app
 ENV ASPNETCORE_CONTENTROOT=/app
+ENV DOTNET_ENVIRONMENT=Production
 
 
 FROM bitnami/dotnet-sdk:5.0.408 AS build

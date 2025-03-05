@@ -8,15 +8,6 @@
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5001"
-    },
-    "LEotA_prod": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://172.18.0.2:5001"
     }
   }
 }

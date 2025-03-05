@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 using System.IO;
+using Microsoft.Extensions.Logging;
 
 namespace LEotA
 {
@@ -35,11 +36,14 @@ namespace LEotA
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            // Проверяем, существует ли файл appsettings.local.json
-            var localAppSettingsPath = Path.Combine(env.ContentRootPath, "appsettings.local.json");
-            if (File.Exists(localAppSettingsPath))
+            // Check if the environment is "dev" and the local settings file exists
+            if (env.EnvironmentName == "Development")
             {
-                builder.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
+                var localAppSettingsPath = Path.Combine(env.ContentRootPath, "appsettings.local.json");
+                if (File.Exists(localAppSettingsPath))
+                {
+                    builder.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
+                }
             }
 
             builder.AddEnvironmentVariables();
@@ -52,7 +56,13 @@ namespace LEotA
         public void ConfigureServices(IServiceCollection services)
         {
             Uri engineUrl = new Uri(Configuration.GetSection("EngineUrl").Value ?? throw new InvalidOperationException("Invalid engine url in appsettings.json check"));
-            
+
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddConsole();
+                loggingBuilder.AddDebug();
+            });
+
             services.AddRazorPages(options => {
                 options.Conventions.AddFolderRouteModelConvention("/", model =>
                 {

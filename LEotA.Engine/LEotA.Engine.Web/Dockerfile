@@ -2,8 +2,9 @@
 
 FROM bfren/aspnet:net5.0.17 AS base
 WORKDIR /app
-EXPOSE 10001
-ENV ASPNETCORE_URLS=http://+:10001
+EXPOSE 10000
+ENV ASPNETCORE_URLS=http://+:10000
+ENV DOTNET_ENVIRONMENT=Production
 
 FROM bitnami/dotnet-sdk:5.0.408 AS build
 WORKDIR /src
